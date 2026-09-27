@@ -1,0 +1,83 @@
+#!/bin/bash
+
+export DISPLAY=:0.0
+
+# Dell P1917S identificado pelo EDID.
+TARGET_HASH="9f48548fb72095984c204928a4fa9e80"
+
+# Conectores validados neste notebook.
+HDMI_DRM="/sys/class/drm/card0-HDMI-A-1"
+HDMI_OUTPUT="HDMI-1"
+INTERNAL_OUTPUT="LVDS-1"
+
+case "$1" in
+    start)
+
+        # Aguarda o Xorg e os monitores ficarem disponíveis.
+        sleep 3
+
+        # Existe monitor conectado ao HDMI?
+        if [ -r "$HDMI_DRM/status" ] &&
+           [ "$(cat "$HDMI_DRM/status")" = "connected" ]; then
+
+            EDID_HASH="$(
+                md5sum "$HDMI_DRM/edid" 2>/dev/null |
+                awk '{print $1}'
+            )"
+
+            # Dell P1917S.
+            if [ "$EDID_HASH" = "$TARGET_HASH" ]; then
+
+                echo "Dell P1917S detectado"
+
+                # Resolução nativa 5:4.
+                # O frontend usa 75.02 Hz.
+                xrandr \
+                    --output "$HDMI_OUTPUT" \
+                    --primary \
+                    --mode 1280x1024 \
+                    --rate 75.02
+
+                # Preenche toda a tela 5:4.
+                batocera-settings-set global.ratio full
+
+            # Outro monitor HDMI.
+            else
+
+                echo "Outro monitor HDMI detectado"
+
+                # Usa automaticamente a resolução preferida
+                # informada pelo EDID do monitor.
+                xrandr \
+                    --output "$HDMI_OUTPUT" \
+                    --primary \
+                    --preferred
+
+                # Não força stretch.
+                batocera-settings-set global.ratio auto
+            fi
+
+        # Sem HDMI: tela interna do notebook.
+        else
+
+            echo "Sem HDMI; usando tela interna"
+
+            xrandr \
+                --output "$INTERNAL_OUTPUT" \
+                --primary \
+                --preferred
+
+            # Mantém aspect ratio normal.
+            batocera-settings-set global.ratio auto
+        fi
+        ;;
+
+    stop)
+        ;;
+
+    *)
+        echo "Uso: $0 {start|stop}"
+        ;;
+esac
+
+exit 0

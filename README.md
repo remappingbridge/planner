@@ -1,11 +1,13 @@
 # repo-planner
 
-Planejamento e evidências dos programas do ecossistema Remapping Bridge.
+Planejamento, evidências e documentação operacional do ecossistema Remapping Bridge.
 
-## Programas
+## Estrutura
 
-- `mouse-bridge-remapper/` — programa histórico MBR.
-- `mouse/` — UI/Core/integração modular.
-- `hope/` — programa HOPE para o repositório `remappingbridge/remappingbridge`: partir exatamente do BLU2USB G06 aceito e substituir, uma tela por vez, somente a UX observável pelo Mouse UI Layout 1.0.
+- `RP-2350/mouse-bridge-remapper/` — programa histórico MBR para RP-2350.
+- `RP-2350/mouse/` — UI/Core/integração modular para RP-2350.
+- `RP-2350/hope/` — série HOPE do RemappingBridge; série concluída e RemappingBridge 1.0 publicado.
+- `batocera/monitor5x4/` — configuração documentada do Batocera v43 para o monitor Dell P1917S 5:4.
+- `office-drive/` — planejamento independente existente.
 
-O programa HOPE está em execução: **HOPE-00, HOPE-01, HOPE-02, HOPE-08, HOPE-24, HOPE-09, HOPE-25, HOPE-06, HOPE-26, HOPE-07, HOPE-27 e HOPE-03 aceitos; HOPE-28 (`help-home-connected`) aceito; fluxo `REMAPPING OPTIONS` (HOPE-10/29/11/14/12/13/15/16/17/18/19/20/21/22) consolidado em candidato único, aguardando teste físico**.
+A reorganização em `RP-2350/` agrupa os planners associados ao firmware/microcontrolador sem alterar seu conteúdo.
