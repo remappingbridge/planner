@@ -1,4 +1,4 @@
-# repo-planner
+# Planner
 
 Planejamento, evidências e documentação operacional do ecossistema Remapping Bridge.
 
