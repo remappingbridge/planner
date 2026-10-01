@@ -2,7 +2,7 @@
 
 Registro operacional e rastreável da preparação do Xbox 360 E para executar Aurora temporariamente via ABadAvatar/XeUnshackle e, em etapa futura, consumir jogos mantidos no macOS via Ethernet/NetISO.
 
-> **Status atual (2026-10-01):** Aurora 0.7b.2 abriu com sucesso. O desbloqueio é **temporário e não persistente**. A NAND não foi modificada. Há duas leituras idênticas da NAND salvas localmente no Debian.
+> **Status atual (2026-10-01):** Aurora 0.7b.2 foi migrado para o HDD interno e abriu com sucesso via ABadAvatar/XeUnshackle. A alternância foi validada fisicamente: **USB conectado + exploit = Aurora desbloqueado; USB removido + reboot = dashboard retail/original**. A NAND não foi modificada. Há duas leituras idênticas da NAND salvas localmente no Debian.
 
 ## Console e estado confirmado
 
@@ -10,81 +10,54 @@ Registro operacional e rastreável da preparação do Xbox 360 E para executar A
 - MFR Date: **2014-05-06**.
 - Dashboard: **2.0.17559.0**.
 - Kernel: **2.0.17559.0**.
-- HDD interno: aproximadamente 250 GB, com ~220 GB livres observados.
-- Rede foi removida/desconectada durante os testes do exploit.
-- Existem perfis/avatares antigos no console; não foi necessário removê-los.
+- HDD interno: aproximadamente 250 GB, com ~220 GB livres observados antes da migração.
+- Aurora 0.7b.2 atualmente em `Hdd:\Apps\Aurora\Aurora.xex`.
+- ABadAvatar/XeUnshackle continuam no pendrive.
 - Nenhuma gravação de NAND, RGH físico ou instalação persistente foi executada.
 
-A data de fabricação sugere uma revisão anterior à Winchester, mas isso **não foi usado como pré-condição**: o caminho escolhido foi software-only com ABadAvatar/XeUnshackle.
-
-## Arquitetura atual
-
-```text
-Xbox 360 retail 17559
-        |
-        v
-ABadAvatar v1.3-beta (USB FAT32 + MBR)
-        |
-        v
-XeUnshackle BETA v1.03
-        |
-        v
-DashLaunch em memória
-        |
-        v
-Usb:\Apps\Aurora\Aurora.xex
-        |
-        v
-Aurora 0.7b.2
-```
-
-Ao desligar/reiniciar o console, o softmod deixa de estar ativo. É necessário disparar o ABadAvatar novamente.
-
-## Arquitetura escolhida para a próxima fase
-
-Foi decidido **preservar permanentemente a alternância entre modo original e modo desbloqueado**.
-
-A estratégia é:
+## Arquitetura validada
 
 ```text
 HDD interno
 └── Apps\Aurora\
     └── Aurora.xex
         ^
-        | só executa depois do exploit
+        | executado apenas após exploit
         |
 USB Aurora-XBOX
-├── Content\                <- perfil/entrada ABadAvatar
+├── Content\                <- ABadAvatar
 ├── BadUpdatePayload\       <- XeUnshackle
-└── launch.ini               <- aponta para Hdd:\Apps\Aurora\Aurora.xex
+└── launch.ini               <- Default = Hdd:\Apps\Aurora\Aurora.xex
 ```
 
-Comportamento desejado:
+Fluxos validados:
 
 ```text
-USB removido + reboot
-= Xbox retail/original
-
-USB conectado + ABadAvatar disparado
-= XeUnshackle/DashLaunch em memória
-= Aurora no HDD interno
+USB conectado
+ -> ABadAvatar
+ -> XeUnshackle
+ -> DashLaunch em memória
+ -> Hdd:\Apps\Aurora\Aurora.xex
+ -> Aurora 0.7b.2
 ```
 
-**Não mover ABadAvatar/XeUnshackle para o HDD interno.** O pendrive deve continuar funcionando como a "chave" física que habilita o modo modificado.
+```text
+USB removido
+ -> reboot/power-on
+ -> nenhum exploit
+ -> dashboard Microsoft retail/original
+```
 
-Arquivos do Aurora podem permanecer no HDD porque, no estado retail, não são executáveis por si só e não tornam o console persistentemente modificado.
+A alternância retail/desbloqueado é agora um requisito permanente do projeto. **Não mover ABadAvatar/XeUnshackle para o HDD e não instalar mecanismo persistente na NAND.**
 
 ## Pendrive de trabalho
 
-Pendrive usado:
-
 - SanDisk Ultra.
-- Capacidade mostrada pelo Linux: 28,7 GiB / 30,8 GB.
-- Tabela de partições: **MBR/msdos**.
-- Partição: FAT32.
+- 28,7 GiB / 30,8 GB.
+- MBR/msdos + FAT32.
 - Label: `Aurora-XBOX`.
 
-Importante: o nome de dispositivo Linux variou durante o trabalho (`/dev/sde1`, depois `/dev/sdd1`). **Nunca presumir a letra do dispositivo.** Confirmar sempre com:
+A letra do device Linux variou (`/dev/sde1`, `/dev/sdd1`). Sempre confirmar com:
 
 ```bash
 findmnt -no SOURCE,FSTYPE,LABEL,TARGET /media/tiago/Aurora-XBOX
@@ -94,17 +67,15 @@ lsblk -o NAME,SIZE,MODEL,TRAN,MOUNTPOINTS
 ## Arquivos do projeto
 
 - [01-console-e-decisoes.md](01-console-e-decisoes.md) — inventário e decisões.
-- [02-softmod-abadavatar-xeunshackle.md](02-softmod-abadavatar-xeunshackle.md) — processo de exploit e lições aprendidas.
-- [03-backup-nand.md](03-backup-nand.md) — backup, validação, localização e cópia futura para armazenamento externo.
-- [04-aurora.md](04-aurora.md) — download, validação, instalação e boot do Aurora.
-- [05-proximos-passos-netiso.md](05-proximos-passos-netiso.md) — trabalho ainda não executado para macOS + Ethernet + NetISO.
+- [02-softmod-abadavatar-xeunshackle.md](02-softmod-abadavatar-xeunshackle.md) — processo de exploit.
+- [03-backup-nand.md](03-backup-nand.md) — backup e recuperação.
+- [04-aurora.md](04-aurora.md) — instalação, migração e validação do Aurora.
+- [05-proximos-passos-netiso.md](05-proximos-passos-netiso.md) — próxima fase: NetISO/macOS/Ethernet.
 
-## Estado do `launch.ini`
-
-Configuração relevante validada antes do boot bem-sucedido do Aurora:
+## Estado atual do `launch.ini`
 
 ```ini
-Default = Usb:\Apps\Aurora\Aurora.xex
+Default = Hdd:\Apps\Aurora\Aurora.xex
 
 plugin1 =
 plugin2 =
@@ -118,33 +89,21 @@ fakelive = false
 autofake = false
 ```
 
-`Xbdm.xex` e `JRPC2.xex` continuam fisicamente no pendrive, mas foram removidos da lista de plugins do DashLaunch.
-
 ## Segurança
 
-Não registrar neste repositório:
+Não versionar ou compartilhar:
 
 - CPUKey;
 - DVDKey;
-- conteúdo de `cpukey.txt`;
-- conteúdo de `ConsoleInfo.txt`;
+- `cpukey.txt`;
+- `ConsoleInfo.txt`;
 - dumps de NAND;
 - qualquer segredo único do console.
 
-Esses dados permanecem somente no backup local descrito em [03-backup-nand.md](03-backup-nand.md).
-
-## Resultado já validado
-
-Fluxo validado fisicamente:
+O backup permanece em:
 
 ```text
-Boot
- -> seleção de perfis
- -> ABadAvatar dispara
- -> XeUnshackle abre
- -> botão BACK
- -> DashLaunch lê launch.ini
- -> Aurora 0.7b.2 abre com sucesso
+/home/tiago/xbox360-1538-backup-20261001-190729/
 ```
 
-Nenhuma configuração de NetISO foi executada ainda.
+Consulte [03-backup-nand.md](03-backup-nand.md).
