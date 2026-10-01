@@ -1,112 +1,86 @@
 # 05 — Próximos passos: macOS + Ethernet + NetISO
 
-> Este arquivo registra **planejamento ainda não executado**. Não tratar os itens abaixo como configuração já validada.
+> A fase de migração do Aurora para HDD e alternância retail/desbloqueado foi concluída em 2026-10-01. O restante deste arquivo registra a próxima fase ainda não validada.
+
+## Estado de entrada
+
+Validado:
+
+```text
+sem USB + reboot
+ -> Xbox retail/original
+
+USB Aurora-XBOX + ABadAvatar
+ -> XeUnshackle
+ -> DashLaunch temporário
+ -> Hdd:\Apps\Aurora\Aurora.xex
+ -> Aurora 0.7b.2
+```
+
+O pendrive continua sendo a **chave do desbloqueio**.
 
 ## Objetivo
 
-Manter os jogos exclusivamente no MacBook/macOS:
-
 ```text
-MacBook
-├── biblioteca de jogos Xbox 360 (.iso)
+MacBook/macOS
+├── biblioteca Xbox 360 (.iso)
 └── servidor NetISO
         |
-        | Ethernet
+        | Ethernet direto
         v
 Xbox 360
 └── ABadAvatar -> XeUnshackle -> Aurora -> NetISO
 ```
 
-O Xbox deve consumir o conteúdo pela rede durante a sessão, sem copiar permanentemente a biblioteca para o HDD interno.
+Os jogos devem permanecer no Mac, sem cópia integral para o HDD interno.
 
-## Requisito de alternância retail / desbloqueado
+## Regras permanentes
 
-A arquitetura futura deve manter o pendrive `Aurora-XBOX` como **chave do desbloqueio**.
+- não mover ABadAvatar/XeUnshackle para o HDD;
+- não instalar DashLaunch na flash/NAND;
+- manter `liveblock = true`;
+- preservar `USB fora = retail`;
+- usar `plugin1` para NetISO quando essa fase for instalada;
+- manter Xbdm/JRPC2 desabilitados enquanto NetISO estiver em teste, evitando conflito de plugins.
 
-```text
-HDD interno:
-  Apps\Aurora\...
-  (arquivos inertes quando o Xbox está retail)
+## Próximas etapas
 
-USB Aurora-XBOX:
-  Content\
-  BadUpdatePayload\
-  launch.ini
-  (ABadAvatar + XeUnshackle)
-```
+1. Obter o pacote de NetISO/Aurora e validar sua origem.
+2. Fazer backup do `Hdd1:\Apps\Aurora\Plugins\Nova.xex` original antes da substituição.
+3. Instalar o `Nova.xex` modificado no Aurora do HDD.
+4. Colocar `NetISO.xex` e `NetISO.xex.txt` em local rastreável.
+5. Configurar `NetISO.xex.txt` com o IP do MacBook.
+6. Alterar o `launch.ini` do USB para carregar NetISO em `plugin1`.
+7. Configurar Ethernet direto MacBook ↔ Xbox.
+8. Usar inicialmente uma sub-rede isolada, sem gateway.
+9. Executar servidor NetISO no macOS.
+10. Testar descoberta/montagem de uma ISO Xbox 360.
+11. Confirmar novamente que a remoção do USB + reboot mantém o modo retail.
 
-Regras:
-
-- **não mover** ABadAvatar/XeUnshackle para o HDD;
-- **não instalar** DashLaunch na flash/NAND;
-- sem USB/exploit, o console deve iniciar retail;
-- com USB/exploit, o DashLaunch temporário deverá iniciar o Aurora no HDD.
-
-## Etapas planejadas
-
-1. Copiar Aurora do USB para `Hdd1:\Apps\Aurora\`, mantendo uma cópia no USB até o teste terminar.
-2. Alterar somente o `launch.ini` do USB para apontar `Default` para o Aurora no HDD e confirmar o boot.
-3. Testar o modo retail: desligar, retirar USB e confirmar dashboard Microsoft normal.
-4. Testar novamente o modo desbloqueado: recolocar USB, disparar ABadAvatar e confirmar Aurora no HDD.
-5. Somente depois remover a cópia redundante de Aurora do USB, se desejado.
-6. Instalar/configurar plugin NetISO.
-7. Manter `liveblock = true`.
-8. Reservar `plugin1` para NetISO se a implementação escolhida exigir isso.
-9. Configurar link Ethernet direto MacBook ↔ Xbox.
-10. Definir IPs estáticos em uma sub-rede dedicada.
-11. Iniciar o servidor NetISO no macOS.
-12. Apontar o cliente/plugin do Xbox para o endereço do Mac.
-13. Validar uma ISO conhecida antes de migrar a biblioteca completa.
-
-## Rede proposta
-
-Exemplo de sub-rede dedicada:
+## Rede inicialmente planejada
 
 ```text
 MacBook Ethernet: 192.168.50.1/24
 Xbox Ethernet:    192.168.50.2/24
+Gateway:          nenhum durante os primeiros testes
+NetISO TCP:       4323
 ```
 
-Inicialmente sem gateway, para manter o Xbox isolado da Internet.
+A rede efetivamente usada deverá substituir este bloco depois da validação.
 
-Depois, se necessário, o MacBook pode compartilhar sua conexão Wi-Fi para a interface Ethernet.
-
-## Administração
-
-O Xbox/Aurora não deve ser tratado como servidor SSH Unix.
-
-Administração esperada:
-
-- SSH no MacBook para gerenciar biblioteca e NetISO;
-- FTP/Aurora para arquivos no Xbox quando necessário;
-- interface do Aurora para configurações específicas do dashboard.
-
-## Critério de conclusão futuro
-
-A próxima fase só será considerada concluída quando este fluxo for validado:
+## Critério de conclusão
 
 ```text
 ISO permanece no macOS
- -> servidor NetISO lê ISO
- -> Ethernet direto MacBook/Xbox
- -> Aurora/NetISO monta o jogo
- -> jogo inicia e executa sem cópia integral local
+ -> servidor NetISO
+ -> Ethernet direto
+ -> NetISO no Xbox lista/monta ISO
+ -> jogo inicia
 ```
 
-E a alternância deve continuar válida:
+sem quebrar:
 
 ```text
-sem USB -> retail
-com USB + exploit -> Aurora/NetISO
+USB fora + reboot -> retail
+USB + exploit     -> Aurora/NetISO
 ```
-
-Após validar, atualizar este arquivo com:
-
-- versão exata do NetISO;
-- origem/hash dos binários;
-- comandos de instalação;
-- configuração de rede efetivamente usada;
-- paths no macOS;
-- configuração final do `launch.ini`;
-- testes realizados;
-- limitações observadas.
