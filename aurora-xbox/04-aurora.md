@@ -26,58 +26,29 @@ SHA-256 validado:
 0c7c765c3a5b938cfc64c71beda276a17d109b88df2a88e3f91eb1e74b7e46a0
 ```
 
-## Problemas encontrados durante download/extração
+## Extração
 
-### Mirror ConsoleMods
+`7z 25.01` abriu o RAR5, mas não suportou o método usado em 122 itens. A extração parcial foi descartada.
 
-Uma tentativa direta contra um mirror em ConsoleMods retornou HTTP 403.
-
-A solução foi usar o host Phoenix/XboxUnity.
-
-### 7-Zip
-
-`7z 25.01` conseguiu abrir o RAR5, porém retornou `Unsupported Method` em 122 itens.
-
-A extração parcial foi descartada.
-
-### unrar
-
-Foi usado:
-
-```text
-UNRAR 7.12 freeware
-```
-
-Validação:
+Com `UNRAR 7.12`:
 
 ```bash
 unrar t Aurora_0.7b.2.rar
 ```
 
-Resultado:
-
-```text
-All OK
-```
+Resultado: `All OK`.
 
 Extração:
 
 ```bash
 rm -rf aurora-stage
 mkdir aurora-stage
-
-unrar x -o+ \
-Aurora_0.7b.2.rar \
-aurora-stage/
+unrar x -o+ Aurora_0.7b.2.rar aurora-stage/
 ```
 
-Resultado final:
+Resultado: `All OK`.
 
-```text
-All OK
-```
-
-Arquivos essenciais confirmados:
+Arquivos essenciais:
 
 ```text
 Aurora.xex               12333056 bytes
@@ -86,86 +57,105 @@ Plugins/FtpDll.xex         200704 bytes
 Skins/Default.xzp         5180269 bytes
 ```
 
-## Instalação no pendrive
+## Primeira instalação — USB
 
-Destino:
+A pasta completa foi inicialmente copiada para:
 
 ```text
 Usb:\Apps\Aurora\
 ```
 
-No Debian:
-
-```bash
-MNT='/media/tiago/Aurora-XBOX'
-
-mkdir -p "$MNT/Apps/Aurora"
-
-rsync -a \
-'/tmp/xbox360-softmod/aurora-stage/' \
-"$MNT/Apps/Aurora/"
-```
-
-Validação manual executada para:
-
-- `Aurora.xex`;
-- `Plugins/FtpDll.xex`;
-- `Plugins/Nova.xex`;
-- `Skins/Default.xzp`.
-
-Todos retornaram `OK`.
-
-## DashLaunch / XeUnshackle
-
-O `launch.ini` foi alterado de SimpleNAND para Aurora:
+O `launch.ini` usado no primeiro teste:
 
 ```ini
 Default = Usb:\Apps\Aurora\Aurora.xex
-```
-
-Os plugins do XeUnshackle foram desabilitados:
-
-```ini
 plugin1 =
 plugin2 =
 plugin3 =
 plugin4 =
 plugin5 =
-```
-
-Configuração de Live mantida:
-
-```ini
 liveblock = true
 livestrong = false
 fakelive = false
 autofake = false
 ```
 
-## Teste físico concluído
+Teste físico: **Aurora abriu com sucesso**.
 
-Fluxo executado:
+## Migração para HDD interno
+
+Em 2026-10-01, usando o File Manager do próprio Aurora, a pasta `Aurora` foi **copiada**, não movida, de:
 
 ```text
-Xbox liga
- -> tela de perfis
- -> ABadAvatar v1.3-beta dispara
- -> XeUnshackle BETA v1.03 abre
+Usb0:\Apps\Aurora\
+```
+
+para:
+
+```text
+Hdd1:\Apps\Aurora\
+```
+
+A cópia no USB foi mantida como fallback durante a validação.
+
+Depois o `launch.ini` no USB foi alterado para:
+
+```ini
+Default = Hdd:\Apps\Aurora\Aurora.xex
+plugin1 =
+plugin2 =
+plugin3 =
+plugin4 =
+plugin5 =
+liveblock = true
+livestrong = false
+fakelive = false
+autofake = false
+```
+
+A configuração foi sincronizada e o USB desmontado corretamente no Debian.
+
+## Validação da alternância
+
+### Modo desbloqueado
+
+Teste físico concluído:
+
+```text
+USB Aurora-XBOX conectado
+ -> ABadAvatar
+ -> XeUnshackle
  -> BACK
- -> DashLaunch lê launch.ini
- -> Usb:\Apps\Aurora\Aurora.xex
- -> Aurora abre
+ -> DashLaunch temporário
+ -> Hdd:\Apps\Aurora\Aurora.xex
+ -> Aurora
 ```
 
 **Resultado: sucesso.**
 
-Este é o estado atual congelado da configuração.
+### Modo retail/original
 
-## O que ainda não foi feito
+Teste físico concluído:
 
-- Aurora ainda não foi migrado para o HDD interno.
-- NetISO ainda não foi configurado.
-- Ethernet direto MacBook ↔ Xbox ainda não foi configurado.
-- Biblioteca de ISOs ainda não foi servida pela rede.
-- Não foi definida persistência do ABadAvatar no HDD.
-- Nenhuma modificação permanente foi feita na NAND.
+```text
+Xbox desligado
+ -> USB Aurora-XBOX removido
+ -> power-on/reboot
+ -> nenhum ABadAvatar
+ -> dashboard Microsoft retail
+```
+
+**Resultado: sucesso.**
+
+A arquitetura desejada está, portanto, validada: o HDD pode conter o Aurora sem tornar o console persistentemente desbloqueado.
+
+## Estado congelado desta etapa
+
+- Aurora principal: `Hdd1:\Apps\Aurora\`.
+- ABadAvatar/XeUnshackle: USB `Aurora-XBOX`.
+- `launch.ini`: USB.
+- cópia redundante do Aurora ainda pode permanecer em `Usb0:\Apps\Aurora\` como fallback;
+- NAND intacta;
+- modo retail e modo desbloqueado ambos validados.
+
+Próxima fase: NetISO + Ethernet direto com o MacBook.
