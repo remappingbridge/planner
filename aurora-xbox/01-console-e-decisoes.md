@@ -36,7 +36,8 @@ Requisitos do usuário:
 - link físico MacBook ↔ Xbox por Ethernet;
 - Xbox lê os jogos durante a sessão, sem manter a biblioteca permanentemente local;
 - administração do lado macOS preferencialmente por terminal/SSH;
-- evitar alterações físicas no Xbox enquanto houver solução software-only adequada.
+- evitar alterações físicas no Xbox enquanto houver solução software-only adequada;
+- preservar a capacidade de alternar livremente entre **Xbox retail/original** e **sessão desbloqueada/Aurora**.
 
 ## Decisões tomadas
 
@@ -53,6 +54,32 @@ Foi escolhida uma rota software-only:
 5. Aurora.
 
 Isso evita soldagem e alteração permanente da NAND.
+
+### Preservar o pendrive como chave do desbloqueio
+
+Decisão explícita em 2026-10-01:
+
+- Aurora poderá ser migrado para o HDD interno;
+- ABadAvatar, XeUnshackle e o `launch.ini` de entrada continuarão no pendrive `Aurora-XBOX`;
+- o perfil/payload ABadAvatar **não deverá ser migrado para o HDD** enquanto esse requisito permanecer;
+- nenhum mecanismo de inicialização persistente será instalado na NAND.
+
+Modelo operacional:
+
+```text
+USB fora + reboot
+-> Xbox retail/original
+
+USB conectado
+-> ABadAvatar
+-> XeUnshackle
+-> DashLaunch temporário
+-> Hdd:\Apps\Aurora\Aurora.xex
+```
+
+Essa separação é requisito do projeto, não apenas uma etapa temporária.
+
+Para retornar ao modo realmente retail, desligar/reiniciar o console e iniciar **sem disparar ABadAvatar**. Voltar apenas à interface NXE dentro de uma sessão já explorada não equivale a remover os patches daquela sessão.
 
 ### Não restaurar o Xbox
 
