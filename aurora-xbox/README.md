@@ -40,6 +40,40 @@ Aurora 0.7b.2
 
 Ao desligar/reiniciar o console, o softmod deixa de estar ativo. É necessário disparar o ABadAvatar novamente.
 
+## Arquitetura escolhida para a próxima fase
+
+Foi decidido **preservar permanentemente a alternância entre modo original e modo desbloqueado**.
+
+A estratégia é:
+
+```text
+HDD interno
+└── Apps\Aurora\
+    └── Aurora.xex
+        ^
+        | só executa depois do exploit
+        |
+USB Aurora-XBOX
+├── Content\                <- perfil/entrada ABadAvatar
+├── BadUpdatePayload\       <- XeUnshackle
+└── launch.ini               <- aponta para Hdd:\Apps\Aurora\Aurora.xex
+```
+
+Comportamento desejado:
+
+```text
+USB removido + reboot
+= Xbox retail/original
+
+USB conectado + ABadAvatar disparado
+= XeUnshackle/DashLaunch em memória
+= Aurora no HDD interno
+```
+
+**Não mover ABadAvatar/XeUnshackle para o HDD interno.** O pendrive deve continuar funcionando como a "chave" física que habilita o modo modificado.
+
+Arquivos do Aurora podem permanecer no HDD porque, no estado retail, não são executáveis por si só e não tornam o console persistentemente modificado.
+
 ## Pendrive de trabalho
 
 Pendrive usado:
