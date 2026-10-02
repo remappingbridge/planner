@@ -2,7 +2,7 @@
 
 Registro operacional e rastreável da preparação do Xbox 360 E para executar Aurora temporariamente via ABadAvatar/XeUnshackle e consumir jogos mantidos no macOS via Ethernet/NetISO.
 
-> **Status atual (2026-10-02):** NetISO foi validado fim a fim e permaneceu estável durante gameplay. `PES 2018` abriu a partir da ISO no Mac, e o Xbox também foi reiniciado sem o pendrive e voltou normalmente ao dashboard retail/original. A rede privada usa MacBook `192.168.50.1` ↔ Xbox `192.168.50.2`. A NAND não foi modificada.
+> **Status atual (2026-10-02):** NetISO foi validado fim a fim e permaneceu estável durante gameplay. `PES 2018` abriu a partir da ISO no Mac, o Xbox voltou normalmente ao dashboard retail/original sem o pendrive, e o servidor NetISO passou a executar como LaunchDaemon de sistema no macOS, servindo `/Users/Shared/xbox360` em TCP 4323. A NAND não foi modificada.
 
 ## Console e estado confirmado
 
@@ -74,6 +74,7 @@ lsblk -o NAME,SIZE,MODEL,TRAN,MOUNTPOINTS
 - [07-netiso-package.md](07-netiso-package.md) — pacote NetISO validado no macOS.
 - [08-netiso-installation.md](08-netiso-installation.md) — instalação e rollback do NetISO no Xbox.
 - [09-netiso-end-to-end.md](09-netiso-end-to-end.md) — validação fim a fim com PES 2018.
+- [10-netiso-launchdaemon.md](10-netiso-launchdaemon.md) — servidor NetISO automático no boot via LaunchDaemon.
 
 ## Estado atual do `launch.ini`
 
