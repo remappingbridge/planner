@@ -8,7 +8,7 @@ A cadeia completa foi validada com sucesso até a abertura de um jogo real:
 
 ```text
 MacBook
-/Users/admin/Documents/xbox360/PES 2018 - Pro Evolution Soccer (USA) (En,Es).iso
+/Users/Shared/xbox360/PES 2018 - Pro Evolution Soccer (USA) (En,Es).iso
         |
         | netiso-srv TCP 4323
         v
@@ -52,8 +52,8 @@ HDD Xbox
     └── Plugins\Nova.xex   <- versão modificada para NetISO
 
 MacBook
-├── /Users/admin/Documents/xbox360/*.iso
-└── netiso-srv -r -v /Users/admin/Documents/xbox360
+├── /Users/Shared/xbox360/*.iso
+└── netiso-srv -r -v /Users/Shared/xbox360
 ```
 
 ## Rede
@@ -89,4 +89,16 @@ USB fora + reboot -> dashboard retail/original
 USB + exploit     -> Aurora + NetISO
 ```
 
-A próxima etapa é automatizar o `netiso-srv` no macOS com um LaunchAgent do `launchd`.
+## Validação dinâmica do enlace
+
+Em 2026-10-02 também foi validado o comportamento durante perda e retorno do cabo Ethernet:
+
+```text
+cabo conectado    -> ISO remota disponível
+cabo desconectado -> ISO remota desaparece
+cabo reconectado  -> ISO remota reaparece
+```
+
+Não houve travamento no teste. Isso confirma recuperação normal do NetISO quando o enlace físico volta.
+
+O servidor foi posteriormente migrado para um LaunchDaemon de sistema e a biblioteca para `/Users/Shared/xbox360`; consulte [10-netiso-launchdaemon.md](10-netiso-launchdaemon.md).
