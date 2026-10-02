@@ -74,4 +74,19 @@ USB fora + reboot -> dashboard retail/original
 USB + exploit     -> Aurora + NetISO
 ```
 
-Ainda falta repetir o teste de modo retail depois desta instalação do NetISO e, opcionalmente, automatizar o servidor NetISO no macOS com launchd.
+## Validação de estabilidade e retorno ao modo retail
+
+Em 2026-10-02 o usuário confirmou:
+
+- gameplay via NetISO sem travamentos;
+- reinicialização do Xbox sem o pendrive retorna normalmente ao dashboard retail/original;
+- portanto a instalação do Nova modificado no HDD não alterou o comportamento retail sem o exploit.
+
+Requisito permanente novamente validado:
+
+```text
+USB fora + reboot -> dashboard retail/original
+USB + exploit     -> Aurora + NetISO
+```
+
+A próxima etapa é automatizar o `netiso-srv` no macOS com um LaunchAgent do `launchd`.
