@@ -77,6 +77,21 @@ A instância será configurada para escutar somente em `127.0.0.1` e `192.168.50
 
 **Gate:** backend SMB1/NT1 funciona no Mac com autenticação local via `smbclient`, o nome `XBOXMAC` resolve na rede privada, TCP 445/139 não fica exposto pelo Wi-Fi e a biblioteca ConnectX fica separada. A autenticação real pelo Xbox será validada depois que o plugin ConnectX existir, em CX-03/CX-04.
 
+### Evidências parciais CX-01 — 2026-10-02
+
+- Homebrew 7.0.6 presente em `/opt/homebrew`;
+- Samba 4.25.0 instalado via Homebrew;
+- portas TCP 139/445 estavam livres antes de iniciar o Samba dedicado;
+- existe um share configurado no SMB nativo do macOS (`Talita’s Public Folder`), mas o serviço nativo não estava escutando nas portas SMB; não removê-lo;
+- `testparm` carregou `/opt/homebrew/etc/samba-xbox/smb.conf` com sucesso;
+- servidor configurado como standalone, `server min protocol = NT1`, `server max protocol = NT1`, `ntlm auth = ntlmv1-permitted`, `bind interfaces only = yes`;
+- share `XBOX360` aponta para `/Users/Shared/xbox360-connectx`, read-only e autenticado;
+- usuário Samba `admin` foi adicionado;
+- arquivo de prova `CX-01-READY.txt` criado;
+- configuração persistente da interface `USB 10/100 LAN` continua `192.168.50.1/24`, porém o link físico `en7` estava `inactive` no momento do teste.
+
+Enquanto `en7` estiver inativo, não considerar o gate concluído.
+
 ## CX-02 — preparar jogo, identidade e metadados
 
 Usar um jogo já validado em NetISO para comparação direta, preferencialmente PES 2018. A ISO original permanece intacta.
