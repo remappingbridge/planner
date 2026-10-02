@@ -102,7 +102,7 @@ Diagnóstico adicional: com `en7` ativo e `smbd` funcional, `nmbd` não permanec
 
 Usar um jogo já validado em NetISO para comparação direta, preferencialmente PES 2018. A ISO original permanece intacta.
 
-### CX-02A — extrair a ISO
+### CX-02A — extrair a ISO — CONCLUÍDO
 
 Preservar:
 
@@ -117,7 +117,7 @@ Criar separadamente:
 └── default.xex
 ```
 
-### CX-02B — validar `default.xex`
+### CX-02B — validar `default.xex` — CONCLUÍDO
 
 Confirmar que a extração produziu o executável principal e os demais arquivos do jogo. O `.xex` sozinho não é tratado como jogo completo.
 
@@ -184,7 +184,20 @@ Antes de enviar qualquer asset:
 - confirmar que a arte corresponde à edição correta;
 - registrar tamanhos e hashes relevantes.
 
-**Gate:** jogo extraído funcional + identidade confirmada + staging de metadata/assets pronto para importação offline.
+### Evidências CX-02A/B — PES 2018
+
+- ISO original preservada em `/Users/Shared/xbox360/PES 2018 - Pro Evolution Soccer (USA) (En,Es).iso`;
+- SHA-256 da ISO após extração: `12c32bf93d23e237c18fc345dc9c7984b8767de24eb866dccd930d599dd04601`;
+- pasta ConnectX criada em `/Users/Shared/xbox360-connectx/PES 2018`;
+- `default.xex` encontrado na raiz da pasta do jogo;
+- 186 arquivos extraídos;
+- tamanho extraído observado: `6.6G`;
+- a extração também trouxe `$SystemUpdate`; para a biblioteca ConnectX esse diretório será removido da cópia extraída e, em extrações futuras, `extract-xiso -s` será usado para ignorá-lo;
+- o comando simples `extract-xiso` não está no PATH; para o pipeline futuro o binário será instalado em caminho estável antes da automação.
+
+**Conclusão:** CX-02A e CX-02B concluídos. A pasta está estruturalmente no formato esperado para execução por `default.xex`; a validação real de lançamento ocorrerá no CX-04 depois da instalação do ConnectX.
+
+**Gate geral CX-02:** jogo extraído funcional + identidade confirmada + staging de metadata/assets pronto para importação offline.
 
 ## CX-03 — instalar e configurar ConnectX no Aurora
 
