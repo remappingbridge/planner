@@ -121,6 +121,16 @@ Criar separadamente:
 
 Confirmar que a extração produziu o executável principal e os demais arquivos do jogo. O `.xex` sozinho não é tratado como jogo completo.
 
+### Classificação de entradas não-Xbox
+
+O pipeline futuro não deve assumir que toda pasta encontrada perto da biblioteca é um jogo Xbox 360. Antes de processar metadata/assets, deve exigir pelo menos:
+
+- `default.xex` presente;
+- assinatura XEX válida (`XEX2`) no executável;
+- TitleID extraível da ExecutionId do XEX.
+
+Exemplo observado em 2026-10-02: `/Users/Shared/xbox360/The Legend of Korra™/` contém `LoK.exe`, `steam_api.dll`, `_CommonRedist/DirectX` e outros artefatos de Windows/Steam, sem `default.xex`; portanto deve ser classificado como **PC / não Xbox 360** e ignorado pelo pipeline ConnectX.
+
 ### CX-02C — extrair identidade
 
 Ler do conteúdo extraído, quando disponível:
