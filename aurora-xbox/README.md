@@ -53,7 +53,7 @@ aurora-xbox/
 Ordem definida:
 
 1. **NetISO — VALIDADO / MANTER.** ISOs no Mac, montagem pela rede.
-2. **ConnectX — PRÓXIMA IMPLEMENTAÇÃO.** Jogos extraídos no Mac e biblioteca remota escaneável pelo Aurora/CoverFlow.
+2. **ConnectX — EM IMPLEMENTAÇÃO.** CX-00 concluído; próximo gate CX-01. Jogos extraídos no Mac e biblioteca remota escaneável pelo Aurora/CoverFlow.
 3. **GOD/local — IMPLEMENTAR POR ÚLTIMO.** Games on Demand no HDD interno para experiência local.
 
 As três abordagens serão mantidas e testadas em coexistência. A implementação de uma não implica remover as anteriores.
