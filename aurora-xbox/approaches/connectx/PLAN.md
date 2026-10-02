@@ -259,6 +259,10 @@ Fluxo preferido:
 
 **Gate:** jogo ConnectX aparece com capa correta e metadados suficientes para uso normal.
 
+## Validação pós-reboot adiada
+
+A validação pós-reboot do Samba/NetBIOS foi adiada por decisão operacional do usuário. Ela será executada no CX-07, junto com a validação final de coexistência. Isso não bloqueia CX-02 em diante desde que `smbd`/`nmbd` estejam funcionais na sessão atual.
+
 ## CX-07 — coexistência final
 
 Com ConnectX concluído, validar as duas bibliotecas no mesmo console:
@@ -273,7 +277,7 @@ ConnectX
 -> CoverFlow -> Launch
 ```
 
-Validar ainda reboot do Mac, serviços automáticos, cabo removido/reconectado, NetISO, ConnectX e `USB removido + reboot = retail`.
+Validar ainda reboot real do Mac (incluindo autostart NetISO + `smbd` + `nmbd`), cabo removido/reconectado, NetISO, ConnectX e `USB removido + reboot = retail`.
 
 **Gate de conclusão:** NetISO e ConnectX coexistem sem regressão.
 
