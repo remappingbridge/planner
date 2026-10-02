@@ -1,6 +1,6 @@
 # CX-01 — backend SMB/NetBIOS isolado no Mac
 
-> **Status funcional: VALIDADO em 2026-10-02. Persistência no boot em validação.**
+> **Status funcional: VALIDADO em 2026-10-02. LaunchDaemons configurados; validação pós-reboot foi adiada para o gate final de coexistência.**
 
 ## Implementação
 
@@ -84,6 +84,10 @@ Se a abordagem ConnectX for removida, o serviço Apple pode ser reativado com:
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.netbiosd.plist
 ```
 
-## Pendência para fechamento operacional
+## Persistência / reboot
 
-Transformar `smbd` e `nmbd` em LaunchDaemons próprios e validar após reboot real do Mac. Como `en7` pode estar sem link durante o boot, os serviços devem aguardar `192.168.50.1` aparecer antes de iniciar.
+Foram criados LaunchDaemons próprios para `smbd` e `nmbd`, usando um wrapper que aguarda `en7` adquirir `192.168.50.1` antes de iniciar os processos.
+
+Na primeira tentativa os dois jobs ficaram em `spawn scheduled` com `last exit code = 1`. O reboot real não será executado agora por decisão operacional do usuário.
+
+A validação pós-reboot foi transferida para o gate final de coexistência (CX-07), junto com a validação completa de NetISO + ConnectX. Antes disso, os LaunchDaemons serão corrigidos e validados na sessão atual.
