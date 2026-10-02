@@ -102,7 +102,7 @@ Diagnóstico adicional: com `en7` ativo e `smbd` funcional, `nmbd` não permanec
 
 Usar um jogo já validado em NetISO para comparação direta, preferencialmente PES 2018. A ISO original permanece intacta.
 
-### CX-02A — extrair a ISO — CONCLUÍDO — CONCLUÍDO
+### CX-02A — extrair a ISO — CONCLUÍDO
 
 Preservar:
 
@@ -117,7 +117,7 @@ Criar separadamente:
 └── default.xex
 ```
 
-### CX-02B — validar `default.xex` — CONCLUÍDO — CONCLUÍDO
+### CX-02B — validar `default.xex` — CONCLUÍDO
 
 Confirmar que a extração produziu o executável principal e os demais arquivos do jogo. O `.xex` sozinho não é tratado como jogo completo.
 
@@ -131,7 +131,7 @@ O pipeline futuro não deve assumir que toda pasta encontrada perto da bibliotec
 
 Exemplo observado em 2026-10-02: `/Users/Shared/xbox360/The Legend of Korra™/` contém `LoK.exe`, `steam_api.dll`, `_CommonRedist/DirectX` e outros artefatos de Windows/Steam, sem `default.xex`; portanto deve ser classificado como **PC / não Xbox 360** e ignorado pelo pipeline ConnectX.
 
-### CX-02C — extrair identidade
+### CX-02C — extrair identidade — CONCLUÍDO
 
 Ler do conteúdo extraído, quando disponível:
 
@@ -142,9 +142,31 @@ Ler do conteúdo extraído, quando disponível:
 
 Registrar esses dados antes de importar assets.
 
-### CX-02D — conferir edição
+### CX-02D — conferir edição — CONCLUÍDO
 
 Relacionar TitleID/MediaID com a ISO usada no NetISO para evitar aplicar capa ou metadata de edição/região errada.
+
+### Evidências CX-02C/D — PES 2018
+
+- scanner incremental instalado em `/usr/local/libexec/xbox-connectx-scan`;
+- catálogo persistente: `/usr/local/var/xbox-connectx/catalog.json`;
+- formato XEX: `XEX2`;
+- TitleID: `4A3007D3`;
+- MediaID: `1CB7BE36`;
+- versão XEX: `0.0.0.18`;
+- disco: `1/1`;
+- tamanho de `default.xex`: `31674368` bytes;
+- SHA-256 de `default.xex`: `57185a354d728081f88675ffeee081e1e982c6ef7cd6369db3fd9abaf6e7cc72`;
+- x360db identifica `4A3007D3` como `PRO EVOLUTION SOCCER 2018` e `1CB7BE36` como edição `Original`, região `USA`;
+- ConsoleMods também relaciona `1CB7BE36` a PES 2018 NA/LATAM, com inglês e espanhol;
+- portanto a identidade extraída é consistente com a ISO piloto nomeada `(USA) (En,Es)`.
+
+Fontes de verificação:
+
+- `https://github.com/xenia-manager/x360db/blob/main/titles/4A3007D3/info.json`
+- `https://consolemods.org/wiki/Xbox_360:List_of_Every_Xbox_360_Disc_part_1`
+
+CX-02C e CX-02D concluídos.
 
 ### CX-02E — buscar metadata e artwork no Mac
 
