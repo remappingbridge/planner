@@ -113,3 +113,25 @@ io.remappingbridge.netiso-srv
 ```
 
 O MacBook pode continuar usando Wi-Fi normalmente; o Xbox acessa o serviço pela rede Ethernet privada em `192.168.50.1:4323`.
+
+
+## Validação após reboot real do macOS
+
+Em 2026-10-02 o MacBook foi reiniciado com `sudo reboot`. Após o sistema voltar e a sessão SSH ser restabelecida, sem iniciar o NetISO manualmente, o serviço já estava ativo.
+
+Estado observado:
+
+```text
+state = running
+runs = 1
+pid = 300
+last exit code = (never exited)
+```
+
+A porta também estava aberta automaticamente:
+
+```text
+netiso-srv ... TCP *:4323 (LISTEN)
+```
+
+Conclusão: o LaunchDaemon inicia corretamente no boot e não depende de Terminal nem de inicialização manual do servidor.
