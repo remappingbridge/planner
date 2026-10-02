@@ -86,8 +86,10 @@ A instância será configurada para escutar somente em `127.0.0.1` e `192.168.50
 - `testparm` carregou `/opt/homebrew/etc/samba-xbox/smb.conf` com sucesso;
 - servidor configurado como standalone, `server min protocol = NT1`, `server max protocol = NT1`, `ntlm auth = ntlmv1-permitted`, `bind interfaces only = yes`;
 - share `XBOX360` aponta para `/Users/Shared/xbox360-connectx`, read-only e autenticado;
-- usuário Samba `admin` foi adicionado;
+- usuário Samba `admin` foi adicionado e a senha foi redefinida com sucesso (segredo não registrado);
 - arquivo de prova `CX-01-READY.txt` criado;
+- autenticação SMB local validada via `smbclient` usando NT1: o share `//192.168.50.1/XBOX360` listou `CX-01-READY.txt`;
+- `smbd` dedicado ficou escutando somente em `192.168.50.1:445`, `192.168.50.1:139` e loopback, sem bind wildcard;
 - configuração persistente da interface `USB 10/100 LAN` continua `192.168.50.1/24`, porém o link físico `en7` estava `inactive` no momento do teste.
 
 Enquanto `en7` estiver inativo, não considerar o gate concluído.
