@@ -1,5 +1,9 @@
 # Plano de implementação — ConnectX
 
+## Política de avanço dos gates
+
+A partir de CX-01, a aceitação dos gates é **baseada em evidências**. O usuário não precisa declarar `gate aceito` nem pedir explicitamente o próximo gate. Quando os critérios objetivos do gate forem comprovados pelas saídas/testes, o gate será registrado como concluído e o trabalho avançará automaticamente. O fluxo só deve parar quando houver falha, ambiguidade, risco de regressão ou teste físico que ainda dependa do usuário.
+
 ## Princípios
 
 - NetISO permanece funcionando durante todo o experimento.
@@ -62,9 +66,14 @@ O backend deve usar conta dedicada/read-only quando possível.
 
 ### Decisão técnica deste gate
 
-1. verificar se o serviço SMB disponível no macOS 27 suporta o protocolo exigido pelo ConnectX e isolamento por interface;
-2. se não suportar, usar uma instância Samba dedicada (por exemplo Homebrew) com `server min protocol = NT1` e bind somente em `en7/192.168.50.1`;
-3. não habilitar SMB1 na interface Wi-Fi.
+A implementação escolhida é **Samba dedicado via Homebrew**, separado do servidor SMB nativo da Apple. Motivos:
+
+- ConnectX exige SMBv1/NT1;
+- Samba permite `server min protocol = NT1`;
+- Samba permite `interfaces` + `bind interfaces only = yes`, restringindo o serviço à rede privada do Xbox;
+- o binário Homebrew usa nome próprio (`samba-dot-org-smbd`) no macOS, reduzindo conflito com o `smbd` da Apple.
+
+A instância será configurada para escutar somente em `127.0.0.1` e `192.168.50.1/en7`, com `hosts allow` limitado a `127.0.0.1` e `192.168.50.0/24`. SMB1 não deve ser exposto pela interface Wi-Fi.
 
 **Gate:** Xbox consegue autenticar no share SMB pela rede privada, e o serviço não fica exposto pelo Wi-Fi.
 
