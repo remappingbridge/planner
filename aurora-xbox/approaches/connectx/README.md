@@ -1,6 +1,6 @@
 # Abordagem 2 — ConnectX
 
-> **Status: CX-00 concluído. CX-01 funcionalmente validado; persistência no boot em validação.**
+> **Status: CX-00 concluído; CX-01 funcionalmente validado; CX-02 concluído para o jogo piloto PES 2018. Próximo gate: CX-03.**
 
 Objetivo: manter jogos no Mac, mas permitir que o Aurora trate a biblioteca remota como um caminho escaneável e coloque os títulos no CoverFlow/carrossel principal.
 
