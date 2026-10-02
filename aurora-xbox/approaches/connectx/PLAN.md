@@ -223,6 +223,8 @@ Somente os arquivos disponíveis/validados precisam existir.
 
 Conclusão: metadata e três classes de artwork passaram; capa ainda pendente de normalização para o formato Aurora.
 
+Decisão do pipeline: x360db continua como fonte primária de metadata, banner, background e icon. Para `cover`, quando a boxart do x360db não estiver no formato landscape esperado pelo Aurora, XboxUnity passa a ser a fonte preferida de full boxart (`/api/boxart/<CoverID>`), mantendo cache local e sem sobrescrever uma escolha manual já validada.
+
 ### CX-02G — validar staging antes do Xbox
 
 Antes de enviar qualquer asset:
