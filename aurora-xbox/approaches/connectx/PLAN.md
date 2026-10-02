@@ -10,17 +10,21 @@
 - Testar primeiro com **um único jogo**.
 - Só expandir para a biblioteca inteira depois de validar CoverFlow, capas e estabilidade.
 
-## CX-00 — congelar baseline e rollback
+## CX-00 — congelar baseline e rollback — CONCLUÍDO
 
-Antes de instalar ConnectX:
+Baseline congelado e rollback documentado em [CX-00-baseline.md](CX-00-baseline.md).
 
-- registrar estado atual dos plugins do Aurora;
-- manter backup do `Nova.xex` original já existente;
-- registrar `launch.ini` atual;
-- confirmar NetISO funcionando;
-- confirmar `USB fora + reboot = retail`.
+Confirmado antes de qualquer instalação ConnectX:
 
-**Gate:** baseline NetISO continua funcional e há rollback documentado.
+- estado relevante dos plugins registrado;
+- backup do `Nova.xex` original preservado com SHA-256;
+- `launch.ini` atual congelado;
+- NetISO validado fim a fim;
+- recuperação após perda/retorno do cabo validada;
+- LaunchDaemon NetISO validado após reboot do Mac;
+- `USB fora + reboot = retail` novamente validado.
+
+**Gate:** **ACEITO/CONCLUÍDO**. Próximo gate: CX-01.
 
 ## CX-01 — backend SMB isolado no Mac
 
@@ -64,9 +68,11 @@ O backend deve usar conta dedicada/read-only quando possível.
 
 **Gate:** Xbox consegue autenticar no share SMB pela rede privada, e o serviço não fica exposto pelo Wi-Fi.
 
-## CX-02 — preparar um jogo extraído
+## CX-02 — preparar jogo, identidade e metadados
 
-Usar um jogo que já foi validado em NetISO para comparação direta, preferencialmente PES 2018.
+Usar um jogo já validado em NetISO para comparação direta, preferencialmente PES 2018. A ISO original permanece intacta.
+
+### CX-02A — extrair a ISO
 
 Preservar:
 
@@ -81,9 +87,74 @@ Criar separadamente:
 └── default.xex
 ```
 
-A extração deve remover apenas o que for seguro remover, sem alterar a ISO original.
+### CX-02B — validar `default.xex`
 
-**Gate:** pasta contém `default.xex` e arquivos completos do jogo; ISO original continua intacta.
+Confirmar que a extração produziu o executável principal e os demais arquivos do jogo. O `.xex` sozinho não é tratado como jogo completo.
+
+### CX-02C — extrair identidade
+
+Ler do conteúdo extraído, quando disponível:
+
+- TitleID;
+- MediaID;
+- nome técnico/comercial identificável;
+- região/edição relevante.
+
+Registrar esses dados antes de importar assets.
+
+### CX-02D — conferir edição
+
+Relacionar TitleID/MediaID com a ISO usada no NetISO para evitar aplicar capa ou metadata de edição/região errada.
+
+### CX-02E — buscar metadata e artwork no Mac
+
+Preparar o pipeline para obter, quando disponível:
+
+- título;
+- capa;
+- banner;
+- background;
+- ícone;
+- descrição;
+- publisher;
+- developer;
+- gênero;
+- data de lançamento.
+
+Não depender de busca manual capa por capa quando for possível automatizar.
+
+### CX-02F — gerar staging de importação do Aurora
+
+Preparar estrutura compatível com importação offline:
+
+```text
+Aurora/User/Import/<TitleID>/
+├── titlename.txt
+├── description.txt
+├── publisher.txt
+├── developer.txt
+├── releasedate.txt
+├── genre.txt
+├── cover.jpg
+├── banner.jpg
+├── background.jpg
+├── icon.png
+└── screenshot*.jpg
+```
+
+Somente os arquivos disponíveis/validados precisam existir.
+
+### CX-02G — validar staging antes do Xbox
+
+Antes de enviar qualquer asset:
+
+- confirmar TitleID correto;
+- confirmar que a pasta extraída contém o jogo completo;
+- confirmar que a ISO original não foi alterada;
+- confirmar que a arte corresponde à edição correta;
+- registrar tamanhos e hashes relevantes.
+
+**Gate:** jogo extraído funcional + identidade confirmada + staging de metadata/assets pronto para importação offline.
 
 ## CX-03 — instalar e configurar ConnectX no Aurora
 
