@@ -223,6 +223,16 @@ Somente os arquivos disponíveis/validados precisam existir.
 
 Conclusão: metadata e três classes de artwork passaram; capa ainda pendente de normalização para o formato Aurora.
 
+Validação adicional do fallback XboxUnity em 2026-10-02:
+
+- `CoverInfo.php?titleid=4a3007d3` respondeu corretamente;
+- XboxUnity retornou 189 capas cadastradas para o TitleID;
+- existem múltiplas entradas marcadas `Official = 1`;
+- candidato inicial determinístico para PES 2018: CoverID `21461`, marcado como oficial e enviado em `2017-09-15`, três dias após a data de lançamento registrada (`2017-09-12`);
+- antes de promover esse cover ao staging, validar `/api/boxart/21461` como imagem íntegra e dimensão/aspecto compatíveis com `900x600`.
+
+Regra planejada para jogos futuros: preferir capas `Official = 1`; entre elas, escolher automaticamente a enviada mais próxima da data de lançamento, mantendo um override persistente por TitleID para correções manuais futuras.
+
 Decisão do pipeline: x360db continua como fonte primária de metadata, banner, background e icon. Para `cover`, quando a boxart do x360db não estiver no formato landscape esperado pelo Aurora, XboxUnity passa a ser a fonte preferida de full boxart (`/api/boxart/<CoverID>`), mantendo cache local e sem sobrescrever uma escolha manual já validada.
 
 ### CX-02G — validar staging antes do Xbox
