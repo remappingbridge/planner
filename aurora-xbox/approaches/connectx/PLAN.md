@@ -102,7 +102,7 @@ Diagnóstico adicional: com `en7` ativo e `smbd` funcional, `nmbd` não permanec
 
 Usar um jogo já validado em NetISO para comparação direta, preferencialmente PES 2018. A ISO original permanece intacta.
 
-### CX-02A — extrair a ISO — CONCLUÍDO
+### CX-02A — extrair a ISO — CONCLUÍDO — CONCLUÍDO
 
 Preservar:
 
@@ -117,7 +117,7 @@ Criar separadamente:
 └── default.xex
 ```
 
-### CX-02B — validar `default.xex` — CONCLUÍDO
+### CX-02B — validar `default.xex` — CONCLUÍDO — CONCLUÍDO
 
 Confirmar que a extração produziu o executável principal e os demais arquivos do jogo. O `.xex` sozinho não é tratado como jogo completo.
 
