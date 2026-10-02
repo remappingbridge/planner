@@ -2,7 +2,7 @@
 
 Registro operacional e rastreável da preparação do Xbox 360 E para executar Aurora temporariamente via ABadAvatar/XeUnshackle e consumir jogos mantidos no macOS via Ethernet/NetISO.
 
-> **Status atual (2026-10-01):** NetISO foi validado fim a fim. O Aurora abriu com o `Nova.xex` modificado, o File Browser mostrou o NetISO, e `PES 2018` foi montado a partir do Mac e abriu no Xbox. A rede privada usa MacBook `192.168.50.1` ↔ Xbox `192.168.50.2`. A NAND não foi modificada.
+> **Status atual (2026-10-02):** NetISO foi validado fim a fim e permaneceu estável durante gameplay. `PES 2018` abriu a partir da ISO no Mac, e o Xbox também foi reiniciado sem o pendrive e voltou normalmente ao dashboard retail/original. A rede privada usa MacBook `192.168.50.1` ↔ Xbox `192.168.50.2`. A NAND não foi modificada.
 
 ## Console e estado confirmado
 
