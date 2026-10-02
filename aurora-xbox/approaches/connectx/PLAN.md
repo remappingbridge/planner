@@ -98,7 +98,7 @@ Enquanto `en7` estiver inativo, não considerar o gate concluído.
 
 Diagnóstico adicional: com `en7` ativo e `smbd` funcional, `nmbd` não permaneceu em execução porque o daemon nativo do macOS `netbiosd` já ocupava UDP 137/138. `nmblookup` por broadcast e unicast falharam para `XBOXMAC`. Apple documenta a desativação reversível de `netbiosd`; CX-01 passa a usar o `nmbd` do Samba dedicado para registrar `XBOXMAC`, mantendo a pilha ConnectX sob uma única configuração.
 
-## CX-02 — preparar jogo, identidade e metadados
+## CX-02 — preparar jogo, identidade e metadados — CONCLUÍDO PARA O JOGO PILOTO
 
 Usar um jogo já validado em NetISO para comparação direta, preferencialmente PES 2018. A ISO original permanece intacta.
 
@@ -168,7 +168,7 @@ Fontes de verificação:
 
 CX-02C e CX-02D concluídos.
 
-### CX-02E — buscar metadata e artwork no Mac — PARCIALMENTE VALIDADO
+### CX-02E — buscar metadata e artwork no Mac — CONCLUÍDO
 
 Preparar o pipeline para obter, quando disponível:
 
@@ -185,7 +185,7 @@ Preparar o pipeline para obter, quando disponível:
 
 Não depender de busca manual capa por capa quando for possível automatizar.
 
-### CX-02F — gerar staging de importação do Aurora — PARCIALMENTE VALIDADO
+### CX-02F — gerar staging de importação do Aurora — CONCLUÍDO
 
 Preparar estrutura compatível com importação offline:
 
@@ -243,7 +243,7 @@ Validação do CoverID `21461`:
 
 Decisão do pipeline: x360db continua como fonte primária de metadata, banner, background e icon. Para `cover`, quando a boxart do x360db não estiver no formato landscape esperado pelo Aurora, XboxUnity passa a ser a fonte preferida de full boxart (`/api/boxart/<CoverID>`), mantendo cache local e sem sobrescrever uma escolha manual já validada.
 
-### CX-02G — validar staging antes do Xbox
+### CX-02G — validar staging antes do Xbox — CONCLUÍDO
 
 Antes de enviar qualquer asset:
 
@@ -266,7 +266,21 @@ Antes de enviar qualquer asset:
 
 **Conclusão:** CX-02A e CX-02B concluídos. A pasta está estruturalmente no formato esperado para execução por `default.xex`; a validação real de lançamento ocorrerá no CX-04 depois da instalação do ConnectX.
 
-**Gate geral CX-02:** jogo extraído funcional + identidade confirmada + staging de metadata/assets pronto para importação offline.
+### Evidências finais CX-02E/F/G — PES 2018
+
+- `cover.jpg` convertido para JPEG real, `900x600`, SHA-256 `092fecf6440814ae8ecb3693cfbb3ba39ab4f6d3dece55b53074b654265e76b0`;
+- `banner.png`: `420x95`;
+- `background.jpg`: `1280x720`;
+- `icon.png`: `64x64`;
+- metadata textual completa no staging;
+- execução repetida de `xbox-connectx-stage-assets` não alterou nenhum hash (`diff_exit=0`), comprovando idempotência do staging atual;
+- SHA-256 da ISO original permaneceu `12c32bf93d23e237c18fc345dc9c7984b8767de24eb866dccd930d599dd04601`;
+- SHA-256 de `default.xex` permaneceu `57185a354d728081f88675ffeee081e1e982c6ef7cd6369db3fd9abaf6e7cc72`;
+- `staging-manifest.json` registra TitleID `4A3007D3`, MediaID `1CB7BE36`, edição `Original`, região `USA` e hashes de todos os arquivos staged.
+
+**Gate geral CX-02:** **CONCLUÍDO para o jogo piloto PES 2018.** O teste incremental completo com um segundo jogo continua reservado ao CX-06, conforme requisito já congelado.
+
+Próximo gate: CX-03 — instalar/configurar ConnectX no Aurora preservando NetISO.
 
 ## CX-03 — instalar e configurar ConnectX no Aurora
 
