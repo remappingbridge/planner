@@ -30,7 +30,7 @@ Confirmado antes de qualquer instalação ConnectX:
 
 **Gate:** **ACEITO/CONCLUÍDO**. Próximo gate: CX-01.
 
-## CX-01 — backend SMB isolado no Mac
+## CX-01 — backend SMB isolado no Mac — FUNCIONAL VALIDADO / PERSISTÊNCIA EM VALIDAÇÃO
 
 Criar biblioteca dedicada:
 
@@ -76,6 +76,8 @@ A implementação escolhida é **Samba dedicado via Homebrew**, separado do serv
 A instância será configurada para escutar somente em `127.0.0.1` e `192.168.50.1/en7`, com `hosts allow` limitado a `127.0.0.1` e `192.168.50.0/24`. SMB1 não deve ser exposto pela interface Wi-Fi.
 
 **Gate:** backend SMB1/NT1 funciona no Mac com autenticação local via `smbclient`, o nome `XBOXMAC` resolve na rede privada, TCP 445/139 não fica exposto pelo Wi-Fi e a biblioteca ConnectX fica separada. A autenticação real pelo Xbox será validada depois que o plugin ConnectX existir, em CX-03/CX-04.
+
+Evidências consolidadas: [CX-01-samba.md](CX-01-samba.md). Funcionalidade principal já validada; falta apenas validar autostart após reboot real do Mac antes de considerar CX-01 operacionalmente encerrado.
 
 ### Evidências parciais CX-01 — 2026-10-02
 
