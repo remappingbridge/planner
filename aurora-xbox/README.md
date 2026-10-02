@@ -2,7 +2,7 @@
 
 Registro operacional e rastreável da preparação do Xbox 360 E para executar Aurora temporariamente via ABadAvatar/XeUnshackle e consumir jogos mantidos no macOS via Ethernet/NetISO.
 
-> **Status atual (2026-10-02):** NetISO foi validado fim a fim e permaneceu estável durante gameplay. `PES 2018` abriu a partir da ISO no Mac, o Xbox voltou normalmente ao dashboard retail/original sem o pendrive, e o servidor NetISO passou a executar como LaunchDaemon de sistema no macOS, servindo `/Users/Shared/xbox360` em TCP 4323. A NAND não foi modificada.
+> **Status atual (2026-10-02):** NetISO foi validado fim a fim e permaneceu estável durante gameplay. `PES 2018` abriu a partir da ISO no Mac, o Xbox voltou normalmente ao dashboard retail/original sem o pendrive, e o servidor NetISO passou a executar como LaunchDaemon de sistema no macOS, servindo `/Users/Shared/xbox360` em TCP 4323. O autostart também foi validado após um reboot real do Mac. A NAND não foi modificada.
 
 ## Console e estado confirmado
 
