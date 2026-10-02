@@ -259,3 +259,41 @@ Validar ainda reboot do Mac, serviços automáticos, cabo removido/reconectado, 
 ## Depois do CX-07
 
 Congelar a configuração ConnectX validada e seguir para [../god-local/](../god-local/).
+## Pipeline incremental para jogos futuros
+
+A solução de metadados/capas não será tratada como importação única. O objetivo é suportar novos jogos adicionados posteriormente sem reconstruir manualmente a biblioteca.
+
+Fluxo planejado:
+
+```text
+nova ISO adicionada em /Users/Shared/xbox360
+        ↓
+extração para /Users/Shared/xbox360-connectx/<jogo>/
+        ↓
+detecção de default.xex
+        ↓
+leitura de TitleID / MediaID
+        ↓
+comparação com catálogo local de jogos já processados
+        ↓
+buscar somente metadata/artwork ausentes
+        ↓
+gerar/atualizar Aurora/User/Import/<TitleID>/
+        ↓
+enviar somente deltas por FTP
+        ↓
+Aurora rescan/import
+```
+
+Requisitos do pipeline:
+
+- manter um manifesto local por TitleID/MediaID e hash da ISO/XEX;
+- ser idempotente: rodar novamente não deve duplicar assets nem recriar jogos já processados;
+- detectar jogos novos e alterações de edição/MediaID;
+- preservar capas previamente escolhidas manualmente, salvo ordem explícita de substituição;
+- manter cache local de metadata/artwork para não depender de novo download a cada execução;
+- gerar staging separado antes de qualquer FTP;
+- permitir execução manual inicialmente e posterior automação por LaunchDaemon/serviço no Mac depois que o fluxo estiver validado;
+- nunca apagar a ISO original ao gerar a árvore ConnectX.
+
+O gate CX-06 só será considerado completamente concluído quando esse fluxo incremental estiver validado com pelo menos um jogo já existente e um segundo jogo adicionado depois.
