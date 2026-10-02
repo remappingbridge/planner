@@ -233,6 +233,14 @@ Validação adicional do fallback XboxUnity em 2026-10-02:
 
 Regra planejada para jogos futuros: preferir capas `Official = 1`; entre elas, escolher automaticamente a enviada mais próxima da data de lançamento, mantendo um override persistente por TitleID para correções manuais futuras.
 
+Validação do CoverID `21461`:
+
+- download concluído com sucesso (~953 KiB);
+- dimensões: `900x600`;
+- SHA-256: `8e42bd94ba792b37e4ab1afb24217558da0ad4ffbfa868a2e2386b51d3eed30a`;
+- `file` identificou o conteúdo como **PNG**, apesar do arquivo ter sido salvo inicialmente com extensão `.jpg`;
+- o staging foi temporariamente atualizado como `cover.jpg`, mas precisa ser convertido para JPEG real antes de CX-02F/G serem concluídos; não considerar apenas a extensão como validação de formato.
+
 Decisão do pipeline: x360db continua como fonte primária de metadata, banner, background e icon. Para `cover`, quando a boxart do x360db não estiver no formato landscape esperado pelo Aurora, XboxUnity passa a ser a fonte preferida de full boxart (`/api/boxart/<CoverID>`), mantendo cache local e sem sobrescrever uma escolha manual já validada.
 
 ### CX-02G — validar staging antes do Xbox
