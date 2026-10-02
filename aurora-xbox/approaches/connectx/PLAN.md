@@ -75,7 +75,7 @@ A implementação escolhida é **Samba dedicado via Homebrew**, separado do serv
 
 A instância será configurada para escutar somente em `127.0.0.1` e `192.168.50.1/en7`, com `hosts allow` limitado a `127.0.0.1` e `192.168.50.0/24`. SMB1 não deve ser exposto pela interface Wi-Fi.
 
-**Gate:** Xbox consegue autenticar no share SMB pela rede privada, e o serviço não fica exposto pelo Wi-Fi.
+**Gate:** backend SMB1/NT1 funciona no Mac com autenticação local via `smbclient`, o nome `XBOXMAC` resolve na rede privada, TCP 445/139 não fica exposto pelo Wi-Fi e a biblioteca ConnectX fica separada. A autenticação real pelo Xbox será validada depois que o plugin ConnectX existir, em CX-03/CX-04.
 
 ## CX-02 — preparar jogo, identidade e metadados
 
