@@ -92,3 +92,84 @@ A alternância deve continuar preservada:
 USB fora + reboot -> retail
 USB + exploit     -> Aurora/NetISO
 ```
+
+
+## Instalação no Xbox concluída — aguardando teste após reboot
+
+Backup do `Nova.xex` original do Aurora foi copiado via FTP para:
+
+```text
+/Users/admin/Documents/xbox360-tools/xbox-backup/Nova-original.xex
+```
+
+Tamanho:
+
+```text
+240K
+```
+
+SHA-256:
+
+```text
+3fdf5175a4caaa74e075a839776b12d15982ac304807ebc9f8d9ff0b8ae218fa
+```
+
+Configuração criada:
+
+```text
+NetISO.xex.txt = 192.168.50.1
+```
+
+Arquivos enviados ao pendrive:
+
+```text
+Usb0:\NetISO\NetISO.xex      28672 bytes
+Usb0:\NetISO\NetISO.xex.txt     14 bytes
+```
+
+O `Nova.xex` modificado foi enviado para:
+
+```text
+Hdd1:\Apps\Aurora\Plugins\Nova.xex
+```
+
+Tamanho remoto observado:
+
+```text
+192512 bytes
+```
+
+O `launch.ini` no pendrive foi alterado e reenviado com:
+
+```ini
+Default = Hdd:\Apps\Aurora\Aurora.xex
+plugin1 = Usb:\NetISO\NetISO.xex
+plugin2 =
+plugin3 =
+plugin4 =
+plugin5 =
+liveblock = true
+livestrong = false
+fakelive = false
+autofake = false
+```
+
+Estado desta etapa:
+
+- backup original do Nova: concluído;
+- NetISO.xex no USB: concluído;
+- NetISO.xex.txt com IP do Mac: concluído;
+- Nova modificado no HDD: concluído;
+- plugin1 no launch.ini: concluído;
+- **teste pós-reboot ainda pendente**;
+- **montagem de ISO ainda pendente**.
+
+Rollback do Nova, se necessário:
+
+```text
+origem no Mac:
+~/Documents/xbox360-tools/xbox-backup/Nova-original.xex
+
+destino:
+Hdd1:\Apps\Aurora\Plugins\Nova.xex
+```
