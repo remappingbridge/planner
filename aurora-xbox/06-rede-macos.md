@@ -211,3 +211,25 @@ Instalar o lado Xbox do NetISO:
 - `NetISO.xex.txt` apontando para `192.168.50.1`;
 - NetISO como `plugin1` no `launch.ini` do pendrive;
 - validar montagem de uma ISO real.
+
+
+## FTP root do Aurora validado
+
+Com o Aurora aberto, a raiz FTP foi listada a partir do Mac:
+
+```bash
+curl -s --user xboxftp:xboxftp ftp://192.168.50.2/
+```
+
+Volumes expostos:
+
+```text
+Hdd1
+Usb0
+System
+HddX
+SysExt
+Game
+```
+
+Isso confirmou acesso remoto tanto ao HDD interno (`Hdd1`) quanto ao pendrive/chave (`Usb0`) sem precisar remover o USB do Xbox. A etapa seguinte pode, portanto, fazer backup e substituição controlada de arquivos via FTP.
