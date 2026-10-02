@@ -2,7 +2,7 @@
 
 Registro operacional e rastreável da preparação do Xbox 360 E para executar Aurora temporariamente via ABadAvatar/XeUnshackle e, em etapa futura, consumir jogos mantidos no macOS via Ethernet/NetISO.
 
-> **Status atual (2026-10-01):** Aurora 0.7b.2 foi migrado para o HDD interno e abriu com sucesso via ABadAvatar/XeUnshackle. A alternância foi validada fisicamente: **USB conectado + exploit = Aurora desbloqueado; USB removido + reboot = dashboard retail/original**. A NAND não foi modificada. Há duas leituras idênticas da NAND salvas localmente no Debian.
+> **Status atual (2026-10-01):** Aurora 0.7b.2 está no HDD interno; a alternância retail/desbloqueado foi validada; e a rede privada MacBook `192.168.50.1` ↔ Xbox `192.168.50.2` também foi validada por ARP, FTP e TCP 4323. Falta instalar o plugin NetISO no lado Xbox e testar uma ISO. A NAND não foi modificada.
 
 ## Console e estado confirmado
 
@@ -70,7 +70,7 @@ lsblk -o NAME,SIZE,MODEL,TRAN,MOUNTPOINTS
 - [02-softmod-abadavatar-xeunshackle.md](02-softmod-abadavatar-xeunshackle.md) — processo de exploit.
 - [03-backup-nand.md](03-backup-nand.md) — backup e recuperação.
 - [04-aurora.md](04-aurora.md) — instalação, migração e validação do Aurora.
-- [05-proximos-passos-netiso.md](05-proximos-passos-netiso.md) — próxima fase: NetISO/macOS/Ethernet.
+- [05-proximos-passos-netiso.md](05-proximos-passos-netiso.md) — próxima fase: plugin NetISO e teste de jogos.\n- [06-rede-macos.md](06-rede-macos.md) — rede privada MacBook ↔ Xbox e servidor NetISO, já validados.
 
 ## Estado atual do `launch.ini`
 
