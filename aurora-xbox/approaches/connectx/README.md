@@ -1,6 +1,6 @@
 # Abordagem 2 — ConnectX
 
-> **Status: PRÓXIMA IMPLEMENTAÇÃO.**
+> **Status: CX-00 CONCLUÍDO. Próximo gate: CX-01.**
 
 Objetivo: manter jogos no Mac, mas permitir que o Aurora trate a biblioteca remota como um caminho escaneável e coloque os títulos no CoverFlow/carrossel principal.
 
@@ -33,3 +33,8 @@ ConnectX exige jogos em formato extraído; ISO não é suportada diretamente. A 
 ConnectX é um módulo/plugin do Aurora. O planejamento não reserva outro slot DashLaunch para ele; o `plugin1` do NetISO permanece como está.
 
 Consulte [PLAN.md](PLAN.md).
+
+## Gates
+
+- [CX-00 — baseline e rollback](CX-00-baseline.md) — **CONCLUÍDO**.
+- [PLAN.md](PLAN.md) — sequência completa CX-01…CX-07.
