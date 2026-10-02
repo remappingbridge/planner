@@ -94,6 +94,8 @@ A instância será configurada para escutar somente em `127.0.0.1` e `192.168.50
 
 Enquanto `en7` estiver inativo, não considerar o gate concluído.
 
+Diagnóstico adicional: com `en7` ativo e `smbd` funcional, `nmbd` não permaneceu em execução porque o daemon nativo do macOS `netbiosd` já ocupava UDP 137/138. `nmblookup` por broadcast e unicast falharam para `XBOXMAC`. Apple documenta a desativação reversível de `netbiosd`; CX-01 passa a usar o `nmbd` do Samba dedicado para registrar `XBOXMAC`, mantendo a pilha ConnectX sob uma única configuração.
+
 ## CX-02 — preparar jogo, identidade e metadados
 
 Usar um jogo já validado em NetISO para comparação direta, preferencialmente PES 2018. A ISO original permanece intacta.
