@@ -1,6 +1,6 @@
 # Abordagem 2 — ConnectX
 
-> **Status: CX-00 CONCLUÍDO. Próximo gate: CX-01.**
+> **Status: CX-00 concluído. CX-01 funcionalmente validado; persistência no boot em validação.**
 
 Objetivo: manter jogos no Mac, mas permitir que o Aurora trate a biblioteca remota como um caminho escaneável e coloque os títulos no CoverFlow/carrossel principal.
 
@@ -37,4 +37,5 @@ Consulte [PLAN.md](PLAN.md).
 ## Gates
 
 - [CX-00 — baseline e rollback](CX-00-baseline.md) — **CONCLUÍDO**.
+- [CX-01 — Samba/NetBIOS](CX-01-samba.md) — **FUNCIONAL VALIDADO; autostart pendente**.
 - [PLAN.md](PLAN.md) — sequência completa CX-01…CX-07.
