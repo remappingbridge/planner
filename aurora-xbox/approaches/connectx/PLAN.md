@@ -284,6 +284,28 @@ Próximo gate: CX-03 — instalar/configurar ConnectX no Aurora preservando NetI
 
 ## CX-03 — instalar e configurar ConnectX no Aurora
 
+### Bloqueio atual CX-03 — binários ConnectX
+
+Em 2026-10-02 foi feita busca local em `$HOME` e `/Users/Shared` por:
+
+- `connectx.xex`;
+- `connectx_patch.xexp`;
+- arquivos `.zip`, `.rar` ou `.7z` contendo `connectx` no nome.
+
+Nenhum arquivo foi encontrado.
+
+A documentação ConsoleMods registra que ConnectX é ferramenta do kit oficial de desenvolvimento e, por isso, não é redistribuída por eles. O projeto RetroNAS documenta hashes conhecidos para verificação de uma cópia obtida legitimamente:
+
+```text
+connectx_patch.xexp
+SHA-256 92889b1d096afcd06201f372f54743113b3b7a35248dfa75d5e422ce16dc81a1
+
+connectx.xex
+SHA-256 7cace98c5a74891f78d2d6dd3b04d071c4d2c9f06dd6d8c796bfd9887a86f67b
+```
+
+CX-03 fica bloqueado somente até existir uma cópia legítima dos dois binários. NetISO e todo o staging CX-02 permanecem intactos.
+
 Segundo a documentação do ConnectX:
 
 - instalar `connectx_patch.xexp` e `connectx.xex` na pasta de plugins do Aurora;
