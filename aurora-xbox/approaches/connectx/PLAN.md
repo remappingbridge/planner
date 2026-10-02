@@ -168,7 +168,7 @@ Fontes de verificação:
 
 CX-02C e CX-02D concluídos.
 
-### CX-02E — buscar metadata e artwork no Mac
+### CX-02E — buscar metadata e artwork no Mac — PARCIALMENTE VALIDADO
 
 Preparar o pipeline para obter, quando disponível:
 
@@ -185,7 +185,7 @@ Preparar o pipeline para obter, quando disponível:
 
 Não depender de busca manual capa por capa quando for possível automatizar.
 
-### CX-02F — gerar staging de importação do Aurora
+### CX-02F — gerar staging de importação do Aurora — PARCIALMENTE VALIDADO
 
 Preparar estrutura compatível com importação offline:
 
@@ -205,6 +205,23 @@ Aurora/User/Import/<TitleID>/
 ```
 
 Somente os arquivos disponíveis/validados precisam existir.
+
+### Evidências CX-02E/F — PES 2018
+
+- metadata do x360db obtida com sucesso para TitleID `4A3007D3` / MediaID `1CB7BE36`;
+- staging criado em `/usr/local/var/xbox-connectx/staging/Aurora/User/Import/4A3007D3`;
+- `titlename.txt`: `PRO EVOLUTION SOCCER 2018`;
+- publisher: `Konami Digital Entertainment`;
+- developer: `Konami Digital Entertainment Co., Ltd.`;
+- release date: `2017-09-12`;
+- genre: `Sports & Recreation`;
+- `banner.png`: `420x95` — dimensão esperada;
+- `background.jpg`: `1280x720` — dimensão esperada;
+- `icon.png`: `64x64` — dimensão esperada;
+- `cover.jpg`: `219x300` — fonte x360db retornou boxart vertical; o formato de importação Aurora documenta `900x600` para `cover`, portanto a capa ainda precisa ser normalizada/substituída antes de CX-02F/G serem considerados concluídos;
+- screenshots permanecem deliberadamente fora do pipeline nesta etapa por risco de duplicação/corrupção em reimportações.
+
+Conclusão: metadata e três classes de artwork passaram; capa ainda pendente de normalização para o formato Aurora.
 
 ### CX-02G — validar staging antes do Xbox
 
