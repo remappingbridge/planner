@@ -1719,6 +1719,18 @@ No Mac real:
 
 Próxima evidência exigida: inspeção visual da página com a coluna `Ações de exclusão` e os controles destrutivos claramente visíveis antes de executar qualquer exclusão real.
 
+#### Inspeção visual — APROVADA em 2026-10-03
+
+No Mac real, após garantir que a instância atual do backend estava servindo a porta 8742:
+
+- seção `Biblioteca e exclusão` visível;
+- coluna `Ações de exclusão` visível;
+- controles `Excluir ISO`, `Excluir ConnectX` e `Excluir ISO + ConnectX` visíveis;
+- nenhum arquivo foi excluído durante esta inspeção.
+
+Próximo teste físico: usar PES 2018 como primeiro alvo real de exclusão e restauração pelo Finder.
+
+
 #### Ajuste mínimo de UX para validação física — 2026-10-03
 
 A sequência oficial permanece no XM-06; nenhum gate intermediário será executado.
