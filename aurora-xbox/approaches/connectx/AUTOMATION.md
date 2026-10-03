@@ -607,6 +607,28 @@ Conclusão: o caminho de deploy direto de cover (`GC`) é persistente e compatí
 
 O FTP do Aurora pode ficar indisponível enquanto um jogo está em execução, porque o servidor FTP pertence ao ambiente Aurora/Nova e não deve ser tratado como serviço persistente do Xbox durante gameplay. Falha de conexão à porta 21 após iniciar o jogo não invalida o teste de asset. Para operações de sync/backup, retornar ao Aurora e aguardar o FTP responder antes de transferir arquivos.
 
+
+
+### Evidências AUTO-06 — segundo jogo NBA Jam
+
+Deploy incremental real concluído para o segundo jogo:
+
+- NBA Jam correlacionado como TitleID `4541094C`, MediaID `72098D69`, ContentID `00000002`;
+- `BK4541094C.asset`, `GL4541094C.asset` e `GC4541094C.asset` estavam diferentes dos assets criados automaticamente pelo Aurora;
+- `xbox-connectx-sync --apply` fez backup dos três assets remotos antigos;
+- os três assets foram enviados e verificados por download de retorno;
+- hashes verificados:
+  - BK: `a935d528a6c8dbd8b13e5094b0bcb553c8c6b8eb49a17fc52272f8f741e388f6`;
+  - GL: `cd7c3502fd51ab65757f2cdb9a1c614941670f8967073083033351bd84d12d1a`;
+  - GC: `2266257620192937ab9051bd807e69b44e321d82bf25927d877a04add7029910`;
+- comparação FTP independente confirmou que os três arquivos remotos são byte-identical aos assets locais gerados;
+- PES 2018 permaneceu `SAME` nos três assets durante o mesmo apply;
+- `waiting_for_aurora_scan=0`.
+
+O estado `CHANGED` persistido imediatamente após esse apply representa que houve alterações nessa execução; ele não é evidência de falha. A próxima execução sem mudanças deve resultar em `SAME` e `SYNCED`.
+
+Validação física ainda necessária: reiniciar apenas o Aurora e confirmar visualmente cover/background/icon do NBA Jam e abertura do jogo. Metadata textual detalhada continua fora desta fase; a automação atual instala BK/GL/GC, enquanto escrita direta de campos textuais em `content.db` permanece reservada ao AUTO-08.
+
 ## AUTO-07 — remoção e órfãos
 
 A exclusão no Mac não deve apagar automaticamente banco/assets do Xbox na primeira versão.
