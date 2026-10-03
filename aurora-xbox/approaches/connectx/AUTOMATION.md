@@ -214,7 +214,15 @@ Gate: duas execuções consecutivas sem mudanças produzem zero alterações.
 - estado persistido em `/usr/local/var/xbox-connectx/sync-state.json`;
 - nenhum arquivo foi alterado no Xbox.
 
-Para fechar o gate de idempotência do AUTO-01 ainda é necessária uma segunda execução consecutiva sem mudanças, seguida de um `--apply` no-op para provar que o modo de aplicação também não faz upload quando os hashes já coincidem.
+Validação complementar executada:
+
+- segundo `--dry-run` consecutivo: `BK`, `GL` e `GC` permaneceram `SAME`;
+- `--apply` executado em seguida: zero alterações e zero uploads;
+- resumo em ambos: `games=1`, `assets_changed=0`, `assets_uploaded=0`, `waiting_for_aurora_scan=0`;
+- `sync-state.json` terminou com `status = SYNCED`, ContentID `00000001` e hashes locais/remotos idênticos para os três assets;
+- snapshot usado pelo último apply: SHA-256 `686d42c5d8c8c0c0928cd730017e6966f6840f9c5081191668d3b40500bdd204`.
+
+**AUTO-01: CONCLUÍDO.** O orquestrador one-shot é idempotente no jogo piloto tanto em `--dry-run` quanto em `--apply` no-op.
 
 ### Reboot liberado para validações
 
