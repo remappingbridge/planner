@@ -114,3 +114,11 @@ Backup sensível permanece fora do repositório em:
 ```text
 /home/tiago/xbox360-1538-backup-20261001-190729/
 ```
+
+## XboxMac UI
+
+Planejamento do painel macOS/browser para administrar conexões, automação e biblioteca sem exigir conhecimento do backend:
+
+- [xboxmac-ui/PLAN.md](xboxmac-ui/PLAN.md)
+
+O código será implementado separadamente em `remappingbridge/xboxmac-ui`; este repositório mantém somente o planejamento e o registro operacional.
