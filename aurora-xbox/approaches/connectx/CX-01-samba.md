@@ -189,3 +189,18 @@ Duas validações de cliente ainda falharam, mas por motivos distintos do carreg
 - `smbclient -L //192.168.50.1 -U admin` tentou carregar a configuração padrão `/opt/homebrew/etc/smb.conf` e negociou SMB2/SMB3, enquanto o servidor dedicado aceita somente NT1. O teste deve usar explicitamente o arquivo `samba-xbox/smb.conf` e cliente NT1.
 
 Reboot real permanece pendente até essas duas validações funcionais passarem.
+
+
+### Pré-reboot validado — Samba e NetBIOS
+
+Com os LaunchDaemons corrigidos e em execução:
+
+- resolução NetBIOS via broadcast retornou `192.168.50.1 XBOXMAC<00>`;
+- resolução NetBIOS via unicast para `192.168.50.1` retornou `192.168.50.1 XBOXMAC<00>`;
+- `smbclient` com configuração dedicada e protocolo NT1 listou o share `XBOX360` e `IPC$`;
+- workgroup listing mostrou `WORKGROUP` com master `XBOXMAC`;
+- isso confirma funcionalmente `smbd` + `nmbd` supervisionados pelo `launchd` antes do reboot.
+
+Os erros antigos em `log.nmbd` são históricos da tentativa anterior com `setsid()`; a validação atual de broadcast, unicast e SMB passou.
+
+Próximo passo liberado: reboot real do Mac sem comandos manuais e validação de autostart de NetISO, `smbd`, `nmbd`, resolução `XBOXMAC`, acesso ConnectX no Xbox e coexistência com NetISO.
