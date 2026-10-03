@@ -1000,3 +1000,20 @@ O mecanismo de autorun do Aurora foi validado de forma autocontida e reversível
 **Gate de autorun: CONCLUÍDO.** O Aurora pode aplicar metadata sem navegação manual em `Scripts > Utility`.
 
 Próximo passo: substituir o probe por um autorun genérico e idempotente orientado por manifesto gerado pelo Mac. O manifesto deve carregar ContentID/TitleID/MediaID e os cinco campos textuais suportados, validar identidade antes de escrever, aplicar somente diferenças, registrar resultado por jogo e se auto-desabilitar após processar a fila.
+
+
+### AUTO-08J — autorun executa antes do catálogo Content
+
+O primeiro autorun genérico orientado por manifesto executou no boot e leu corretamente dois jogos, mas `Content.GetInfo(2)` e `Content.GetInfo(1)` retornaram ausência naquele instante:
+
+- NBA Jam: `game_status=CONTENT_NOT_FOUND`;
+- PES 2018: `game_status=CONTENT_NOT_FOUND`;
+- `games=2`;
+- `status=PARTIAL_FAILURE`;
+- manifesto permaneceu pendente;
+- nenhum `last_applied` foi criado;
+- `RunLuaAtBoot` permaneceu `1`.
+
+Conclusão: o mecanismo de autorun funciona, mas o `Main.lua` roda antes de o catálogo Content estar disponível. Isso é uma condição de inicialização, não erro de identidade nem do manifesto.
+
+Próximo ajuste: o autorun deve aguardar a inicialização do subsistema Content com timeout finito e backoff, procurando os ContentIDs esperados antes de tentar qualquer setter. Se o catálogo não ficar pronto dentro do timeout, manter o manifesto pendente e registrar `CONTENT_TIMEOUT`, sem loops infinitos e sem reiniciar o Aurora.
