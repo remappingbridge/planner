@@ -729,3 +729,19 @@ A automação só será considerada fechada quando o segundo jogo passar do esta
 - ConsoleMods — Aurora Import Format;
 - x360db — metadata e artwork;
 - XboxUnity — covers.
+
+
+### AUTO-06 — idempotência pós-deploy do segundo jogo
+
+Após o deploy real dos assets do NBA Jam, uma nova execução de `xbox-connectx-sync --apply` sem alterações retornou:
+
+- NBA Jam: BK = `SAME`, GL = `SAME`, GC = `SAME`;
+- PES 2018: BK = `SAME`, GL = `SAME`, GC = `SAME`;
+- `games=2`;
+- `assets_changed=0`;
+- `assets_uploaded=0`;
+- `waiting_for_aurora_scan=0`.
+
+Isso confirma idempotência pós-upload para dois jogos e que o orquestrador não reenvia assets já sincronizados.
+
+Resta somente a validação física pós-restart do Aurora para o NBA Jam: cover, background/icon e abertura do jogo. Metadata textual detalhada continua fora desta fase e será tratada no AUTO-08.
