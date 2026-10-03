@@ -280,6 +280,20 @@ Falha de metadata não deve apagar uma extração funcional.
 
 Gate: jogo novo aparece corretamente no share ConnectX e a reexecução não extrai novamente a mesma ISO.
 
+### Evidências AUTO-02 — descoberta inicial
+
+Primeiro `xbox-connectx-ingest --dry-run` executado em 2026-10-03:
+
+- 14 ISOs detectadas em `/Users/Shared/xbox360`;
+- PES 2018 foi reconhecido corretamente como `ALREADY_INGESTED`, sem nova extração;
+- SHA-256 da ISO do PES permaneceu `12c32bf93d23e237c18fc345dc9c7984b8767de24eb866dccd930d599dd04601`;
+- SHA-256 do `default.xex` permaneceu `57185a354d728081f88675ffeee081e1e982c6ef7cd6369db3fd9abaf6e7cc72`;
+- 13 ISOs adicionais foram detectadas como `NEW_ISO`;
+- `ingest-state.json` contém somente o jogo já promovido, portanto o dry-run não marcou jogos novos como ingeridos;
+- nenhuma extração foi iniciada durante o dry-run.
+
+Isso valida a detecção incremental básica e a preservação de um jogo existente. O próximo teste de AUTO-02 será feito com **um único segundo jogo**, para evitar processar as 13 ISOs simultaneamente e permitir observar promoção, TitleID/MediaID e idempotência de forma controlada.
+
 ## AUTO-03 — metadata e artwork
 
 Fontes:
