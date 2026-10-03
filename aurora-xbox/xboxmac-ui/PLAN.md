@@ -1400,7 +1400,7 @@ No Mac real:
 
 **XM-04: CONCLUÍDO.** Próximo gate: XM-05.
 
-### XM-05 — integração da automação — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
+### XM-05 — integração da automação — CONCLUÍDO
 
 - dry-run;
 - execução;
@@ -1560,7 +1560,18 @@ Após corrigir o JavaScript renderizado:
 
 Resta somente o teste físico end-to-end de um job real e a repetição da mesma ISO para comprovar idempotência pela UI.
 
-XM-05 só deve ser marcado como CONCLUÍDO após essa validação física.
+#### Validação física end-to-end — CONCLUÍDA em 2026-10-03
+
+O usuário validou o fluxo real pela interface local:
+
+- execução automática funcionou corretamente;
+- as ações manuais orientadas pelo painel funcionaram corretamente;
+- o fluxo continuou após as ações no Aurora;
+- o jogo chegou ao estado funcional final;
+- o jogo foi iniciado e rodou no Xbox ao final da preparação;
+- a integração navegador ↔ backend permaneceu funcional durante o fluxo.
+
+**XM-05: CONCLUÍDO.** Próximo gate: XM-06.
 
 ### XM-06 — Lixeira
 
