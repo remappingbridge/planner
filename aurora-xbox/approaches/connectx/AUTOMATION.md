@@ -399,6 +399,17 @@ Validação no Xbox:
 
 Estado: **AUTO-06A concluído para cover (`GC`)**. A leitura de hash pós-restart ainda pode ser feita como evidência adicional quando o Aurora/FTP estiver novamente ativo, mas não bloqueia a validação funcional.
 
+### Evidência pós-restart — GC preservado
+
+- após retornar ao Aurora, FTP na porta 21 voltou a responder;
+- `GC4A3007D3.asset` foi baixado novamente após restart;
+- SHA-256 pós-restart: `b5c92a6a1b4a7dc077801032fc9e642259639876b26ce1a43952faa642d47cc7`;
+- hash idêntico ao asset gerado no Mac;
+- o Aurora não sobrescreveu/regenerou o `GC` durante o restart;
+- CoverFlow e execução do PES 2018 permaneceram normais.
+
+Conclusão: o caminho de deploy direto de cover (`GC`) é persistente e compatível com o Aurora.
+
 ### Observação operacional — FTP durante execução do jogo
 
 O FTP do Aurora pode ficar indisponível enquanto um jogo está em execução, porque o servidor FTP pertence ao ambiente Aurora/Nova e não deve ser tratado como serviço persistente do Xbox durante gameplay. Falha de conexão à porta 21 após iniciar o jogo não invalida o teste de asset. Para operações de sync/backup, retornar ao Aurora e aguardar o FTP responder antes de transferir arquivos.
