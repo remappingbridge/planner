@@ -171,3 +171,21 @@ Validação manual em foreground:
 Isso elimina a falha anterior `Failed to create session, error code 1` sem voltar ao modo daemonizado `-D`, preservando compatibilidade com supervisão por `launchd`.
 
 Próximo passo: carregar os dois LaunchDaemons no domínio `system`, confirmar `state = running`, validar portas/NetBIOS/ConnectX e somente então executar reboot real.
+
+
+### LaunchDaemons em execução — validação funcional ainda parcial
+
+Após aplicar `--no-process-group`, os dois jobs foram carregados no domínio `system` com sucesso:
+
+- `io.remappingbridge.connectx-smbd`: `state = running`, PID 10928, `last exit code = (never exited)`;
+- `io.remappingbridge.connectx-nmbd`: `state = running`, PID 10934, `last exit code = (never exited)`;
+- `smbd` escuta em `192.168.50.1:445/139` e loopback;
+- `nmbd` escuta UDP 137/138 na interface privada e broadcast;
+- processos estão em foreground com `--no-process-group`, portanto supervisionados pelo `launchd`.
+
+Duas validações de cliente ainda falharam, mas por motivos distintos do carregamento dos daemons:
+
+- `nmblookup XBOXMAC` não encontrou o nome; é necessário testar explicitamente broadcast/unicast e consultar o log atual do `nmbd`;
+- `smbclient -L //192.168.50.1 -U admin` tentou carregar a configuração padrão `/opt/homebrew/etc/smb.conf` e negociou SMB2/SMB3, enquanto o servidor dedicado aceita somente NT1. O teste deve usar explicitamente o arquivo `samba-xbox/smb.conf` e cliente NT1.
+
+Reboot real permanece pendente até essas duas validações funcionais passarem.
