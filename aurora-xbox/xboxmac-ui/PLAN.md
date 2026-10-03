@@ -1573,7 +1573,7 @@ O usuário validou o fluxo real pela interface local:
 
 **XM-05: CONCLUÍDO.** Próximo gate: XM-06.
 
-### XM-06 — exclusão e reconciliação pelo filesystem — EM VALIDAÇÃO FÍSICA
+### XM-06 — exclusão e reconciliação pelo filesystem — CONCLUÍDO
 
 - excluir ISO;
 - excluir ConnectX;
@@ -1729,6 +1729,21 @@ No Mac real, após garantir que a instância atual do backend estava servindo a 
 - nenhum arquivo foi excluído durante esta inspeção.
 
 Próximo teste físico: usar PES 2018 como primeiro alvo real de exclusão e restauração pelo Finder.
+
+#### Validação física final — APROVADA em 2026-10-03
+
+Validação realizada em múltiplos jogos reais:
+
+- excluir somente ISO: OK;
+- excluir somente ConnectX: OK;
+- excluir ISO + ConnectX: OK;
+- restaurar somente ISO pelo Finder: OK;
+- restaurar somente ConnectX pelo Finder: OK;
+- restaurar ISO + ConnectX pelo Finder: OK.
+
+Resultado: o filesystem se comportou como fonte de verdade conforme definido; exclusão e restauração funcionaram tanto separadamente quanto em conjunto. XM-06 aceito e concluído.
+
+
 
 
 #### Ajuste mínimo de UX para validação física — 2026-10-03
