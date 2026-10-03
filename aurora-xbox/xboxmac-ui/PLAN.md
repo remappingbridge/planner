@@ -1055,7 +1055,7 @@ No longo prazo, `xbox-connectx-sync` pode se tornar um comando thin-wrapper da m
 
 ## Gates de implementação
 
-### XM-00 — contrato, baseline e migração do backend validado — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO LOCAL
+### XM-00 — contrato, baseline e migração do backend validado — CONCLUÍDO
 
 - congelar paths;
 - congelar portas;
@@ -1105,7 +1105,20 @@ bash -n backend/connectx/xbox-connectx-add
 cargo check --manifest-path backend/asset-engine/Cargo.toml
 ```
 
-XM-00 só deve ser marcado como CONCLUÍDO após essas validações locais passarem.
+#### Validação local — CONCLUÍDA em 2026-10-03
+
+No Mac real, após `git pull`:
+
+- `python3 scripts/verify-xm00.py` retornou `XM-00: OK`;
+- baseline retornou `legacy_pipeline=UNCHANGED`;
+- proteção de runtime retornou `runtime_data=IGNORED`;
+- configuração versionada retornou `sensitive_values_in_versioned_defaults=NONE`;
+- 4/4 testes unitários passaram;
+- `py_compile` dos cinco scripts Python ConnectX passou;
+- `bash -n backend/connectx/xbox-connectx-add` passou;
+- `cargo check --manifest-path backend/asset-engine/Cargo.toml` terminou com sucesso.
+
+**XM-00: CONCLUÍDO.** Próximo gate: XM-01.
 
 ### XM-01 — backend local mínimo
 
