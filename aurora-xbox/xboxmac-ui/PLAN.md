@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO
+### XM-07 — assets/Aurora e ações manuais guiadas — EM VALIDAÇÃO FÍSICA
 
 - estado de scan;
 - ContentID;
