@@ -1573,47 +1573,61 @@ O usuário validou o fluxo real pela interface local:
 
 **XM-05: CONCLUÍDO.** Próximo gate: XM-06.
 
-### XM-06 — Lixeira — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
+### XM-06 — exclusão delegada ao macOS — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
 
-- mover ISO;
-- mover ConnectX;
-- confirmações;
+- excluir ISO;
+- excluir ConnectX;
+- confirmação;
 - path guards;
-- reconciliação de estado;
+- Lixo nativo do macOS como destino preferencial;
+- `~/Downloads` como fallback;
+- tombstones persistentes;
+- nenhuma restauração pela aplicação;
 - nunca `rm -rf`.
 
-Gate: exclusões recuperáveis pela Lixeira e nenhum path externo pode ser atingido.
+Gate: exclusões saem do gerenciamento do XboxMac, ficam recuperáveis pelo macOS quando possível e nenhum path externo pode ser atingido.
 
-#### Evidências de implementação — 2026-10-03
+#### Redefinição do requisito — 2026-10-03
+
+Antes dos testes físicos, o requisito foi corrigido:
+
+- não deve existir Lixeira privada do XboxMac;
+- o destino preferencial é o Lixo nativo do macOS;
+- se o Lixo nativo não puder ser usado, o fallback é `~/Downloads`;
+- recuperação é responsabilidade do Finder/macOS, nunca do XboxMac;
+- uma vez excluído, o componente permanece excluído para a aplicação mesmo se o usuário recuperar o arquivo manualmente pelo Finder.
+
+A implementação anterior de `/Users/Shared/.xboxmac-trash`, estado `TRASHED` e botão `Restaurar` foi removida antes de qualquer teste físico.
+
+#### Evidências da implementação revisada
 
 Publicado em `remappingbridge/xboxmac-ui/main`:
 
-- Lixeira própria em `/Users/Shared/.xboxmac-trash`, derivada da raiz de ISOs;
-- `backend/server/xboxmac/trash_store.py`: leitura dos manifestos;
-- `backend/server/xboxmac/trash.py`: plano, movimento e restauração;
-- movimento exclusivamente por `os.rename`;
-- exige mesmo filesystem e recusa fallback copy/delete;
-- nenhum uso de `rm -rf`, `unlink`, `os.remove` ou `shutil.rmtree`;
-- confirmação em duas fases: plan + execute;
-- `plan_id` inclui fingerprint do alvo e invalida operação se o estado mudar;
-- ISO limitada à raiz `/Users/Shared/xbox360` e filha direta;
-- ConnectX limitado a `/Users/Shared/xbox360-connectx`;
-- symlinks recusados;
-- mover a própria raiz é recusado;
-- manifesto `xboxmac-trash-entry-v1` preserva paths originais e paths da Lixeira;
-- rollback best-effort para movimento/restauração parcial;
-- restauração recusa sobrescrever destino existente;
-- Lixeira bloqueada enquanto houver job de automação não terminal;
-- biblioteca reconciliada com estado `TRASHED`;
-- bytes movidos deixam de contar em ISO/ConnectX ativos e passam a `trash_bytes`;
-- UI oferece `Lixeira ISO`, `Lixeira ConnectX`, `Lixeira ambos` e `Restaurar`;
-- filtro da biblioteca inclui `TRASHED`;
-- `GET /api/trash`;
-- `POST /api/trash/plan`;
-- `POST /api/trash/execute`;
-- `POST /api/trash/{trash_id}/restore`;
-- schema em `backend/contracts/trash.schema.json`;
-- testes de segurança em `backend/server/tests/test_xm06_trash.py`;
+- `backend/server/xboxmac/trash.py`: plano e execução da exclusão;
+- Lixo do macOS via Finder e `/usr/bin/osascript`;
+- path enviado ao AppleScript por variável de ambiente, sem interpolação;
+- fallback por `os.rename` para `~/Downloads`;
+- nomes de fallback nunca sobrescrevem item existente;
+- fallback recusado se origem e Downloads estiverem em filesystems diferentes;
+- nenhum fallback copy+delete;
+- `backend/server/xboxmac/deletion_store.py`: tombstones persistentes;
+- store `/usr/local/var/xbox-connectx/xboxmac-deletions.json`;
+- schema `backend/contracts/deletion.schema.json`;
+- biblioteca aplica tombstones e ignora componentes excluídos;
+- recuperação manual pelo Finder não reintroduz o componente no XboxMac;
+- automação recusa ISO tombstonada;
+- excluir somente ISO mantém ConnectX como `SOURCE_PRUNED`;
+- excluir somente ConnectX mantém a ISO como `ISO_ONLY`;
+- excluir ambos remove o jogo da biblioteca ativa;
+- confirmação em duas fases: `POST /api/trash/plan` e `POST /api/trash/execute`;
+- `plan_id` invalida a execução se path/inode/tamanho/mtime mudarem;
+- symlinks e paths externos são recusados;
+- exclusão bloqueada enquanto houver job não terminal;
+- UI oferece somente `Excluir ISO`, `Excluir ConnectX` e `Excluir ambos`;
+- não existe endpoint de restauração;
+- não existe estado `TRASHED`;
+- não existe `.xboxmac-trash`;
+- testes em `backend/server/tests/test_xm06_trash.py`;
 - verificador `scripts/verify-xm06.py`;
 - documentação em `docs/XM-06.md`.
 
@@ -1625,17 +1639,15 @@ git pull
 .venv/bin/python -m unittest discover -s backend/server/tests -v
 ```
 
-Depois, teste físico pela página local:
+Depois, o teste físico deve confirmar primeiro o destino real da exclusão:
 
-- mover ISO + ConnectX de um jogo conhecido para a Lixeira;
-- confirmar estado `TRASHED`;
-- confirmar ausência nos paths originais;
-- restaurar pela UI;
-- confirmar retorno a `CONNECTX_READY`;
-- iniciar o jogo no Xbox novamente.
+- preferencialmente Lixo do macOS;
+- se Finder falhar, `~/Downloads`;
+- item removido da biblioteca ativa;
+- recuperação manual no macOS não desfaz o tombstone;
+- nenhum controle de restauração aparece na UI.
 
 XM-06 só deve ser marcado como CONCLUÍDO após essa validação física.
-
 ### XM-07 — assets/Aurora e ações manuais guiadas
 
 - estado de scan;
