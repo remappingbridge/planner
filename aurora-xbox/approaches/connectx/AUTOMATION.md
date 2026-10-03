@@ -432,6 +432,18 @@ Falta apenas registrar os hashes pós-restart de `BK`, `GL` e `GC` como evidênc
 
 Conclusão: o caminho de deploy direto de cover (`GC`) é persistente e compatível com o Aurora.
 
+### Evidência final AUTO-06 — persistência pós-restart
+
+- `BK4A3007D3.asset` pós-restart: SHA-256 `e408253f8327b456985fa59c50a0bfe7ec1c11d6977952dfa351f03abe1970c1`;
+- `GL4A3007D3.asset` pós-restart: SHA-256 `0c9e4557b30dc5ae264c8d1969dd9d251505a4e21aa1102bec228f93387b2c32`;
+- `GC4A3007D3.asset` pós-restart: SHA-256 `b5c92a6a1b4a7dc077801032fc9e642259639876b26ce1a43952faa642d47cc7`;
+- os três hashes são exatamente os mesmos dos assets gerados no Mac e enviados por FTP;
+- o Aurora não reescreveu os assets após restart;
+- cover, background, banner/icon e execução do jogo permaneceram normais;
+- nenhum `Assets > Import` foi executado.
+
+**AUTO-06: CONCLUÍDO para o jogo piloto PES 2018.** O deploy direto, verificação de retorno, persistência pós-restart e compatibilidade visual/funcional de `GC + BK + GL` foram comprovados.
+
 ### Observação operacional — FTP durante execução do jogo
 
 O FTP do Aurora pode ficar indisponível enquanto um jogo está em execução, porque o servidor FTP pertence ao ambiente Aurora/Nova e não deve ser tratado como serviço persistente do Xbox durante gameplay. Falha de conexão à porta 21 após iniciar o jogo não invalida o teste de asset. Para operações de sync/backup, retornar ao Aurora e aguardar o FTP responder antes de transferir arquivos.
