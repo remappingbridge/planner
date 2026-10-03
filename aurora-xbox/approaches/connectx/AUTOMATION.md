@@ -1093,3 +1093,18 @@ O callback do filtro customizado foi executado com o CoverFlow já operacional:
 Conclusão: a função registrada em `GameListFilterCategories.User` é um hook válido de pós-inicialização do catálogo. Diferentemente de `RunLuaAtBoot`, ela é chamada numa fase em que os objetos Content já estão hidratados.
 
 Próximo gate: verificar se a Quick View que contém `XboxMac Probe` permanece selecionada após reiniciar apenas o Aurora. Se persistir, o filtro pode servir como gatilho automático do processador de metadata sem navegação manual em execuções futuras.
+
+
+### AUTO-08P — Quick View não permaneceu ativa após restart
+
+Teste de persistência do hook por filtro:
+
+- marker anterior removido antes do restart;
+- Aurora reiniciado com a Quick View `XboxMac Probe` previamente ativa;
+- usuário não selecionou manualmente nenhuma Quick View após o restart;
+- após mover entre capas, `xboxmac-filter-callback-probe.txt` não reapareceu;
+- FTP retornou `550 Could not open file`.
+
+Conclusão: a definição da Quick View pode continuar cadastrada, mas sua seleção ativa não foi restaurada automaticamente no restart. Portanto não podemos depender de uma Quick View customizada selecionada manualmente como gatilho permanente.
+
+Próximo passo: inspecionar `settings.db` para mapear a linha da Quick View `XboxMac Probe`, o `FilterMethod` salvo e quaisquer settings que representem a Quick View ativa/default. A partir disso decidir entre tornar essa Quick View o default persistente ou abandonar esse mecanismo em favor de outro hook pós-inicialização.
