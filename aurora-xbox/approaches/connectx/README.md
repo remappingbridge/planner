@@ -1,6 +1,6 @@
 # Abordagem 2 — ConnectX
 
-> **Status: CX-00 concluído; CX-01 funcionalmente validado; CX-02 concluído para o PES 2018; CX-03 concluído. Próximo gate: CX-04 — execução remota do PES 2018 via ConnectX.**
+> **Status: CX-00 concluído; CX-01 funcionalmente validado; CX-02 concluído para o PES 2018; CX-03 e CX-04 concluídos. Próximo gate: CX-05 — adicionar ConnectX ao CoverFlow.**
 
 Objetivo: manter jogos no Mac, mas permitir que o Aurora trate a biblioteca remota como um caminho escaneável e coloque os títulos no CoverFlow/carrossel principal.
 
