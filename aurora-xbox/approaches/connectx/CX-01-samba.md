@@ -151,3 +151,23 @@ O diagnóstico manual reproduziu a mesma falha fora do launchd:
 A implementação Samba 4.25 chama `setsid()` no caminho de foreground quando `no_session` não está habilitado. Em um processo que já é líder de grupo, `setsid()` retorna EPERM (errno 1), exatamente o erro observado. A correção candidata é iniciar em foreground com `--no-process-group`, preservando a supervisão pelo launchd sem tentar criar nova sessão.
 
 Próximo gate técnico: alterar somente o wrapper para acrescentar `--no-process-group` a `smbd -F` e `nmbd -F`, testar manualmente e então via `launchctl bootstrap`. Reboot continua bloqueado até os dois jobs ficarem em `state = running`.
+
+
+### Correção confirmada — --no-process-group
+
+A hipótese de falha em `setsid()` foi confirmada operacionalmente.
+
+O wrapper `/usr/local/libexec/xbox-connectx-samba` foi alterado para usar:
+
+- `samba-dot-org-smbd -F --no-process-group -s <conf>`;
+- `nmbd -F --no-process-group -s <conf>`.
+
+Validação manual em foreground:
+
+- `smbd_foreground=ALIVE`;
+- `nmbd_foreground=ALIVE`;
+- stderr vazio para ambos.
+
+Isso elimina a falha anterior `Failed to create session, error code 1` sem voltar ao modo daemonizado `-D`, preservando compatibilidade com supervisão por `launchd`.
+
+Próximo passo: carregar os dois LaunchDaemons no domínio `system`, confirmar `state = running`, validar portas/NetBIOS/ConnectX e somente então executar reboot real.
