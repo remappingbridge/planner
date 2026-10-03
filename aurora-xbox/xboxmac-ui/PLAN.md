@@ -1400,7 +1400,7 @@ No Mac real:
 
 **XM-04: CONCLUÍDO.** Próximo gate: XM-05.
 
-### XM-05 — integração da automação
+### XM-05 — integração da automação — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
 
 - dry-run;
 - execução;
@@ -1410,6 +1410,60 @@ No Mac real:
 - idempotência.
 
 Gate: um novo jogo pode ser preparado a partir da UI sem terminal; quando houver ação manual no Aurora, a UI entra em estado explícito, orienta o usuário e continua automaticamente após detectar a mudança.
+
+#### Evidências de implementação — 2026-10-03
+
+Publicado em `remappingbridge/xboxmac-ui/main`:
+
+- `backend/server/xboxmac/automation.py`: fila persistente e worker único;
+- persistência em `/usr/local/var/xbox-connectx/xboxmac-jobs.json`;
+- seleção limitada a nomes de ISO dentro da raiz permitida;
+- path traversal rejeitado;
+- subprocessos diretos, sem shell;
+- dry-run sem execução dos comandos ConnectX;
+- ingestão individual por ISO para preservar erro por jogo;
+- sincronização de metadata/capas reutilizando os executáveis validados em `/usr/local/libexec`;
+- estado `WAITING_FOR_XBOX` recuperável quando Aurora FTP estiver temporariamente offline;
+- `WAITING_FOR_AURORA_SCAN` com ação `aurora_rescan`;
+- retry automático após Rescan;
+- `WAITING_FOR_AURORA_REFRESH` com ação `aurora_refresh`;
+- verificação automática por `xbox-connectx-sync-metadata --status`;
+- retomada de jobs não terminais após restart do backend;
+- log limitado por job;
+- `POST /api/jobs/dry-run`;
+- `POST /api/jobs`;
+- `GET /api/jobs`;
+- `GET /api/jobs/{job_id}`;
+- schema de job atualizado em `backend/contracts/job.schema.json`;
+- controles diagnósticos mínimos na página local para selecionar ISO, dry-run, execução e acompanhamento da fila;
+- testes em `backend/server/tests/test_xm05_automation.py`;
+- verificador `scripts/verify-xm05.py`;
+- dry-run real `scripts/test-xm05-dry-run.py`;
+- documentação em `docs/XM-05.md`.
+
+O worker mantém o pipeline `connectx-v1.0.0` como adaptador externo; nenhum dos scripts congelados foi modificado.
+
+Validação necessária:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm05.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+.venv/bin/python scripts/test-xm05-dry-run.py
+```
+
+Depois, teste físico pela página local com uma única ISO `ISO_ONLY`:
+
+- Dry-run pela UI;
+- iniciar job;
+- acompanhar progresso sem terminal;
+- fazer Rescan somente quando solicitado;
+- fazer refresh/restart somente quando solicitado;
+- confirmar continuação automática;
+- confirmar estado terminal;
+- repetir a mesma ISO e validar idempotência.
+
+XM-05 só deve ser marcado como CONCLUÍDO após essa validação física.
 
 ### XM-06 — Lixeira
 
