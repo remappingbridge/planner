@@ -804,3 +804,25 @@ Após o deploy e a execução idempotente, o Aurora foi reiniciado e o NBA Jam f
 - uma execução subsequente de `xbox-connectx-sync --apply` retornou zero mudanças e zero uploads.
 
 **AUTO-06: CONCLUÍDO.** O deploy transacional de assets nativos foi comprovado com o jogo piloto e com um segundo jogo adicionado depois.
+
+
+### AUTO-08 — mapeamento real do content.db
+
+Auditoria read-only do snapshot `content-20261003-090346.db`:
+
+- SHA-256: `7aea0fe7156c71e4c08258ffc62ff526b686be3fdc48a0709b70dd8e64e20ec0`;
+- `PRAGMA integrity_check = ok`;
+- tabelas relevantes observadas: `ContentItems`, `DvdCache`, `MountedDevices`, `TitleUpdates`;
+- `ContentItems` contém diretamente as colunas `TitleName`, `Description`, `Publisher`, `Developer` e `ReleaseDate`;
+- PES 2018 possui esses cinco campos preenchidos e eles correspondem ao staging textual já validado;
+- NBA Jam possui `TitleName = NBA JAM`, mas `Description`, `Publisher`, `Developer` e `ReleaseDate` vazios;
+- staging do NBA Jam contém:
+  - Description: `BOOMSHAKALAKA!   NBA JAM is back, better than ever, and brought to you by EA Sports™.`;
+  - Publisher: `Electronic Arts Inc.`;
+  - Developer: `Electronic Arts Canada`;
+  - ReleaseDate: `2010-11-23`;
+  - Genre: `Sports & Recreation`;
+- não existe coluna textual `Genre` no schema observado; há somente `GenreFlag INTEGER`;
+- `GenreFlag` não pode ser inferido de forma segura a partir do staging: PES 2018 aparece com `GenreFlag=0` em `ContentItems` e `1024` em `DvdCache`, enquanto NBA Jam aparece com `0` nos dois contextos observados.
+
+Decisão: AUTO-08 será dividido em duas partes. Primeiro validar e automatizar somente os cinco campos textuais diretamente mapeados (`TitleName`, `Description`, `Publisher`, `Developer`, `ReleaseDate`) em uma cópia local do banco. `GenreFlag` permanece intocado até haver mapeamento reproduzível; não inferir bitmask por nome de gênero.
