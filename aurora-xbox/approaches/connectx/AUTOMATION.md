@@ -77,13 +77,45 @@ SS<TitleID>.asset  -> screenshots
 
 Screenshots ficam fora da primeira versão automática.
 
-## Limite deliberado da v1
+## Limite e implementação atual da v1
 
-A v1 automatizará artwork sem escrever diretamente em `content.db`.
+A v1 continua sem escrita externa direta em `content.db`.
 
-Motivo: a geração dos `.asset` está documentada e existe implementação aberta em `libaustralis`; já a alteração do banco do Aurora pode causar perda de catálogo se feita enquanto o dashboard estiver usando o arquivo.
+A estratégia validada em 2026-10-03 é:
 
-Metadata textual continuará sendo preparada no staging `User/Import/<TitleID>`. A automação direta de título, descrição, publisher, developer, gênero e data será uma fase separada depois que o schema e a estratégia de atualização transacional do banco forem validados.
+- o Aurora continua responsável por criar a linha `ContentItems` e o `ContentID` durante o Rescan;
+- o Mac baixa uma cópia de `content.db` via FTP e usa apenas leitura para descobrir/correlacionar `ContentID`;
+- metadata textual é aplicada **dentro do Aurora**, por `XboxMacProbe.lua`, usando a API de alto nível `Content.*`;
+- o Mac envia um manifesto controlado contendo ContentID, TitleID, MediaID e os campos textuais alvo;
+- o filtro valida identidade antes de aplicar qualquer mudança;
+- setters são chamados somente para campos que diferem;
+- o estado final verificado é a fonte de verdade, não o booleano isolado de um setter;
+- a capa é gerada no Mac como `GC<TitleID>.asset` RXEA usando o AssetEngine baseado em `libaustralis`;
+- o asset é enviado diretamente ao `Data/GameData/<TitleID>_<ContentID>/`;
+- screenshots permanecem fora da primeira versão automática.
+
+Campos textuais validados:
+
+```text
+TitleName
+Description
+Publisher
+Developer
+ReleaseDate
+```
+
+`Genre` permanece fora desta automação.
+
+### Ações manuais ainda existentes
+
+O pipeline de baixo nível comprovado ainda possui dois pontos em que o usuário pode precisar agir no Aurora:
+
+1. **Rescan do caminho ConnectX**, para que o Aurora descubra o jogo e crie `ContentItems.Id`;
+2. **refresh/reload/restart do Aurora**, quando necessário para consumir/refletir metadata e capa no CoverFlow.
+
+Essas ações passam a ser tratadas como estados formais pelo XboxMac UI, conforme `../../xboxmac-ui/PLAN.md`.
+
+O backend deve detectar automaticamente quando cada condição foi satisfeita e continuar o job sem exigir uma segunda execução manual de comando no Mac.
 
 ## Estado persistente no Mac
 
@@ -1139,3 +1171,207 @@ A Quick View customizada foi definida como padrão usando a própria API do Auro
 Conclusão: uma Quick View default cujo filtro retorna sempre `true` fornece um hook automático e persistente após o catálogo Content estar hidratado. Isso elimina a dependência de `RunLuaAtBoot`, polling bloqueante, GizmoUI e execução manual de Utility Scripts para processar metadata.
 
 Próximo passo: substituir o probe por um processador idempotente do manifesto pendente. O filtro continuará retornando `true` para todos os jogos e executará a rotina no máximo uma vez por sessão, somente quando existir manifesto pendente.
+
+
+## Estado consolidado validado — 2026-10-03
+
+O pipeline funcional atual foi validado de ponta a ponta e passa a ser o baseline a ser incorporado ao monorepo `remappingbridge/xboxmac-ui`.
+
+### Componentes validados no Mac
+
+```text
+/usr/local/libexec/xbox-connectx-ingest
+/usr/local/libexec/xbox-connectx-scan
+/usr/local/libexec/xbox-connectx-stage-assets
+/usr/local/libexec/xbox-connectx-sync-metadata
+/usr/local/libexec/xbox-connectx-sync-covers
+/usr/local/libexec/xbox-connectx-add
+```
+
+Gerador de assets:
+
+```text
+~/Documents/xbox360-tools/aurora-asset-engine-test/
+```
+
+Filtro instalado no Aurora:
+
+```text
+/Hdd1/Apps/Aurora/User/Scripts/Content/Filters/XboxMacProbe.lua
+```
+
+### Paths de dados
+
+ISOs de origem:
+
+```text
+/Users/Shared/xbox360/
+```
+
+Jogos extraídos usados pelo ConnectX:
+
+```text
+/Users/Shared/xbox360-connectx/
+```
+
+Staging temporário de ingestão:
+
+```text
+/Users/Shared/.xbox360-connectx-staging/
+```
+
+Estado/cache local da automação:
+
+```text
+/usr/local/var/xbox-connectx/
+```
+
+Esses diretórios de dados/runtime **não** devem ser versionados no Git.
+
+### Comando principal validado
+
+Um jogo:
+
+```text
+xbox-connectx-add 'Jogo.iso'
+```
+
+Vários jogos:
+
+```text
+xbox-connectx-add 'Jogo 1.iso' 'Jogo 2.iso'
+```
+
+Comportamento idempotente validado:
+
+- ISO já processada retorna `ALREADY_INGESTED`;
+- jogos já corretos retornam `SYNCED`;
+- quando nada precisa mudar, `status=ALREADY_SYNCED` e `next=NONE`;
+- manifesto de metadata contém somente jogos/campos pendentes;
+- cover sync ignora `GC*.asset` já preenchido;
+- segunda execução sem mudanças não reextrai nem reenvia dados.
+
+### Estado WAITING_FOR_AURORA_SCAN
+
+Quando o jogo já está em `/Users/Shared/xbox360-connectx`, mas ainda não existe em `ContentItems`:
+
+```text
+status=WAITING_FOR_AURORA_SCAN
+```
+
+O usuário executa Rescan no path ConnectX do Aurora.
+
+Na CLI atual, o mesmo comando é executado novamente. Na aplicação web final, **não** deve haver essa segunda ação no Mac: o backend deve reconciliar periodicamente `content.db` e continuar automaticamente quando encontrar TitleID + MediaID e obter o ContentID.
+
+### Metadata seletiva
+
+Depois que o ContentID existe:
+
+- o sincronizador compara o alvo com os campos atuais;
+- jogos já corretos ficam `SYNCED`;
+- jogos com diferenças ficam `PENDING`;
+- somente os `PENDING` entram no manifesto.
+
+Validação de lote comprovada:
+
+- cinco jogos já sincronizados foram excluídos do manifesto;
+- um sexto jogo novo gerou `games=1`;
+- dois jogos novos simultâneos geraram `games=2`;
+- ambos foram aplicados e terminaram em `status=VERIFIED`.
+
+### Capa nativa do Aurora
+
+O problema de capas ausentes foi diagnosticado por comparação do `GameData`.
+
+Placeholder observado:
+
+```text
+GC<TitleID>.asset = 2048 bytes
+```
+
+Asset funcional gerado:
+
+```text
+GC<TitleID>.asset = 566272 bytes
+magic = RXEA
+```
+
+O AssetEngine:
+
+- importa `cover.jpg` como `AssetType::Boxart`;
+- usa `TextureFormat::BC3`;
+- salva `GC<TitleID>.asset`;
+- relê o arquivo;
+- exporta novamente a imagem para verificação;
+- exige magic `RXEA`.
+
+A substituição do placeholder foi validada primeiro com Guitar Hero Metallica e depois automatizada para os demais jogos.
+
+### Jogos usados na validação funcional
+
+1. PRO EVOLUTION SOCCER 2018;
+2. NBA JAM;
+3. Guitar Hero Metallica;
+4. SEGA Rally;
+5. Fuzion Frenzy 2;
+6. Teenage Mutant Ninja Turtles Mutants in Manhattan;
+7. Guitar Hero World Tour;
+8. Guitar Hero Aerosmith;
+9. Guitar Hero Smash Hits.
+
+No último teste com Guitar Hero Smash Hits:
+
+- primeira execução: `WAITING_FOR_AURORA_SCAN`;
+- após Rescan: `ContentID=9`;
+- manifesto: `games=1`;
+- metadata: `status=VERIFIED`;
+- cover: placeholder de 2048 bytes substituído automaticamente por asset RXEA de 566272 bytes;
+- após recarregar/reiniciar o Aurora, a capa apareceu no CoverFlow;
+- verificação final: `overall=VERIFIED`.
+
+### Baseline para o XboxMac UI
+
+O monorepo `remappingbridge/xboxmac-ui` deve incorporar, inicialmente sem refatoração funcional:
+
+```text
+backend/connectx/
+    xbox-connectx-add
+    xbox-connectx-ingest
+    xbox-connectx-scan
+    xbox-connectx-stage-assets
+    xbox-connectx-sync-metadata
+    xbox-connectx-sync-covers
+
+backend/asset-engine/
+    Cargo.toml
+    Cargo.lock
+    src/main.rs
+
+aurora/User/Scripts/Content/Filters/
+    XboxMacProbe.lua
+```
+
+Os comandos CLI permanecem disponíveis como interface de diagnóstico/recuperação, mas a UI futura deve chamar a mesma lógica de domínio através do backend local, sem criar pipeline paralelo.
+
+### UX futura das dependências manuais
+
+Estados formais:
+
+```text
+CONNECTX_READY
+→ WAITING_FOR_AURORA_SCAN
+→ APPLYING_METADATA
+→ SYNCING_COVER
+→ WAITING_FOR_AURORA_REFRESH
+→ VERIFYING
+→ AURORA_READY
+```
+
+Enquanto Rescan/refresh remoto não estiver validado:
+
+- a UI orienta a ação necessária no Xbox;
+- o backend continua monitorando;
+- não há botão obrigatório "Já fiz";
+- o usuário não volta ao terminal;
+- quando o backend detecta a condição, o job continua sozinho.
+
