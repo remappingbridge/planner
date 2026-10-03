@@ -984,3 +984,19 @@ Segundo protótipo executado no ContentID 2 (NBA Jam) corrigindo a semântica de
 **AUTO-08 core API: VALIDADO.** Os cinco campos textuais suportados podem ser aplicados de forma segura pela API de alto nível do próprio Aurora, sem substituir externamente o SQLite e sem usar `Sql.Execute UPDATE ContentItems`.
 
 Próximo passo: transformar o protótipo em fluxo genérico e idempotente acionado automaticamente pelo boot do Aurora, usando manifesto gerado no Mac e preservando o bootstrap original de `User/Scripts/Main.lua`.
+
+
+### AUTO-08I — RunLuaAtBoot validado
+
+O mecanismo de autorun do Aurora foi validado de forma autocontida e reversível:
+
+- o `User/Scripts/Main.lua` remoto ainda correspondia ao baseline SHA-256 `2e7e252cd8ad696f1b190bb22cdc550a8ffd952448ef4653926162c5e97755fa` antes do teste;
+- foi instalado um probe temporário no `Main.lua`;
+- um Utility Script habilitou `RunLuaAtBoot = 1` e chamou `Aurora.Restart()`;
+- no boot seguinte o `Main.lua` executou automaticamente e criou `xboxmac-autorun-probe.txt` com `status=EXECUTED`;
+- o próprio autorun desabilitou `RunLuaAtBoot` via `Settings.SetSystem("RunLuaAtBoot","0")`;
+- após o boot, `settings.db` confirmou `RunLuaAtBoot = 0`.
+
+**Gate de autorun: CONCLUÍDO.** O Aurora pode aplicar metadata sem navegação manual em `Scripts > Utility`.
+
+Próximo passo: substituir o probe por um autorun genérico e idempotente orientado por manifesto gerado pelo Mac. O manifesto deve carregar ContentID/TitleID/MediaID e os cinco campos textuais suportados, validar identidade antes de escrever, aplicar somente diferenças, registrar resultado por jogo e se auto-desabilitar após processar a fila.
