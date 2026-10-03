@@ -399,6 +399,17 @@ Validação no Xbox:
 
 Estado: **AUTO-06A concluído para cover (`GC`)**. A leitura de hash pós-restart ainda pode ser feita como evidência adicional quando o Aurora/FTP estiver novamente ativo, mas não bloqueia a validação funcional.
 
+### Evidências AUTO-06B — deploy BK/GL
+
+- `BK4A3007D3.asset` remoto antes do upload: SHA-256 `3b76e98804f86d6c6abd45a347d7e1d76b5821a1eae651049311343ce721493f`, idêntico ao backup;
+- `BK4A3007D3.asset` gerado/enviado: SHA-256 `e408253f8327b456985fa59c50a0bfe7ec1c11d6977952dfa351f03abe1970c1`;
+- download de retorno do `BK` bateu byte a byte com o gerado (`remote_matches_generated=0`);
+- `GL4A3007D3.asset` remoto antes do upload: SHA-256 `6dce362c2258627a084cc0163d271ecdfb57948c63eb11326a63f6cc4324fcd2`, idêntico ao backup;
+- `GL4A3007D3.asset` gerado/enviado: SHA-256 `0c9e4557b30dc5ae264c8d1969dd9d251505a4e21aa1102bec228f93387b2c32`;
+- download de retorno do `GL` bateu byte a byte com o gerado (`remote_matches_generated=0`);
+- a capa (`GC`) permaneceu correta após restart;
+- validação visual específica de background/banner/icon ainda pendente.
+
 ### Evidência pós-restart — GC preservado
 
 - após retornar ao Aurora, FTP na porta 21 voltou a responder;
