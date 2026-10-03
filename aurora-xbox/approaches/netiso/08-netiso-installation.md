@@ -57,6 +57,14 @@ Tamanho remoto observado após upload:
 192512 bytes
 ```
 
+SHA-256 do `Nova.xex` modificado atualmente instalado, reconfirmado imediatamente antes da instalação do ConnectX em 2026-10-03:
+
+```text
+7be2e01f60065ac642e4393228fa845d4e7b7fa02e8c1183636ee20907e05eee
+```
+
+Esse hash é do **Nova modificado para NetISO**. O hash `3fdf5175...` acima continua sendo o backup do Nova original.
+
 ## launch.ini
 
 Configuração enviada de volta ao pendrive:
