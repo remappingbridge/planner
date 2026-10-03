@@ -873,3 +873,18 @@ Teste executado com NBA Jam aberto e em execução, portanto fora do dashboard A
 Conclusão: não existe uma janela simples "Aurora fechado + FTP ativo" para substituir `content.db`. Portanto o AUTO-08 não deve fazer upload cego do banco enquanto o Aurora está aberto nem tentar substituir o arquivo durante gameplay.
 
 Próxima estratégia: manter o patch de metadata em cópia local e procurar um mecanismo Aurora-native para aplicar metadata textual sem escrita externa concorrente no SQLite. O caminho preferido é automatizar o mesmo mecanismo de importação de `User/Import/<TitleID>` já validado manualmente, se houver entrypoint/script/command invocável sem interação; somente se isso não existir considerar um mecanismo de manutenção explícito para troca do banco fora do processo Aurora.
+
+
+### AUTO-08C — pivot para SQL nativo do Aurora
+
+A tentativa de encontrar uma janela externa segura mostrou que o FTP some quando um jogo está em execução. A estratégia de substituir `content.db` por FTP foi descartada.
+
+Pesquisa técnica posterior encontrou um caminho melhor e Aurora-native:
+
+- o runtime Lua do Aurora expõe `Sql.Execute(query)` e `Sql.ExecuteFetchRows(query)`;
+- o Utility Script oficial/comunitário `DBCleaner` do repositório XboxUnity/AuroraScripts usa `scriptPermissions = { "sql", "filesystem" }` e executa `DELETE FROM ContentItems ...` através de `Sql.Execute`;
+- o mesmo script usa `Aurora.Restart()` após mudanças quando necessário.
+
+Decisão: metadata textual não será aplicada por substituição externa do arquivo SQLite. O próximo protótipo será um script Lua Aurora-native que lê um manifesto controlado e atualiza somente `TitleName`, `Description`, `Publisher`, `Developer` e `ReleaseDate` usando a API SQL interna do próprio Aurora.
+
+Requisito adicional para manter o objetivo "sem clique": antes de considerar AUTO-08 concluído, investigar uma forma suportada de disparar esse script automaticamente (startup/hook/integração existente). Se não existir, o script manual será apenas validação intermediária e não o estado final.
