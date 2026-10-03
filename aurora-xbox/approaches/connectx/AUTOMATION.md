@@ -408,6 +408,11 @@ Hipótese operacional prioritária: o Aurora ainda não persistiu/flushou a nova
 
 Verificação FTP de `/Hdd1/Apps/Aurora/Data/Databases` mostrou apenas `content.db` (20480 bytes), sem `content.db-wal`, `content.db-shm` ou journal visível. Isso reduz a chance de a nova entrada estar apenas em um arquivo auxiliar exposto por FTP. O próximo teste continua sendo reiniciar somente o Aurora e refazer o snapshot para verificar se a entrada do NBA Jam é persistida no `content.db` principal.
 
+
+### Pós-restart: diretório de banco sem journal/WAL
+
+Após reiniciar apenas o Aurora e aguardar ~15 segundos, a listagem FTP de `/Hdd1/Apps/Aurora/Data/Databases` mostrou apenas `content.db` (20480 bytes). Não havia `content.db-wal`, `content.db-journal` ou outro arquivo auxiliar visível. Isso reduz a hipótese de uma linha nova estar somente em WAL/journal remoto; ainda é necessário executar o novo dry-run e consultar o snapshot pós-restart para verificar se a linha de NBA Jam foi persistida no `content.db` principal.
+
 ## AUTO-04 — descobrir ContentID do Aurora
 
 Pré-condição: o Aurora já precisa ter descoberto o jogo no path ConnectX.
