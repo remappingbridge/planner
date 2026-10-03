@@ -1520,6 +1520,30 @@ Resta apenas a validação física end-to-end pela interface local do XboxMac.
 
 A interface diagnóstica foi ajustada antes do teste físico para manter também ISOs já ingeridas na lista de seleção. Isso permite repetir exatamente a mesma ISO após a primeira execução e validar idempotência pela própria UI. O estado atual do item é exibido ao lado do nome.
 
+#### Bloqueio encontrado no primeiro teste da página
+
+Ao abrir a página com o backend ativo, o HTML carregou, mas todos os placeholders permaneceram estáticos:
+
+- `Preparando conexões...`;
+- `Verificando...`;
+- `Carregando biblioteca...`;
+- `Carregando ISOs...`;
+- fila vazia sem atualização.
+
+Diagnóstico: o script embutido não era analisado pelo navegador. Duas rotinas de erro usavam strings JavaScript contendo HTML com aspas duplas escapadas dentro de uma string Python tripla. Na renderização, Python consumia as barras e produzia JavaScript inválido, por exemplo um atributo `colspan="3"` quebrando a própria string JS.
+
+Correção aplicada:
+
+- removido o uso de `innerHTML` nessas rotinas;
+- erros passam a ser montados exclusivamente via `document.createElement`, `cell.colSpan` e `textContent`;
+- acrescentado teste do HTML efetivamente retornado por `home()`, exigindo handlers seguros e as quatro chamadas iniciais:
+  - `ensureThenRefresh()`;
+  - `refreshLibrary()`;
+  - `refreshAutomationCandidates()`;
+  - `refreshJobs()`.
+
+O backend/API não foi alterado por essa correção.
+
 XM-05 só deve ser marcado como CONCLUÍDO após essa validação física.
 
 ### XM-06 — Lixeira
