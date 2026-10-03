@@ -1,6 +1,6 @@
 # Abordagem 2 — ConnectX
 
-> **Status: CX-00…CX-05 concluídos; CX-06 validado para o jogo piloto PES 2018 e automação de assets comprovada; teste incremental com segundo jogo ainda pendente. CX-07 (autostart/coexistência pós-reboot) liberado para execução.**
+> **Status: CX-00…CX-05 concluídos; CX-06 validado para o jogo piloto PES 2018 e automação de assets comprovada; CX-07 concluído com reboot real, autostart e coexistência NetISO + ConnectX. O teste incremental com um segundo jogo continua pendente para fechar completamente o CX-06.**
 
 Objetivo: manter jogos no Mac, mas permitir que o Aurora trate a biblioteca remota como um caminho escaneável e coloque os títulos no CoverFlow/carrossel principal.
 
