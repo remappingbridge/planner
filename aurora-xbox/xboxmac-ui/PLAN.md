@@ -1299,7 +1299,35 @@ O teste físico deve comprovar:
 
 O caminho "serviço realmente ausente → iniciar somente aquele serviço" é validado por teste unitário para evitar derrubar LaunchDaemons funcionais apenas para testar o gate.
 
-XM-03 só deve ser marcado como CONCLUÍDO após a validação física segura.
+#### Primeira validação física — SUCESSO / ajuste de teste unitário pendente
+
+No Mac real:
+
+- ensure saudável retornou `ready`;
+- NetISO, Samba e NetBIOS retornaram `already_running`;
+- PIDs permaneceram inalterados:
+  - NetISO: 300;
+  - smbd: 301;
+  - nmbd: 299;
+- `healthy_service_restarts=0`;
+- com Ethernet fisicamente desconectada, o ensure retornou `waiting_external`;
+- nenhum dos três serviços foi reiniciado durante a queda física;
+- após reconexão, `result=ready`;
+- os mesmos PIDs foram preservados até o fim;
+- teste físico terminou com `XM-03: OK` e `netiso_pid_preserved=YES`.
+
+A suíte unitária teve uma única falha em `test_home_requests_ensure_before_status`. A falha era do próprio teste: ele comparava a primeira ocorrência textual de `/api/status` na página inteira, que aparece dentro da definição de `refreshStatus()`, com a ocorrência de `/api/connections/ensure`.
+
+O comportamento real da página e do endpoint foi validado fisicamente. O teste foi corrigido para inspecionar especificamente o corpo de `ensureThenRefresh()` e confirmar a ordem:
+
+```text
+POST /api/connections/ensure
+→ await refreshStatus()
+```
+
+Nenhum código funcional do ensure foi alterado nessa correção.
+
+XM-03 será marcado como CONCLUÍDO após a suíte unitária passar novamente.
 
 ### XM-04 — biblioteca read-only
 
