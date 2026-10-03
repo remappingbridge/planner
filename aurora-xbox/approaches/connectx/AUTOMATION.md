@@ -1017,3 +1017,19 @@ O primeiro autorun genérico orientado por manifesto executou no boot e leu corr
 Conclusão: o mecanismo de autorun funciona, mas o `Main.lua` roda antes de o catálogo Content estar disponível. Isso é uma condição de inicialização, não erro de identidade nem do manifesto.
 
 Próximo ajuste: o autorun deve aguardar a inicialização do subsistema Content com timeout finito e backoff, procurando os ContentIDs esperados antes de tentar qualquer setter. Se o catálogo não ficar pronto dentro do timeout, manter o manifesto pendente e registrar `CONTENT_TIMEOUT`, sem loops infinitos e sem reiniciar o Aurora.
+
+
+### AUTO-08K — espera síncrona bloqueia inicialização do Content
+
+O autorun v2 aguardou por 30 tentativas de 1 segundo usando `wait()`, mas `Content.GetInfo` permaneceu indisponível durante toda a execução:
+
+- `content_ready_attempt=TIMEOUT`;
+- `games=2`;
+- `status=CONTENT_TIMEOUT`;
+- manifesto permaneceu pendente;
+- nenhum `last_applied` foi criado;
+- `RunLuaAtBoot` permaneceu `1`.
+
+Conclusão: esperar de forma síncrona dentro de `User/Scripts/Main.lua` não resolve; o script de boot está executando antes da inicialização do catálogo Content e a própria espera síncrona não permite que o subsistema fique disponível durante essa execução.
+
+Decisão: não aumentar o timeout e não fazer polling bloqueante no boot. O próximo passo é encontrar um mecanismo realmente diferido/assíncrono após o dashboard estar pronto, ou um endpoint remoto do Aurora que permita disparar o processamento após a inicialização. Enquanto isso, o manifesto permanece pendente e nenhum dado é perdido.
