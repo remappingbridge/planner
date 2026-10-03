@@ -358,7 +358,7 @@ Gate: assets gerados para o PES são equivalentes aos assets produzidos pelo imp
 - `SS4A3007D3.asset` é byte-identical ao asset vazio produzido pelo Aurora;
 - `GC/BK/GL` são diferentes byte a byte dos assets produzidos pelo Aurora, o que é aceitável nesta fase porque podem existir diferenças válidas de codificação BC3; a aceitação final exige teste real no Aurora.
 
-**AUTO-05: geração local validada.** Falta somente provar compatibilidade real no Xbox. O primeiro teste de deploy deve substituir apenas `GC4A3007D3.asset` e preservar rollback imediato.
+**AUTO-05: CONCLUÍDO para o jogo piloto.** O `GC4A3007D3.asset` gerado no Mac foi instalado diretamente, o Aurora reiniciado sem `Assets > Import`, a capa permaneceu correta no CoverFlow e o PES 2018 iniciou normalmente.
 
 ## AUTO-06 — deploy transacional por FTP
 
@@ -389,7 +389,19 @@ Gate: capa aparece no CoverFlow sem executar manualmente `Start > Assets > Impor
 - nenhum outro asset (`BK`, `GL`, `SS`) foi alterado;
 - próximo passo: reiniciar apenas o Aurora, sem `Assets > Import`, e validar CoverFlow + abertura do jogo.
 
-Estado: **deploy transacional básico validado; compatibilidade visual ainda pendente**.
+Validação no Xbox:
+
+- Aurora reiniciado sem executar `Assets > Import`;
+- PES 2018 continuou aparecendo no CoverFlow;
+- capa exibida corretamente;
+- jogo iniciou e rodou normalmente;
+- isso prova que o Aurora aceita diretamente o `GC*.asset` gerado no Mac.
+
+Estado: **AUTO-06A concluído para cover (`GC`)**. A leitura de hash pós-restart ainda pode ser feita como evidência adicional quando o Aurora/FTP estiver novamente ativo, mas não bloqueia a validação funcional.
+
+### Observação operacional — FTP durante execução do jogo
+
+O FTP do Aurora pode ficar indisponível enquanto um jogo está em execução, porque o servidor FTP pertence ao ambiente Aurora/Nova e não deve ser tratado como serviço persistente do Xbox durante gameplay. Falha de conexão à porta 21 após iniciar o jogo não invalida o teste de asset. Para operações de sync/backup, retornar ao Aurora e aguardar o FTP responder antes de transferir arquivos.
 
 ## AUTO-07 — remoção e órfãos
 
