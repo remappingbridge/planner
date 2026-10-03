@@ -526,3 +526,21 @@ Requisitos do pipeline:
 - nunca apagar a ISO original ao gerar a árvore ConnectX.
 
 O gate CX-06 só será considerado completamente concluído quando esse fluxo incremental estiver validado com pelo menos um jogo já existente e um segundo jogo adicionado depois.
+
+### Evidências finais CX-07 — 2026-10-03
+
+Validação completa após reboot real do MacBook:
+
+- NetISO iniciou automaticamente via `launchd`;
+- `smbd` iniciou automaticamente via `launchd`;
+- `nmbd` iniciou automaticamente via `launchd`;
+- `en7` voltou em `192.168.50.1/24`, 100baseTX full-duplex;
+- `XBOXMAC` voltou a resolver para `192.168.50.1`;
+- PES 2018 continuou aparecendo no CoverFlow e iniciou normalmente via ConnectX;
+- gameplay via ConnectX funcionou após reboot;
+- retorno ao Aurora funcionou;
+- NetISO continuou acessível na mesma sessão;
+- biblioteca ISO continuou disponível e montagem/execução via NetISO funcionou;
+- não foi necessário iniciar nenhum serviço manualmente após o reboot.
+
+**CX-07: CONCLUÍDO.** NetISO e ConnectX coexistem com autostart funcional no Mac e sem regressão observada.
