@@ -357,6 +357,24 @@ Regra de capa:
 
 Gate: novo jogo recebe o mesmo resultado em execuções repetidas.
 
+### Evidências finais AUTO-03 — NBA Jam
+
+A normalização genérica de artwork foi validada com o segundo jogo:
+
+- `NBA Jam` recebeu full cover do XboxUnity, `CoverID=416`;
+- a capa automática vertical do x360db (`219x300`) foi substituída por JPEG real `900x600`;
+- SHA-256 da nova capa: `2e169e5af8039073bf1eed65fe3d267110f44653d53415281765890a28ea8273`;
+- banner permaneceu `420x95`;
+- background permaneceu `1280x720`;
+- icon permaneceu `64x64`;
+- a capa já validada do PES 2018 foi preservada byte a byte, SHA-256 `092fecf6440814ae8ecb3693cfbb3ba39ab4f6d3dece55b53074b654265e76b0`;
+- segunda execução reconheceu ambas as capas como válidas `900x600`;
+- `staging-manifest.json` permaneceu byte-identical entre as execuções (`manifest_idempotent=0`).
+
+A regra agora é genérica: artwork x360db continua sendo a fonte primária, mas cover automática fora de `900x600` recebe fallback determinístico para full cover XboxUnity. Uma capa que não é reconhecida como pertencente à automação é preservada como escolha manual.
+
+**AUTO-03: CONCLUÍDO.** Metadata/artwork incremental e idempotente foi comprovado com PES 2018 + NBA Jam.
+
 ### AUTO-03 — segundo jogo NBA Jam: staging bruto
 
 O staging automático do segundo jogo foi executado sem alterações manuais:
