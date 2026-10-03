@@ -928,3 +928,36 @@ Resultado:
 Isso confirma de forma independente que a API `Content.*` usa o mesmo ContentID interno `2` já correlacionado pelo banco e que o alvo do primeiro patch real é inequivocamente o NBA Jam. O probe não modificou metadata.
 
 Próximo gate: aplicar os cinco campos suportados pela API `Content.*` ao ContentID 2, com verificação de TitleID/MediaID antes da escrita, snapshot do `content.db` antes e depois e rollback disponível. `Genre` permanece fora.
+
+
+### AUTO-08G — primeiro patch real: semântica de no-op descoberta
+
+O primeiro teste de escrita via API `Content.*` foi executado no ContentID 2 (NBA Jam) com backup prévio íntegro.
+
+Estado do backup imediatamente antes do teste:
+
+- `Description`, `Publisher`, `Developer` e `ReleaseDate` vazios no `content.db`;
+- `TitleName = NBA JAM`;
+- `GenreFlag = 0`;
+- `PRAGMA integrity_check = ok`;
+- SHA-256 do backup: `cf72d69789f725b7290c02717c68e3e00e7c61de84a5810edeac66de404491ce`.
+
+Durante o script:
+
+- `Content.GetInfo(2)` já retornou `ReleaseDate = 2010-11-23`, apesar de o snapshot de `content.db` imediatamente anterior ter esse campo vazio;
+- `Content.SetTitle` retornou `false` porque o título já era `NBA JAM`;
+- `Content.SetDescription`, `Content.SetPublisher` e `Content.SetDeveloper` retornaram `true`;
+- `Content.SetReleaseDate` retornou `false` enquanto o valor exposto pela API já era o alvo;
+- o estado lido logo após as chamadas correspondia integralmente ao alvo.
+
+O protótipo considerou incorretamente qualquer retorno `false` como falha e acionou rollback. Esse critério está errado para operações idempotentes/no-op: o estado final precisa ser a fonte de verdade, não a exigência de todos os setters retornarem `true`.
+
+O rollback restaurou Description/Publisher/Developer para vazio. Após restart, `content.db` permaneceu íntegro e o PES não foi alterado. Curiosamente, `ReleaseDate = 2010-11-23` ficou persistido no NBA Jam, confirmando que a API/estado interno do Aurora pode conter metadata ainda não refletida no snapshot anterior.
+
+Decisão para o próximo protótipo:
+
+- chamar setter somente quando o valor atual exposto por `Content.GetInfo` difere do alvo;
+- considerar sucesso quando o estado pós-operação coincide com o alvo, independentemente do booleano de um setter em no-op;
+- rollback somente dos campos realmente modificados nessa execução;
+- não tocar em `Genre`;
+- validar novamente o `content.db` após `Aurora.Restart()`.
