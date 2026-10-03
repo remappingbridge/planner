@@ -281,6 +281,27 @@ A v1 não criará linhas no banco.
 
 Gate: PES 2018 tem ContentID determinado de forma reproduzível e a pasta nativa correspondente é confirmada no Xbox.
 
+### Evidências AUTO-04 — PES 2018
+
+- consulta de `ContentItems` para TitleID `4A3007D3` retornou uma única entrada ativa;
+- `ContentItems.Id = 1`, portanto `ContentID = 00000001`;
+- `TitleId = 4A3007D3`, `MediaId = 1CB7BE36`;
+- `TitleName = PRO EVOLUTION SOCCER 2018`;
+- `Directory = \\PES 2018`;
+- `Executable = default.xex`;
+- `ScanPathId = 1`, `FoundAtDepth = 1`;
+- o diretório nativo ativo esperado pelo Aurora é `4A3007D3_00000001`;
+- existe também `4A3007D3_002DC6C1`, mas não há linha correspondente em `ContentItems` para esse TitleID no snapshot atual; tratar como diretório histórico/stale até prova em contrário e não utilizá-lo como destino automático;
+- assets do diretório ativo foram copiados para o backup local:
+  - `GL4A3007D3.asset` SHA-256 `6dce362c2258627a084cc0163d271ecdfb57948c63eb11326a63f6cc4324fcd2`;
+  - `GC4A3007D3.asset` SHA-256 `a1a0fb1ac04ea4ed190288c134f6315e8f5e926dec4708737676dacbda85fd38`;
+  - `BK4A3007D3.asset` SHA-256 `3b76e98804f86d6c6abd45a347d7e1d76b5821a1eae651049311343ce721493f`;
+  - `SS4A3007D3.asset` SHA-256 `83f9860b9a37f6f7368e84ce476d12daabcf7a0170fd5cce36da9d23ce0ad503`.
+
+**AUTO-04: CONCLUÍDO para o jogo piloto PES 2018.** A descoberta de ContentID é reproduzível a partir de `ContentItems.Id` e o diretório GameData correspondente foi confirmado.
+
+AUTO-00 ainda requer somente verificar/copiar eventual conteúdo do subdiretório `PluginData` do diretório ativo antes de ser considerado rollback completo.
+
 ## AUTO-05 — gerar assets nativos
 
 Usar como referência/implementação o formato aberto documentado e a biblioteca `libaustralis`.
