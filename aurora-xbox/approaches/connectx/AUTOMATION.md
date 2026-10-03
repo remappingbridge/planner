@@ -410,6 +410,17 @@ Estado: **AUTO-06A concluído para cover (`GC`)**. A leitura de hash pós-restar
 - a capa (`GC`) permaneceu correta após restart;
 - validação visual específica de background/banner/icon ainda pendente.
 
+### Validação visual AUTO-06B — BK/GL
+
+- após restart do Aurora, os detalhes do PES 2018 permaneceram visualmente normais;
+- background exibido corretamente;
+- banner/ícone sem corrupção perceptível;
+- cover permaneceu correta;
+- nenhuma execução de `Assets > Import` foi necessária;
+- a validação funcional do conjunto `GC + BK + GL` está concluída.
+
+Falta apenas registrar os hashes pós-restart de `BK`, `GL` e `GC` como evidência adicional de persistência byte a byte.
+
 ### Evidência pós-restart — GC preservado
 
 - após retornar ao Aurora, FTP na porta 21 voltou a responder;
