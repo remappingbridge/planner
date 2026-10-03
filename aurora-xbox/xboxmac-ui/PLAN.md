@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas
+### XM-07 — assets/Aurora e ações manuais guiadas — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO
 
 - estado de scan;
 - ContentID;
@@ -1817,6 +1817,46 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - nenhuma escrita externa direta em `content.db`.
 
 Gate: jogo novo chega a `AURORA_READY` pela UI, com metadata e capa verificadas; qualquer ação ainda manual no Xbox é explicitamente orientada e detectada automaticamente pelo backend.
+
+#### Implementação XM-07
+
+Implementação adicionada sem alterar o pipeline congelado:
+
+- jobs persistem `content_id`, `metadata_state`, `cover_state` e `aurora_verified` por jogo;
+- saída de `xbox-connectx-sync-metadata` é interpretada para capturar ContentID e estado do manifesto/metadata;
+- saída de `xbox-connectx-sync-covers` é interpretada para verificar capa/GC por ContentID + TitleID;
+- correlação de capa usa ContentID para evitar ambiguidade em jogos com mesmo TitleID;
+- `AURORA_READY` exige ContentID conhecido + metadata `VERIFIED` + capa/GC `VERIFIED`;
+- UI ganhou coluna `Jogos / Aurora` com TitleID, MediaID, ContentID, metadata, capa/GC e verificação final;
+- `WAITING_FOR_AURORA_SCAN` orienta Rescan sem botão `Já fiz`;
+- `WAITING_FOR_AURORA_REFRESH` orienta refresh/restart sem confirmação manual no Mac;
+- backend continua detectando automaticamente quando avançar;
+- nenhuma escrita direta em `content.db`;
+- scripts congelados `backend/connectx/*` e filtro Lua não foram modificados;
+- testes específicos em `backend/server/tests/test_xm07_aurora.py`;
+- verificador `scripts/verify-xm07.py`;
+- documentação em `docs/XM-07.md`.
+
+Validação necessária:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm07.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Depois, validação física com uma ISO nova deve comprovar:
+
+- chegada automática a `WAITING_FOR_AURORA_SCAN` quando necessário;
+- continuação automática depois do Rescan;
+- ContentID visível na UI;
+- metadata `VERIFIED`;
+- capa/GC `VERIFIED`;
+- orientação de refresh/restart quando necessária;
+- continuação automática depois do refresh/restart;
+- estado final `AURORA_READY`;
+- capa visível no CoverFlow do Aurora.
+
 
 ### XM-08 — launcher macOS
 
