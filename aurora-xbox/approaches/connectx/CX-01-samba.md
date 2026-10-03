@@ -137,3 +137,17 @@ Após encerrar as instâncias manuais de `smbd` e `nmbd`, os dois LaunchDaemons 
 - portanto o problema é reproduzível mesmo com wrapper em foreground e plists válidos.
 
 Conclusão: **CX-07 continua bloqueado e o Mac não deve ser reiniciado ainda**. Próximo diagnóstico: capturar stderr/logs gerados por essa tentativa, verificar pid/state files remanescentes e executar cada wrapper fora do launchd em ambiente limpo para separar falha do Samba de falha específica do launchd.
+
+
+### Causa raiz provável confirmada — setsid / no-process-group
+
+O diagnóstico manual reproduziu a mesma falha fora do launchd:
+
+- `smbd -F` via wrapper terminou com exit 1;
+- `nmbd -F` via wrapper terminou com exit 1;
+- os logs nativos de ambos registraram repetidamente `Failed to create session, error code 1`;
+- ao restaurar com `-D`, ambos iniciaram normalmente e voltaram a escutar nas portas esperadas.
+
+A implementação Samba 4.25 chama `setsid()` no caminho de foreground quando `no_session` não está habilitado. Em um processo que já é líder de grupo, `setsid()` retorna EPERM (errno 1), exatamente o erro observado. A correção candidata é iniciar em foreground com `--no-process-group`, preservando a supervisão pelo launchd sem tentar criar nova sessão.
+
+Próximo gate técnico: alterar somente o wrapper para acrescentar `--no-process-group` a `smbd -F` e `nmbd -F`, testar manualmente e então via `launchctl bootstrap`. Reboot continua bloqueado até os dois jobs ficarem em `state = running`.
