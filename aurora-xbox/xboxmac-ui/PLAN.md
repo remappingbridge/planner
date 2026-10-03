@@ -1725,6 +1725,16 @@ Antes de retomar a validação física, a página diagnóstica receberá somente
 
 Esse ajuste pertence ao próprio XM-06 e existe apenas para tornar o teste físico seguro e inequívoco.
 
+#### Segunda regressão textual corrigida
+
+A validação seguinte manteve `STATIC_OK` e novamente 49/50 testes passaram. O único teste legado restante exigia também a presença literal de `XM-01` na home.
+
+Correção aplicada:
+
+- cabeçalho agora usa `Backend local ativo. Interface diagnóstica XM-01…XM-06.`;
+- preserva simultaneamente os marcadores históricos do XM-01 e o contexto atual do XM-06;
+- nenhuma API, schema ou lógica funcional foi alterada.
+
 #### Regressão de compatibilidade textual corrigida
 
 Na primeira validação após a melhoria visual, 49/50 testes passaram. O único erro foi o teste legado do XM-01 exigir a frase literal `Backend local ativo.`, enquanto a UI havia mudado para `Backend local ativo · interface diagnóstica do XM-06`.
