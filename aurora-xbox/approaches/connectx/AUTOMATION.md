@@ -203,6 +203,23 @@ Responsabilidades:
 
 Gate: duas execuções consecutivas sem mudanças produzem zero alterações.
 
+### Evidências AUTO-01 — primeiro dry-run idempotente
+
+- `/usr/local/libexec/xbox-connectx-sync` instalado no Mac;
+- modo `--dry-run` executou scanner, staging, conexão FTP, snapshot íntegro de `content.db`, correlação de ContentID e comparação de assets;
+- snapshot de `content.db` obtido com SHA-256 `686d42c5d8c8c0c0928cd730017e6966f6840f9c5081191668d3b40500bdd204`;
+- PES 2018 correlacionado como `4A3007D3 / 1CB7BE36 / ContentID 00000001`;
+- `BK`, `GL` e `GC` retornaram `SAME`;
+- resumo: `games=1`, `assets_changed=0`, `assets_uploaded=0`, `waiting_for_aurora_scan=0`;
+- estado persistido em `/usr/local/var/xbox-connectx/sync-state.json`;
+- nenhum arquivo foi alterado no Xbox.
+
+Para fechar o gate de idempotência do AUTO-01 ainda é necessária uma segunda execução consecutiva sem mudanças, seguida de um `--apply` no-op para provar que o modo de aplicação também não faz upload quando os hashes já coincidem.
+
+### Reboot liberado para validações
+
+A partir de 2026-10-03 o MacBook pode ser reiniciado durante os testes quando necessário. Isso libera a validação real de persistência que estava adiada, especialmente Samba/NetBIOS do ConnectX, NetISO e posteriormente o backend/scheduler da automação. O reboot deve ser usado apenas em gates que explicitamente testam autostart/recuperação.
+
 ## Política de retenção da ISO
 
 A ISO em `/Users/Shared/xbox360` é tratada como **fonte de ingestão**, não como arquivo necessário para execução via ConnectX.
