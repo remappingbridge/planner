@@ -107,3 +107,19 @@ Antes do reboot real foi auditado o estado dos serviços:
 - NetISO estava carregado pelo launchd e ouvindo em TCP 4323, com conexões estabelecidas ao Xbox.
 
 Conclusão: **não reiniciar ainda**. O estado atual prova que a sessão funciona, mas não prova autostart ConnectX; como os processos Samba/NetBIOS estão ativos fora do launchd, o reboot agora provavelmente os perderia. O próximo passo é corrigir/carregar os jobs ConnectX e validar o wrapper/logs antes do reboot.
+
+
+### Diagnóstico do wrapper/LaunchDaemons — 2026-10-03
+
+A inspeção do wrapper e dos plists descartou a hipótese de daemonização incorreta:
+
+- `/usr/local/libexec/xbox-connectx-samba` espera `en7` adquirir `192.168.50.1`;
+- para `smbd`, usa `exec ... samba-dot-org-smbd -F -s <conf>`;
+- para `nmbd`, usa `exec ... nmbd -F -s <conf>`;
+- portanto ambos permanecem em foreground e são apropriados para supervisão por `launchd`;
+- os dois plists passam em `plutil -lint`;
+- ownership/permissões: plists `root:wheel 0644`, wrapper `root:wheel 0755`;
+- logs dedicados estavam vazios;
+- os jobs ConnectX não apareciam em `launchctl print system`, enquanto processos Samba/NetBIOS manuais estavam ativos.
+
+Conclusão: o problema atual não está no wrapper nem na sintaxe dos plists. O foco passa a ser registrar/carregar os dois LaunchDaemons no domínio `system` e substituir de forma controlada os processos manuais pelos processos supervisionados pelo `launchd`, antes do reboot real.
