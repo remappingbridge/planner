@@ -1338,7 +1338,7 @@ Após a correção exclusiva do teste de sequência da página:
 
 **XM-03: CONCLUÍDO.**
 
-### XM-04 — biblioteca read-only — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO LOCAL
+### XM-04 — biblioteca read-only — CONCLUÍDO
 
 - inventário ISO;
 - inventário ConnectX;
@@ -1382,7 +1382,23 @@ git pull
 
 Depois deve ser validado o endpoint real `GET /api/library`, confirmando os nove pares TitleID/MediaID já conhecidos e a preservação dos hashes de `ingest-state.json` e `catalog.json`.
 
-XM-04 só deve ser marcado como CONCLUÍDO após essa validação.
+#### Validação local — CONCLUÍDA em 2026-10-03
+
+No Mac real:
+
+- `scripts/verify-xm04.py`: `STATIC_OK`;
+- 24/24 testes do backend passaram;
+- biblioteca real contém 15 jogos;
+- estados: 9 `CONNECTX_READY` e 6 `ISO_ONLY`;
+- 9/9 pares TitleID/MediaID conhecidos foram encontrados;
+- correlação por TitleID + MediaID: OK;
+- filtro real: OK;
+- bytes ISO agregados: 119358312448;
+- bytes ConnectX agregados: 39254235826;
+- hashes de `ingest-state.json` e `catalog.json` permaneceram inalterados;
+- `runtime_mutation=NONE`.
+
+**XM-04: CONCLUÍDO.** Próximo gate: XM-05.
 
 ### XM-05 — integração da automação
 
