@@ -389,6 +389,20 @@ O staging automático do segundo jogo foi executado sem alterações manuais:
 
 O mesmo padrão observado no PES 2018 se repetiu no segundo jogo. Portanto, a correção deixa de ser exceção por jogo: o `xbox-connectx-stage-assets` deve validar dimensões da cover e aplicar automaticamente fallback determinístico para full cover quando a fonte primária não for `900x600`, sem sobrescrever uma escolha manual protegida.
 
+
+### AUTO-04 — NBA Jam visível no Aurora, mas ainda ausente do snapshot principal
+
+Diagnóstico pós-Scan Now:
+
+- snapshot local analisado: `content-20261003-083534.db`;
+- SHA-256: `5d0884106481f3cc7d4a4632cd7b60a06d79bebc3dc2dfc1f927162e391037cf`;
+- `ContentItems` contém apenas a linha antiga do PES 2018 (Id 1);
+- nenhuma linha com NBA Jam / TitleID 4541094C foi encontrada;
+- nenhum diretório `4541094C_*` existe ainda em `Aurora/Data/GameData`;
+- apesar disso, o jogo apareceu no Aurora após Scan Now e iniciou normalmente via ConnectX.
+
+Hipótese operacional prioritária: o Aurora ainda não persistiu/flushou a nova entrada no arquivo principal `content.db` que o FTP entregou. Antes de alterar a regra de lookup do orquestrador, verificar arquivos auxiliares/journal do SQLite e repetir o snapshot após reinício limpo do Aurora. Se a linha aparecer após restart, a correlação atual está correta e o problema era apenas timing/persistência do banco.
+
 ## AUTO-04 — descobrir ContentID do Aurora
 
 Pré-condição: o Aurora já precisa ter descoberto o jogo no path ConnectX.
