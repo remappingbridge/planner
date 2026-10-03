@@ -403,6 +403,11 @@ Diagnóstico pós-Scan Now:
 
 Hipótese operacional prioritária: o Aurora ainda não persistiu/flushou a nova entrada no arquivo principal `content.db` que o FTP entregou. Antes de alterar a regra de lookup do orquestrador, verificar arquivos auxiliares/journal do SQLite e repetir o snapshot após reinício limpo do Aurora. Se a linha aparecer após restart, a correlação atual está correta e o problema era apenas timing/persistência do banco.
 
+
+### AUTO-04 — remoto sem journal auxiliar
+
+Verificação FTP de `/Hdd1/Apps/Aurora/Data/Databases` mostrou apenas `content.db` (20480 bytes), sem `content.db-wal`, `content.db-shm` ou journal visível. Isso reduz a chance de a nova entrada estar apenas em um arquivo auxiliar exposto por FTP. O próximo teste continua sendo reiniciar somente o Aurora e refazer o snapshot para verificar se a entrada do NBA Jam é persistida no `content.db` principal.
+
 ## AUTO-04 — descobrir ContentID do Aurora
 
 Pré-condição: o Aurora já precisa ter descoberto o jogo no path ConnectX.
