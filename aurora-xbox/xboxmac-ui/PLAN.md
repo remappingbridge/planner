@@ -1219,7 +1219,25 @@ bash scripts/test-xm02-local.sh
 
 O teste físico deve comprovar os seis componentes `up` no estado saudável, mudança observável após desconectar a Ethernet privada e recuperação completa após reconexão.
 
-XM-02 só deve ser marcado como CONCLUÍDO após essa validação.
+#### Ajuste após primeira validação física
+
+Na primeira execução física, Ethernet, NetISO, Samba, NetBIOS e Aurora FTP ficaram `up`, mas o componente `xbox` ficou `down` porque o console não respondeu a ICMP.
+
+Ao mesmo tempo, `192.168.50.2:21` estava aberto e Aurora FTP estava `up`, comprovando que o console estava acessível.
+
+Conclusão: ICMP não pode ser requisito obrigatório para reachability do Xbox.
+
+O probe foi corrigido para considerar o console `up` quando qualquer sinal confiável responder:
+
+- ICMP;
+- Aurora FTP/TCP 21;
+- Aurora WebUI/TCP 9999.
+
+ICMP permanece apenas como evidência adicional.
+
+Foi acrescentado teste unitário específico para o caso "FTP acessível + ICMP indisponível".
+
+XM-02 só deve ser marcado como CONCLUÍDO após repetir a validação física com esse ajuste.
 
 ### XM-03 — ensure connections
 
