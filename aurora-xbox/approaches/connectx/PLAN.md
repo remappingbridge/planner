@@ -304,7 +304,7 @@ connectx.xex
 SHA-256 7cace98c5a74891f78d2d6dd3b04d071c4d2c9f06dd6d8c796bfd9887a86f67b
 ```
 
-CX-03 fica bloqueado somente até existir uma cópia legítima dos dois binários. NetISO e todo o staging CX-02 permanecem intactos.
+CX-03 foi desbloqueado em 2026-10-03: os dois binários locais foram encontrados e seus SHA-256 conferem exatamente com os hashes de referência já registrados acima. Próxima etapa: transferir os arquivos para o Mac, fazer backup do estado atual de `Aurora/Plugins`, enviar por FTP ao Xbox e validar os hashes remotos antes de habilitar o módulo.
 
 Segundo a documentação do ConnectX:
 
