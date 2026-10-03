@@ -457,7 +457,25 @@ Fluxo preferido:
 - após o import, a capa apareceu no CoverFlow do PES 2018;
 - `Script Data` do path ConnectX não é necessário para capas/metadata e permanece `None`.
 
-Estado: **CX-06A concluído para o jogo piloto.** O fechamento completo de CX-06 ainda exige o teste incremental com um segundo jogo novo.
+Estado: **CX-06A concluído para o jogo piloto.**
+
+### Evidências finais CX-06 — segundo jogo incremental
+
+O segundo jogo, NBA Jam, percorreu o fluxo incremental completo:
+
+- ISO nova detectada e extraída uma única vez;
+- TitleID `4541094C` / MediaID `72098D69`;
+- metadata/artwork preparados de forma idempotente;
+- full cover normalizada automaticamente para `900x600`;
+- Aurora Scan Now criou `ContentID = 00000002`;
+- `xbox-connectx-sync --apply` gerou e enviou BK/GL/GC;
+- hashes remotos foram verificados byte a byte;
+- execução subsequente retornou BK/GL/GC = `SAME`, zero alterações e zero uploads;
+- após restart do Aurora, capa/background/icon apareceram corretamente;
+- NBA Jam iniciou e rodou normalmente;
+- nenhuma execução de `Start > Assets > Import` foi necessária para o segundo jogo.
+
+**CX-06: CONCLUÍDO.** O fluxo incremental de assets foi validado com um jogo já existente e um segundo jogo adicionado depois.
 
 ## Validação pós-reboot adiada
 
