@@ -1120,7 +1120,7 @@ No Mac real, após `git pull`:
 
 **XM-00: CONCLUÍDO.** Próximo gate: XM-01.
 
-### XM-01 — backend local mínimo
+### XM-01 — backend local mínimo — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO RUNTIME
 
 - FastAPI/Uvicorn;
 - bind `127.0.0.1:8742`;
@@ -1130,6 +1130,35 @@ No Mac real, após `git pull`:
 - shutdown limpo.
 
 Gate: backend abre localmente e não fica exposto na LAN.
+
+#### Evidências de implementação — 2026-10-03
+
+Publicado em `remappingbridge/xboxmac-ui/main`:
+
+- `backend/server/xboxmac/app.py`: FastAPI mínimo com lifespan e logging;
+- `backend/server/xboxmac/cli.py`: launcher Uvicorn;
+- bind lido do contrato XM-00 e rejeição explícita de host diferente de `127.0.0.1`;
+- execução como root rejeitada pelo launcher;
+- `GET /`: página diagnóstica mínima;
+- `GET /healthz`: contrato `xboxmac-health-v1`;
+- Swagger/ReDoc/OpenAPI públicos desabilitados neste baseline mínimo;
+- dependências em `backend/server/requirements.txt`;
+- testes em `backend/server/tests/test_xm01_server.py`;
+- verificação estática em `scripts/verify-xm01.py`;
+- documentação em `docs/XM-01.md`.
+
+Nenhum código do pipeline ConnectX congelado foi alterado para implementar o XM-01.
+
+Validação pendente no Mac:
+
+1. instalar FastAPI/Uvicorn em `.venv`;
+2. executar verificador e testes;
+3. iniciar `python -m backend.server.xboxmac.cli`;
+4. confirmar `GET /healthz`;
+5. confirmar listener exclusivamente `127.0.0.1:8742`;
+6. encerrar com Ctrl+C e confirmar `xboxmacd shutdown complete`.
+
+XM-01 só deve ser marcado como CONCLUÍDO depois da validação runtime.
 
 ### XM-02 — status de conexões
 
