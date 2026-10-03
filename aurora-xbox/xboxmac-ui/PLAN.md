@@ -1669,6 +1669,23 @@ Depois, teste físico deve validar:
 - rejeição de ConnectX inválido;
 - atualização automática da página sem reload manual.
 
+#### Primeira validação estática — 2026-10-03
+
+No Mac real:
+
+- `scripts/verify-xm06.py`: `STATIC_OK`;
+- 49/50 testes passaram;
+- única falha: `test_stale_plan_is_rejected`;
+- o alvo foi modificado entre `plan` e `execute`;
+- a biblioteca corretamente deixou de associar a ISO modificada ao jogo antigo;
+- por isso a execução retornou `ISO não está disponível para excluir` antes da comparação final do `plan_id`.
+
+Correção aplicada:
+
+- qualquer desaparecimento, substituição ou mudança estrutural do alvo entre `plan` e `execute` agora é normalizado para:
+  `o estado mudou desde a confirmação; gere um novo plano`;
+- isso mantém a semântica de confirmação em duas fases consistente sem reduzir os guards de path/fingerprint.
+
 XM-06 só deve ser marcado como CONCLUÍDO após essa validação física.
 ### XM-07 — assets/Aurora e ações manuais guiadas
 
