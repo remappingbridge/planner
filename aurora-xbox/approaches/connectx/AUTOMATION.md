@@ -150,6 +150,34 @@ AUTO-00 permanece em andamento até o backup dos diretórios candidatos e a corr
 
 ## AUTO-01 — orquestrador one-shot
 
+### Auditoria dos componentes existentes — 2026-10-03
+
+Componentes locais existentes foram revisados antes de criar o orquestrador:
+
+- `/usr/local/libexec/xbox-connectx-scan`: scanner Python independente;
+  - raiz fixa `/Users/Shared/xbox360-connectx`;
+  - localiza `default.xex` recursivamente;
+  - ignora `$SystemUpdate`;
+  - lê XEX1/XEX2 e extrai TitleID, MediaID, versões e dados de disco;
+  - calcula SHA-256 do `default.xex`;
+  - grava `catalog.json` de forma atômica com schema `xbox-connectx-catalog-v1`.
+- `/usr/local/libexec/xbox-connectx-stage-assets`: staging Python independente;
+  - lê `catalog.json`;
+  - consulta/cacheia x360db por TitleID;
+  - valida MediaID;
+  - prepara metadata textual e artwork em `staging/Aurora/User/Import/<TitleID>`;
+  - preserva arquivos já existentes, portanto escolhas manuais não são substituídas;
+  - grava `staging-manifest.json` com hashes;
+  - atualmente não implementa a lógica completa de fallback XboxUnity nem normalização genérica de dimensões/formato para jogos futuros.
+
+Estado observado do PES 2018:
+
+- `catalog.json`: TitleID `4A3007D3`, MediaID `1CB7BE36`, XEX SHA-256 `57185a354d728081f88675ffeee081e1e982c6ef7cd6369db3fd9abaf6e7cc72`;
+- staging possui cover/background/banner/icon e metadata textual com hashes registrados;
+- os scripts atuais não conhecem `content.db`, ContentID, FTP, assets nativos, dry-run/apply, lock global ou estado de upload.
+
+Decisão: **não reescrever scanner nem staging agora**. `xbox-connectx-sync` será inicialmente um orquestrador sobre esses componentes comprovados, adicionando ContentID, geração `.asset`, comparação remota, backup, deploy idempotente e estado de sincronização. Depois o código poderá ser refatorado para a biblioteca compartilhada do XboxMac UI.
+
 Criar um comando único:
 
 ```text
