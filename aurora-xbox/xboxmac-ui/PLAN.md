@@ -1120,7 +1120,7 @@ No Mac real, após `git pull`:
 
 **XM-00: CONCLUÍDO.** Próximo gate: XM-01.
 
-### XM-01 — backend local mínimo — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO RUNTIME
+### XM-01 — backend local mínimo — CONCLUÍDO
 
 - FastAPI/Uvicorn;
 - bind `127.0.0.1:8742`;
@@ -1158,7 +1158,22 @@ Validação pendente no Mac:
 5. confirmar listener exclusivamente `127.0.0.1:8742`;
 6. encerrar com Ctrl+C e confirmar `xboxmacd shutdown complete`.
 
-XM-01 só deve ser marcado como CONCLUÍDO depois da validação runtime.
+#### Validação runtime — CONCLUÍDA em 2026-10-03
+
+No Mac real:
+
+- dependências FastAPI/Uvicorn instaladas na venv;
+- `scripts/verify-xm00.py`: OK;
+- `scripts/verify-xm01.py`: `STATIC_OK`;
+- 4/4 testes XM-00: OK;
+- 4/4 testes XM-01: OK;
+- `GET /healthz`: HTTP 200 com schema `xboxmac-health-v1`;
+- `GET /`: HTTP 200;
+- `lsof` confirmou listener exclusivamente `127.0.0.1:8742`;
+- nenhum bind `0.0.0.0`, wildcard ou IPv6 wildcard foi observado;
+- encerramento por SIGINT produziu `xboxmacd shutdown complete` e finalização limpa do Uvicorn.
+
+**XM-01: CONCLUÍDO.** Próximo gate: XM-02.
 
 ### XM-02 — status de conexões
 
