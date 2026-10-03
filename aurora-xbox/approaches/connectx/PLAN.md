@@ -364,7 +364,7 @@ plugin1 = Usb:\NetISO\NetISO.xex
 
 **Gate:** **CONCLUÍDO.** ConnectX e NetISO coexistem no Aurora. Próximo gate: CX-04.
 
-## CX-04 — validar execução remota pelo File Manager
+## CX-04 — validar execução remota pelo File Manager — CONCLUÍDO
 
 No Aurora:
 
@@ -380,7 +380,19 @@ Executar o jogo diretamente pelo `default.xex`.
 
 Testar abertura, carregamento, gameplay, retorno ao Aurora e desconexão/reconexão do cabo.
 
-**Gate:** jogo extraído roda pela rede sem afetar NetISO.
+### Evidências finais CX-04 — 2026-10-03
+
+- PES 2018 abriu normalmente via `ConnectX:\PES 2018\default.xex`;
+- menu principal funcional;
+- partida executada por aproximadamente 10 minutos sem travamentos;
+- carregamentos entre menus/partida funcionais;
+- retorno ao Aurora funcional;
+- NetISO continuou disponível;
+- com cabo Ethernet removido, ConnectX ficou indisponível conforme esperado;
+- após reconectar o cabo, ConnectX voltou a funcionar sem reiniciar o Xbox;
+- PES 2018 abriu novamente via `default.xex` após a recuperação da rede.
+
+**Gate:** **CONCLUÍDO.** Execução remota via ConnectX validada sem regressão do NetISO. Próximo gate: CX-05.
 
 ## CX-05 — colocar a biblioteca no CoverFlow
 
