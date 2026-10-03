@@ -282,7 +282,7 @@ Antes de enviar qualquer asset:
 
 Próximo gate: CX-03 — instalar/configurar ConnectX no Aurora preservando NetISO.
 
-## CX-03 — instalar e configurar ConnectX no Aurora
+## CX-03 — instalar e configurar ConnectX no Aurora — CONCLUÍDO
 
 ### Bloqueio atual CX-03 — binários ConnectX
 
@@ -353,7 +353,16 @@ Não alterar:
 plugin1 = Usb:\NetISO\NetISO.xex
 ```
 
-**Gate:** ConnectX aparece na lista de plugins/módulos e NetISO continua carregando.
+### Evidências finais CX-03 — 2026-10-03
+
+- backend SMB/NetBIOS confirmado ativo na sessão;
+- `XBOXMAC` resolvendo para `192.168.50.1` na rede privada;
+- módulo ConnectX habilitado no Aurora;
+- configuração aplicada com `Computer Name = XBOXMAC`, `Share Name = XBOX360` e credenciais SMB locais;
+- após reinício do Xbox e nova sessão desbloqueada, `ConnectX:` apareceu no File Manager;
+- NetISO permaneceu disponível, sem alteração de `launch.ini` e sem regressão observada.
+
+**Gate:** **CONCLUÍDO.** ConnectX e NetISO coexistem no Aurora. Próximo gate: CX-04.
 
 ## CX-04 — validar execução remota pelo File Manager
 
