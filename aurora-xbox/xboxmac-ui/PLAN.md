@@ -1725,6 +1725,18 @@ Antes de retomar a validação física, a página diagnóstica receberá somente
 
 Esse ajuste pertence ao próprio XM-06 e existe apenas para tornar o teste físico seguro e inequívoco.
 
+#### Regressão de compatibilidade textual corrigida
+
+Na primeira validação após a melhoria visual, 49/50 testes passaram. O único erro foi o teste legado do XM-01 exigir a frase literal `Backend local ativo.`, enquanto a UI havia mudado para `Backend local ativo · interface diagnóstica do XM-06`.
+
+Correção aplicada sem alterar comportamento:
+
+- restaurada a frase literal `Backend local ativo.`;
+- mantida a identificação visual `Interface diagnóstica do XM-06`;
+- nenhuma API, schema ou fluxo funcional foi alterado.
+
+
+
 Implementação mínima aplicada no `xboxmac-ui/main`:
 
 - página continua sendo HTML/CSS/JS embutido, sem framework;
