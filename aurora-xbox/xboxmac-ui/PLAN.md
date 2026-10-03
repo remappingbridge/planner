@@ -10,6 +10,29 @@ https://github.com/remappingbridge/xboxmac-ui
 
 Este documento fica no `planner`. Nenhum código deve ser colocado no repositório `xboxmac-ui` antes do início explícito da implementação.
 
+## Regra de handoff para implementação
+
+A implementação do aplicativo web/browser **não será feita incrementalmente neste chat**.
+
+Quando o trabalho de baixo nível da automação ConnectX/Aurora estiver suficientemente estabilizado e chegar o momento de iniciar o XboxMac UI, este fluxo deve parar antes de criar código no repositório `remappingbridge/xboxmac-ui`.
+
+Nesse ponto, deve ser produzido **um único prompt de handoff para ChatGPT Work**, com contexto suficiente para que o Work implemente o aplicativo inteiro de uma vez, usando este plano e os documentos relacionados como fonte de verdade.
+
+O prompt deve instruir o Work a:
+
+- trabalhar diretamente no repositório privado `remappingbridge/xboxmac-ui`;
+- ler primeiro este `PLAN.md` e `../approaches/connectx/AUTOMATION.md`, além dos documentos de NetISO/ConnectX/Aurora relevantes;
+- preservar a arquitetura validada e os paths/portas/serviços congelados;
+- reutilizar o pipeline de domínio já comprovado, sem criar uma segunda automação concorrente;
+- implementar backend, frontend web, persistência, jobs, launcher macOS, testes e empacotamento previstos nos gates XM-00..XM-10 aplicáveis;
+- tratar o ambiente real já validado no Mac/Xbox como baseline, não como hipótese;
+- não alterar o contrato `USB + exploit = desbloqueado / USB removido + reboot = retail`;
+- preservar NetISO e ConnectX durante toda a implementação;
+- executar testes, corrigir regressões e deixar documentação suficiente para manutenção;
+- não exigir que o usuário acompanhe gate por gate da construção da UI: o objetivo do handoff é uma execução completa pelo Work, seguida de validação do resultado.
+
+Este chat pode continuar implementando e validando infraestrutura, CLI, automação, ingestão, assets e serviços de sistema antes desse handoff. Ele não deve iniciar a implementação do aplicativo web/browser propriamente dito.
+
 ## Objetivo
 
 Criar um aplicativo macOS que funcione como painel de controle do ambiente Xbox 360 ↔ Mac.
