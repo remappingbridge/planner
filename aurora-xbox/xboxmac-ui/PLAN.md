@@ -2,19 +2,41 @@
 
 Data inicial: 2026-10-03
 
-Repositório de implementação planejado:
+Repositório do produto:
 
 ```text
 https://github.com/remappingbridge/xboxmac-ui
 ```
 
-Este documento fica no `planner`. Nenhum código deve ser colocado no repositório `xboxmac-ui` antes do início explícito da implementação.
+Este documento fica no `planner` e é a fonte de verdade para a arquitetura e a experiência do usuário.
+
+### Decisão de repositório — 2026-10-03
+
+`remappingbridge/xboxmac-ui` será um **monorepo do produto**, não apenas um repositório de frontend.
+
+Ele reunirá:
+
+- interface web;
+- backend local;
+- engine ConnectX já validada no Mac;
+- gerador nativo de assets do Aurora;
+- integração Lua instalada no Aurora;
+- scripts de instalação/diagnóstico;
+- documentação e testes.
+
+O código de infraestrutura/automação já comprovado pode ser incorporado ao repositório **antes** do início da implementação da UI web, desde que seja copiado como baseline estável e não seja refatorado durante essa migração.
+
+Jogos, ISOs, XEX extraídos, assets gerados, bancos baixados, caches, manifests transitórios, backups e demais dados de runtime não serão versionados.
 
 ## Regra de handoff para implementação
 
-A implementação do aplicativo web/browser **não será feita incrementalmente neste chat**.
+A implementação da interface web/browser **não será feita incrementalmente neste chat**.
 
-Quando o trabalho de baixo nível da automação ConnectX/Aurora estiver suficientemente estabilizado e chegar o momento de iniciar o XboxMac UI, este fluxo deve parar antes de criar código no repositório `remappingbridge/xboxmac-ui`.
+Entretanto, a incorporação do backend/CLI já validado ao monorepo `remappingbridge/xboxmac-ui` faz parte da preparação do baseline e pode ser realizada antes do handoff.
+
+Essa incorporação deve preservar os arquivos funcionais atuais como fonte inicial, sem reescrever o pipeline durante a migração.
+
+Quando chegar o momento de iniciar a aplicação web/browser propriamente dita, este fluxo deve parar antes de criar a UI.
 
 Nesse ponto, deve ser produzido **um único prompt de handoff para ChatGPT Work**, com contexto suficiente para que o Work implemente o aplicativo inteiro de uma vez, usando este plano e os documentos relacionados como fonte de verdade.
 
@@ -31,7 +53,7 @@ O prompt deve instruir o Work a:
 - executar testes, corrigir regressões e deixar documentação suficiente para manutenção;
 - não exigir que o usuário acompanhe gate por gate da construção da UI: o objetivo do handoff é uma execução completa pelo Work, seguida de validação do resultado.
 
-Este chat pode continuar implementando e validando infraestrutura, CLI, automação, ingestão, assets e serviços de sistema antes desse handoff. Ele não deve iniciar a implementação do aplicativo web/browser propriamente dito.
+Este chat pode continuar implementando e validando infraestrutura, CLI, automação, ingestão, assets e serviços de sistema antes desse handoff. Também pode migrar esses componentes comprovados para a estrutura definitiva do monorepo. Ele não deve iniciar a implementação do aplicativo web/browser propriamente dito.
 
 ## Objetivo
 
@@ -454,6 +476,164 @@ Ordenação:
 - tamanho ConnectX;
 - status.
 
+## Experiência do usuário para ações manuais do Aurora
+
+### Decisão atual
+
+O pipeline validado ainda depende de ações no próprio Aurora que não possuem automação remota comprovada.
+
+Na v1, isso **não será escondido** do usuário. A interface deve transformar cada dependência manual em um estado explícito, orientado e detectável automaticamente.
+
+O usuário não deve precisar:
+
+- lembrar a sequência;
+- voltar ao terminal;
+- executar novamente um comando;
+- informar manualmente à UI que concluiu uma ação quando o backend puder detectar isso sozinho.
+
+### Ação manual 1 — Rescan do caminho ConnectX
+
+Depois da extração e promoção do jogo:
+
+```text
+ISO
+→ extração
+→ TitleID/MediaID
+→ metadata/artwork staging
+→ CONNECTX_READY
+→ WAITING_FOR_AURORA_SCAN
+```
+
+A UI deve apresentar uma chamada clara, por exemplo:
+
+```text
+Ação necessária no Xbox
+
+No Aurora, execute Rescan no caminho ConnectX.
+
+Não é necessário confirmar nesta tela.
+O XboxMac continuará automaticamente quando o jogo aparecer no catálogo.
+```
+
+O backend deve consultar periodicamente uma cópia do `content.db` via FTP e correlacionar:
+
+```text
+TitleID + MediaID
+        ↓
+ContentItems.Id
+        ↓
+ContentID
+```
+
+Assim que o ContentID aparecer, o job continua sozinho.
+
+**Não criar botão obrigatório "Já fiz".** Um botão opcional de `Verificar agora` pode existir, mas a reconciliação automática é a fonte de verdade.
+
+Exemplo de estado da API:
+
+```json
+{
+  "state": "WAITING_FOR_AURORA_SCAN",
+  "manual_action": {
+    "required": true,
+    "type": "aurora_rescan",
+    "message": "Execute Rescan no caminho ConnectX do Aurora."
+  }
+}
+```
+
+### Ação manual 2 — refresh/reload do Aurora
+
+Depois que o ContentID existe, o backend pode:
+
+- gerar o manifesto de metadata apenas para jogos pendentes;
+- gerar `GC<TitleID>.asset` a partir da capa;
+- enviar a capa ao `GameData/<TitleID>_<ContentID>`;
+- aguardar o processador Lua do Aurora consumir o manifesto.
+
+Nos testes atuais, para que metadata/capa sejam refletidos no CoverFlow pode ser necessário atualizar, recarregar ou reiniciar o Aurora.
+
+Enquanto não houver mecanismo remoto validado para isso, a UI deve assumir:
+
+```text
+APPLYING_METADATA
+→ SYNCING_COVER
+→ WAITING_FOR_AURORA_REFRESH
+```
+
+Mensagem proposta:
+
+```text
+Instalação preparada no Xbox
+
+Metadados enviados.
+Capa instalada.
+
+Recarregue ou reinicie o Aurora para concluir a atualização da biblioteca.
+O XboxMac verificará o resultado automaticamente.
+```
+
+O backend deve continuar verificando:
+
+- manifesto remoto ausente;
+- resultado do filtro presente;
+- `status=VERIFIED`;
+- valores esperados no `content.db`;
+- asset de capa não-placeholder no GameData.
+
+Quando tudo estiver confirmado:
+
+```text
+WAITING_FOR_AURORA_REFRESH
+→ VERIFYING
+→ AURORA_READY
+```
+
+Exemplo de estado:
+
+```json
+{
+  "state": "WAITING_FOR_AURORA_REFRESH",
+  "manual_action": {
+    "required": true,
+    "type": "aurora_refresh",
+    "message": "Recarregue ou reinicie o Aurora."
+  }
+}
+```
+
+### Evolução futura
+
+Se um método seguro e suportado de Rescan ou refresh remoto for validado posteriormente, o backend passa a executá-lo e simplesmente deixa de retornar `manual_action.required = true`.
+
+A UI não deve depender da existência permanente dessas etapas manuais.
+
+### Fluxo de UX alvo da v1
+
+```text
+usuário seleciona uma ou várias ISOs
+        ↓
+backend processa
+        ↓
+UI: AÇÃO NECESSÁRIA — Rescan no Aurora
+        ↓
+usuário faz Rescan
+        ↓
+backend detecta ContentID automaticamente
+        ↓
+backend aplica metadata + capa
+        ↓
+UI: AÇÃO NECESSÁRIA — recarregar/reiniciar Aurora
+        ↓
+usuário recarrega/reinicia
+        ↓
+backend verifica automaticamente
+        ↓
+CONCLUÍDO
+```
+
+Do ponto de vista do usuário, o Mac não exige comandos durante esse fluxo.
+
 ## Identidade e estado do jogo
 
 A identidade não é o filename.
@@ -484,6 +664,10 @@ READY_TO_PROCESS
 PROCESSING
 CONNECTX_READY
 WAITING_FOR_AURORA_SCAN
+APPLYING_METADATA
+SYNCING_COVER
+WAITING_FOR_AURORA_REFRESH
+VERIFYING
 AURORA_READY
 SOURCE_PRUNED
 PENDING_UPLOAD
@@ -499,6 +683,10 @@ ISO_ONLY
 → PROCESSING
 → CONNECTX_READY
 → WAITING_FOR_AURORA_SCAN
+→ APPLYING_METADATA
+→ SYNCING_COVER
+→ WAITING_FOR_AURORA_REFRESH
+→ VERIFYING
 → AURORA_READY
 ```
 
@@ -632,36 +820,112 @@ Proteções:
 - CSRF token para POSTs;
 - não expor segredos nos logs.
 
-## Layout de implementação planejado
+## Layout do monorepo
 
-No futuro repositório `remappingbridge/xboxmac-ui`:
+Estrutura oficial planejada para `remappingbridge/xboxmac-ui`:
 
 ```text
 xboxmac-ui/
-├── pyproject.toml
-├── src/
-│   └── xboxmac/
-│       ├── app.py
-│       ├── api/
-│       ├── services/
-│       │   ├── netiso.py
-│       │   ├── connectx.py
-│       │   ├── xbox.py
-│       │   ├── aurora.py
-│       │   ├── library.py
-│       │   ├── automation.py
-│       │   ├── launchd.py
-│       │   └── trash.py
-│       ├── jobs/
-│       ├── db/
-│       ├── templates/
-│       └── static/
-├── helpers/
+├── web/
+│   ├── templates/
+│   ├── static/
+│   └── ...
+│
+├── backend/
+│   ├── server/
+│   │   ├── pyproject.toml
+│   │   ├── src/
+│   │   │   └── xboxmac/
+│   │   │       ├── app.py
+│   │   │       ├── api/
+│   │   │       ├── services/
+│   │   │       ├── jobs/
+│   │   │       └── db/
+│   │   └── tests/
+│   │
+│   ├── connectx/
+│   │   ├── xbox-connectx-add
+│   │   ├── xbox-connectx-ingest
+│   │   ├── xbox-connectx-scan
+│   │   ├── xbox-connectx-stage-assets
+│   │   ├── xbox-connectx-sync-metadata
+│   │   └── xbox-connectx-sync-covers
+│   │
 │   └── asset-engine/
-├── packaging/
-│   └── macos/
-└── tests/
+│       ├── Cargo.toml
+│       ├── Cargo.lock
+│       └── src/main.rs
+│
+├── aurora/
+│   └── User/
+│       └── Scripts/
+│           └── Content/
+│               └── Filters/
+│                   └── XboxMacProbe.lua
+│
+├── scripts/
+│   ├── install-macos
+│   ├── update-macos
+│   └── doctor
+│
+├── docs/
+│   ├── architecture.md
+│   ├── installation.md
+│   ├── aurora-setup.md
+│   └── troubleshooting.md
+│
+├── runtime/                 # gitignored; opcional para desenvolvimento
+├── .gitignore
+└── README.md
 ```
+
+### Regra de migração do backend validado
+
+A primeira incorporação deve copiar para o monorepo, sem refatoração funcional:
+
+- os seis comandos `xbox-connectx-*` validados;
+- o gerador Rust de assets RXEA;
+- `XboxMacProbe.lua`;
+- documentação do snapshot funcional.
+
+No ambiente instalado, os executáveis podem continuar em:
+
+```text
+/usr/local/libexec/
+```
+
+mas esses arquivos instalados passam a ser **artefatos de instalação**, não a fonte de código.
+
+Fluxo:
+
+```text
+repositório
+backend/connectx/xbox-connectx-add
+        ↓ install-macos
+/usr/local/libexec/xbox-connectx-add
+```
+
+Depois dessa migração, alterações devem nascer no repositório, ser testadas e somente então instaladas no Mac.
+
+### Conteúdo que nunca deve entrar no Git
+
+```text
+/Users/Shared/xbox360/
+/Users/Shared/xbox360-connectx/
+/Users/Shared/.xbox360-connectx-staging/
+/usr/local/var/xbox-connectx/
+```
+
+Também ignorar, conforme aplicável:
+
+- `*.iso`;
+- `*.xex`;
+- `*.asset`;
+- `*.db` obtido do Aurora;
+- caches;
+- manifests transitórios;
+- backups operacionais;
+- jogos extraídos.
 
 ## API interna planejada
 
@@ -713,6 +977,8 @@ aurora-xbox/approaches/connectx/AUTOMATION.md
 
 O XboxMac será o frontend/control plane dessa automação.
 
+O baseline funcional já validado no Mac deve ser migrado para `backend/connectx/`, mantendo os comandos CLI como ferramentas de diagnóstico e recuperação.
+
 A implementação não deve criar dois pipelines concorrentes.
 
 Direção:
@@ -730,7 +996,7 @@ No longo prazo, `xbox-connectx-sync` pode se tornar um comando thin-wrapper da m
 
 ## Gates de implementação
 
-### XM-00 — contrato e baseline
+### XM-00 — contrato, baseline e migração do backend validado
 
 - congelar paths;
 - congelar portas;
@@ -738,9 +1004,15 @@ No longo prazo, `xbox-connectx-sync` pode se tornar um comando thin-wrapper da m
 - definir catálogo/schema;
 - definir regras de privilégio;
 - definir comportamento offline;
-- nenhum código destrutivo.
+- incorporar ao monorepo os scripts ConnectX validados;
+- incorporar o AssetEngine Rust;
+- incorporar `XboxMacProbe.lua`;
+- definir `.gitignore` para impedir versionamento de jogos/runtime;
+- preservar CLI funcional;
+- nenhum código destrutivo;
+- nenhuma refatoração funcional durante a migração inicial.
 
-Gate: documento suficiente para implementar sem decisões implícitas.
+Gate: monorepo contém o baseline reproduzível e documentado, sem dados de runtime, suficiente para implementar a UI sem decisões implícitas.
 
 ### XM-01 — backend local mínimo
 
@@ -793,7 +1065,7 @@ Gate: biblioteca exibida sem permitir alterações.
 - erro por jogo;
 - idempotência.
 
-Gate: um novo jogo pode ser preparado a partir da UI sem terminal.
+Gate: um novo jogo pode ser preparado a partir da UI sem terminal; quando houver ação manual no Aurora, a UI entra em estado explícito, orienta o usuário e continua automaticamente após detectar a mudança.
 
 ### XM-06 — Lixeira
 
@@ -806,16 +1078,23 @@ Gate: um novo jogo pode ser preparado a partir da UI sem terminal.
 
 Gate: exclusões recuperáveis pela Lixeira e nenhum path externo pode ser atingido.
 
-### XM-07 — assets/Aurora
+### XM-07 — assets/Aurora e ações manuais guiadas
 
 - estado de scan;
 - ContentID;
-- assets;
+- manifesto de metadata seletivo;
+- filtro Lua via API `Content.*`;
+- geração de `GC<TitleID>.asset`;
 - uploads pendentes;
 - CoverFlow;
-- sem clique manual `Assets > Import`.
+- `WAITING_FOR_AURORA_SCAN` com instrução de Rescan;
+- detecção automática do ContentID, sem botão obrigatório de confirmação;
+- `WAITING_FOR_AURORA_REFRESH` quando refresh/restart ainda for necessário;
+- verificação automática até `AURORA_READY`;
+- sem clique manual `Assets > Import`;
+- nenhuma escrita externa direta em `content.db`.
 
-Gate: segundo jogo novo chega a CoverFlow com artwork pela UI.
+Gate: jogo novo chega a `AURORA_READY` pela UI, com metadata e capa verificadas; qualquer ação ainda manual no Xbox é explicitamente orientada e detectada automaticamente pelo backend.
 
 ### XM-08 — launcher macOS
 
@@ -869,4 +1148,7 @@ O projeto estará pronto para uso cotidiano quando uma pessoa que não conhece o
 9. mover o convertido para a Lixeira sem apagar a ISO;
 10. entender claramente quando uma entrada antiga ainda permanece no Aurora;
 11. reiniciar o Mac e voltar ao mesmo estado operacional;
-12. fazer tudo isso sem conhecer os detalhes internos dos serviços.
+12. fazer tudo isso sem conhecer os detalhes internos dos serviços;
+13. receber instruções claras quando Rescan ou refresh/restart do Aurora ainda forem necessários;
+14. não precisar executar um segundo comando no Mac depois dessas ações manuais;
+15. ver a UI continuar automaticamente assim que o backend detectar que o Aurora avançou de estado.
