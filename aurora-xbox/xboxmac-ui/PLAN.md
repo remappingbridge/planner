@@ -28,6 +28,65 @@ O código de infraestrutura/automação já comprovado pode ser incorporado ao r
 
 Jogos, ISOs, XEX extraídos, assets gerados, bancos baixados, caches, manifests transitórios, backups e demais dados de runtime não serão versionados.
 
+## Modelo de execução do desenvolvimento
+
+Decisão operacional a partir de 2026-10-03:
+
+### Backend e integração de sistema
+
+O desenvolvimento de backend, automação, CLI, integração macOS/ConnectX/Aurora, jobs, contratos de API, persistência e demais componentes de sistema pode ser feito diretamente neste fluxo de chat.
+
+Fluxo padrão:
+
+```text
+ChatGPT
+→ edita o repositório remappingbridge/xboxmac-ui
+→ executa validações estáticas/unitárias disponíveis
+→ faz commit/push
+
+usuário
+→ git pull
+→ build local quando necessário
+→ testes físicos no Mac/Xbox
+→ retorna evidências
+
+ChatGPT
+→ corrige/avança a partir dessas evidências
+```
+
+Regras:
+
+- não exigir que o usuário copie patches manualmente quando a edição direta do repositório estiver disponível;
+- cada alteração de backend deve ser rastreável por commit;
+- não quebrar o baseline marcado por `connectx-v1.0.0`;
+- mudanças que dependam do hardware real devem parar no ponto em que o teste físico do usuário seja necessário;
+- após o teste físico, registrar a evidência relevante no planner antes de consolidar a próxima etapa;
+- preservar a CLI existente como interface de diagnóstico e recuperação durante a evolução para serviços internos.
+
+### Frontend web
+
+A implementação pesada do frontend/browser será delegada ao **ChatGPT Work** em uma execução concentrada, usando este planner e o backend já estabilizado como contrato.
+
+Antes desse handoff, este fluxo de chat pode:
+
+- definir contratos da API;
+- definir estados/jobs;
+- definir payloads JSON;
+- preparar endpoints;
+- preparar fixtures e testes de integração;
+- documentar UX e estados manuais;
+- criar apenas o mínimo de HTML necessário para diagnóstico técnico, se indispensável ao backend.
+
+Ele não deve antecipar a construção completa da experiência visual que será entregue pelo Work.
+
+### Fonte de verdade
+
+O repositório `remappingbridge/xboxmac-ui` é a fonte de código.
+
+O repositório `remappingbridge/planner` é a fonte de verdade para arquitetura, decisões, gates, evidências e handoff.
+
+Arquivos instalados em `/usr/local/libexec` ou no Xbox/Aurora são artefatos implantados e não devem se tornar uma segunda fonte de desenvolvimento.
+
 ## Regra de handoff para implementação
 
 A implementação da interface web/browser **não será feita incrementalmente neste chat**.
