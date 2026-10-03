@@ -1074,3 +1074,22 @@ Probe em Content Filter carregado automaticamente após restaurar o bootstrap or
 Conclusão: o loader de filtros ocorre depois que as APIs Lua são registradas, mas ainda antes de o catálogo Content estar hidratado. Entretanto, a função de filtro em `GameListFilterCategories` é invocada posteriormente pelo CoverFlow recebendo o próprio objeto Content. Isso cria um candidato melhor a hook diferido: registrar um filtro que retorna sempre `true` e executa a rotina de metadata somente na primeira invocação real, quando um objeto Content já está sendo avaliado.
 
 Próximo teste: instrumentar a função `XboxMac Probe` para registrar sua primeira invocação e, uma única vez, selecionar esse filtro no Aurora. Depois validar se a seleção persiste entre reinícios; se persistir, ele pode servir como hook pós-carga sem alterar a lista visível e sem depender de `RunLuaAtBoot`.
+
+
+### AUTO-08O — filtro executado após catálogo Content pronto
+
+O callback do filtro customizado foi executado com o CoverFlow já operacional:
+
+- `status=CALLBACK_INVOKED`;
+- item recebido: `Guitar Hero Metallica`;
+- `item_id=3000004`;
+- `item_title_id=1096157232`;
+- `item_media_id=772574815`;
+- `Content.GetInfo(3000004)` retornou com sucesso;
+- `getinfo_id=3000004`;
+- `getinfo_name=Guitar Hero Metallica`;
+- `status=CONTENT_READY`.
+
+Conclusão: a função registrada em `GameListFilterCategories.User` é um hook válido de pós-inicialização do catálogo. Diferentemente de `RunLuaAtBoot`, ela é chamada numa fase em que os objetos Content já estão hidratados.
+
+Próximo gate: verificar se a Quick View que contém `XboxMac Probe` permanece selecionada após reiniciar apenas o Aurora. Se persistir, o filtro pode servir como gatilho automático do processador de metadata sem navegação manual em execuções futuras.
