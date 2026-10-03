@@ -340,6 +340,26 @@ Validação local obrigatória antes de FTP:
 
 Gate: assets gerados para o PES são equivalentes aos assets produzidos pelo importador do próprio Aurora ou são aceitos pelo Aurora sem corrupção.
 
+### Evidências AUTO-05 — geração local válida
+
+- helper `aurora-asset-engine-test` compilado com sucesso contra `libaustralis` fixado no commit `9769ac0248876d1cb38f7e84229db784b0c4202c`;
+- assets gerados localmente para `4A3007D3_00000001`:
+  - `GC4A3007D3.asset` SHA-256 `b5c92a6a1b4a7dc077801032fc9e642259639876b26ce1a43952faa642d47cc7` (~553 KiB);
+  - `BK4A3007D3.asset` SHA-256 `e408253f8327b456985fa59c50a0bfe7ec1c11d6977952dfa351f03abe1970c1` (~922 KiB);
+  - `GL4A3007D3.asset` SHA-256 `0c9e4557b30dc5ae264c8d1969dd9d251505a4e21aa1102bec228f93387b2c32` (~48 KiB);
+  - `SS4A3007D3.asset` SHA-256 `83f9860b9a37f6f7368e84ce476d12daabcf7a0170fd5cce36da9d23ce0ad503` (2048 bytes).
+- todos começam com magic `RXEA` (`52584541`);
+- todos os assets gerados puderam ser reabertos/decodificados pelo próprio `libaustralis`;
+- dimensões redecodificadas:
+  - cover `900x600`;
+  - background `1280x720`;
+  - banner `420x95`;
+  - icon `64x64`;
+- `SS4A3007D3.asset` é byte-identical ao asset vazio produzido pelo Aurora;
+- `GC/BK/GL` são diferentes byte a byte dos assets produzidos pelo Aurora, o que é aceitável nesta fase porque podem existir diferenças válidas de codificação BC3; a aceitação final exige teste real no Aurora.
+
+**AUTO-05: geração local validada.** Falta somente provar compatibilidade real no Xbox. O primeiro teste de deploy deve substituir apenas `GC4A3007D3.asset` e preservar rollback imediato.
+
 ## AUTO-06 — deploy transacional por FTP
 
 Para cada jogo:
