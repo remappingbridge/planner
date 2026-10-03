@@ -1327,9 +1327,18 @@ POST /api/connections/ensure
 
 Nenhum código funcional do ensure foi alterado nessa correção.
 
-XM-03 será marcado como CONCLUÍDO após a suíte unitária passar novamente.
+#### Validação final — CONCLUÍDA
 
-### XM-04 — biblioteca read-only
+Após a correção exclusiva do teste de sequência da página:
+
+- `scripts/verify-xm03.py` retornou `STATIC_OK`;
+- 17/17 testes do backend passaram;
+- nenhum código funcional do ensure foi alterado;
+- permanecem válidas as evidências físicas de zero restarts e preservação dos PIDs de NetISO, smbd e nmbd.
+
+**XM-03: CONCLUÍDO.**
+
+### XM-04 — biblioteca read-only — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO LOCAL
 
 - inventário ISO;
 - inventário ConnectX;
@@ -1339,6 +1348,40 @@ XM-03 será marcado como CONCLUÍDO após a suíte unitária passar novamente.
 - filtros.
 
 Gate: biblioteca exibida sem permitir alterações.
+
+#### Evidências de implementação — 2026-10-03
+
+Publicado em `remappingbridge/xboxmac-ui/main`:
+
+- `backend/server/xboxmac/library.py`: inventário somente-leitura;
+- leitura de `/Users/Shared/xbox360`;
+- leitura de `/Users/Shared/xbox360-connectx`;
+- leitura de `ingest-state.json` e `catalog.json`;
+- correlação de ingestão ↔ catálogo por `TitleID + MediaID`, independentemente do nome das pastas;
+- ISOs sem ingestão aparecem como `ISO_ONLY`;
+- estados locais: `ISO_ONLY`, `CONNECTX_READY`, `SOURCE_PRUNED`, `ORPHANED`, `ERROR`;
+- tamanho individual de ISO e árvore ConnectX;
+- totais agregados;
+- `GET /api/library` com filtros `query`, `state`, `has_iso` e `has_connectx`;
+- schema `xboxmac-library-v1` em `backend/contracts/library.schema.json`;
+- tabela diagnóstica read-only na página local;
+- testes em `backend/server/tests/test_xm04_library.py`;
+- verificador estático `scripts/verify-xm04.py`;
+- documentação em `docs/XM-04.md`.
+
+O XM-04 não executa o scanner legado e não contém endpoints de mutação da biblioteca.
+
+Validação pendente no Mac:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm04.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Depois deve ser validado o endpoint real `GET /api/library`, confirmando os nove pares TitleID/MediaID já conhecidos e a preservação dos hashes de `ingest-state.json` e `catalog.json`.
+
+XM-04 só deve ser marcado como CONCLUÍDO após essa validação.
 
 ### XM-05 — integração da automação
 
