@@ -300,7 +300,13 @@ Gate: PES 2018 tem ContentID determinado de forma reproduzível e a pasta nativa
 
 **AUTO-04: CONCLUÍDO para o jogo piloto PES 2018.** A descoberta de ContentID é reproduzível a partir de `ContentItems.Id` e o diretório GameData correspondente foi confirmado.
 
-AUTO-00 ainda requer somente verificar/copiar eventual conteúdo do subdiretório `PluginData` do diretório ativo antes de ser considerado rollback completo.
+`PluginData` do diretório ativo `4A3007D3_00000001` foi verificado e estava vazio.
+
+**AUTO-00: CONCLUÍDO para o jogo piloto.** Snapshot íntegro de `content.db`, assets ativos e estado de `PluginData` foram registrados. O rollback do estado relevante do PES 2018 está coberto.
+
+### Observação sobre ScanPathId
+
+A busca por tabelas no `content.db` contendo `scan` ou `path` no nome não retornou tabelas. Portanto, neste snapshot o mapeamento de `ScanPathId = 1` não está disponível no mesmo banco por uma tabela óbvia. Isso não bloqueia a correlação do jogo, porque `ContentItems.Id`, `TitleId`, `Directory` e `Executable` já identificaram unicamente a entrada ativa.
 
 ## AUTO-05 — gerar assets nativos
 
