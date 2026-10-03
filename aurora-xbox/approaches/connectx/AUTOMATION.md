@@ -1033,3 +1033,12 @@ O autorun v2 aguardou por 30 tentativas de 1 segundo usando `wait()`, mas `Conte
 Conclusão: esperar de forma síncrona dentro de `User/Scripts/Main.lua` não resolve; o script de boot está executando antes da inicialização do catálogo Content e a própria espera síncrona não permite que o subsistema fique disponível durante essa execução.
 
 Decisão: não aumentar o timeout e não fazer polling bloqueante no boot. O próximo passo é encontrar um mecanismo realmente diferido/assíncrono após o dashboard estar pronto, ou um endpoint remoto do Aurora que permita disparar o processamento após a inicialização. Enquanto isso, o manifesto permanece pendente e nenhum dado é perdido.
+
+
+### AUTO-08L — deferred probe falhou antes do marker
+
+O primeiro probe diferido com `GizmoUI` não criou `xboxmac-deferred-probe.txt`; a leitura por FTP retornou `550 Could not open file`.
+
+Há um bug concreto no probe: ele usou `pcall(GizmoUI.CreateInstance)`. Em Lua, a expressão `GizmoUI.CreateInstance` é resolvida antes de `pcall`; se `GizmoUI` não estiver disponível no contexto de boot, a indexação falha fora da proteção e o marker nunca é escrito.
+
+Próximo passo: instalar um probe diagnóstico que escreve um marker imediatamente ao entrar no `Main.lua`, registra `type(GizmoUI)` e `type(XuiMessage)`, e chama `GizmoUI.CreateInstance()` somente dentro de uma closure protegida por `pcall`. O manifesto de metadata permanece pendente e não deve ser processado durante este diagnóstico.
