@@ -394,7 +394,7 @@ Testar abertura, carregamento, gameplay, retorno ao Aurora e desconexão/reconex
 
 **Gate:** **CONCLUÍDO.** Execução remota via ConnectX validada sem regressão do NetISO. Próximo gate: CX-05.
 
-## CX-05 — colocar a biblioteca no CoverFlow
+## CX-05 — colocar a biblioteca no CoverFlow — CONCLUÍDO
 
 No Aurora:
 
@@ -415,9 +415,26 @@ Configurar o caminho para conteúdo Xbox 360 e profundidade suficiente para enco
 
 **Resultado esperado:** o jogo remoto passa a aparecer no menu principal/CoverFlow sem precisar navegar manualmente pelo File Manager.
 
-**Gate:** título ConnectX aparece no carrossel e inicia a partir dele.
+### Evidências finais CX-05 — 2026-10-03
+
+- path ConnectX adicionado em `Content > Manage Paths` usando a árvore `\Xbox360\System\ConnectX`;
+- PES 2018 passou a aparecer no CoverFlow;
+- lançamento pelo CoverFlow funciona com Ethernet conectado;
+- com Ethernet removido, o lançamento falha conforme esperado;
+- após reconectar Ethernet, o lançamento volta a funcionar;
+- NetISO permaneceu funcional;
+- capa ainda ausente no CoverFlow: isso pertence ao CX-06 (asset import), não bloqueia o gate funcional CX-05.
+
+**Gate:** **CONCLUÍDO.** Próximo gate: CX-06.
 
 ## CX-06 — capas e metadados
+
+### Correção de procedimento — Scan Now vs Import Assets
+
+- `Content > Manage Paths > Scan Now` executa o scanner de conteúdo/caminhos; não importa `User/Import/<TitleID>`.
+- O importador offline correto fica em `Start > Assets > Import` no Aurora 0.7b.2.
+- `Script Data` em Manage Paths serve para utility scripts saberem onde ficam categorias como Applications/Emulators/Homebrew; não é usado para capas, metadata de jogos ou importação de assets. Para o path ConnectX, manter `Script Data = None`.
+- O staging remoto já foi validado byte a byte (`diff_exit=0`), portanto a próxima ação é acionar `Assets > Import`, não repetir `Scan Now`.
 
 Como a rede do Xbox foi deliberadamente mantida sem Internet, tratar capas em duas alternativas:
 
