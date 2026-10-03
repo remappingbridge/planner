@@ -679,6 +679,37 @@ O reconciliador `/usr/local/libexec/xbox-connectx-reconcile` foi instalado e val
 
 Próximo teste AUTO-07: simular de forma reversível a ausência somente da ISO do NBA Jam e depois a ausência somente da árvore ConnectX, confirmando `SOURCE_PRUNED` e `ORPHANED` sem apagar catálogo ou assets do Aurora.
 
+
+
+### Evidências finais AUTO-07 — lifecycle e órfãos
+
+O reconciliador foi validado com dois cenários reversíveis usando NBA Jam:
+
+1. ausência somente da ISO:
+   - `lifecycle=SOURCE_PRUNED`;
+   - `source_present=False`;
+   - árvore ConnectX preservada;
+   - `default.xex` preservado e hash válido;
+   - após restaurar a ISO, o estado voltou para `ACTIVE`.
+
+2. ausência somente da árvore ConnectX:
+   - `lifecycle=ORPHANED`;
+   - ISO permaneceu presente;
+   - `connectx_present=False`;
+   - `xex_present=False`;
+   - após restaurar a pasta, o estado voltou para `ACTIVE`.
+
+Estado final:
+
+- PES 2018: `ACTIVE`;
+- NBA Jam: `ACTIVE`;
+- `SOURCE_PRUNED=0`;
+- `ORPHANED=0`.
+
+Nenhuma operação do AUTO-07 apagou ou alterou `content.db`, `Data/GameData` ou assets do Aurora.
+
+**AUTO-07: CONCLUÍDO.** A automação distingue de forma idempotente jogo ativo, ISO deliberadamente removida e árvore ConnectX ausente sem destruição automática do catálogo.
+
 ## AUTO-08 — metadata textual sem clique
 
 Fase posterior à automação do artwork.
