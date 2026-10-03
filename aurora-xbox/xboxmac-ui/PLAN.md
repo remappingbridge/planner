@@ -1686,6 +1686,27 @@ Correção aplicada:
   `o estado mudou desde a confirmação; gere um novo plano`;
 - isso mantém a semântica de confirmação em duas fases consistente sem reduzir os guards de path/fingerprint.
 
+#### Validação estática final — CONCLUÍDA em 2026-10-03
+
+No Mac real:
+
+- `scripts/verify-xm06.py`: `STATIC_OK`;
+- 50/50 testes do backend passaram;
+- Lixo nativo do macOS: contrato presente;
+- fallback `~/Downloads`: contrato presente;
+- Lixeira privada: proibida;
+- restauração pela aplicação: proibida;
+- filesystem: fonte de verdade;
+- remoção pelo Finder: reconciliável;
+- restauração pelo Finder: reconhecível;
+- ISO manual: reconhecível;
+- ConnectX manual: exige XEX válido;
+- revisão leve da biblioteca: ativa;
+- path guards: ativos;
+- pipeline `connectx-v1.0.0`: inalterado.
+
+Resta somente a validação física de filesystem/Finder.
+
 XM-06 só deve ser marcado como CONCLUÍDO após essa validação física.
 ### XM-07 — assets/Aurora e ações manuais guiadas
 
