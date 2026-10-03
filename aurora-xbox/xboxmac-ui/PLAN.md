@@ -1463,6 +1463,35 @@ Depois, teste físico pela página local com uma única ISO `ISO_ONLY`:
 - confirmar estado terminal;
 - repetir a mesma ISO e validar idempotência.
 
+#### Primeira validação estática/dry-run — 2026-10-03
+
+No Mac real:
+
+- `scripts/verify-xm05.py`: `STATIC_OK`;
+- dry-run real: `XM-05 DRY-RUN: OK`;
+- 6 ISOs `ISO_ONLY` detectadas;
+- bytes planejados: 47022563328;
+- path traversal rejeitado;
+- `runtime_mutation=NONE`;
+- nenhuma ISO foi extraída e nenhum job foi criado pelo dry-run.
+
+A suíte unitária apresentou 1 falha em 32 testes:
+
+```text
+test_dry_run_is_read_only_and_detects_idempotence
+already_ingested: esperado 1, obtido 0
+```
+
+Causa: no macOS o diretório temporário pode aparecer textualmente como `/var/...`, enquanto `Path.resolve()` canonicaliza para `/private/var/...`. A comparação de `source_iso` era textual, embora ambos apontassem para o mesmo arquivo.
+
+Correção aplicada:
+
+- canonicalização de paths do catálogo/biblioteca antes de comparar `source_iso`;
+- a mesma canonicalização foi aplicada à recuperação de identidade pós-ingestão;
+- acrescentado teste específico com path semanticamente equivalente contendo `..`.
+
+O pipeline ConnectX congelado não foi alterado.
+
 XM-05 só deve ser marcado como CONCLUÍDO após essa validação física.
 
 ### XM-06 — Lixeira
