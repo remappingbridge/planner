@@ -2,6 +2,10 @@
 
 Data do plano: 2026-10-03
 
+## Integração com XboxMac UI
+
+Esta automação será exposta ao usuário pelo painel planejado em [../../xboxmac-ui/PLAN.md](../../xboxmac-ui/PLAN.md). O painel será o control plane; não deve existir um segundo pipeline de conversão concorrente.
+
 ## Objetivo
 
 Automatizar o fluxo entre a biblioteca ISO do Mac, a árvore ConnectX e os assets locais do Aurora, mantendo:
