@@ -1518,6 +1518,8 @@ ISOs disponíveis para o teste físico:
 
 Resta apenas a validação física end-to-end pela interface local do XboxMac.
 
+A interface diagnóstica foi ajustada antes do teste físico para manter também ISOs já ingeridas na lista de seleção. Isso permite repetir exatamente a mesma ISO após a primeira execução e validar idempotência pela própria UI. O estado atual do item é exibido ao lado do nome.
+
 XM-05 só deve ser marcado como CONCLUÍDO após essa validação física.
 
 ### XM-06 — Lixeira
