@@ -316,6 +316,26 @@ connectx_patch.xexp
 
 Próxima etapa: fazer backup do estado atual de `Aurora/Plugins`, enviar por FTP ao Xbox e validar os hashes remotos antes de habilitar o módulo.
 
+### Evidências de instalação CX-03 — 2026-10-03
+
+- backup pré-ConnectX do diretório de plugins registrado em `~/Documents/xbox360-tools/xbox-backup/aurora-plugins-pre-connectx-20261003/`;
+- `Nova.xex` remoto antes da instalação ConnectX: `192512` bytes, SHA-256 `7be2e01f60065ac642e4393228fa845d4e7b7fa02e8c1183636ee20907e05eee`;
+- `connectx.xex` enviado para `Hdd1:\Apps\Aurora\Plugins\connectx.xex`, tamanho remoto `79872` bytes;
+- `connectx_patch.xexp` enviado para `Hdd1:\Apps\Aurora\Plugins\connectx_patch.xexp`, tamanho remoto `4096` bytes;
+- os dois arquivos foram baixados de volta do Xbox e seus SHA-256 remotos conferiram exatamente com as cópias locais/verificadas:
+
+```text
+connectx.xex
+7cace98c5a74891f78d2d6dd3b04d071c4d2c9f06dd6d8c796bfd9887a86f67b
+
+connectx_patch.xexp
+92889b1d096afcd06201f372f54743113b3b7a35248dfa75d5e422ce16dc81a1
+```
+
+Nenhuma alteração foi feita em `launch.ini` ou no `Nova.xex` durante a instalação ConnectX.
+
+Próxima evidência necessária: carregar/habilitar o módulo ConnectX no Aurora, salvar `XBOXMAC`/`XBOX360`/credenciais SMB, reiniciar o Xbox e confirmar que `ConnectX:` aparece no File Manager enquanto NetISO continua disponível.
+
 Segundo a documentação do ConnectX:
 
 - instalar `connectx_patch.xexp` e `connectx.xex` na pasta de plugins do Aurora;
