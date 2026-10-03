@@ -1055,7 +1055,7 @@ No longo prazo, `xbox-connectx-sync` pode se tornar um comando thin-wrapper da m
 
 ## Gates de implementação
 
-### XM-00 — contrato, baseline e migração do backend validado
+### XM-00 — contrato, baseline e migração do backend validado — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO LOCAL
 
 - congelar paths;
 - congelar portas;
@@ -1072,6 +1072,40 @@ No longo prazo, `xbox-connectx-sync` pode se tornar um comando thin-wrapper da m
 - nenhuma refatoração funcional durante a migração inicial.
 
 Gate: monorepo contém o baseline reproduzível e documentado, sem dados de runtime, suficiente para implementar a UI sem decisões implícitas.
+
+#### Evidências de implementação — 2026-10-03
+
+Implementação publicada em `remappingbridge/xboxmac-ui/main`.
+
+Entregas:
+
+- `backend/contracts/defaults.json`: paths, rede, portas, serviços e schemas atuais sem segredos;
+- `backend/contracts/config.schema.json`: contrato da configuração;
+- `backend/contracts/game.schema.json`: entidade e estados do jogo;
+- `backend/contracts/job.schema.json`: jobs e ações manuais;
+- `backend/contracts/models.py`: enums/validação reutilizáveis;
+- `backend/contracts/baseline.json`: hashes Git blob dos arquivos congelados em `connectx-v1.0.0`;
+- `scripts/verify-xm00.py`: verificação local do gate;
+- testes em `backend/contracts/tests/`;
+- `docs/architecture.md`, `docs/contracts.md` e `docs/XM-00.md`;
+- `backend/server/README.md`: fronteira reservada para XM-01, sem antecipar FastAPI.
+
+Verificação GitHub entre `connectx-v1.0.0` e `main` confirmou que os seis scripts ConnectX, o AssetEngine e `XboxMacProbe.lua` **não foram modificados**. As diferenças são somente contratos, documentação, testes, verificador e README.
+
+A validação estática da sintaxe dos novos módulos Python passou no ambiente de desenvolvimento do chat.
+
+Validação pendente no Mac:
+
+```text
+git pull
+python3 scripts/verify-xm00.py
+python3 -m unittest discover -s backend/contracts/tests -v
+python3 -m py_compile backend/connectx/xbox-connectx-ingest backend/connectx/xbox-connectx-scan backend/connectx/xbox-connectx-stage-assets backend/connectx/xbox-connectx-sync-metadata backend/connectx/xbox-connectx-sync-covers
+bash -n backend/connectx/xbox-connectx-add
+cargo check --manifest-path backend/asset-engine/Cargo.toml
+```
+
+XM-00 só deve ser marcado como CONCLUÍDO após essas validações locais passarem.
 
 ### XM-01 — backend local mínimo
 
