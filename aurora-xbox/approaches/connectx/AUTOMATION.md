@@ -905,3 +905,26 @@ A documentação do AuroraScripts expõe uma API de alto nível mais segura do q
 Decisão: para AUTO-08, preferir a API `Content.*` e evitar `Sql.Execute UPDATE ContentItems` para esses campos. Isso deixa a própria camada do Aurora responsável por atualizar seu estado interno. SQL direto fica reservado somente para campos sem API dedicada, caso venham a ser necessários e depois de validação separada.
 
 O `User/Scripts/Main.lua` atual é o bootstrap padrão de 219 bytes, SHA-256 `2e7e252cd8ad696f1b190bb22cdc550a8ffd952448ef4653926162c5e97755fa`, contendo apenas `require("Enums")`, `ScriptVersion = 1.0` e prints. Portanto não há customização existente para preservar além desse bootstrap, mas ele deve ser salvo antes de qualquer alteração.
+
+
+### AUTO-08F — Content.GetInfo validado no NBA Jam
+
+Probe read-only executado como Utility Script no Aurora usando `Content.GetInfo(2)`.
+
+Resultado:
+
+- `Id = 2`;
+- `Name = NBA JAM`;
+- `TitleId = 1161890124` (`4541094C`);
+- `MediaId = 1913228649` (`72098D69`);
+- `Directory = \\nba jam (usa, europe)`;
+- `Executable = default.xex`;
+- `Publisher` vazio;
+- `Developer` vazio;
+- `ReleaseDate` vazio;
+- `Description = Not Available`;
+- `Genre = 0` e `GenreStr` vazio.
+
+Isso confirma de forma independente que a API `Content.*` usa o mesmo ContentID interno `2` já correlacionado pelo banco e que o alvo do primeiro patch real é inequivocamente o NBA Jam. O probe não modificou metadata.
+
+Próximo gate: aplicar os cinco campos suportados pela API `Content.*` ao ContentID 2, com verificação de TitleID/MediaID antes da escrita, snapshot do `content.db` antes e depois e rollback disponível. `Genre` permanece fora.
