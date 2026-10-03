@@ -826,3 +826,37 @@ Auditoria read-only do snapshot `content-20261003-090346.db`:
 - `GenreFlag` não pode ser inferido de forma segura a partir do staging: PES 2018 aparece com `GenreFlag=0` em `ContentItems` e `1024` em `DvdCache`, enquanto NBA Jam aparece com `0` nos dois contextos observados.
 
 Decisão: AUTO-08 será dividido em duas partes. Primeiro validar e automatizar somente os cinco campos textuais diretamente mapeados (`TitleName`, `Description`, `Publisher`, `Developer`, `ReleaseDate`) em uma cópia local do banco. `GenreFlag` permanece intocado até haver mapeamento reproduzível; não inferir bitmask por nome de gênero.
+
+
+### AUTO-08A — patch local validado
+
+Foi criado e validado um patch somente em cópia local de `content.db`, sem qualquer upload ao Xbox.
+
+Normalização confirmada usando a linha já importada do PES 2018 como referência:
+
+- `TitleName`: remover EOL final;
+- `Description`: preservar EOL final;
+- `Publisher`: remover EOL final;
+- `Developer`: remover EOL final;
+- `ReleaseDate`: remover EOL final.
+
+NBA Jam, ContentID `00000002`, passou localmente de campos vazios para:
+
+- `TitleName = NBA JAM`;
+- `Description = BOOMSHAKALAKA!   NBA JAM is back, better than ever, and brought to you by EA Sports™.\n`;
+- `Publisher = Electronic Arts Inc.`;
+- `Developer = Electronic Arts Canada`;
+- `ReleaseDate = 2010-11-23`.
+
+Validações do patch local:
+
+- `GenreFlag` permaneceu `0`;
+- linha do PES 2018 permaneceu byte/logicamente inalterada;
+- tabelas `DvdCache`, `MountedDevices` e `TitleUpdates` permaneceram inalteradas;
+- nenhuma coluna fora do conjunto permitido foi modificada na linha do NBA Jam;
+- `PRAGMA integrity_check = ok`;
+- `logical_diff = OK`;
+- SHA-256 do snapshot original: `7aea0fe7156c71e4c08258ffc62ff526b686be3fdc48a0709b70dd8e64e20ec0`;
+- SHA-256 da cópia patched: `3110e5a8edc7129478e5d4cb9f7ce517aec3fb7bec3f3994356842eef9a9faf7`.
+
+O próximo gate não fará upload imediatamente. Primeiro deve ser comprovada uma janela segura em que o Aurora não esteja mantendo/escrevendo `content.db` e ainda exista um mecanismo confiável para substituir o arquivo com backup/rollback.
