@@ -888,3 +888,20 @@ Pesquisa técnica posterior encontrou um caminho melhor e Aurora-native:
 Decisão: metadata textual não será aplicada por substituição externa do arquivo SQLite. O próximo protótipo será um script Lua Aurora-native que lê um manifesto controlado e atualiza somente `TitleName`, `Description`, `Publisher`, `Developer` e `ReleaseDate` usando a API SQL interna do próprio Aurora.
 
 Requisito adicional para manter o objetivo "sem clique": antes de considerar AUTO-08 concluído, investigar uma forma suportada de disparar esse script automaticamente (startup/hook/integração existente). Se não existir, o script manual será apenas validação intermediária e não o estado final.
+
+
+### AUTO-08E — API Content preferida ao SQL
+
+A documentação do AuroraScripts expõe uma API de alto nível mais segura do que SQL direto para os cinco campos já mapeados:
+
+- `Content.GetInfo(contentId)`;
+- `Content.SetTitle(contentId, title)`;
+- `Content.SetDescription(contentId, description)`;
+- `Content.SetDeveloper(contentId, developer)`;
+- `Content.SetPublisher(contentId, publisher)`;
+- `Content.SetReleaseDate(contentId, releaseDate)`;
+- `Content.FindContent(titleId, searchText)`.
+
+Decisão: para AUTO-08, preferir a API `Content.*` e evitar `Sql.Execute UPDATE ContentItems` para esses campos. Isso deixa a própria camada do Aurora responsável por atualizar seu estado interno. SQL direto fica reservado somente para campos sem API dedicada, caso venham a ser necessários e depois de validação separada.
+
+O `User/Scripts/Main.lua` atual é o bootstrap padrão de 219 bytes, SHA-256 `2e7e252cd8ad696f1b190bb22cdc550a8ffd952448ef4653926162c5e97755fa`, contendo apenas `require("Enums")`, `ScriptVersion = 1.0` e prints. Portanto não há customização existente para preservar além desse bootstrap, mas ele deve ser salvo antes de qualquer alteração.
