@@ -1042,3 +1042,20 @@ O primeiro probe diferido com `GizmoUI` não criou `xboxmac-deferred-probe.txt`;
 Há um bug concreto no probe: ele usou `pcall(GizmoUI.CreateInstance)`. Em Lua, a expressão `GizmoUI.CreateInstance` é resolvida antes de `pcall`; se `GizmoUI` não estiver disponível no contexto de boot, a indexação falha fora da proteção e o marker nunca é escrito.
 
 Próximo passo: instalar um probe diagnóstico que escreve um marker imediatamente ao entrar no `Main.lua`, registra `type(GizmoUI)` e `type(XuiMessage)`, e chama `GizmoUI.CreateInstance()` somente dentro de uma closure protegida por `pcall`. O manifesto de metadata permanece pendente e não deve ser processado durante este diagnóstico.
+
+
+### AUTO-08M — GizmoUI indisponível no contexto de boot
+
+Probe diagnóstico executado no `User/Scripts/Main.lua` durante o boot:
+
+- `status=BOOT_ENTERED`;
+- `type(GizmoUI) = nil`;
+- `type(XuiMessage) = nil`;
+- `GizmoUI.CreateInstance()` falhou de forma protegida;
+- `status=CREATE_FAILED`.
+
+Conclusão: o runtime reduzido usado por `RunLuaAtBoot` não expõe `GizmoUI`/XUI. Portanto timers/callbacks XUI não podem ser usados para diferir o processamento de metadata a partir do `Main.lua`.
+
+A estratégia de timer assíncrono no boot foi descartada. O manifesto de metadata continua pendente e intacto.
+
+Próxima investigação: usar um trigger externo após o Aurora estar totalmente inicializado. O candidato prioritário é o WebUI/HTTP já habilitado no Aurora (`PluginWebUI`, porta `9999`), verificando se há endpoint suportado para disparar ação/script depois que o catálogo Content estiver disponível. Se não houver, avaliar um mecanismo de execução por evento/utility script acionado remotamente, sem exigir navegação manual no Xbox.
