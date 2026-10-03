@@ -1253,7 +1253,7 @@ No Mac real, após a correção do probe de reachability:
 
 **XM-02: CONCLUÍDO.** Próximo gate: XM-03.
 
-### XM-03 — ensure connections
+### XM-03 — ensure connections — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
 
 - iniciar somente serviços faltantes;
 - não reiniciar saudáveis;
@@ -1261,6 +1261,45 @@ No Mac real, após a correção do probe de reachability:
 - NetISO não pode ser interrompido ao abrir o app.
 
 Gate: abrir painel em estados variados converge para o estado saudável possível.
+
+#### Evidências de implementação — 2026-10-03
+
+Publicado em `remappingbridge/xboxmac-ui/main`:
+
+- `backend/server/xboxmac/ensure.py`: serviço idempotente de ensure;
+- `POST /api/connections/ensure`;
+- painel diagnóstica chama ensure antes de consultar status;
+- NetISO/Samba/NetBIOS com `launchd=running` recebem `already_running` e não são reiniciados;
+- somente job launchd não-running pode receber `launchctl kickstart system/<label>`;
+- não existe uso de `kickstart -k`, `bootstrap`, `bootout`, `load/unload`, `kill` ou `sudo`;
+- Ethernet física, Xbox e Aurora indisponíveis retornam ação externa explícita, sem tentativa destrutiva;
+- falhas de start são classificadas como `permission_required`, `not_loaded` ou `failed`;
+- testes unitários em `backend/server/tests/test_xm03_ensure.py`;
+- verificação estática em `scripts/verify-xm03.py`;
+- teste físico seguro em `scripts/test-xm03-local.sh`;
+- documentação em `docs/XM-03.md`.
+
+A evidência do XM-02 mostrou que, durante perda física da Ethernet, os três LaunchDaemons permanecem `running` enquanto os sockets ficam indisponíveis. Por isso XM-03 usa o estado launchd — e não apenas TCP — para decidir se um serviço precisa ser iniciado.
+
+Validação física pendente:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm03.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+bash scripts/test-xm03-local.sh
+```
+
+O teste físico deve comprovar:
+
+- ensure saudável sem mudança de PID;
+- perda física da Ethernet sem restart de NetISO/Samba/NetBIOS;
+- recuperação após reconexão;
+- PID do NetISO preservado durante todo o ciclo.
+
+O caminho "serviço realmente ausente → iniciar somente aquele serviço" é validado por teste unitário para evitar derrubar LaunchDaemons funcionais apenas para testar o gate.
+
+XM-03 só deve ser marcado como CONCLUÍDO após a validação física segura.
 
 ### XM-04 — biblioteca read-only
 
