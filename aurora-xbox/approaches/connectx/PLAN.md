@@ -304,7 +304,17 @@ connectx.xex
 SHA-256 7cace98c5a74891f78d2d6dd3b04d071c4d2c9f06dd6d8c796bfd9887a86f67b
 ```
 
-CX-03 foi desbloqueado em 2026-10-03: os dois binários locais foram encontrados e seus SHA-256 conferem exatamente com os hashes de referência já registrados acima. Próxima etapa: transferir os arquivos para o Mac, fazer backup do estado atual de `Aurora/Plugins`, enviar por FTP ao Xbox e validar os hashes remotos antes de habilitar o módulo.
+CX-03 foi desbloqueado em 2026-10-03: os dois binários locais foram encontrados e seus SHA-256 conferem exatamente com os hashes de referência já registrados acima. Transferência para o Mac concluída em 2026-10-03. Os arquivos foram copiados para `~/Documents/xbox360-tools/connectx/` no Mac e os SHA-256 foram novamente verificados com sucesso:
+
+```text
+connectx.xex
+7cace98c5a74891f78d2d6dd3b04d071c4d2c9f06dd6d8c796bfd9887a86f67b
+
+connectx_patch.xexp
+92889b1d096afcd06201f372f54743113b3b7a35248dfa75d5e422ce16dc81a1
+```
+
+Próxima etapa: fazer backup do estado atual de `Aurora/Plugins`, enviar por FTP ao Xbox e validar os hashes remotos antes de habilitar o módulo.
 
 Segundo a documentação do ConnectX:
 
