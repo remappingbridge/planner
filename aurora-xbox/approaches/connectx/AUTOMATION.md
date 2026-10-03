@@ -1059,3 +1059,18 @@ Conclusão: o runtime reduzido usado por `RunLuaAtBoot` não expõe `GizmoUI`/XU
 A estratégia de timer assíncrono no boot foi descartada. O manifesto de metadata continua pendente e intacto.
 
 Próxima investigação: usar um trigger externo após o Aurora estar totalmente inicializado. O candidato prioritário é o WebUI/HTTP já habilitado no Aurora (`PluginWebUI`, porta `9999`), verificando se há endpoint suportado para disparar ação/script depois que o catálogo Content estiver disponível. Se não houver, avaliar um mecanismo de execução por evento/utility script acionado remotamente, sem exigir navegação manual no Xbox.
+
+
+### AUTO-08N — filter loader disponível antes do catálogo
+
+Probe em Content Filter carregado automaticamente após restaurar o bootstrap original e desabilitar `RunLuaAtBoot`:
+
+- `status=FILTER_LOADED`;
+- `Content`, `FileSystem` e `GameListFilterCategories` estavam disponíveis como tabelas;
+- `Content.GetInfo(1)` executou sem exceção, mas retornou `nil`;
+- `RunLuaAtBoot = 0`;
+- `User/Scripts/Main.lua` original foi restaurado com SHA-256 `2e7e252cd8ad696f1b190bb22cdc550a8ffd952448ef4653926162c5e97755fa`.
+
+Conclusão: o loader de filtros ocorre depois que as APIs Lua são registradas, mas ainda antes de o catálogo Content estar hidratado. Entretanto, a função de filtro em `GameListFilterCategories` é invocada posteriormente pelo CoverFlow recebendo o próprio objeto Content. Isso cria um candidato melhor a hook diferido: registrar um filtro que retorna sempre `true` e executa a rotina de metadata somente na primeira invocação real, quando um objeto Content já está sendo avaliado.
+
+Próximo teste: instrumentar a função `XboxMac Probe` para registrar sua primeira invocação e, uma única vez, selecionar esse filtro no Aurora. Depois validar se a seleção persiste entre reinícios; se persistir, ele pode servir como hook pós-carga sem alterar a lista visível e sem depender de `RunLuaAtBoot`.
