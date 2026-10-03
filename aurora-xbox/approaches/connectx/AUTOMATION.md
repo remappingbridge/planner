@@ -860,3 +860,16 @@ Validações do patch local:
 - SHA-256 da cópia patched: `3110e5a8edc7129478e5d4cb9f7ce517aec3fb7bec3f3994356842eef9a9faf7`.
 
 O próximo gate não fará upload imediatamente. Primeiro deve ser comprovada uma janela segura em que o Aurora não esteja mantendo/escrevendo `content.db` e ainda exista um mecanismo confiável para substituir o arquivo com backup/rollback.
+
+
+### AUTO-08B — janela segura via jogo indisponível
+
+Teste executado com NBA Jam aberto e em execução, portanto fora do dashboard Aurora:
+
+- tentativa de conexão FTP com `192.168.50.2` expirou por timeout;
+- `content.db` não pôde ser lido nesse estado;
+- isso confirma operacionalmente que o FTP usado pelo pipeline é fornecido pelo próprio Aurora e desaparece quando o dashboard deixa de executar.
+
+Conclusão: não existe uma janela simples "Aurora fechado + FTP ativo" para substituir `content.db`. Portanto o AUTO-08 não deve fazer upload cego do banco enquanto o Aurora está aberto nem tentar substituir o arquivo durante gameplay.
+
+Próxima estratégia: manter o patch de metadata em cópia local e procurar um mecanismo Aurora-native para aplicar metadata textual sem escrita externa concorrente no SQLite. O caminho preferido é automatizar o mesmo mecanismo de importação de `User/Import/<TitleID>` já validado manualmente, se houver entrypoint/script/command invocável sem interação; somente se isso não existir considerar um mecanismo de manutenção explícito para troca do banco fora do processo Aurora.
