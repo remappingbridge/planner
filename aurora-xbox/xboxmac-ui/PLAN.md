@@ -1573,7 +1573,7 @@ O usuário validou o fluxo real pela interface local:
 
 **XM-05: CONCLUÍDO.** Próximo gate: XM-06.
 
-### XM-06 — Lixeira
+### XM-06 — Lixeira — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
 
 - mover ISO;
 - mover ConnectX;
@@ -1583,6 +1583,58 @@ O usuário validou o fluxo real pela interface local:
 - nunca `rm -rf`.
 
 Gate: exclusões recuperáveis pela Lixeira e nenhum path externo pode ser atingido.
+
+#### Evidências de implementação — 2026-10-03
+
+Publicado em `remappingbridge/xboxmac-ui/main`:
+
+- Lixeira própria em `/Users/Shared/.xboxmac-trash`, derivada da raiz de ISOs;
+- `backend/server/xboxmac/trash_store.py`: leitura dos manifestos;
+- `backend/server/xboxmac/trash.py`: plano, movimento e restauração;
+- movimento exclusivamente por `os.rename`;
+- exige mesmo filesystem e recusa fallback copy/delete;
+- nenhum uso de `rm -rf`, `unlink`, `os.remove` ou `shutil.rmtree`;
+- confirmação em duas fases: plan + execute;
+- `plan_id` inclui fingerprint do alvo e invalida operação se o estado mudar;
+- ISO limitada à raiz `/Users/Shared/xbox360` e filha direta;
+- ConnectX limitado a `/Users/Shared/xbox360-connectx`;
+- symlinks recusados;
+- mover a própria raiz é recusado;
+- manifesto `xboxmac-trash-entry-v1` preserva paths originais e paths da Lixeira;
+- rollback best-effort para movimento/restauração parcial;
+- restauração recusa sobrescrever destino existente;
+- Lixeira bloqueada enquanto houver job de automação não terminal;
+- biblioteca reconciliada com estado `TRASHED`;
+- bytes movidos deixam de contar em ISO/ConnectX ativos e passam a `trash_bytes`;
+- UI oferece `Lixeira ISO`, `Lixeira ConnectX`, `Lixeira ambos` e `Restaurar`;
+- filtro da biblioteca inclui `TRASHED`;
+- `GET /api/trash`;
+- `POST /api/trash/plan`;
+- `POST /api/trash/execute`;
+- `POST /api/trash/{trash_id}/restore`;
+- schema em `backend/contracts/trash.schema.json`;
+- testes de segurança em `backend/server/tests/test_xm06_trash.py`;
+- verificador `scripts/verify-xm06.py`;
+- documentação em `docs/XM-06.md`.
+
+Validação necessária:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm06.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Depois, teste físico pela página local:
+
+- mover ISO + ConnectX de um jogo conhecido para a Lixeira;
+- confirmar estado `TRASHED`;
+- confirmar ausência nos paths originais;
+- restaurar pela UI;
+- confirmar retorno a `CONNECTX_READY`;
+- iniciar o jogo no Xbox novamente.
+
+XM-06 só deve ser marcado como CONCLUÍDO após essa validação física.
 
 ### XM-07 — assets/Aurora e ações manuais guiadas
 
