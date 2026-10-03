@@ -294,6 +294,21 @@ Primeiro `xbox-connectx-ingest --dry-run` executado em 2026-10-03:
 
 Isso valida a detecção incremental básica e a preservação de um jogo existente. O próximo teste de AUTO-02 será feito com **um único segundo jogo**, para evitar processar as 13 ISOs simultaneamente e permitir observar promoção, TitleID/MediaID e idempotência de forma controlada.
 
+### AUTO-02 — piloto NBA Jam selecionado
+
+Validação seletiva executada antes do primeiro `--apply`:
+
+- nova opção `--iso` permite limitar a ingestão a uma única ISO dentro de `/Users/Shared/xbox360`;
+- `NBA Jam (USA, Europe).iso` foi selecionado como segundo jogo piloto;
+- dry-run retornou exatamente `isos=1`;
+- ISO reconhecida como `NEW_ISO`;
+- SHA-256: `9d2961302f5a1f3f2146ca17ff234903b35418d77daf3c034fe3bc2c839d5caf`;
+- tamanho observado da ISO: ~7.3 GiB;
+- volume de destino tinha ~607 GiB livres;
+- nenhum outro jogo foi processado e nenhuma extração ocorreu no dry-run.
+
+Pré-condições para o primeiro `--apply` seletivo estão satisfeitas.
+
 ## AUTO-03 — metadata e artwork
 
 Fontes:
