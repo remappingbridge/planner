@@ -961,3 +961,26 @@ Decisão para o próximo protótipo:
 - rollback somente dos campos realmente modificados nessa execução;
 - não tocar em `Genre`;
 - validar novamente o `content.db` após `Aurora.Restart()`.
+
+
+### AUTO-08H — Content API persistente validada
+
+Segundo protótipo executado no ContentID 2 (NBA Jam) corrigindo a semântica de no-op:
+
+- identidade validada antes da escrita: ContentID `2`, TitleID `4541094C`, MediaID `72098D69`;
+- `TitleName` já estava no alvo e foi ignorado com `SKIP_ALREADY_TARGET`;
+- `ReleaseDate` já estava no alvo e foi ignorado com `SKIP_ALREADY_TARGET`;
+- `Description`, `Publisher` e `Developer` foram escritos via API `Content.*`;
+- estado imediatamente posterior coincidiu integralmente com o alvo;
+- `status=VERIFIED`;
+- `Aurora.Restart()` executou e o dashboard reiniciou;
+- após restart, `content.db` persistiu os valores;
+- `PRAGMA integrity_check = ok`;
+- PES 2018 permaneceu inalterado;
+- `GenreFlag` permaneceu `0`;
+- SHA-256 do snapshot pré-teste: `1d093001225971e6f13dd17e2db3be37e42861e12a788935d550a0e521439186`;
+- SHA-256 do `content.db` pós-restart: `85c1c495a44e1aeeeb629b46d26c3fb28ca877100ff7b1c16dc93aa6bb39a190`.
+
+**AUTO-08 core API: VALIDADO.** Os cinco campos textuais suportados podem ser aplicados de forma segura pela API de alto nível do próprio Aurora, sem substituir externamente o SQLite e sem usar `Sql.Execute UPDATE ContentItems`.
+
+Próximo passo: transformar o protótipo em fluxo genérico e idempotente acionado automaticamente pelo boot do Aurora, usando manifesto gerado no Mac e preservando o bootstrap original de `User/Scripts/Main.lua`.
