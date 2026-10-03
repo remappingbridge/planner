@@ -1725,6 +1725,21 @@ Antes de retomar a validação física, a página diagnóstica receberá somente
 
 Esse ajuste pertence ao próprio XM-06 e existe apenas para tornar o teste físico seguro e inequívoco.
 
+Implementação mínima aplicada no `xboxmac-ui/main`:
+
+- página continua sendo HTML/CSS/JS embutido, sem framework;
+- seções Conexões, Biblioteca e Automação agora são visualmente separadas;
+- biblioteca possui aviso explícito de que exclusão usa Lixo do macOS e fallback `~/Downloads`;
+- tabela possui container com scroll horizontal;
+- coluna renomeada para `Ações de exclusão`;
+- estados de conexão e biblioteca usam badges;
+- ações `Excluir ISO` e `Excluir ConnectX` usam estilo destrutivo outline;
+- `Excluir ISO + ConnectX` usa estilo destrutivo preenchido;
+- área de ações possui largura e espaçamento próprios;
+- botão principal de automação é destacado;
+- verificações automatizadas exigem esses marcadores visuais.
+
+
 ### XM-07 — assets/Aurora e ações manuais guiadas
 
 - estado de scan;
