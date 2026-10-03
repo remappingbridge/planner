@@ -136,6 +136,18 @@ Antes de qualquer upload automático para `Data/GameData`:
 
 Gate: rollback completo possível sem depender do servidor de metadata.
 
+### Evidências AUTO-00 — snapshot inicial 2026-10-03
+
+- snapshot de `content.db` salvo em `/Users/admin/Documents/xbox360-tools/xbox-backup/aurora-automation-20261003-070309/content.db`;
+- SHA-256 do snapshot: `04dbac6de2b8100461f4d5ca8b8a5a68074fbe29a14607a87ac5724c7c03c0db`;
+- `PRAGMA integrity_check` retornou `ok`;
+- schema de `ContentItems` confirmado; `Id` é a primary key e existem campos `Directory`, `Executable`, `TitleId`, `MediaId`, `TitleName`, `ScanPathId` e `FoundAtDepth` relevantes para correlação;
+- foram encontrados dois diretórios `GameData` com o mesmo TitleID `4A3007D3`: `4A3007D3_002DC6C1` e `4A3007D3_00000001`;
+- não assumir qual deles pertence à entrada ConnectX: o próximo passo é consultar `ContentItems.Id`/`Directory` e correlacionar o `ContentID` real;
+- a primeira tentativa de backup de GameData falhou apenas na construção do path local/remoto porque o FTP do Aurora retornou uma linha LIST detalhada em `--list-only`; nenhum arquivo no Xbox foi alterado.
+
+AUTO-00 permanece em andamento até o backup dos diretórios candidatos e a correlação do ContentID serem concluídos.
+
 ## AUTO-01 — orquestrador one-shot
 
 Criar um comando único:
