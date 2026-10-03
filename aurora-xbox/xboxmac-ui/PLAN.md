@@ -1573,7 +1573,7 @@ O usuário validou o fluxo real pela interface local:
 
 **XM-05: CONCLUÍDO.** Próximo gate: XM-06.
 
-### XM-06 — exclusão delegada ao macOS — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
+### XM-06 — exclusão e reconciliação pelo filesystem — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
 
 - excluir ISO;
 - excluir ConnectX;
@@ -1581,57 +1581,75 @@ O usuário validou o fluxo real pela interface local:
 - path guards;
 - Lixo nativo do macOS como destino preferencial;
 - `~/Downloads` como fallback;
-- tombstones persistentes;
-- nenhuma restauração pela aplicação;
+- filesystem como fonte de verdade;
+- restauração exclusivamente pelo Finder/macOS;
+- reconhecimento automático de remoção/restauração/instalação manual;
 - nunca `rm -rf`.
 
-Gate: exclusões saem do gerenciamento do XboxMac, ficam recuperáveis pelo macOS quando possível e nenhum path externo pode ser atingido.
+Gate: conteúdo real das pastas canônicas define a biblioteca; exclusões são recuperáveis pelo macOS quando possível, restaurações e instalações manuais válidas são reconhecidas automaticamente, e nenhum path externo pode ser atingido.
 
-#### Redefinição do requisito — 2026-10-03
+#### Regra definitiva — 2026-10-03
 
-Antes dos testes físicos, o requisito foi corrigido:
+- não existe Lixeira privada do XboxMac;
+- não existe estado `TRASHED`;
+- não existe tombstone permanente de exclusão;
+- não existe botão ou endpoint de restore;
+- excluir pela aplicação tenta Lixo do macOS e usa `~/Downloads` como fallback;
+- remover manualmente pelo Finder é equivalente a excluir pela aplicação;
+- restaurar manualmente para a pasta canônica é reconhecido automaticamente;
+- um jogo restaurado pode ser tratado como instalação nova;
+- ISO nova colocada manualmente na raiz é reconhecida como `ISO_ONLY`;
+- ConnectX novo colocado manualmente é reconhecido somente se possuir `default.xex` XEX1/XEX2 parseável com `Execution Info`, `TitleID` e `MediaID`;
+- registros stale de `ingest-state.json`/`catalog.json` não mantêm jogo ausente na biblioteca.
 
-- não deve existir Lixeira privada do XboxMac;
-- o destino preferencial é o Lixo nativo do macOS;
-- se o Lixo nativo não puder ser usado, o fallback é `~/Downloads`;
-- recuperação é responsabilidade do Finder/macOS, nunca do XboxMac;
-- uma vez excluído, o componente permanece excluído para a aplicação mesmo se o usuário recuperar o arquivo manualmente pelo Finder.
-
-A implementação anterior de `/Users/Shared/.xboxmac-trash`, estado `TRASHED` e botão `Restaurar` foi removida antes de qualquer teste físico.
-
-#### Evidências da implementação revisada
+#### Implementação
 
 Publicado em `remappingbridge/xboxmac-ui/main`:
 
-- `backend/server/xboxmac/trash.py`: plano e execução da exclusão;
-- Lixo do macOS via Finder e `/usr/bin/osascript`;
-- path enviado ao AppleScript por variável de ambiente, sem interpolação;
-- fallback por `os.rename` para `~/Downloads`;
-- nomes de fallback nunca sobrescrevem item existente;
-- fallback recusado se origem e Downloads estiverem em filesystems diferentes;
-- nenhum fallback copy+delete;
-- `backend/server/xboxmac/deletion_store.py`: tombstones persistentes;
-- store `/usr/local/var/xbox-connectx/xboxmac-deletions.json`;
-- schema `backend/contracts/deletion.schema.json`;
-- biblioteca aplica tombstones e ignora componentes excluídos;
-- recuperação manual pelo Finder não reintroduz o componente no XboxMac;
-- automação recusa ISO tombstonada;
-- excluir somente ISO mantém ConnectX como `SOURCE_PRUNED`;
-- excluir somente ConnectX mantém a ISO como `ISO_ONLY`;
-- excluir ambos remove o jogo da biblioteca ativa;
-- confirmação em duas fases: `POST /api/trash/plan` e `POST /api/trash/execute`;
-- `plan_id` invalida a execução se path/inode/tamanho/mtime mudarem;
-- symlinks e paths externos são recusados;
-- exclusão bloqueada enquanto houver job não terminal;
-- UI oferece somente `Excluir ISO`, `Excluir ConnectX` e `Excluir ambos`;
-- não existe endpoint de restauração;
-- não existe estado `TRASHED`;
-- não existe `.xboxmac-trash`;
+- `backend/server/xboxmac/connectx_discovery.py`: descoberta read-only de ConnectX no filesystem;
+- parser de `default.xex` compatível com o mínimo usado pelo scanner legado, sem alterar o scanner congelado;
+- biblioteca cruza estado histórico com presença real de ISO/ConnectX;
+- stale record sem componente físico deixa de aparecer;
+- remover ISO externamente + manter ConnectX => `SOURCE_PRUNED`;
+- remover ConnectX externamente + manter ISO => `ISO_ONLY`;
+- remover ambos => jogo sai da biblioteca ativa;
+- restaurar os componentes => jogo reaparece automaticamente;
+- arquivo diferente reutilizando o mesmo path de ISO não herda identidade antiga quando `source_size/source_mtime_ns` divergem;
+- ConnectX manual válido entra como `CONNECTX_READY` com correlação `filesystem`;
+- ConnectX inválido não entra na biblioteca e é contabilizado em `sources.connectx_live.invalid_entries`;
+- endpoint leve `GET /api/library/revision`;
+- frontend consulta revisão a cada 3 segundos e só reconstrói biblioteca quando o filesystem muda;
+- `POST /api/delete/plan` e `POST /api/delete/execute` substituem a nomenclatura `/api/trash/*`;
+- exclusão pela aplicação usa Finder via `/usr/bin/osascript`;
+- fallback usa `os.rename` para `~/Downloads`, sem sobrescrever e sem copy+delete;
+- exclusão continua bloqueada enquanto houver job não terminal;
+- UI oferece `Excluir ISO`, `Excluir ConnectX` e `Excluir ambos`;
 - testes em `backend/server/tests/test_xm06_trash.py`;
 - verificador `scripts/verify-xm06.py`;
 - documentação em `docs/XM-06.md`.
 
-Validação necessária:
+#### Requisito mínimo de instalação manual
+
+ISO:
+
+- arquivo regular;
+- não symlink;
+- filha direta de `/Users/Shared/xbox360`;
+- extensão `.iso`.
+
+ConnectX:
+
+- árvore dentro de `/Users/Shared/xbox360-connectx`;
+- `default.xex` presente;
+- `default.xex` e pasta não-symlink;
+- magic `XEX1` ou `XEX2`;
+- header table estruturalmente válida;
+- `XEX Execution Info` presente;
+- `TitleID` e `MediaID` extraíveis.
+
+Arquivos adicionais variam por jogo; não existe conjunto universal além do executável principal que possa garantir genericamente todos os dados game-specific.
+
+#### Validação necessária
 
 ```text
 git pull
@@ -1639,13 +1657,15 @@ git pull
 .venv/bin/python -m unittest discover -s backend/server/tests -v
 ```
 
-Depois, o teste físico deve confirmar primeiro o destino real da exclusão:
+Depois, teste físico deve validar:
 
-- preferencialmente Lixo do macOS;
-- se Finder falhar, `~/Downloads`;
-- item removido da biblioteca ativa;
-- recuperação manual no macOS não desfaz o tombstone;
-- nenhum controle de restauração aparece na UI.
+- exclusão pela UI para Lixo do macOS/fallback;
+- remoção manual pelo Finder;
+- restauração manual pelo Finder;
+- ISO manual nova;
+- ConnectX manual válido;
+- rejeição de ConnectX inválido;
+- atualização automática da página sem reload manual.
 
 XM-06 só deve ser marcado como CONCLUÍDO após essa validação física.
 ### XM-07 — assets/Aurora e ações manuais guiadas
