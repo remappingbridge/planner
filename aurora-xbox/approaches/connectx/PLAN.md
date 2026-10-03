@@ -484,6 +484,10 @@ Validar ainda reboot real do Mac (incluindo autostart NetISO + `smbd` + `nmbd`),
 ## Depois do CX-07
 
 Congelar a configuração ConnectX validada e seguir para [../god-local/](../god-local/).
+## Automação
+
+O plano detalhado para eliminar o clique manual de importação e evoluir o pipeline para sincronização incremental está em [AUTOMATION.md](AUTOMATION.md).
+
 ## Pipeline incremental para jogos futuros
 
 A solução de metadados/capas não será tratada como importação única. O objetivo é suportar novos jogos adicionados posteriormente sem reconstruir manualmente a biblioteca.
