@@ -402,8 +402,14 @@ No Aurora:
 Settings
 -> Content
 -> Manage Paths
--> adicionar ConnectX:
+-> Add
+-> Path / Select location / Change
+-> \Xbox360\System
+-> destacar ConnectX
+-> pressionar Y para selecionar o caminho
 ```
+
+Observação: nessa tela de seleção do Aurora, o ConnectX pode aparecer como `\Xbox360\System\ConnectX` em vez da notação lógica `ConnectX:` usada no File Manager. Isso é esperado; não é necessário entrar dentro da pasta do jogo. Selecione o item `ConnectX` nessa árvore com `Y`.
 
 Configurar o caminho para conteúdo Xbox 360 e profundidade suficiente para encontrar o `default.xex`. Executar rescan.
 
