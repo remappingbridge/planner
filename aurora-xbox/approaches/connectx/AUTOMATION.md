@@ -1108,3 +1108,17 @@ Teste de persistência do hook por filtro:
 Conclusão: a definição da Quick View pode continuar cadastrada, mas sua seleção ativa não foi restaurada automaticamente no restart. Portanto não podemos depender de uma Quick View customizada selecionada manualmente como gatilho permanente.
 
 Próximo passo: inspecionar `settings.db` para mapear a linha da Quick View `XboxMac Probe`, o `FilterMethod` salvo e quaisquer settings que representem a Quick View ativa/default. A partir disso decidir entre tornar essa Quick View o default persistente ou abandonar esse mecanismo em favor de outro hook pós-inicialização.
+
+
+### AUTO-08Q — DefaultQuickView localizado
+
+Inspeção de `settings.db` após criar a Quick View de probe:
+
+- `PRAGMA integrity_check = ok`;
+- Quick View customizada: `Id=6`, `DisplayName=' XboxMac Probe'`, `FilterMethod='User.XboxMac Probe'`;
+- `SystemSettings.DefaultQuickView = 1`;
+- a Quick View padrão atual é `Show All` (`Id=1`).
+
+Conclusão: o Aurora persiste explicitamente uma Quick View padrão através de `SystemSettings.DefaultQuickView`. Isso explica por que o probe não permaneceu ativo após restart apesar da Quick View continuar cadastrada.
+
+Próximo teste: alterar `DefaultQuickView` de `1` para `6` usando a própria API `Settings.SetSystem`, reiniciar o Aurora e verificar se o callback do filtro dispara automaticamente sem LB/RB nem seleção manual.
