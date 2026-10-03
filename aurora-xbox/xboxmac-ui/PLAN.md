@@ -1628,6 +1628,7 @@ Publicado em `remappingbridge/xboxmac-ui/main`:
 - UI oferece `Excluir ISO`, `Excluir ConnectX` e `Excluir ambos`;
 - testes em `backend/server/tests/test_xm06_trash.py`;
 - verificador `scripts/verify-xm06.py`;
+- fixture manual temporário `scripts/make-xm06-connectx-fixture.py` para validar descoberta ConnectX sem copiar um jogo grande;
 - documentação em `docs/XM-06.md`.
 
 #### Requisito mínimo de instalação manual
@@ -1705,7 +1706,7 @@ No Mac real:
 - path guards: ativos;
 - pipeline `connectx-v1.0.0`: inalterado.
 
-Resta somente a validação física de filesystem/Finder.
+Resta somente a validação física de filesystem/Finder. O `xboxmac-ui/main` está em `9d1bdf4f14eebe37fda0e5a3f6402a4225d1f39b` para essa etapa.
 
 XM-06 só deve ser marcado como CONCLUÍDO após essa validação física.
 ### XM-07 — assets/Aurora e ações manuais guiadas
