@@ -1604,6 +1604,8 @@ Gate: conteúdo real das pastas canônicas define a biblioteca; exclusões são 
 
 #### Implementação
 
+Implementação atual em `remappingbridge/xboxmac-ui/main`: `779ba9ae2a4e0fe2809e7ba313c6e7c43e9546eb`.
+
 Publicado em `remappingbridge/xboxmac-ui/main`:
 
 - `backend/server/xboxmac/connectx_discovery.py`: descoberta read-only de ConnectX no filesystem;
