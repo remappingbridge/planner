@@ -1122,3 +1122,20 @@ Inspeção de `settings.db` após criar a Quick View de probe:
 Conclusão: o Aurora persiste explicitamente uma Quick View padrão através de `SystemSettings.DefaultQuickView`. Isso explica por que o probe não permaneceu ativo após restart apesar da Quick View continuar cadastrada.
 
 Próximo teste: alterar `DefaultQuickView` de `1` para `6` usando a própria API `Settings.SetSystem`, reiniciar o Aurora e verificar se o callback do filtro dispara automaticamente sem LB/RB nem seleção manual.
+
+
+### AUTO-08R — hook persistente pós-inicialização validado
+
+A Quick View customizada foi definida como padrão usando a própria API do Aurora:
+
+- `SystemSettings.DefaultQuickView = 6`;
+- Quick View `Id=6`, `DisplayName=' XboxMac Probe'`, `FilterMethod='User.XboxMac Probe'`;
+- após restart do Aurora, sem selecionar manualmente Quick View e sem LB/RB, o callback do filtro executou;
+- callback recebeu `Guitar Hero Metallica` (`Id=3000004`) e `Content.GetInfo(3000004)` retornou o mesmo item;
+- `status=CONTENT_READY`.
+
+**Gate de trigger pós-inicialização persistente: CONCLUÍDO.**
+
+Conclusão: uma Quick View default cujo filtro retorna sempre `true` fornece um hook automático e persistente após o catálogo Content estar hidratado. Isso elimina a dependência de `RunLuaAtBoot`, polling bloqueante, GizmoUI e execução manual de Utility Scripts para processar metadata.
+
+Próximo passo: substituir o probe por um processador idempotente do manifesto pendente. O filtro continuará retornando `true` para todos os jogos e executará a rotina no máximo uma vez por sessão, somente quando existir manifesto pendente.
