@@ -1175,7 +1175,7 @@ No Mac real:
 
 **XM-01: CONCLUÍDO.** Próximo gate: XM-02.
 
-### XM-02 — status de conexões
+### XM-02 — status de conexões — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
 
 - Ethernet;
 - Xbox reachability;
@@ -1185,6 +1185,41 @@ No Mac real:
 - Aurora FTP.
 
 Gate: painel reflete corretamente estados online/offline sem modificar serviços.
+
+#### Evidências de implementação — 2026-10-03
+
+Publicado em `remappingbridge/xboxmac-ui/main`:
+
+- `backend/server/xboxmac/status.py`: probes somente-leitura;
+- `GET /api/status` com schema `xboxmac-status-v1`;
+- Ethernet validada por `ifconfig`, link ativo e IP privado esperado;
+- Xbox por ICMP;
+- NetISO por estado launchd + TCP 4323;
+- Samba por estado launchd + TCP 139/445;
+- NetBIOS por estado launchd + `nmblookup` broadcast, com fallback read-only de listeners UDP;
+- Aurora FTP por disponibilidade TCP 21, sem necessidade de credenciais;
+- página diagnóstica mínima exibe os seis estados via `/api/status`;
+- testes unitários em `backend/server/tests/test_xm02_status.py`;
+- `scripts/verify-xm02.py` verifica componentes, ausência de operações mutáveis e integridade do baseline;
+- `scripts/test-xm02-local.sh` valida estado conectado → desconectado → recuperado;
+- documentação em `docs/XM-02.md`.
+
+O XM-02 não contém ação de start/stop/restart e não modifica configuração, LaunchDaemons ou Xbox.
+
+Validação física pendente:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm00.py
+.venv/bin/python scripts/verify-xm01.py
+.venv/bin/python scripts/verify-xm02.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+bash scripts/test-xm02-local.sh
+```
+
+O teste físico deve comprovar os seis componentes `up` no estado saudável, mudança observável após desconectar a Ethernet privada e recuperação completa após reconexão.
+
+XM-02 só deve ser marcado como CONCLUÍDO após essa validação.
 
 ### XM-03 — ensure connections
 
