@@ -1544,6 +1544,22 @@ Correção aplicada:
 
 O backend/API não foi alterado por essa correção.
 
+#### Validação da integração navegador ↔ backend — CONCLUÍDA em 2026-10-03
+
+Após corrigir o JavaScript renderizado:
+
+- 35/35 testes do backend passaram;
+- `GET /healthz`: OK;
+- `GET /api/status`: `overall=ready`;
+- Ethernet, Xbox, NetISO, Samba, NetBIOS e Aurora FTP: `up`;
+- `GET /api/library?has_iso=true`: 15 jogos;
+- biblioteca: 9 `CONNECTX_READY` + 6 `ISO_ONLY`;
+- `GET /api/jobs`: acessível, fila inicialmente vazia;
+- no navegador, Conexões, Biblioteca e lista de ISOs passaram a carregar corretamente;
+- filtro da biblioteca por `ISO_ONLY` foi validado manualmente.
+
+Resta somente o teste físico end-to-end de um job real e a repetição da mesma ISO para comprovar idempotência pela UI.
+
 XM-05 só deve ser marcado como CONCLUÍDO após essa validação física.
 
 ### XM-06 — Lixeira
