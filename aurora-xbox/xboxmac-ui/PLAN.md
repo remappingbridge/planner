@@ -1573,7 +1573,7 @@ O usuário validou o fluxo real pela interface local:
 
 **XM-05: CONCLUÍDO.** Próximo gate: XM-06.
 
-### XM-06 — exclusão e reconciliação pelo filesystem — CONGELADO APÓS VALIDAÇÃO ESTÁTICA
+### XM-06 — exclusão e reconciliação pelo filesystem — EM VALIDAÇÃO FÍSICA
 
 - excluir ISO;
 - excluir ConnectX;
@@ -1708,77 +1708,22 @@ No Mac real:
 
 Resta somente a validação física de filesystem/Finder. O `xboxmac-ui/main` está em `9d1bdf4f14eebe37fda0e5a3f6402a4225d1f39b` para essa etapa.
 
-#### Congelamento deliberado — 2026-10-03
+#### Ajuste mínimo de UX para validação física — 2026-10-03
 
-XM-06 fica congelado neste ponto:
+A sequência oficial permanece no XM-06; nenhum gate intermediário será executado.
 
-- implementação concluída;
-- verificador estático aprovado;
-- 50/50 testes unitários aprovados;
-- validação física de exclusão/restore Finder ainda pendente;
-- nenhum desenvolvimento adicional de exclusão deve ocorrer até o gate ser descongelado.
+Antes de retomar a validação física, a página diagnóstica receberá somente melhorias mínimas de clareza:
 
-Motivo: a interface diagnóstica atual tornou a validação física ruim e pouco confiável para uma operação destrutiva. A prioridade passa a ser criar uma fundação visual/UX suficientemente clara para que os testes físicos posteriores sejam executados sem ambiguidade.
+- seções visualmente separadas;
+- tabela da biblioteca com scroll horizontal;
+- coluna de ações explicitamente destacada;
+- badges de estado;
+- botões de exclusão claramente destrutivos e visíveis;
+- tipografia e espaçamento suficientes para leitura e teste;
+- nenhuma mudança de endpoint, schema ou fluxo;
+- nenhuma introdução de framework frontend.
 
-O congelamento não altera os contratos do XM-06 e não o marca como concluído.
-
-
-### XM-UI-00 — fundação visual e de interação
-
-Objetivo: substituir a página diagnóstica crua por uma base visual utilizável sem antecipar o frontend final nem alterar contratos do backend.
-
-Escopo:
-
-- extrair CSS do HTML embutido para asset próprio;
-- criar design tokens CSS para tipografia, espaçamento, radius, borda, superfície e estados;
-- layout principal com largura controlada e hierarquia clara;
-- cabeçalho e navegação/seções;
-- cards de status;
-- badges/pills para estados;
-- botões primário, secundário, destrutivo e neutro;
-- formulários, campos, selects e estados disabled/focus;
-- tabela de biblioteca mais legível;
-- área de automação/fila visualmente separada;
-- feedback visual para loading, erro, sucesso e ação manual;
-- modal/confirm visual pode ser preparado, mas operações críticas continuam respeitando o contrato atual;
-- responsividade desktop/tablet;
-- sem framework JavaScript;
-- sem npm/build obrigatório;
-- sem alterar endpoints, schemas ou máquina de estados;
-- sem implementar fluxos ainda não definidos por XM-07+.
-
-Decisão arquitetural:
-
-- usar CSS próprio, versionado no repositório;
-- HTML semântico + JavaScript existente;
-- evitar React/Vue/Svelte neste momento;
-- nenhuma dependência CDN obrigatória;
-- manter possibilidade de migrar posteriormente para framework sem acoplar o backend à camada visual.
-
-Gate:
-
-- página pode ser usada confortavelmente para status, biblioteca e automação existentes;
-- controles críticos são visualmente identificáveis;
-- estados e ações não dependem de ler JSON bruto;
-- nenhum contrato/API do backend é alterado;
-- suíte XM-01…XM-06 continua passando.
-
-### Tradeoffs registrados
-
-Vantagens:
-
-- melhora imediatamente a testabilidade dos gates físicos;
-- reduz risco de erro humano em ações destrutivas;
-- cria vocabulário visual reutilizável para XM-07, XM-08 e XM-09;
-- evita esperar o backend inteiro terminar para começar UX;
-- CSS/HTML sem build mantém implantação e debug simples.
-
-Custos/riscos:
-
-- alguns componentes visuais poderão mudar quando XM-07 introduzir novos estados;
-- haverá algum retrabalho de composição quando o frontend definitivo for feito;
-- não resolve sozinho problemas de arquitetura de interação;
-- investir agora em framework JS completo aumentaria esse retrabalho, por isso foi explicitamente adiado.
+Esse ajuste pertence ao próprio XM-06 e existe apenas para tornar o teste físico seguro e inequívoco.
 
 ### XM-07 — assets/Aurora e ações manuais guiadas
 
