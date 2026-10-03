@@ -1367,6 +1367,7 @@ Publicado em `remappingbridge/xboxmac-ui/main`:
 - tabela diagnóstica read-only na página local;
 - testes em `backend/server/tests/test_xm04_library.py`;
 - verificador estático `scripts/verify-xm04.py`;
+- validação local read-only `scripts/test-xm04-library.py`;
 - documentação em `docs/XM-04.md`.
 
 O XM-04 não executa o scanner legado e não contém endpoints de mutação da biblioteca.
