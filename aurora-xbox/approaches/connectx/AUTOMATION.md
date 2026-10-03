@@ -159,6 +159,42 @@ Responsabilidades:
 
 Gate: duas execuções consecutivas sem mudanças produzem zero alterações.
 
+## Política de retenção da ISO
+
+A ISO em `/Users/Shared/xbox360` é tratada como **fonte de ingestão**, não como arquivo necessário para execução via ConnectX.
+
+Depois que uma ISO for extraída, validada e promovida com sucesso para:
+
+```text
+/Users/Shared/xbox360-connectx/<jogo>/
+```
+
+essa árvore extraída passa a ser a cópia de execução usada pelo ConnectX.
+
+Consequências:
+
+- remover apenas a ISO original **não remove** a árvore extraída;
+- o jogo continua disponível via ConnectX enquanto `/Users/Shared/xbox360-connectx/<jogo>/` existir;
+- a automação não deve reextrair nem apagar um jogo apenas porque a ISO de origem não existe mais;
+- ausência intencional da ISO será registrada como `SOURCE_PRUNED`, não como `ORPHANED`;
+- `ORPHANED` fica reservado para casos em que a árvore ConnectX desapareceu ou a entrada local perdeu sua origem/estado de forma inconsistente.
+
+A exclusão automática da ISO não será comportamento padrão. Uma futura opção explícita poderá ser adicionada:
+
+```text
+xbox-connectx-sync --delete-source-after-verify
+```
+
+Ela só poderá apagar a ISO após:
+
+- extração concluída;
+- `default.xex` validado;
+- TitleID/MediaID lidos;
+- hash do XEX registrado;
+- pasta final promovida com sucesso;
+- tamanho/arquivo-contagem registrados;
+- opcionalmente, lançamento real do jogo já validado pelo menos uma vez.
+
 ## AUTO-02 — ingestão de novas ISOs
 
 Para cada ISO nova:
@@ -279,13 +315,20 @@ Estados:
 
 ```text
 ACTIVE
-MISSING_SOURCE
+SOURCE_PRUNED
 PENDING_UPLOAD
 WAITING_FOR_AURORA_SCAN
 ORPHANED
 ```
 
-Quando ISO e pasta ConnectX desaparecerem:
+Quando apenas a ISO desaparecer, mas a pasta ConnectX continuar válida:
+
+- marcar `SOURCE_PRUNED`;
+- manter o jogo ativo;
+- não reextrair;
+- não remover assets/catálogo.
+
+Quando a pasta ConnectX desaparecer de forma inesperada:
 
 - marcar `ORPHANED`;
 - não apagar `content.db`;
