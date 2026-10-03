@@ -1175,7 +1175,7 @@ No Mac real:
 
 **XM-01: CONCLUÍDO.** Próximo gate: XM-02.
 
-### XM-02 — status de conexões — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
+### XM-02 — status de conexões — CONCLUÍDO
 
 - Ethernet;
 - Xbox reachability;
@@ -1237,7 +1237,21 @@ ICMP permanece apenas como evidência adicional.
 
 Foi acrescentado teste unitário específico para o caso "FTP acessível + ICMP indisponível".
 
-XM-02 só deve ser marcado como CONCLUÍDO após repetir a validação física com esse ajuste.
+#### Validação física final — CONCLUÍDA em 2026-10-03
+
+No Mac real, após a correção do probe de reachability:
+
+- 11/11 testes do backend passaram;
+- estado saudável retornou `overall=ready`;
+- Ethernet, Xbox, NetISO, Samba, NetBIOS e Aurora FTP ficaram `up`;
+- o Xbox foi corretamente considerado `up` por TCP 21 e TCP 9999 mesmo sem ICMP;
+- ao desconectar fisicamente a Ethernet, `overall=degraded` e os seis componentes refletiram indisponibilidade coerente;
+- `launchd=running` permaneceu verdadeiro para NetISO/Samba/NetBIOS durante a queda física, comprovando que XM-02 não reiniciou serviços;
+- após reconexão, os seis componentes retornaram a `up` e `overall=ready`;
+- o teste terminou com `service_mutation=NONE`;
+- shutdown do xboxmacd permaneceu limpo.
+
+**XM-02: CONCLUÍDO.** Próximo gate: XM-03.
 
 ### XM-03 — ensure connections
 
