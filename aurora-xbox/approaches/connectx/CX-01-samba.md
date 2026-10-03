@@ -204,3 +204,22 @@ Com os LaunchDaemons corrigidos e em execução:
 Os erros antigos em `log.nmbd` são históricos da tentativa anterior com `setsid()`; a validação atual de broadcast, unicast e SMB passou.
 
 Próximo passo liberado: reboot real do Mac sem comandos manuais e validação de autostart de NetISO, `smbd`, `nmbd`, resolução `XBOXMAC`, acesso ConnectX no Xbox e coexistência com NetISO.
+
+
+### Pós-reboot real validado — serviços do Mac
+
+Foi executado reboot real do MacBook em 2026-10-03. Após o retorno, sem iniciar manualmente Samba, nmbd ou NetISO:
+
+- `en7` voltou ativo com `192.168.50.1/24`, link `100baseTX full-duplex`;
+- `io.remappingbridge.netiso-srv` retornou em `state = running`, PID 318, sem exit anterior;
+- `io.remappingbridge.connectx-smbd` retornou em `state = running`, PID 319, sem exit anterior;
+- `io.remappingbridge.connectx-nmbd` retornou em `state = running`, PID 317, sem exit anterior;
+- `smbd` e `nmbd` iniciaram em foreground com `--no-process-group`, supervisionados por `launchd`;
+- NetISO voltou a escutar TCP 4323 e já apresentava conexão estabelecida com o Xbox em `192.168.50.2`;
+- Samba voltou a escutar em `192.168.50.1:445/139` e loopback;
+- nmbd voltou a escutar UDP 137/138 na interface privada e broadcast;
+- resolução NetBIOS pós-reboot via broadcast retornou `192.168.50.1 XBOXMAC<00>`.
+
+Os processos adicionais de `smbd` observados após o reboot são workers filhos do processo principal, comportamento esperado do Samba.
+
+**Autostart no Mac: VALIDADO.** Falta apenas a validação funcional pós-reboot no Xbox: abrir jogo via ConnectX/CoverFlow e confirmar NetISO na mesma sessão.
