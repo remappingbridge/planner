@@ -1253,7 +1253,7 @@ No Mac real, após a correção do probe de reachability:
 
 **XM-02: CONCLUÍDO.** Próximo gate: XM-03.
 
-### XM-03 — ensure connections — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO FÍSICA
+### XM-03 — ensure connections — CONCLUÍDO
 
 - iniciar somente serviços faltantes;
 - não reiniciar saudáveis;
