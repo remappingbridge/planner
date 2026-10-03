@@ -665,6 +665,20 @@ xbox-connectx-sync --prune
 
 só será implementada após validar uma forma segura de remover a entrada do Aurora e seu diretório GameData.
 
+
+
+### AUTO-07 — baseline do reconciliador validado
+
+O reconciliador `/usr/local/libexec/xbox-connectx-reconcile` foi instalado e validado em dry-run e apply sem mutação de biblioteca:
+
+- PES 2018: `ACTIVE`, source presente, árvore ConnectX presente, `default.xex` presente e hash válido;
+- NBA Jam: `ACTIVE`, source presente, árvore ConnectX presente, `default.xex` presente e hash válido;
+- resumo: `ACTIVE=2`, `SOURCE_PRUNED=0`, `ORPHANED=0`;
+- `ingest-state.json` passou a registrar `lifecycle_status` sem substituir o estado operacional já existente;
+- relatório persistente: `/usr/local/var/xbox-connectx/reconcile-state.json`.
+
+Próximo teste AUTO-07: simular de forma reversível a ausência somente da ISO do NBA Jam e depois a ausência somente da árvore ConnectX, confirmando `SOURCE_PRUNED` e `ORPHANED` sem apagar catálogo ou assets do Aurora.
+
 ## AUTO-08 — metadata textual sem clique
 
 Fase posterior à automação do artwork.
