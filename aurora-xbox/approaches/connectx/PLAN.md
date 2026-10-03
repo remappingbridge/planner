@@ -449,7 +449,15 @@ Fluxo preferido:
 - usar o mecanismo de importação de Assets do Aurora;
 - confirmar capa correta no CoverFlow.
 
-**Gate:** jogo ConnectX aparece com capa correta e metadados suficientes para uso normal.
+### Evidências CX-06A — import offline do PES 2018
+
+- staging em `Aurora/User/Import/4A3007D3` enviado ao Xbox e validado byte a byte (`diff_exit=0`);
+- `Content > Manage Paths > Scan Now` não importou a capa, confirmando que scan de conteúdo e importação de assets são fluxos distintos;
+- `Start > Assets > Import` importou corretamente os assets;
+- após o import, a capa apareceu no CoverFlow do PES 2018;
+- `Script Data` do path ConnectX não é necessário para capas/metadata e permanece `None`.
+
+Estado: **CX-06A concluído para o jogo piloto.** O fechamento completo de CX-06 ainda exige o teste incremental com um segundo jogo novo.
 
 ## Validação pós-reboot adiada
 
