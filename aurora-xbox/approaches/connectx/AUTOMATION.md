@@ -309,6 +309,27 @@ Validação seletiva executada antes do primeiro `--apply`:
 
 Pré-condições para o primeiro `--apply` seletivo estão satisfeitas.
 
+### Evidências finais AUTO-02 — NBA Jam
+
+O primeiro `--apply` seletivo do segundo jogo foi concluído com sucesso:
+
+- ISO: `NBA Jam (USA, Europe).iso`;
+- SHA-256 da ISO: `9d2961302f5a1f3f2146ca17ff234903b35418d77daf3c034fe3bc2c839d5caf`;
+- extração concluída com 445 arquivos e ~1.30 GB de conteúdo útil;
+- `TitleID = 4541094C`;
+- `MediaID = 72098D69`;
+- SHA-256 de `default.xex`: `17515add563b8902f79e782c386da51d7f2717f456bd3e3c88bdcd4cc0648f6a`;
+- validação x360db retornou `MATCH`;
+- título: `NBA JAM`;
+- edição: `Original`;
+- região: `USA, Europe`;
+- promoção concluída para `/Users/Shared/xbox360-connectx/NBA Jam (USA, Europe)`;
+- estado persistido como `CONNECTX_READY`;
+- segundo `--apply` retornou `ALREADY_INGESTED` e não executou nova extração;
+- PES 2018 permaneceu intacto no estado de ingestão.
+
+**AUTO-02: CONCLUÍDO.** A ingestão incremental foi comprovada com um jogo previamente existente e um segundo jogo adicionado depois, incluindo promoção e reexecução idempotente.
+
 ## AUTO-03 — metadata e artwork
 
 Fontes:
