@@ -91,3 +91,19 @@ Foram criados LaunchDaemons próprios para `smbd` e `nmbd`, usando um wrapper qu
 Na primeira tentativa os dois jobs ficaram em `spawn scheduled` com `last exit code = 1`. O reboot real não será executado agora por decisão operacional do usuário.
 
 A validação pós-reboot foi transferida para o gate final de coexistência (CX-07), junto com a validação completa de NetISO + ConnectX. Antes disso, os LaunchDaemons serão corrigidos e validados na sessão atual.
+
+### Evidência pré-reboot — 2026-10-03
+
+Antes do reboot real foi auditado o estado dos serviços:
+
+- os plists `io.remappingbridge.connectx-smbd.plist` e `io.remappingbridge.connectx-nmbd.plist` existem em `/Library/LaunchDaemons`;
+- ambos chamam `/usr/local/libexec/xbox-connectx-samba` com argumento `smbd` ou `nmbd`, usam `RunAtLoad=true`, `KeepAlive=true` e `ThrottleInterval=5`;
+- `launchctl print system` mostrou somente `io.remappingbridge.netiso-srv` carregado; os dois jobs ConnectX não estavam carregados no launchd;
+- apesar disso, `samba-dot-org-smbd` e `nmbd` estavam em execução manual como root;
+- `smbd` escutava em `192.168.50.1:445/139` e `127.0.0.1:445/139`;
+- `nmbd` escutava UDP 137/138;
+- `en7` estava ativo em `192.168.50.1/24`, 100baseTX full-duplex;
+- `testparm` validou novamente a configuração dedicada;
+- NetISO estava carregado pelo launchd e ouvindo em TCP 4323, com conexões estabelecidas ao Xbox.
+
+Conclusão: **não reiniciar ainda**. O estado atual prova que a sessão funciona, mas não prova autostart ConnectX; como os processos Samba/NetBIOS estão ativos fora do launchd, o reboot agora provavelmente os perderia. O próximo passo é corrigir/carregar os jobs ConnectX e validar o wrapper/logs antes do reboot.
