@@ -123,3 +123,17 @@ A inspeção do wrapper e dos plists descartou a hipótese de daemonização inc
 - os jobs ConnectX não apareciam em `launchctl print system`, enquanto processos Samba/NetBIOS manuais estavam ativos.
 
 Conclusão: o problema atual não está no wrapper nem na sintaxe dos plists. O foco passa a ser registrar/carregar os dois LaunchDaemons no domínio `system` e substituir de forma controlada os processos manuais pelos processos supervisionados pelo `launchd`, antes do reboot real.
+
+
+### Bootstrap controlado falhou — 2026-10-03
+
+Após encerrar as instâncias manuais de `smbd` e `nmbd`, os dois LaunchDaemons foram registrados com `launchctl bootstrap system`, porém ambos falharam imediatamente:
+
+- `io.remappingbridge.connectx-smbd`: `state = spawn scheduled`, `active count = 0`, `runs = 1`, `last exit code = 1`;
+- `io.remappingbridge.connectx-nmbd`: mesmo estado e `last exit code = 1`;
+- nenhum processo Samba/NetBIOS permaneceu ativo;
+- nenhuma porta SMB/NetBIOS ficou aberta;
+- `nmblookup XBOXMAC` falhou;
+- portanto o problema é reproduzível mesmo com wrapper em foreground e plists válidos.
+
+Conclusão: **CX-07 continua bloqueado e o Mac não deve ser reiniciado ainda**. Próximo diagnóstico: capturar stderr/logs gerados por essa tentativa, verificar pid/state files remanescentes e executar cada wrapper fora do launchd em ambiente limpo para separar falha do Samba de falha específica do launchd.
