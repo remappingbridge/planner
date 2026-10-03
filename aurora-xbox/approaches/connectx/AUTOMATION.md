@@ -745,3 +745,17 @@ Após o deploy real dos assets do NBA Jam, uma nova execução de `xbox-connectx
 Isso confirma idempotência pós-upload para dois jogos e que o orquestrador não reenvia assets já sincronizados.
 
 Resta somente a validação física pós-restart do Aurora para o NBA Jam: cover, background/icon e abertura do jogo. Metadata textual detalhada continua fora desta fase e será tratada no AUTO-08.
+
+
+### AUTO-06 — validação física final do segundo jogo
+
+Após o deploy e a execução idempotente, o Aurora foi reiniciado e o NBA Jam foi validado fisicamente:
+
+- capa exibida corretamente no CoverFlow;
+- background/icon exibidos corretamente;
+- jogo abriu e rodou normalmente;
+- nenhum `Assets > Import` foi necessário;
+- PES 2018 permaneceu íntegro;
+- uma execução subsequente de `xbox-connectx-sync --apply` retornou zero mudanças e zero uploads.
+
+**AUTO-06: CONCLUÍDO.** O deploy transacional de assets nativos foi comprovado com o jogo piloto e com um segundo jogo adicionado depois.
