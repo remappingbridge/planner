@@ -379,6 +379,18 @@ Política de overwrite:
 
 Gate: capa aparece no CoverFlow sem executar manualmente `Start > Assets > Import`.
 
+### Evidências AUTO-06A — deploy controlado do GC
+
+- antes do upload, o `GC4A3007D3.asset` remoto tinha SHA-256 `a1a0fb1ac04ea4ed190288c134f6315e8f5e926dec4708737676dacbda85fd38`, idêntico ao backup de referência;
+- foi enviado somente o `GC4A3007D3.asset` gerado localmente;
+- SHA-256 do asset gerado/enviado: `b5c92a6a1b4a7dc077801032fc9e642259639876b26ce1a43952faa642d47cc7`;
+- download de retorno após o upload teve o mesmo SHA-256;
+- `remote_matches_backup=0` antes da substituição e `remote_matches_generated=0` depois dela;
+- nenhum outro asset (`BK`, `GL`, `SS`) foi alterado;
+- próximo passo: reiniciar apenas o Aurora, sem `Assets > Import`, e validar CoverFlow + abertura do jogo.
+
+Estado: **deploy transacional básico validado; compatibilidade visual ainda pendente**.
+
 ## AUTO-07 — remoção e órfãos
 
 A exclusão no Mac não deve apagar automaticamente banco/assets do Xbox na primeira versão.
