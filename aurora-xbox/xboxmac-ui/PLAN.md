@@ -1708,6 +1708,17 @@ No Mac real:
 
 Resta somente a validação física de filesystem/Finder. O `xboxmac-ui/main` está em `9d1bdf4f14eebe37fda0e5a3f6402a4225d1f39b` para essa etapa.
 
+#### Validação após ajuste mínimo de UX — CONCLUÍDA em 2026-10-03
+
+No Mac real:
+
+- 50/50 testes passaram;
+- compatibilidade XM-01…XM-06 preservada;
+- nenhum contrato/API foi alterado;
+- a página permanece pronta para validação física do XM-06.
+
+Próxima evidência exigida: inspeção visual da página com a coluna `Ações de exclusão` e os controles destrutivos claramente visíveis antes de executar qualquer exclusão real.
+
 #### Ajuste mínimo de UX para validação física — 2026-10-03
 
 A sequência oficial permanece no XM-06; nenhum gate intermediário será executado.
