@@ -1,6 +1,6 @@
 # Abordagem 2 — ConnectX
 
-> **Status: CX-00 concluído; CX-01 funcionalmente validado; CX-02 concluído para o PES 2018; CX-03 e CX-04 concluídos. Próximo gate: CX-05 — adicionar ConnectX ao CoverFlow.**
+> **Status: CX-00…CX-05 concluídos; CX-06 validado para o jogo piloto PES 2018 e automação de assets comprovada; teste incremental com segundo jogo ainda pendente. CX-07 (autostart/coexistência pós-reboot) liberado para execução.**
 
 Objetivo: manter jogos no Mac, mas permitir que o Aurora trate a biblioteca remota como um caminho escaneável e coloque os títulos no CoverFlow/carrossel principal.
 
@@ -37,5 +37,5 @@ Consulte [PLAN.md](PLAN.md).
 ## Gates
 
 - [CX-00 — baseline e rollback](CX-00-baseline.md) — **CONCLUÍDO**.
-- [CX-01 — Samba/NetBIOS](CX-01-samba.md) — **FUNCIONAL VALIDADO; autostart pendente**.
+- [CX-01 — Samba/NetBIOS](CX-01-samba.md) — **FUNCIONAL VALIDADO; autostart pós-reboot será fechado no CX-07**.
 - [PLAN.md](PLAN.md) — sequência completa CX-01…CX-07.
