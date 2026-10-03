@@ -357,6 +357,20 @@ Regra de capa:
 
 Gate: novo jogo recebe o mesmo resultado em execuções repetidas.
 
+### AUTO-03 — segundo jogo NBA Jam: staging bruto
+
+O staging automático do segundo jogo foi executado sem alterações manuais:
+
+- scanner registrou `NBA Jam (USA, Europe)` com TitleID `4541094C`, MediaID `72098D69`, XEX `0.0.0.2` e SHA-256 `17515add563b8902f79e782c386da51d7f2717f456bd3e3c88bdcd4cc0648f6a`;
+- staging identificou `NBA JAM`, edição `Original`, região `USA, Europe`;
+- `banner.png`: `420x95` — válido;
+- `background.jpg`: `1280x720` — válido;
+- `icon.png`: `64x64` — válido;
+- `cover.jpg`: `219x300` — boxart vertical do x360db, inválida para o full-cover `900x600` usado pelo pipeline Aurora;
+- hash da cover vertical atual: `f61977e5a5528a93dbe5349b77bbea311833aba6764cd464b6413ff5295738ef`.
+
+O mesmo padrão observado no PES 2018 se repetiu no segundo jogo. Portanto, a correção deixa de ser exceção por jogo: o `xbox-connectx-stage-assets` deve validar dimensões da cover e aplicar automaticamente fallback determinístico para full cover quando a fonte primária não for `900x600`, sem sobrescrever uma escolha manual protegida.
+
 ## AUTO-04 — descobrir ContentID do Aurora
 
 Pré-condição: o Aurora já precisa ter descoberto o jogo no path ConnectX.
