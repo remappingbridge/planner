@@ -310,6 +310,15 @@ A busca por tabelas no `content.db` contendo `scan` ou `path` no nome não retor
 
 ## AUTO-05 — gerar assets nativos
 
+### Tentativa AUTO-05 — ajuste de tipo de erro Rust
+
+- `libaustralis` foi baixado e compilado com sucesso no commit fixado `9769ac0248876d1cb38f7e84229db784b0c4202c`;
+- o helper local `aurora-asset-engine-test` falhou na compilação antes de gerar qualquer asset;
+- causa: o helper declarou `Result<_, Box<dyn Error>>`, enquanto `libaustralis::utils::GenericError` é `Box<dyn Error + Send + Sync + 'static>`;
+- correção: alinhar o retorno de `main()` e `check_magic()` para `Box<dyn Error + Send + Sync>` ou usar `GenericResult`;
+- os erros posteriores de arquivo inexistente ocorreram apenas porque o binário não foi gerado;
+- nenhum arquivo foi enviado ou alterado no Xbox nesta tentativa.
+
 Usar como referência/implementação o formato aberto documentado e a biblioteca `libaustralis`.
 
 Gerar:
