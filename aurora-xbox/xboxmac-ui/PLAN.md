@@ -1492,6 +1492,32 @@ Correção aplicada:
 
 O pipeline ConnectX congelado não foi alterado.
 
+#### Validação estática/dry-run final — CONCLUÍDA em 2026-10-03
+
+No Mac real, após a correção de canonicalização de paths:
+
+- `scripts/verify-xm05.py`: `STATIC_OK`;
+- 33/33 testes do backend passaram;
+- `test_dry_run_is_read_only_and_detects_idempotence`: OK;
+- `test_dry_run_canonicalizes_source_paths`: OK;
+- dry-run real: `XM-05 DRY-RUN: OK`;
+- 6 ISOs `ISO_ONLY` detectadas;
+- bytes planejados: 47022563328;
+- path traversal rejeitado;
+- `runtime_mutation=NONE`;
+- pipeline `connectx-v1.0.0` permanece inalterado.
+
+ISOs disponíveis para o teste físico:
+
+- Grand Theft Auto IV;
+- Guitar Hero Van Halen;
+- Guitar Hero Warriors of Rock;
+- Guitar Hero 5;
+- Guitar Hero II;
+- Guitar Hero III Legends of Rock.
+
+Resta apenas a validação física end-to-end pela interface local do XboxMac.
+
 XM-05 só deve ser marcado como CONCLUÍDO após essa validação física.
 
 ### XM-06 — Lixeira
