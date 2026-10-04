@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — EM VALIDAÇÃO FÍSICA
+### XM-07 — assets/Aurora e ações manuais guiadas — REPLANEJADO / AGUARDANDO CORREÇÕES
 
 - estado de scan;
 - ContentID;
@@ -1858,6 +1858,133 @@ Depois, validação física com uma ISO nova deve comprovar:
 - capa visível no CoverFlow do Aurora.
 
 
+
+#### Replanejamento após validação física — 2026-10-04
+
+A validação física revelou duas divergências de produto que precisam ser corrigidas antes de aceitar o XM-07.
+
+##### XM-07A — Automação atual reconciliada com a biblioteca
+
+Problema observado:
+
+- jobs concluídos permanecem na tabela principal de Automação indefinidamente;
+- PES 2018 continua aparecendo ali mesmo depois de ISO e ConnectX terem sido removidos;
+- isso mistura histórico técnico com estado operacional atual.
+
+Regra planejada:
+
+- a seção principal `Automação` representa somente trabalho atual;
+- jobs em estados não terminais continuam sempre visíveis:
+  `QUEUED`, `RUNNING`, `WAITING_FOR_XBOX`,
+  `WAITING_FOR_AURORA_SCAN`, `APPLYING_METADATA`,
+  `SYNCING_COVER`, `WAITING_FOR_AURORA_REFRESH`,
+  `VERIFYING` e qualquer novo estado de espera do XM-07B;
+- jobs `SUCCEEDED`, `FAILED` e `CANCELLED` deixam a área principal e passam a pertencer ao Histórico;
+- nenhuma remoção automática apaga registros de `xboxmac-jobs.json`;
+- cada game de job terminal é reconciliado com a biblioteca atual por identidade estável
+  (preferência: `game_id`; fallback controlado: `TitleID + MediaID`);
+- presença atual deve ser derivada do filesystem:
+  `ISO_PRESENT`, `CONNECTX_PRESENT`, `BOTH_PRESENT` ou `ABSENT`;
+- jogo sem ISO e sem ConnectX deve aparecer como `ABSENT` apenas no Histórico, nunca como trabalho atual;
+- restauração pelo Finder volta a alterar a presença atual sem reescrever o histórico;
+- nenhuma ação dessa reconciliação remove arquivos ou altera o catálogo do Aurora.
+
+Compatibilidade/API planejada:
+
+- manter `GET /api/jobs` compatível;
+- adicionar filtragem explícita de visão, preferencialmente
+  `scope=active|history|all`, com `all` preservando a resposta histórica atual;
+- a UI principal usa `scope=active`;
+- a futura área Histórico usa `scope=history`.
+
+Gate XM-07A:
+
+- PES removido do filesystem não aparece na Automação atual;
+- job antigo continua recuperável via visão de Histórico/all;
+- jobs ativos nunca desaparecem por falta temporária de ISO/ConnectX;
+- nenhuma perda automática de histórico.
+
+##### XM-07B — Semântica forte de prontidão no Aurora
+
+Problema observado:
+
+- lote de 5 jogos terminou como `SUCCEEDED/AURORA_READY`;
+- filesystem ConnectX estava correto;
+- ContentIDs 11–15 existiam;
+- metadata estava `VERIFIED`;
+- capa/GC estava `VERIFIED`;
+- `content.db` retornou `overall=VERIFIED`;
+- apesar disso, os cinco jogos não estavam visíveis na biblioteca do Aurora.
+
+Conclusão:
+
+`ContentID + metadata + GC asset + content.db` provam que o backend preparou e verificou os dados, mas não provam que o jogo está efetivamente visível/utilizável na interface do Aurora.
+
+Estados planejados:
+
+1. `CONNECTX_READY`
+   - filesystem ConnectX válido.
+
+2. `WAITING_FOR_AURORA_SCAN`
+   - ainda não existe ContentID observável;
+   - UI orienta Rescan;
+   - sem botão `Já fiz`;
+   - backend continua verificando automaticamente.
+
+3. `AURORA_INDEXED`
+   - ContentID existe e identidade TitleID/MediaID confere.
+
+4. `AURORA_PREPARED`
+   - metadata `VERIFIED`;
+   - capa/GC `VERIFIED`;
+   - content.db íntegro;
+   - ainda não significa visibilidade final.
+
+5. `WAITING_FOR_AURORA_VISIBILITY`
+   - backend preparado, mas falta prova independente de que o item entrou na biblioteca visível;
+   - UI pode orientar refresh/restart do Aurora ou reboot do console quando necessário;
+   - não pode terminar como `SUCCEEDED` somente por content.db/assets.
+
+6. `AURORA_READY`
+   - reservado exclusivamente para evidência independente de visibilidade/uso real no Aurora.
+
+Investigação técnica obrigatória antes da implementação:
+
+- procurar um sinal machine-readable que represente a biblioteca realmente carregada pelo Aurora;
+- prioridade de fontes:
+  1. WebUI/API observável do Aurora;
+  2. outra API/runtime state do Aurora;
+  3. somente se comprovado por teste, algum campo/estado do banco que mude depois do refresh/reload;
+- não aceitar como prova final os mesmos sinais já usados para `AURORA_PREPARED`;
+- se não existir probe automático confiável, o sistema deve permanecer em
+  `WAITING_FOR_AURORA_VISIBILITY` em vez de produzir falso `AURORA_READY`;
+- não introduzir botão obrigatório `Já fiz` apenas para mascarar ausência de probe.
+
+Tratamento de lote:
+
+- cada jogo é avaliado individualmente;
+- um lote de 5 pode ter resultados diferentes por game;
+- o job global só pode ser `SUCCEEDED` se todos os games não-erro chegarem a `AURORA_READY`;
+- `AURORA_PREPARED` não conta como sucesso final;
+- erros/esperas de um game não podem ser ocultados pelo sucesso dos demais.
+
+Gate XM-07B:
+
+- jogo individual e lote são testados;
+- nenhum jogo ausente da biblioteca visível pode ser marcado `AURORA_READY`;
+- `SUCCEEDED` implica todos os games válidos em `AURORA_READY`;
+- reboot/refresh necessário é mostrado explicitamente;
+- qualquer avanço após ação no Xbox é detectado automaticamente;
+- não há escrita direta em `content.db`.
+
+#### Relação com XM-10
+
+A permanência do PES 2018 na própria biblioteca do Aurora continua fora do XM-07.
+
+XM-06 remove os arquivos locais.
+XM-10 continua responsável, futuramente, por remover com segurança a entrada e os assets do catálogo Aurora.
+
+
 ### XM-08 — launcher macOS
 
 - `XboxMac.app`;
@@ -1907,6 +2034,61 @@ Gate futuro, separado e opcional:
 - confirmação visual.
 
 Não implementar junto com XM-06.
+
+### XM-11 — histórico de automações
+
+Gate futuro, separado da fila operacional.
+
+Objetivo:
+
+- preservar rastreabilidade dos jobs concluídos sem poluir a área principal `Automação`;
+- permitir que o usuário limpe histórico antigo conscientemente;
+- nunca confundir limpeza de histórico com exclusão de jogo.
+
+Estrutura planejada:
+
+- seção/página `Histórico` separada da Automação atual;
+- listar apenas jobs terminais:
+  `SUCCEEDED`, `FAILED`, `CANCELLED`;
+- mostrar por job:
+  - data/hora;
+  - estado final;
+  - jogos;
+  - TitleID/MediaID/ContentID quando disponíveis;
+  - resultado final;
+  - presença atual reconciliada (`ISO_PRESENT`, `CONNECTX_PRESENT`, `BOTH_PRESENT`, `ABSENT`);
+  - erro resumido quando houver;
+- permitir abrir detalhes/log de um job sem misturá-lo com a fila atual.
+
+Ações planejadas:
+
+- `Limpar histórico concluído`:
+  - exige confirmação;
+  - remove somente jobs terminais do store de histórico;
+  - nunca remove job ativo;
+  - nunca remove ISO;
+  - nunca remove ConnectX;
+  - nunca altera catálogo/assets do Aurora;
+  - persistência reescrita de forma atômica;
+- opcionalmente oferecer exclusão de um único registro histórico;
+- ausência física de ISO/ConnectX não apaga o histórico automaticamente;
+- limpeza automática por TTL fica fora do escopo inicial.
+
+Compatibilidade:
+
+- `GET /api/jobs` permanece compatível;
+- visão `history` usa o filtro/API planejado no XM-07A;
+- endpoint destrutivo de purge deve ser específico de histórico e nunca reutilizar os endpoints de exclusão de jogos.
+
+Gate:
+
+- jobs concluídos não aparecem na Automação atual;
+- Histórico os preserva;
+- `Limpar histórico concluído` remove apenas registros terminais;
+- arquivos de jogos e Aurora permanecem byte-for-byte inalterados;
+- jobs ativos sobrevivem à limpeza;
+- reiniciar o backend mantém corretamente o histórico restante.
+
 
 ## Critérios finais
 
