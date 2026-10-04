@@ -3239,6 +3239,22 @@ Correção:
 - nenhum MediaID alternativo é adotado;
 - teste de regressão adicionado ao XM-07D.
 
+#### XM-07D — fallback validado e aguardando scan do Aurora
+
+Job após a correção de metadata:
+
+- `job_id=0bb08d0df50d41a3833d740eb418b839`;
+- `MANUAL_CONNECTX_VALID 58411447 41E4449D`;
+- nenhum novo erro de MediaID;
+- estado:
+  `WAITING_FOR_AURORA_SCAN`;
+- erro:
+  `null`;
+- ação física requerida:
+  Rescan do caminho ConnectX no Aurora;
+- o mesmo job deve retomar automaticamente quando o jogo aparecer no
+  catálogo do Aurora.
+
 Depois da validação estática, o teste físico usa o arquivo real de
 `The Legend of Korra` já existente:
 
