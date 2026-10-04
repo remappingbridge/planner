@@ -4673,6 +4673,14 @@ Fingerprint ausente detectou backend runtime antigo:
 - helper passa a falhar fechado se fingerprint não for SHA-256 válido;
 - atualizar XboxMac runtime e fazer nova descoberta do zero.
 
+Falha local de retomada do backend:
+
+- após reinstalação, porta 8742 recusou conexão;
+- inventário anterior não pode ser reutilizado;
+- helper/launcher passam a usar `launchctl kickstart -k`;
+- falha futura inclui estado do LaunchAgent + tail de xboxmacd.log;
+- nenhuma ação Aurora foi executada durante essa falha.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
