@@ -2870,6 +2870,31 @@ Conclusão parcial:
 - o planejamento não tenta ingest de ISO;
 - próximo passo é executar o job real e validar metadata/capa/Aurora/probe/store de adoção.
 
+#### Validação física XM-07C — execução real entrou no pipeline sem ingest
+
+Job real do Avatar:
+
+- `job_id=e7eba4ee5d644351bba95172bb1916cd`;
+- `source_kind=manual_connectx`;
+- `result=MANUAL_CONNECTX_VALID`;
+- `game_id=xbox360-545107E1-117FE50B`;
+- `TitleID=545107E1`;
+- `MediaID=117FE50B`;
+- `state=APPLYING_METADATA`;
+- `iso_filenames=[]`;
+- `target_game_ids` contém somente o Avatar;
+- log observado:
+  - `MANUAL_CONNECTX_VALID ...`;
+  - `$ /usr/local/libexec/xbox-connectx-sync-metadata --apply`;
+- nenhuma chamada a `xbox-connectx-ingest`.
+
+Conclusão parcial:
+
+- branch manual foi executado corretamente;
+- XEX foi revalidado pelo fingerprint;
+- ingest ISO foi efetivamente pulado no teste físico;
+- próximo ponto de validação é o resultado do sync de metadata/capa/Aurora.
+
 ### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
 
 Motivação real:
