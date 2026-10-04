@@ -3210,6 +3210,35 @@ Evidência obtida em 2026-10-04:
   antes de avançar é necessário consultar esse job específico e registrar
   seu estado terminal/erro.
 
+#### XM-07D — falha de metadata do Korra e correção
+
+O primeiro job automático após a normalização real falhou em
+`METADATA`:
+
+- job:
+  `4dbd2ed03850447b996f17964ffedf7f`;
+- XEX:
+  `58411447 / 41E4449D`;
+- erro:
+  `MediaID 41E4449D não encontrado no metadata`.
+
+Interpretação:
+
+- identidade binária do jogo estava válida;
+- o x360db possuía o registro por TitleID, mas não essa variante de MediaID;
+- o helper legado tratava ausência do MediaID como erro fatal embora os
+  campos usados de título/descrição/publisher/developer/data/artwork fossem
+  de nível de TitleID.
+
+Correção:
+
+- TitleID divergente continua sendo erro;
+- MediaID ausente passa a `metadata_scope=TITLE_ONLY`;
+- metadata/artwork de nível de título podem ser preparados;
+- edição/região ficam nulas;
+- nenhum MediaID alternativo é adotado;
+- teste de regressão adicionado ao XM-07D.
+
 Depois da validação estática, o teste físico usa o arquivo real de
 `The Legend of Korra` já existente:
 
