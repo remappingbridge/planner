@@ -3538,7 +3538,9 @@ Implementação do launcher:
 - bundle:
   - `Contents/Info.plist`;
   - `Contents/MacOS/XboxMac`;
-  - `Contents/Resources/repo-root.txt`;
+  - `Contents/Resources/runtime-root.txt`;
+- runtime operacional:
+  `~/Library/Application Support/XboxMac/runtime`;
 - health check:
   `GET http://127.0.0.1:8742/healthz`;
 - backend saudável é reutilizado sem restart;
@@ -3603,6 +3605,26 @@ Validação estática planejada:
 .venv/bin/python scripts/verify-xm08.py
 .venv/bin/python -m unittest discover -s backend/server/tests -v
 ```
+
+Primeira tentativa física do launcher:
+
+- falha ao iniciar backend;
+- `/healthz` indisponível;
+- nenhum processo xboxmacd;
+- log:
+  `PermissionError: Operation not permitted` ao ler
+  `~/Documents/.../.venv/pyvenv.cfg`;
+- causa: runtime de desenvolvimento em Documents bloqueado para o
+  processo gráfico iniciado pelo Finder.
+
+Correção aplicada:
+
+- runtime operacional instalado em
+  `~/Library/Application Support/XboxMac/runtime`;
+- `backend/` + `.venv/` copiados na instalação;
+- shebangs dos console scripts da virtualenv copiada são reescritos;
+- launcher não acessa Documents depois de instalado;
+- segundo health check antes de abrir o navegador.
 
 Gate físico XM-08:
 
