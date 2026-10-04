@@ -4551,6 +4551,25 @@ Backup remoto FATX-safe validado fisicamente:
   `WAITING_FOR_AURORA`;
 - não repetir execute enquanto não houver diagnóstico do resultado remoto.
 
+Manifesto pós-startup permaneceu pendente:
+
+- manifesto presente;
+- result ausente;
+- snapshot de visibilidade READY;
+- banco ainda exatamente no hash do plano;
+- ContentID/assets intactos.
+
+Correção:
+
+- delete filter expõe
+  `XboxMacProcessDeleteManifest`;
+- visibility wrapper ativo chama essa função em runtime;
+- instalador XM-10 passa a instalar também
+  `ZZXboxMacVisibilityProbe.lua`;
+- preflight exige wrapper remoto byte-for-byte;
+- plano `da57...` pode ser reutilizado porque o banco permanece no
+  mesmo SHA-256 e nenhuma operação ocorreu.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
