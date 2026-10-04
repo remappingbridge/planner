@@ -4587,6 +4587,20 @@ Antes do rollback:
 - backend exige assets presentes quando havia backup;
 - helper mostra `asset_backup_present`.
 
+Escopo stale ampliado sob investigação:
+
+- PES 2018 desapareceu visualmente como esperado;
+- existem outros jogos visualmente órfãos que não foram candidatos;
+- causa provável:
+  regra inicial `managed identities only`;
+- não ampliar DELETE ainda;
+- auditoria somente leitura:
+  `scripts/physical-xm10-stale-audit.py`;
+- classifica:
+  managed_live / managed_stale / unmanaged_live / unmanaged_stale;
+- inclui Directory, ScanPathId e ScanPath quando possível;
+- gate destrutivo fica congelado até analisar essa auditoria.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
