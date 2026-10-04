@@ -4714,6 +4714,17 @@ Primeiro plan-next-stale falhou fechado:
 - execute-saved-plan posterior recusou por ausência de plano salvo;
 - nenhuma escrita/manifesto/DELETE ocorreu.
 
+Fingerprint estava ausente do payload do plano:
+
+- discovery fingerprint válido;
+- plan fingerprint vazio;
+- plan-next-stale retornou RETRY e não salvou plano;
+- execute-saved-plan posterior recusou ausência do plano;
+- nenhuma escrita ocorreu;
+- corrigido: state_fingerprint entra no payload público e no hash do
+  plan_id;
+- testes exigem fingerprint público de 64 hex.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
