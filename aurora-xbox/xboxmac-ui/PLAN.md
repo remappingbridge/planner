@@ -4607,6 +4607,28 @@ Confirmação visual:
 - PES 2018 desapareceu da biblioteca Aurora;
 - rollback pausado até concluir auditoria global dos demais órfãos.
 
+Auditoria global física concluída:
+
+- aurora_rows=16;
+- managed_live=13;
+- managed_stale=3;
+- unmanaged_stale=0;
+- unknown_identity=0.
+
+Stale restantes:
+
+- aurora-5 — Fuzion Frenzy 2 — 485507D4 / 7D9E713E;
+- aurora-4 — SEGA Rally — 534507E6 / 70E7E7E3;
+- aurora-6 — Teenage Mutant Ninja Turtles Mutants in Manhattan —
+  4156091E / 4EF57F51.
+
+Conclusão:
+
+- regra managed_stale_only está correta;
+- após rollback obrigatório do PES, limpar os quatro stale entries;
+- verifier corrigido;
+- helper físico passa a recuperar xboxmacd automaticamente quando necessário.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
