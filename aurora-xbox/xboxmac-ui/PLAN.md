@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — REPLANEJADO / AGUARDANDO CORREÇÕES
+### XM-07 — assets/Aurora e ações manuais guiadas — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO ESTÁTICA
 
 - estado de scan;
 - ContentID;
@@ -1976,6 +1976,58 @@ Gate XM-07B:
 - reboot/refresh necessário é mostrado explicitamente;
 - qualquer avanço após ação no Xbox é detectado automaticamente;
 - não há escrita direta em `content.db`.
+
+#### Implementação do replanejamento — 2026-10-04
+
+XM-07A implementado:
+
+- `GET /api/jobs?scope=active|history|all`;
+- `all` preserva compatibilidade com a visão completa anterior;
+- UI principal usa somente `scope=active`;
+- jobs terminais deixam a seção `Automação atual`, mas continuam persistidos;
+- `history/all` reconciliam cada game com a biblioteca atual por `game_id` e fallback `TitleID + MediaID`;
+- presença transitória: `BOTH_PRESENT`, `ISO_PRESENT`, `CONNECTX_PRESENT`, `ABSENT`, `UNKNOWN`;
+- `scope=active` evita a varredura pesada da biblioteca a cada polling de 2 segundos;
+- nenhuma exclusão automática de histórico foi adicionada; isso continua no XM-11.
+
+XM-07B implementado:
+
+- novo estado `AURORA_INDEXED`;
+- ContentID passa a participar da desambiguação de toda evidência posterior;
+- `AURORA_PREPARED` representa ContentID + metadata + capa/GC verificados;
+- `AURORA_PREPARED` não promove mais o job para `SUCCEEDED`;
+- novo estado `WAITING_FOR_AURORA_VISIBILITY`;
+- `AURORA_READY` exige resultado `verified` de um probe independente;
+- ponto de extensão: `_probe_aurora_visibility()`;
+- implementação conservadora atual retorna `unavailable`, portanto não produz falso `AURORA_READY`;
+- a ação guiada informa refresh/restart do Aurora e, se necessário, reboot do console;
+- não existe botão obrigatório `Já fiz`;
+- lote continua mantendo evidência por game.
+
+Investigação do NOVA:
+
+- documentação NOVA 0.7b.2 r1622 revisada;
+- endpoints documentados incluem título em execução, filebrowser, sistema, plugin, perfis etc.;
+- não há endpoint documentado de listagem da biblioteca carregada do Aurora;
+- por isso NOVA não foi usado como falsa prova de visibilidade.
+
+Arquivos principais alterados:
+
+- `backend/server/xboxmac/automation.py`;
+- `backend/server/xboxmac/app.py`;
+- `backend/server/tests/test_xm05_automation.py`;
+- `backend/server/tests/test_xm07_aurora.py`;
+- `scripts/verify-xm07.py`;
+- `docs/XM-07.md`;
+- `backend/server/README.md`.
+
+Próxima etapa:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm07.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
 
 #### Relação com XM-10
 
