@@ -4371,6 +4371,32 @@ Primeira validação física não destrutiva:
   - ContentID `1`;
 - nenhuma ação destrutiva foi executada.
 
+Pré-condição adicional antes de qualquer DELETE real:
+
+- instalador limpa marker de carregamento antes de instalar o filtro;
+- `ZZXboxMacCatalogDelete.lua` recria o marker ao ser carregado pelo
+  Aurora;
+- marker:
+  `/Hdd1/Apps/Aurora/User/Scripts/xboxmac-delete-filter-loaded.txt`;
+- conteúdo:
+  `schema=xboxmac-delete-filter-loaded-v1` +
+  `version=xm10-isolated-v2`;
+- comando de validação:
+  `.venv/bin/python scripts/physical-xm10.py loaded`;
+- exclusão real proibida no gate enquanto
+  `XM-10 FILTER_LOADED_OK` não aparecer.
+
+Evidência física já obtida:
+
+- `146/146 OK`;
+- baseline restaurado;
+- filtro separado instalado byte-for-byte;
+- stale real:
+  PES 2018 / `4A3007D3` / `1CB7BE36` / ContentID 1;
+- plano:
+  `ba3e9753357e048b84602742ee311d754984605542cc751ec9129f4fcf610740`;
+- nenhuma ação destrutiva executada.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
