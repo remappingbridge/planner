@@ -3685,18 +3685,14 @@ Resultado: **XM-08 aceito e encerrado.**
 
 ### Observação operacional para XM-09 — interface privada após desconexão prolongada
 
-Detectado em uso real: após horas com o equipamento/ligação Ethernet indisponível, a interface configurada como `en7` deixou de existir no macOS. Os serviços launchd continuaram `running`, mas NetISO/Samba/NetBIOS ficaram sem sockets úteis em `192.168.50.1`.
+Detectado em uso real: após horas com o equipamento/ligação Ethernet
+indisponível, a interface configurada como `en7` deixou de existir no
+macOS. Os serviços launchd continuaram `running`, mas
+NetISO/Samba/NetBIOS ficaram sem sockets úteis em `192.168.50.1`.
 
-XM-09 deve tratar:
+### XM-09 — scheduler e robustez — ETAPA DE REDE IMPLEMENTADA / VALIDAÇÃO FÍSICA PENDENTE
 
-- renumeração da interface privada (`en7` -> outro `enX`);
-- identificação persistente do adaptador por hardware/service em vez de depender apenas do nome BSD;
-- restauração de `192.168.50.1/24`;
-- daemon `running` porém socket indisponível;
-- recuperação automática de NetISO/Samba/NetBIOS;
-- retorno a READY sem terminal.
-
-### XM-09 — scheduler e robustez
+Escopo completo continua:
 
 - reconciliação periódica;
 - estabilidade de arquivo;
@@ -3708,7 +3704,203 @@ XM-09 deve tratar:
 - locks;
 - recuperação após reboot.
 
-Gate: operação cotidiana sem terminal.
+A primeira etapa implementada trata o incidente real de rede antes de
+avançar para os demais itens.
+
+#### Identidade persistente da interface
+
+O contrato deixa de considerar `en7` como identidade primária.
+
+Nova identidade:
+
+- network service macOS:
+  `USB 10/100 LAN`;
+- `en7` permanece apenas como fallback histórico.
+
+O backend resolve dinamicamente o Device através de:
+
+```text
+networksetup -listnetworkserviceorder
+```
+
+Exemplos aceitos:
+
+```text
+USB 10/100 LAN -> en7
+USB 10/100 LAN -> en9
+USB 10/100 LAN -> en12
+```
+
+Fallback adicional:
+
+- se o lookup do serviço falhar, localizar a interface que já contém
+  `192.168.50.1`.
+
+O status passa a expor:
+
+- `configured_interface`;
+- `network_service`;
+- `service_device`;
+- `ip_device`;
+- `resolved_interface`;
+- `resolution_source`;
+- `renumbered`.
+
+#### Reconciliador root periódico
+
+Helper:
+
+```text
+/usr/local/libexec/xboxmac-network-reconcile
+```
+
+Fonte:
+
+```text
+backend/system/xboxmac-network-reconcile
+```
+
+LaunchDaemon:
+
+```text
+io.remappingbridge.xboxmac-network-reconcile
+```
+
+Periodicidade:
+
+```text
+30 segundos
+```
+
+O helper tem escopo fixo e não aceita argumentos vindos da UI.
+
+Contrato congelado:
+
+- service:
+  `USB 10/100 LAN`;
+- Mac:
+  `192.168.50.1/24`;
+- gateway configurado:
+  `0.0.0.0`;
+- DNS:
+  vazio.
+
+Se o IP desaparecer:
+
+1. reaplicar configuração manual no service;
+2. resolver novamente o Device atual;
+3. aguardar `192.168.50.1`;
+4. recuperar serviços vinculados à rede.
+
+Se o adaptador/link estiver ausente:
+
+- registrar estado;
+- não reiniciar serviços continuamente;
+- nova tentativa acontece no próximo intervalo.
+
+#### Daemon running mas socket ausente
+
+A reconciliação não confia somente em `launchctl state=running`.
+
+Também valida:
+
+- NetISO TCP 4323;
+- Samba TCP 139;
+- Samba TCP 445;
+- nmbd UDP 137/138.
+
+Se somente um serviço perdeu seu socket:
+
+- aplicar `launchctl kickstart -k` somente naquele job.
+
+Serviços saudáveis não sofrem restart forçado.
+
+#### Wrapper ConnectX sem en7
+
+Novo wrapper versionado:
+
+```text
+backend/system/xbox-connectx-samba
+```
+
+Ele espera:
+
+```text
+qualquer interface com 192.168.50.1
+```
+
+e não um BSD name específico.
+
+Preservado:
+
+- `samba-dot-org-smbd -F --no-process-group`;
+- `nmbd -F --no-process-group`;
+- config dedicada Samba.
+
+O instalador preserva uma cópia única do wrapper anterior em:
+
+```text
+/usr/local/libexec/xbox-connectx-samba.pre-xm09
+```
+
+#### Instalação privilegiada separada
+
+Script:
+
+```text
+scripts/install-xm09-network-reconciler.sh
+```
+
+Somente esse instalador usa sudo.
+
+`XboxMac.app` e `xboxmacd` continuam sem root.
+
+Instalados:
+
+- `/usr/local/libexec/xboxmac-network-reconcile`;
+- `/usr/local/libexec/xbox-connectx-samba`;
+- `/Library/LaunchDaemons/io.remappingbridge.xboxmac-network-reconcile.plist`;
+- log:
+  `/Library/Logs/XboxMac/network-reconcile.log`.
+
+#### Validação
+
+Estática:
+
+```text
+.venv/bin/python scripts/verify-xm09.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Teste físico:
+
+```text
+.venv/bin/python scripts/physical-xm09-network.py before
+```
+
+Depois desconectar a ligação Ethernet/docking, aguardar mais de 30 s,
+reconectar, aguardar até 45 s e executar:
+
+```text
+.venv/bin/python scripts/physical-xm09-network.py after
+```
+
+Critério desta etapa:
+
+- interface resolvida dinamicamente;
+- `192.168.50.1` presente;
+- link ativo;
+- NetISO UP;
+- Samba UP;
+- NetBIOS UP;
+- `XM-09 NETWORK_RECOVERY_OK`;
+- nenhuma intervenção manual para restaurar IP/serviços.
+
+Depois da aceitação desta etapa, prosseguir automaticamente com os
+demais itens do XM-09: estabilidade de arquivos, offline/cache,
+retries/locks e recuperação final pós-reboot.
+
+Gate final XM-09: operação cotidiana sem terminal.
 
 ### XM-10 — remoção do catálogo Aurora
 
