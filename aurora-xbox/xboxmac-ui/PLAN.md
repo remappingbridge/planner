@@ -3342,9 +3342,7 @@ The Legend of Korra concluiu o fluxo completo:
 
 Resultado: **XM-07D aceito e encerrado.**
 
-### XM-07D.1 — identificação assistida e metadata manual — EM IMPLEMENTAÇÃO
-
-XM-07D.1 — identificação assistida e metadata manual
+### XM-07D.1 — identificação assistida e metadata manual — IMPLEMENTADO / VALIDAÇÃO ESTÁTICA PENDENTE
 
 Objetivo de UX:
 
@@ -3352,60 +3350,139 @@ Objetivo de UX:
 - ajudar a busca de metadata/capa;
 - nunca usar entrada manual para mascarar formato incompatível.
 
-Formulário planejado:
+Implementação:
 
-- arquivo/origem — somente leitura, escolhido a partir do item detectado;
-- `Nome do jogo` — editável;
-- `TitleID` — opcional, hexadecimal de 8 dígitos;
-- `MediaID` — opcional, hexadecimal de 8 dígitos;
-- `Tipo de conteúdo` — auto-detectado quando possível:
-  `Disc / XBLA / STFS / XEX / Unknown`;
-- `Região/edição` — opcional;
-- `Ano` — opcional;
-- `Publisher` — opcional;
-- `Developer` — opcional;
-- `Observações` — opcional;
-- `Título para busca de capa` — por default igual ao nome do jogo, mas ajustável.
+- novo store persistente:
+  `/usr/local/var/xbox-connectx/package-overrides.json`;
+- schema:
+  `xboxmac-package-overrides-v1`;
+- gravação atômica;
+- chave primária por path + fingerprint;
+- após identidade forte, correlação adicional por
+  `TitleID + MediaID`;
+- para jogos já normalizados, salvar um override pode vincular a entrada
+  a uma árvore ConnectX XEX já validada com a mesma identidade
+  (`source=XEX_EXISTING`);
+- após nova normalização, `POST /api/packages/prepare` vincula
+  automaticamente a entrada à identidade XEX antes de criar o job XM-07C.
 
-Comportamento:
+Proveniência por campo:
 
-- campos detectados automaticamente aparecem preenchidos e indicados como `Detectado`;
-- dados vindos de x360db/XboxUnity aparecem como `Catálogo`;
-- valores digitados pelo usuário aparecem como `Manual`;
-- nunca sobrescrever silenciosamente um valor manual;
-- se houver conflito entre XEX/container e formulário, a identidade binária vence para segurança e o conflito é mostrado;
-- TitleID/MediaID manuais só podem ser usados quando o arquivo não expõe esses IDs de forma confiável;
-- validar formato hexadecimal e impedir IDs inválidos.
+- `DETECTED`;
+- `CATALOG`;
+- `MANUAL`.
+
+Regras de prioridade:
+
+- TitleID/MediaID detectados pelo binário vencem sempre;
+- conflito manual/catálogo é mostrado como
+  `DETECTED_WINS`;
+- IDs manuais só são efetivos quando não existe identidade técnica;
+- valores manuais descritivos vencem catálogo;
+- nenhuma edição de metadata altera `supported` ou `normalizable`.
+
+Formulário:
+
+- item não normalizável também pode ser selecionado;
+- ação:
+  `Identificar / editar metadata`;
+- campos:
+  - origem somente leitura;
+  - Nome;
+  - TitleID;
+  - MediaID;
+  - tipo/content type detectado;
+  - Região;
+  - Edição;
+  - Ano;
+  - Publisher;
+  - Developer;
+  - Observações;
+  - Título para busca de capa;
+- proveniência é exibida na UI;
+- conflitos ficam visíveis;
+- botão `Normalizar / Preparar` continua bloqueado logicamente quando
+  `normalizable=false`.
 
 Busca assistida:
 
-- com TitleID conhecido, consultar x360db/XboxUnity diretamente;
-- com apenas nome conhecido, permitir busca por candidatos;
-- se houver múltiplos resultados, mostrar opções e exigir escolha explícita;
-- nunca escolher silenciosamente um jogo apenas por similaridade de nome;
-- a capa pode ser buscada por TitleID/candidato escolhido mesmo quando MediaID ainda não estiver disponível;
-- metadata específica de edição/mídia só pode ser marcada `VERIFIED` quando MediaID for conhecido ou confirmado.
+- x360db `games.json` como índice;
+- `titles/{TitleID}/info.json` para detalhe;
+- busca por:
+  - TitleID exato;
+  - título exato;
+  - prefixo;
+  - substring;
+- sem fuzzy match silencioso;
+- `selection_required=true` sempre;
+- candidatos mostram TitleID, MediaIDs e capa;
+- usuário precisa acionar `Usar este candidato`;
+- MediaID não é escolhido automaticamente entre variantes.
 
-Persistência:
+API:
 
-- guardar overrides em store próprio do XboxMac, separado de `catalog.json` e do arquivo fonte;
-- chave preferencial:
-  - fingerprint do arquivo/container;
-  - após identificação forte, correlacionar também por `TitleID + MediaID`;
-- registrar proveniência por campo:
-  `DETECTED / CATALOG / MANUAL`;
-- apagar histórico de jobs não apaga esses overrides;
-- excluir o arquivo fonte pode manter o override órfão apenas no Histórico/diagnóstico até limpeza explícita.
+- `GET /api/packages/{package_id}/metadata`;
+- `PUT /api/packages/{package_id}/metadata`;
+- `GET /api/packages/{package_id}/metadata/search`;
+- `POST /api/packages/{package_id}/metadata/catalog`.
 
-Gate XM-07D.1:
+Integração Aurora:
+
+- helper estendido:
+  `backend/connectx/xboxmac-stage-assets`;
+- lê apenas overrides vinculados à mesma identidade forte
+  `TitleID + MediaID`;
+- pode aplicar nome/publisher/developer manuais e registrar
+  região/edição/ano/notas/título de busca no staging;
+- a identidade técnica nunca vem do store.
+
+Preservação do baseline:
+
+- `backend/connectx/xbox-connectx-stage-assets` foi restaurado exatamente
+  ao blob congelado `7d01cff377581add9a9d30f33fd48e5f5080b86d`;
+- as extensões XM-07D/D.1 vivem em
+  `backend/connectx/xboxmac-stage-assets`;
+- na validação física, o helper estendido é instalado como
+  `/usr/local/libexec/xbox-connectx-stage-assets`, preservando o contrato
+  do helper legado sem alterar o baseline versionado.
+
+Testes adicionados:
+
+- UNKNOWN com metadata manual continua não normalizável;
+- store persiste entre leituras;
+- conflito de identidade mantém DETECTED;
+- busca por nome não auto-seleciona;
+- catálogo não sobrescreve valores manuais;
+- catálogo conflitante é recusado;
+- bind de identidade XEX persiste;
+- override pode ser vinculado a XEX ConnectX já existente;
+- staging aplica somente override vinculado;
+- rotas/formulário existem.
+
+Validação estática:
+
+```text
+.venv/bin/python scripts/verify-xm07d.py
+.venv/bin/python scripts/verify-xm07d1.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Suíte esperada:
+
+- 104 testes.
+
+Gate físico XM-07D.1:
 
 - item desconhecido pode ser aberto no formulário;
 - usuário complementa nome/IDs/dados;
+- dados sobrevivem a restart do backend;
 - busca de capa usa os dados complementares;
-- conflitos de identidade não são aplicados silenciosamente;
-- nenhuma edição manual transforma arquivo tecnicamente incompatível em `AURORA_READY`;
-- overrides sobrevivem a restart do backend.
-
+- múltiplos resultados exigem escolha explícita;
+- conflito de identidade não é aplicado silenciosamente;
+- nenhuma edição manual transforma arquivo tecnicamente incompatível em
+  `AURORA_READY`;
+- override vinculado a um XEX existente pode alimentar o staging sem
+  alterar TitleID/MediaID.
 
 ### XM-08 — launcher macOS e atalhos de operação no Finder
 
