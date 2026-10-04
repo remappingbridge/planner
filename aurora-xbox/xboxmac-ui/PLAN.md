@@ -4725,6 +4725,18 @@ Fingerprint estava ausente do payload do plano:
   plan_id;
 - testes exigem fingerprint público de 64 hex.
 
+Pré-condição adversarial validada:
+
+- plano adversarial salvo corretamente;
+- cenário permaneceu com mesmo fingerprint;
+- execute-saved-plan retornou
+  `ADVERSARIAL_PRECONDITION_NOT_MET`;
+- endpoint destrutivo não foi chamado;
+- nenhuma escrita ocorreu;
+- decorators dos testes de API corrigidos;
+- próximo teste: alterar cenário e exigir
+  `STALE_PLAN_REJECTED`.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
