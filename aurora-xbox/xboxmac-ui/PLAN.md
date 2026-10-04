@@ -4849,6 +4849,7 @@ Implementado:
 - feedback na Biblioteca em `delete-status`;
 - ação WAITING_FOR_AURORA recomenda reboot completo do Xbox;
 - browser poll automático a cada 4s;
+- reconciliação fica deferida enquanto houver job ativo;
 - `POST /api/delete/aurora/reconcile`;
 - `GET /api/delete/aurora/status` somente leitura;
 - testes: `test_xm12_connectx_aurora_cleanup.py`;
