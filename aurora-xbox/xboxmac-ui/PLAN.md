@@ -2647,7 +2647,191 @@ XM-06 remove os arquivos locais.
 XM-10 continua responsável, futuramente, por remover com segurança a entrada e os assets do catálogo Aurora.
 
 
-### XM-08 — launcher macOS
+### XM-07C — adoção automática de jogos XEX manuais
+
+Motivação real:
+
+- jogo colocado manualmente em `/Users/Shared/xbox360-connectx` com `default.xex` válido pode rodar no Xbox e ser descoberto pela biblioteca;
+- porém hoje ele não necessariamente passa pelo mesmo fluxo de metadata/capa dos jogos ingeridos por ISO;
+- caso de validação: `Avatar: The Last Airbender` em XEX manual, jogável no Xbox, mas sem capa ilustrada automática.
+
+Objetivo:
+
+- transformar qualquer árvore XEX válida colocada manualmente no ConnectX em um candidato adotável pelo XboxMac;
+- não exigir ISO de origem;
+- reutilizar o pipeline já validado de metadata, capa, Aurora scan e probe runtime.
+
+Regras de descoberta:
+
+- detectar recursivamente `default.xex`;
+- recusar symlink;
+- validar magic `XEX1/XEX2`;
+- exigir Execution Info;
+- extrair `TitleID + MediaID`;
+- calcular fingerprint da árvore/arquivo suficiente para reconciliação;
+- distinguir:
+  - XEX gerado pelo XboxMac;
+  - XEX manual ainda não adotado;
+  - XEX manual já adotado.
+
+Novo estado conceitual:
+
+- `MANUAL_CONNECTX_UNADOPTED` — filesystem válido, mas ainda não passou por metadata/capa;
+- após adoção, segue os mesmos estados:
+  `CONNECTX_READY -> WAITING_FOR_AURORA_SCAN -> AURORA_PREPARED -> AURORA_READY`.
+
+Automação:
+
+- a seção Automação passa a permitir selecionar XEX manual sem ISO;
+- nesses casos o botão deve ser `Adotar / Preparar`, não `Ingerir ISO`;
+- o job não chama `xbox-connectx-ingest`;
+- chama scanner/catalogação, staging, metadata, cover e verificação Aurora;
+- idempotente: repetir adoção não duplica catálogo, assets ou jobs;
+- não mover, renomear ou reempacotar a pasta manual sem autorização explícita.
+
+Metadata/capa:
+
+- usar `TitleID + MediaID` obtidos do próprio XEX;
+- buscar x360db;
+- buscar/normalizar capa via XboxUnity quando necessário;
+- gerar GC asset;
+- verificar CoverFlow pelo probe runtime v3;
+- metadata/capa ausentes ou incompletas não devem impedir o jogo de continuar jogável;
+- erros de metadata/capa devem ser mostrados separadamente da validade do XEX.
+
+Gate XM-07C:
+
+- copiar um XEX manual válido para o ConnectX;
+- biblioteca o detecta automaticamente;
+- Automação o mostra como XEX manual não adotado;
+- sem ISO presente, ainda pode ser selecionado para adoção;
+- `Avatar: The Last Airbender` recebe metadata e capa automaticamente;
+- jogo continua jogável no Xbox;
+- chega a `AURORA_READY`;
+- nenhuma duplicação no catálogo/Aurora.
+
+### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
+
+Motivação real:
+
+- alguns jogos rodam no Xenia a partir de um único arquivo/container, mas não aparecem no Aurora/ConnectX porque não possuem `default.xex` exposto;
+- caso de validação: `The Legend of Korra`, formato não-XEX, jogável no Xenia Edge no Mac, mas invisível ao scan/restart do Aurora.
+
+Objetivo:
+
+- detectar o formato real do arquivo;
+- quando suportado, normalizá-lo para uma árvore executável pelo fluxo ConnectX;
+- nunca assumir formato pela extensão;
+- preservar sempre o arquivo original.
+
+Detecção inicial planejada:
+
+- ISO Xbox 360;
+- XEX/tree;
+- pacote STFS:
+  - `LIVE`;
+  - `PIRS`;
+  - `CON`;
+- `UNKNOWN/UNSUPPORTED` para formatos ainda não reconhecidos.
+
+Regras:
+
+- identificação por magic/estrutura interna, não por nome/extensão;
+- extração sempre em staging temporário;
+- validar o resultado antes de publicar no ConnectX;
+- publicação final atômica;
+- origem nunca é alterada;
+- se a extração não produzir `default.xex` válido, não publicar;
+- não copiar automaticamente pacote desconhecido para o HDD interno do Xbox;
+- não declarar compatibilidade com ConnectX apenas porque Xenia consegue abrir o arquivo.
+
+Pipeline esperado para pacote suportado:
+
+```text
+arquivo/container
+    -> detectar formato
+    -> extrair em staging
+    -> localizar default.xex
+    -> validar XEX
+    -> obter TitleID + MediaID
+    -> publicar no ConnectX
+    -> XM-07C adoção
+    -> Aurora scan
+    -> metadata/capa
+    -> probe runtime
+    -> AURORA_READY
+```
+
+Dependências:
+
+- antes da implementação, escolher uma biblioteca/ferramenta de extração STFS adequada ao macOS arm64;
+- ferramenta deve ser auditável, automatizável e utilizável sem GUI;
+- se não houver dependência aceitável, manter o formato como detectado porém não suportado em vez de usar conversão insegura.
+
+#### XM-07D.1 — identificação assistida e metadata manual
+
+Objetivo de UX:
+
+- quando o arquivo/container não fornecer identificação suficiente, permitir ao usuário complementar os dados no próprio painel;
+- ajudar a busca de metadata/capa;
+- nunca usar entrada manual para mascarar formato incompatível.
+
+Formulário planejado:
+
+- arquivo/origem — somente leitura, escolhido a partir do item detectado;
+- `Nome do jogo` — editável;
+- `TitleID` — opcional, hexadecimal de 8 dígitos;
+- `MediaID` — opcional, hexadecimal de 8 dígitos;
+- `Tipo de conteúdo` — auto-detectado quando possível:
+  `Disc / XBLA / STFS / XEX / Unknown`;
+- `Região/edição` — opcional;
+- `Ano` — opcional;
+- `Publisher` — opcional;
+- `Developer` — opcional;
+- `Observações` — opcional;
+- `Título para busca de capa` — por default igual ao nome do jogo, mas ajustável.
+
+Comportamento:
+
+- campos detectados automaticamente aparecem preenchidos e indicados como `Detectado`;
+- dados vindos de x360db/XboxUnity aparecem como `Catálogo`;
+- valores digitados pelo usuário aparecem como `Manual`;
+- nunca sobrescrever silenciosamente um valor manual;
+- se houver conflito entre XEX/container e formulário, a identidade binária vence para segurança e o conflito é mostrado;
+- TitleID/MediaID manuais só podem ser usados quando o arquivo não expõe esses IDs de forma confiável;
+- validar formato hexadecimal e impedir IDs inválidos.
+
+Busca assistida:
+
+- com TitleID conhecido, consultar x360db/XboxUnity diretamente;
+- com apenas nome conhecido, permitir busca por candidatos;
+- se houver múltiplos resultados, mostrar opções e exigir escolha explícita;
+- nunca escolher silenciosamente um jogo apenas por similaridade de nome;
+- a capa pode ser buscada por TitleID/candidato escolhido mesmo quando MediaID ainda não estiver disponível;
+- metadata específica de edição/mídia só pode ser marcada `VERIFIED` quando MediaID for conhecido ou confirmado.
+
+Persistência:
+
+- guardar overrides em store próprio do XboxMac, separado de `catalog.json` e do arquivo fonte;
+- chave preferencial:
+  - fingerprint do arquivo/container;
+  - após identificação forte, correlacionar também por `TitleID + MediaID`;
+- registrar proveniência por campo:
+  `DETECTED / CATALOG / MANUAL`;
+- apagar histórico de jobs não apaga esses overrides;
+- excluir o arquivo fonte pode manter o override órfão apenas no Histórico/diagnóstico até limpeza explícita.
+
+Gate XM-07D.1:
+
+- item desconhecido pode ser aberto no formulário;
+- usuário complementa nome/IDs/dados;
+- busca de capa usa os dados complementares;
+- conflitos de identidade não são aplicados silenciosamente;
+- nenhuma edição manual transforma arquivo tecnicamente incompatível em `AURORA_READY`;
+- overrides sobrevivem a restart do backend.
+
+
+### XM-08 — launcher macOS e atalhos de operação no Finder
 
 - `XboxMac.app`;
 - iniciar/find backend;
@@ -2655,7 +2839,40 @@ XM-10 continua responsável, futuramente, por remover com segurança a entrada e
 - abrir browser;
 - não exigir terminal.
 
-Gate: usuário não técnico consegue iniciar e usar o painel clicando no app.
+#### Atalhos no painel web
+
+Adicionar uma área de acesso rápido com botões:
+
+- `Abrir pasta de ISOs`
+  - abre `/Users/Shared/xbox360` no Finder;
+- `Abrir pasta de jogos XEX / ConnectX`
+  - abre `/Users/Shared/xbox360-connectx` no Finder;
+- `Abrir Lixeira`
+  - abre a Lixeira do usuário atual no Finder.
+
+Regras de segurança/UX:
+
+- endpoints somente locais em `127.0.0.1`;
+- ações POST explícitas, nunca disparadas por simples GET da página;
+- nenhum path arbitrário vindo do navegador;
+- backend usa apenas destinos fixos configurados;
+- botão de pasta cria a pasta somente se isso já fizer parte do contrato de instalação; caso contrário informa que está ausente;
+- abrir Lixeira nunca esvazia Lixeira;
+- nenhum botão move ou exclui arquivo;
+- erros do Finder aparecem no painel;
+- botões devem ter texto grande e ícones não essenciais, mantendo boa acessibilidade visual.
+
+Posicionamento:
+
+- bloco `Arquivos` próximo ao topo do painel, separado das ações destrutivas;
+- esses botões são conveniência operacional e não alteram estado de jobs.
+
+Gate XM-08:
+
+- usuário não técnico consegue iniciar e usar o painel clicando no app;
+- consegue abrir pasta de ISOs, pasta ConnectX e Lixeira pelo painel;
+- nenhuma dessas ações exige Terminal;
+- nenhuma ação de abertura modifica arquivos.
 
 ### Observação operacional para XM-09 — interface privada após desconexão prolongada
 
