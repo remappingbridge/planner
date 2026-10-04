@@ -4488,6 +4488,26 @@ Correção:
   `scripts/repair-xm10-remote-db-backup.py`;
 - reparo não altera manifesto e não executa SQL.
 
+Falha seguinte identificada no reparo remoto: limite FATX.
+
+- plan_id completo possui 64 caracteres;
+- FATX aceita no máximo 42 caracteres por nome;
+- diretório remoto com plan_id completo não pôde ser criado;
+- nenhuma escrita de banco/SQL ocorreu.
+
+Correção:
+
+- plan_id lógico continua SHA-256 completo;
+- chave física remota:
+  `p-<primeiros-32-hex>`;
+- exemplo:
+  `p-dfc73a352853be51e66abfc1602c7f0e`;
+- comprimento:
+  34 caracteres;
+- backend e Lua usam a mesma derivação;
+- backend recusa qualquer componente FATX >42;
+- FTP MKD cria o componente final dentro do diretório pai.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
