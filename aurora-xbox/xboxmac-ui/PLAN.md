@@ -2083,6 +2083,23 @@ Próxima validação física do XM-07A.1:
 - confirmar ConnectX-only visível e não selecionável;
 - não criar job durante essa validação.
 
+#### Validação física XM-07A.1 — APROVADA em 2026-10-04
+
+Validação real da UI concluída:
+
+- default `Nunca rodaram job`: OK;
+- `Já rodaram job`: OK;
+- `Todos`: OK;
+- `Somente ISO`: OK;
+- `Somente ConnectX`: OK;
+- `ISO + ConnectX`: OK;
+- combinações entre filtros: OK;
+- busca por texto/identidade: OK;
+- jogos ConnectX-only aparecem e permanecem não selecionáveis sem ISO: OK;
+- nenhum job foi criado apenas por filtrar.
+
+Resultado: XM-07A.1 aceito fisicamente.
+
 ##### XM-07B — Semântica forte de prontidão no Aurora
 
 Problema observado:
