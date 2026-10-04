@@ -4408,6 +4408,19 @@ carregamento:
   `physical-xm10.py loaded` precisa retornar
   `XM-10 FILTER_LOADED_OK`.
 
+Preflight somente leitura adicional:
+
+- script:
+  `scripts/physical-xm10-loaded.py`;
+- normaliza CRLF antes de validar marker;
+- reconhece o build V2 já instalado e o V3 atual;
+- baixa o filtro remoto e exige SHA-256 de build conhecido;
+- V2 esperado:
+  `7b5fa378178fb04e998e49a6bd8eed13bf9064d912ccd3c2217ee4149813fa2e`;
+- nenhuma escrita, manifesto ou alteração de content.db;
+- DELETE continua bloqueado até:
+  `XM-10 FILTER_PREFLIGHT_OK`.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
