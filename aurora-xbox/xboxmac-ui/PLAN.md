@@ -2390,6 +2390,37 @@ Direção de implementação:
 - não importar jogos não selecionados para o job atual;
 - registrar que um único reboot pode satisfazer a etapa de visibilidade de múltiplos jobs preparados simultaneamente.
 
+#### Descoberta para probe runtime — Content.FindContent()
+
+A API Lua pública do Aurora expõe:
+
+```lua
+table Content.FindContent( DWORD titleId, [string searchText] );
+```
+
+Scripts públicos do Aurora usam também `Content.FindContent()` sem argumentos para construir uma lista de jogos a partir da coleção conhecida pelo runtime.
+
+Isso é tecnicamente superior a usar `content.db` como prova final:
+
+- `content.db` comprova persistência/indexação;
+- `Content.FindContent()` consulta a coleção exposta pelo runtime Lua do Aurora;
+- portanto pode servir como sinal independente para `AURORA_READY`, desde que um probe auxiliar consiga executar essa chamada e publicar o resultado para o Mac.
+
+Restrição de implementação:
+
+- não modificar `XboxMacProbe.lua` congelado sem uma decisão explícita;
+- preferir um probe Lua auxiliar, isolado e removível;
+- não alterar a associação de jogos ao job: o job continua contendo somente os jogos selecionados;
+- sincronização global pode preparar outros jogos, mas isso deve aparecer apenas como efeito global informativo.
+
+Próxima implementação experimental:
+
+1. criar probe Lua auxiliar que enumere `Content.FindContent()`;
+2. gravar snapshot somente-leitura de identidade (`ContentID/TitleID/MediaID`) em arquivo de estado;
+3. backend lê o snapshot via FTP;
+4. jogo do job só chega a `AURORA_READY` se sua identidade aparecer no snapshot runtime;
+5. validar primeiro sem alterar o filtro Lua congelado.
+
 #### Relação com XM-10
 
 A permanência do PES 2018 na própria biblioteca do Aurora continua fora do XM-07.
