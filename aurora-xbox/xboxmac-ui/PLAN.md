@@ -2071,6 +2071,31 @@ Próxima validação física:
 4. validar a presença atual reconciliada, incluindo PES 2018 como `ABSENT`;
 5. somente depois testar um novo fluxo até `WAITING_FOR_AURORA_VISIBILITY`.
 
+#### Validação física XM-07B — falso AURORA_READY eliminado em 2026-10-04
+
+Teste real usando GTA IV já ingerido:
+
+- job novo entrou em `WAITING_FOR_AURORA_VISIBILITY`;
+- game ficou em `AURORA_PREPARED`;
+- resultado de ingestão: `ALREADY_INGESTED`;
+- TitleID: `545407F2`;
+- MediaID: `6AC07221`;
+- ContentID: `13`;
+- metadata: `VERIFIED`;
+- capa/GC: `VERIFIED`;
+- `aurora_verified=false`;
+- job não foi marcado `SUCCEEDED`;
+- game não foi marcado `AURORA_READY`;
+- ação guiada informou refresh/restart/reboot sem botão obrigatório de confirmação;
+- log registrou `AURORA_VISIBILITY UNAVAILABLE` com justificativa de que o NOVA não expõe a biblioteca carregada.
+
+Resultado: a regressão principal do XM-07B está corrigida e validada fisicamente.
+
+Pendência restante do XM-07:
+
+- localizar e validar um sinal independente de visibilidade real no Aurora;
+- se nenhum sinal confiável existir, formalizar `WAITING_FOR_AURORA_VISIBILITY` como limite observável automático do produto, sem falso sucesso.
+
 #### Relação com XM-10
 
 A permanência do PES 2018 na própria biblioteca do Aurora continua fora do XM-07.
