@@ -3951,6 +3951,78 @@ Etapa de rede aceita em 2026-10-04:
 - `XM-09 NETWORK_RECOVERY_OK`;
 - próxima etapa: estabilidade de arquivo, offline/cache, retries e locks.
 
+
+#### Etapa 2 — robustez do scheduler — IMPLEMENTADA / VALIDAÇÃO PENDENTE
+
+Estabilidade de ISO:
+
+- novo estado:
+  `WAITING_FOR_FILE_STABILITY`;
+- tamanho + mtime precisam permanecer iguais por duas observações;
+- intervalo de produção: 5 s;
+- se o arquivo muda, observação reinicia;
+- fingerprint estável substitui o snapshot feito na submissão;
+- ingest não começa sobre arquivo ainda em cópia.
+
+Duplicidade:
+
+- job não-terminal passa a bloquear nova submissão para o mesmo alvo;
+- chave ISO:
+  path canônico;
+- XEX:
+  `game_id` ou SHA-256;
+- jobs terminais não bloqueiam nova execução.
+
+Offline:
+
+- comportamento existente `WAITING_FOR_XBOX` permanece recuperável;
+- ingest local não exige Xbox online;
+- metadata/capa aguardam Aurora FTP;
+- cache de `xboxmac-stage-assets` é reutilizado quando metadata/artwork
+  já existem localmente;
+- conteúdo externo não cacheado pode continuar exigindo Internet.
+
+Retries:
+
+- metadata/capa/status remoto:
+  até 3 tentativas;
+- backoff exponencial;
+- códigos semânticos Aurora 3/4 não são tratados como falha;
+- cada retry é registrado no log do job.
+
+Lock:
+
+- `WorkerLease` baseado em `flock`;
+- path:
+  `<state_root>/xboxmac-worker.lock`;
+- somente um worker pode executar pipeline por vez mesmo se dois backends
+  forem iniciados acidentalmente.
+
+Restart:
+
+- `WAITING_FOR_FILE_STABILITY` é retomável;
+- `WAITING_FOR_AURORA_VISIBILITY` também entra no conjunto de estados
+  recuperados;
+- após restart:
+  `QUEUED + RECOVERED_AFTER_BACKEND_RESTART`.
+
+Teste seguro:
+
+```text
+.venv/bin/python scripts/physical-xm09-scheduler.py
+```
+
+Ele usa somente diretório temporário e valida:
+
+- arquivo mudando antes de estabilizar;
+- rejeição de job duplicado;
+- retry com sucesso na terceira tentativa;
+- exclusão mútua do worker;
+- recuperação de waiter após restart;
+- contrato offline do Xbox;
+- cache-first de assets.
+
+
 Gate final XM-09: operação cotidiana sem terminal.
 
 ### XM-10 — remoção do catálogo Aurora
