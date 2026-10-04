@@ -4774,7 +4774,7 @@ Evidência final:
 
 Status:
 
-    PHYSICAL_VALIDATION_PASSED / FINAL_AUTOMATED_RERUN_PENDING
+    ACCEPTED / COMPLETE
 
 Implementado:
 
@@ -4816,6 +4816,18 @@ Gate final pendente:
 Não há TTL automático no XM-11.
 Exclusão individual de um registro histórico permanece opcional e fora
 do gate inicial.
+
+
+XM-11 = ACCEPTED / COMPLETE
+
+Evidência final:
+
+- STATIC_OK;
+- 171/171 testes OK;
+- UI Histórico validada;
+- purge real 7/7;
+- restart persistente;
+- arquivos de jogos/Aurora fora do purge.
 
 
 ## Critérios finais
