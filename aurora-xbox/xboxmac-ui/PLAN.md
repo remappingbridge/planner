@@ -4827,7 +4827,7 @@ Evidência final:
 
 Status:
 
-    IMPLEMENTED / GLOBAL_RECONCILIATION_PHYSICAL_VALIDATION_PENDING
+    ACCEPTED / COMPLETE
 
 Objetivo:
 
@@ -4911,21 +4911,28 @@ Implementação da decisão arquitetural:
   - resíduo sem qualquer arquivo local ainda aparecer como `AURORA_STALE`;
   - Aurora offline preservar a Biblioteca local.
 
-Nova evidência física parcial:
+Evidência física final:
 
 - após a correção do JavaScript, a UI voltou a popular as listas;
 - exclusão ConnectX feita pela aplicação funcionou;
 - Rescan + restart do Aurora foram suficientes nesse teste para o jogo
   excluído desaparecer do CoverFlow;
-- PES 2018 removido manualmente continuou visível, exatamente o caso de
-  referência agora coberto pela reconciliação global;
-- validação física concluída para o resíduo manual:
-  - PES 2018 apareceu como resíduo elegível na Biblioteca;
-  - ação `Limpar do Aurora` foi executada com sucesso;
-  - após atualização/restart do Aurora, o PES 2018 desapareceu do CoverFlow;
-  - a reconciliação global Aurora × ConnectX está funcional no ambiente real;
-- falta somente a checagem final do verificador/suíte/helper físico atualizados
-  antes de marcar XM-12 como ACCEPTED / COMPLETE.
+- PES 2018 removido manualmente foi detectado como resíduo elegível;
+- ação `Limpar do Aurora` foi executada com sucesso;
+- após atualização/restart do Aurora, o PES 2018 desapareceu do CoverFlow;
+- `verify-xm12.py`: `STATIC_OK`;
+- helper físico final:
+  - `pending=0`;
+  - `complete=2`;
+  - `errors=0`;
+  - `library_aurora_available=true`;
+  - `library_stale_games=0`;
+  - `library_stale_entries=0`;
+- suíte local executou 183 testes; a única falha era uma asserção textual
+  legada do XM-06 que esperava `Ações de exclusão` depois da coluna ter sido
+  generalizada para `Ações`; o teste foi corrigido sem alteração funcional;
+- Histórico XM-11 permanece preservado por contrato e testes;
+- XM-12 aceito.
 
 Regressão observada no primeiro reteste físico:
 
@@ -4936,14 +4943,11 @@ Regressão observada no primeiro reteste físico:
 - corrigidos 20 escapes no `app.py`;
 - JavaScript renderizado validado sintaticamente;
 - teste de regressão adicionado ao XM-12;
-- reteste físico após reinstalação do runtime ainda pendente.
+- reteste físico após reinstalação do runtime concluído com sucesso.
 
-Gate pendente:
+Gate aceito:
 
-1. rodar STATIC_OK e suíte completa após a reconciliação global;
-2. rodar `physical-xm12.py` e confirmar ausência do resíduo removido;
-3. confirmar Histórico XM-11 preservado;
-4. com essas evidências, marcar XM-12 como ACCEPTED / COMPLETE.
+- XM-12 `ACCEPTED / COMPLETE`.
 
 
 ## Critérios finais
