@@ -2327,6 +2327,41 @@ Novo diagnóstico read-only:
 
 Objetivo: comparar os cinco jogos novos não visíveis contra jogos antigos visíveis e verificar diferenças em `ScanPathId`, grupos, flags, profundidade, CaseIndex ou configuração de QuickView.
 
+#### Diagnóstico estrutural XM-07B — campos e QuickView descartados
+
+Com `content.db` e `settings.db` reais:
+
+- ContentIDs 1–15 usam os mesmos valores estruturais relevantes:
+  - `ScanPathId=1`;
+  - `FoundAtDepth=1`;
+  - `ContentGroup=1`;
+  - `DefaultGroup=1`;
+  - `ContentType=28672`;
+  - `FileType=1`;
+  - `ContentFlags=20`;
+  - `CaseIndex=0`;
+- portanto os ContentIDs novos 11–15 não diferem estruturalmente dos jogos antigos visíveis;
+- `DefaultQuickView=6`;
+- QuickView 6 = `XboxMac Probe`, filtro `User.XboxMac Probe`;
+- o filtro Lua congelado `XboxMacProbe.lua` retorna `true` para todo item após executar `processManifest()`;
+- portanto não há regra no filtro XboxMac Probe que exclua seletivamente os cinco novos jogos.
+
+Hipóteses descartadas:
+
+- ScanPathId incorreto;
+- ContentGroup/DefaultGroup divergente;
+- ContentFlags/ContentType/FileType divergentes;
+- profundidade/CaseIndex divergentes;
+- QuickView XboxMac Probe retornando false para os novos jogos.
+
+Próximo teste físico:
+
+- com os ContentIDs 11–15 já persistidos, reiniciar completamente o console;
+- após o boot e carregamento do Aurora, verificar se os cinco jogos passam a aparecer;
+- não executar novo Rescan nem nova automação antes dessa observação.
+
+Objetivo: determinar se a divergência restante está no estado/cache/runtime carregado do Aurora/ConnectX e é resolvida apenas por reboot completo.
+
 #### Relação com XM-10
 
 A permanência do PES 2018 na própria biblioteca do Aurora continua fora do XM-07.
