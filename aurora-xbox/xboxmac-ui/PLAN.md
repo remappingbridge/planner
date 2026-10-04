@@ -4629,6 +4629,26 @@ Conclusão:
 - verifier corrigido;
 - helper físico passa a recuperar xboxmacd automaticamente quando necessário.
 
+Rollback físico do PES 2018 aprovado:
+
+- `ROLLED_BACK`;
+- integrity ok;
+- row presente;
+- assets presentes;
+- backup de assets presente;
+- verified=true;
+- capa reapareceu visualmente somente após reboot completo do Xbox;
+- rescan + restart do Aurora não foram suficientes para atualizar a apresentação.
+
+Próximo estado final do XM-10:
+
+- remover novamente PES 2018;
+- remover Fuzion Frenzy 2;
+- remover SEGA Rally;
+- remover TMNT Mutants in Manhattan;
+- confirmar auditoria stale=0;
+- confirmar visualmente após reboot completo do Xbox.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
