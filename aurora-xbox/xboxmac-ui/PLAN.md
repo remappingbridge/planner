@@ -2029,6 +2029,21 @@ git pull
 .venv/bin/python -m unittest discover -s backend/server/tests -v
 ```
 
+#### Validação física XM-07A — APROVADA em 2026-10-04
+
+No Mac real, após reiniciar o backend atual:
+
+- `GET /api/jobs?scope=active`: vazio;
+- nenhum job terminal antigo permaneceu na seção operacional;
+- `GET /api/jobs?scope=history`: preservou os jobs antigos;
+- PES 2018: `current_presence=ABSENT`, `current_library_state=None`;
+- lote de cinco jogos: `current_presence=BOTH_PRESENT`;
+- os cinco jogos continuam correlacionados à biblioteca ativa como `CONNECTX_READY`;
+- nenhum registro histórico foi apagado ou reescrito;
+- estados históricos antigos como `AURORA_READY` permanecem como evidência do comportamento anterior e não são migrados retroativamente.
+
+Resultado: XM-07A aceito fisicamente.
+
 #### Validação estática do replanejamento — CONCLUÍDA em 2026-10-04
 
 No Mac real:
