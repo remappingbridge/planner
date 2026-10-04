@@ -4050,6 +4050,55 @@ Próximo e último gate do XM-09:
 - backend e serviços voltam ao estado operacional;
 - jobs persistidos permanecem coerentes.
 
+#### Etapa 3 — gate final de reboot — IMPLEMENTADA / TESTE REAL PENDENTE
+
+Verificador:
+
+```text
+scripts/physical-xm09-reboot.py
+```
+
+Fase `before` registra:
+
+- `kern.boottime`;
+- componentes `up/down`;
+- IDs dos jobs persistidos;
+- presença do LaunchAgent xboxmacd;
+- presença do LaunchDaemon do reconciliador.
+
+Marker:
+
+```text
+~/Library/XboxMac/xm09-reboot-marker.json
+```
+
+Procedimento:
+
+1. executar `before`;
+2. reboot real do Mac;
+3. login normal;
+4. nenhum comando de reparo;
+5. abrir `XboxMac.app`;
+6. executar `after` apenas como diagnóstico.
+
+O `after` exige:
+
+- novo boot detectado;
+- backend saudável;
+- LaunchAgent xboxmacd carregado;
+- reconciliador root carregado;
+- Ethernet/NetISO/Samba/NetBIOS `up`;
+- continuidade de Xbox/Aurora FTP se estavam `up` antes;
+- nenhum job persistido desaparecido;
+- `manual_repair_commands=NONE`.
+
+Resultado esperado:
+
+```text
+XM-09 REBOOT_RECOVERY_OK
+```
+
+
 Gate final XM-09: operação cotidiana sem terminal.
 
 ### XM-10 — remoção do catálogo Aurora
