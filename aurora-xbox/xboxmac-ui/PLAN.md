@@ -2647,7 +2647,7 @@ XM-06 remove os arquivos locais.
 XM-10 continua responsável, futuramente, por remover com segurança a entrada e os assets do catálogo Aurora.
 
 
-### XM-07C — adoção automática de jogos XEX manuais — EM VALIDAÇÃO FÍSICA
+### XM-07C — adoção automática de jogos XEX manuais — CONCLUÍDO
 
 Motivação real:
 
@@ -2937,33 +2937,75 @@ Próxima ação física:
   - biblioteca `CONNECTX_READY / ADOPTED`;
   - validar visualmente a nova capa do Avatar no CoverFlow.
 
-#### Validação física XM-07C — restart do Aurora insuficiente
+#### Validação física XM-07C — restart do Aurora foi suficiente para metadata/capa
 
-Após executar restart do Aurora:
+Correção de interpretação baseada na sequência física real:
 
-- job permaneceu `WAITING_FOR_AURORA_REFRESH`;
-- Avatar permaneceu:
-  - `ContentID=16`;
-  - `metadata_state=MANIFEST_PENDING`;
+- após o restart do Aurora, sem reboot completo do console:
+  - Avatar já apareceu visualmente com capa ilustrada;
+  - o manifesto terminou de ser processado;
+  - `metadata_state=VERIFIED`;
   - `cover_state=VERIFIED`;
-  - `aurora_verified=false`;
-- estado remoto do manifesto:
-  - `state=PENDING_AURORA_PROCESSING`;
-  - `waiting_for_aurora=YES`;
-  - `aurora_processing=TIMEOUT`;
-  - `manifest=PRESENT bytes=1813`;
-  - `result=ABSENT`;
-- banco continua íntegro;
-- Avatar ainda não aparece como metadata `VERIFIED`;
-- jogos anteriores permanecem verificados.
+  - `ContentID=16`;
+  - job avançou para `WAITING_FOR_AURORA_VISIBILITY`;
+  - probe runtime v3 ficou `ARMED`.
+
+Evidência do processamento:
+
+- `aurora_processing=COMPLETED`;
+- `manifest=ABSENT`;
+- `result=PRESENT`;
+- setters de TitleName, Description, Publisher, Developer e ReleaseDate retornaram sucesso;
+- `game_status=VERIFIED`;
+- banco:
+  `ContentID=16 TitleID=545107E1 VERIFIED Avatar TLA TBE`;
+- `overall=VERIFIED`.
 
 Conclusão:
 
-- restart do Aurora isoladamente não processou o manifesto do Avatar;
-- não reenviar metadata/capa;
-- não criar novo job;
-- próximo teste é reboot completo do Xbox 360;
-- após reboot, o mesmo job deve continuar automaticamente e reavaliar o manifesto.
+- restart do Aurora foi suficiente para metadata e capa;
+- reboot completo não foi necessário para a capa aparecer;
+- reboot completo executado posteriormente serviu para concluir a prova de visibilidade runtime do QuickView e finalizar a adoção.
+
+#### Validação física final XM-07C — APROVADA em 2026-10-04
+
+Após reboot completo do Xbox, usando o mesmo job do Avatar:
+
+- `job_id=e7eba4ee5d644351bba95172bb1916cd`;
+- job final: `SUCCEEDED`;
+- game final: `AURORA_READY`;
+- `metadata_state=VERIFIED`;
+- `cover_state=VERIFIED`;
+- `aurora_verified=true`;
+- probe:
+  - `status=VERIFIED`;
+  - `protocol=quickview-callback-v3`;
+- log:
+  - `MANUAL_CONNECTX_ADOPTED 545107E1 117FE50B`;
+  - `AURORA_VISIBILITY VERIFIED source=QuickViewCallback`.
+
+Biblioteca final:
+
+- Avatar:
+  - `state=CONNECTX_READY`;
+  - `manual_connectx=true`;
+  - `manual_adoption_state=ADOPTED`;
+  - `manual_adoption_job_id=e7eba4ee5d644351bba95172bb1916cd`.
+
+Store:
+
+- `manual-adoptions.json` criado;
+- chave:
+  `545107E1:117FE50B`;
+- fingerprint do XEX preservado;
+- job de adoção persistido.
+
+Validação visual:
+
+- a capa ilustrada do Avatar apareceu já após restart do Aurora;
+- reboot completo posterior concluiu a prova runtime e a adoção persistente.
+
+Resultado: XM-07C aceito fisicamente e concluído.
 
 ### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
 
