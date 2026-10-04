@@ -3519,7 +3519,7 @@ Validação física final aprovada em 2026-10-04:
 
 Resultado: **XM-07D.1 aceito e encerrado.**
 
-### XM-08 — launcher macOS e atalhos de operação no Finder — IMPLEMENTADO / VALIDAÇÃO ESTÁTICA PENDENTE
+### XM-08 — launcher macOS e atalhos de operação no Finder — ACEITO / CONCLUÍDO
 
 Objetivo:
 
@@ -3669,6 +3669,19 @@ Gate físico XM-08:
 - abrir ISO, ConnectX e Lixeira pelos botões;
 - confirmar que nenhuma ação de abertura modifica arquivos;
 - após a instalação, operação cotidiana sem Terminal.
+
+Validação final aprovada em 2026-10-04:
+
+- `XM-08: STATIC_OK`;
+- suíte backend `111/111 OK`;
+- app iniciou backend desligado sem Terminal;
+- frontend abriu automaticamente;
+- backend persistiu via LaunchAgent após o launcher encerrar;
+- segunda abertura reutilizou o mesmo PID `5607`;
+- atalhos ISO/ConnectX/Lixeira retornaram `opened`;
+- todos retornaram `destructive=false`.
+
+Resultado: **XM-08 aceito e encerrado.**
 
 ### Observação operacional para XM-09 — interface privada após desconexão prolongada
 
