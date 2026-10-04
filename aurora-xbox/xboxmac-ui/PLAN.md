@@ -4806,13 +4806,6 @@ UI Histórico confirmada visualmente pelo usuário.
 Único failure restante era assertion de formatação do teste da URL active;
 corrigido sem alteração de produção.
 
-Gate final pendente:
-
-- rerun do verifier XM-11;
-- rerun da suíte completa;
-- se ambos passarem, XM-11 pode ser marcado ACCEPTED / COMPLETE.
-
-
 Não há TTL automático no XM-11.
 Exclusão individual de um registro histórico permanece opcional e fora
 do gate inicial.
@@ -4828,6 +4821,51 @@ Evidência final:
 - purge real 7/7;
 - restart persistente;
 - arquivos de jogos/Aurora fora do purge.
+
+
+### XM-12 — exclusão ConnectX reconciliada com Aurora
+
+Status:
+
+    IMPLEMENTED / AUTOMATED_AND_PHYSICAL_VALIDATION_PENDING
+
+Objetivo:
+
+- excluir ConnectX pela aplicação => limpar automaticamente catálogo Aurora;
+- ISO presente ou ausente não interfere;
+- ISO-only não toca Aurora;
+- Finder/manual ConnectX removal continua no fluxo stale manual consciente;
+- Histórico XM-11 permanece preservado.
+
+Implementado:
+
+- identidade de exclusão inclui TitleID/MediaID;
+- store persistente `connectx-aurora-reconcile.json`;
+- estados PENDING_DISCOVERY / WAITING_FOR_XBOX /
+  WAITING_FOR_AURORA / COMPLETE / ERROR;
+- reconciliação usa o pipeline seguro XM-10;
+- múltiplas linhas da mesma identidade são tratadas sequencialmente com
+  redescoberta entre operações;
+- feedback na Biblioteca em `delete-status`;
+- ação WAITING_FOR_AURORA recomenda reboot completo do Xbox;
+- browser poll automático a cada 4s;
+- `POST /api/delete/aurora/reconcile`;
+- `GET /api/delete/aurora/status` somente leitura;
+- testes: `test_xm12_connectx_aurora_cleanup.py`;
+- verificador: `scripts/verify-xm12.py`;
+- helper físico: `scripts/physical-xm12.py`;
+- docs: `docs/XM-12.md`.
+
+Gate pendente:
+
+1. STATIC_OK;
+2. suíte completa;
+3. instalar runtime;
+4. confirmar feedback visual;
+5. em alguma exclusão ConnectX feita pela aplicação, observar reconciliação
+   automática sem assumir qual jogo/ISO existe;
+6. após ação indicada no Xbox, confirmar COMPLETE e desaparecimento visual;
+7. confirmar Histórico XM-11 preservado.
 
 
 ## Critérios finais
