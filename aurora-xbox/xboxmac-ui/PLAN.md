@@ -4436,6 +4436,30 @@ Preflight físico aprovado em 2026-10-04:
   `92b97f64332beb05b1d957f62290512c2b87d6738ba0d60bc7e8b5593eb1d706`;
 - nenhuma ação destrutiva executada até este ponto.
 
+Primeiro manifesto físico chegou ao Lua, mas foi recusado antes
+de qualquer DELETE:
+
+- result:
+  `status=INVALID_MANIFEST`;
+- content.db íntegro;
+- ContentID 1 ainda presente;
+- GameData ainda presente;
+- backups locais íntegros;
+- rollback não necessário.
+
+Causa:
+
+- parser Lua `raw:gmatch("([^\\r\\n]+)")` incorreto;
+- em Lua isso fragmentava linhas também em caracteres literais r/n.
+
+Correção:
+
+- parser substituído por:
+  `for line in (raw .. "\\n"):gmatch("(.-)\\n") do`;
+- regressão coberta por testes/verifier;
+- manifesto pendente será reutilizado;
+- proibido repetir `execute` para esse plan_id.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
