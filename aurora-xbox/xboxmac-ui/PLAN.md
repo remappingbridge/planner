@@ -2895,6 +2895,48 @@ Conclusão parcial:
 - ingest ISO foi efetivamente pulado no teste físico;
 - próximo ponto de validação é o resultado do sync de metadata/capa/Aurora.
 
+#### Validação física XM-07C — metadata e capa do Avatar preparadas
+
+Job real `e7eba4ee5d644351bba95172bb1916cd`:
+
+- estado atual: `WAITING_FOR_AURORA_REFRESH`;
+- Avatar:
+  - `ContentID=16`;
+  - `TitleID=545107E1`;
+  - `MediaID=117FE50B`;
+  - `metadata_state=MANIFEST_PENDING`;
+  - `cover_state=VERIFIED`;
+  - `aurora_verified=false`;
+- metadata:
+  - catálogo local reconheceu 15 games;
+  - Aurora content.db íntegro com 16 items;
+  - Avatar detectado como pendente nos campos:
+    `TitleName, Description, Publisher, Developer, ReleaseDate`;
+  - manifesto enviado:
+    `manifest_uploaded=YES`;
+- capa:
+  - placeholder remoto anterior: `2048` bytes;
+  - GC novo enviado: `566272` bytes;
+  - `covers_uploaded=1`;
+  - `status=UPDATED`;
+- nenhum erro de metadata/capa;
+- nenhuma chamada a ingest ISO.
+
+Próxima ação física:
+
+- executar refresh/restart do Aurora conforme orientação do job;
+- aguardar o backend verificar o manifesto;
+- esperado:
+  - metadata -> `VERIFIED`;
+  - estado -> `WAITING_FOR_AURORA_VISIBILITY`;
+  - probe v3 armado;
+- após prova de visibilidade:
+  - job `SUCCEEDED`;
+  - game `AURORA_READY`;
+  - adoção persistida;
+  - biblioteca `CONNECTX_READY / ADOPTED`;
+  - validar visualmente a nova capa do Avatar no CoverFlow.
+
 ### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
 
 Motivação real:
