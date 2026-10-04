@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — IMPLEMENTADO / AGUARDANDO VALIDAÇÃO ESTÁTICA
+### XM-07 — assets/Aurora e ações manuais guiadas — EM VALIDAÇÃO FÍSICA
 
 - estado de scan;
 - ContentID;
@@ -2028,6 +2028,33 @@ git pull
 .venv/bin/python scripts/verify-xm07.py
 .venv/bin/python -m unittest discover -s backend/server/tests -v
 ```
+
+#### Validação estática do replanejamento — CONCLUÍDA em 2026-10-04
+
+No Mac real:
+
+- `scripts/verify-xm07.py`: `STATIC_OK`;
+- 58/58 testes do backend passaram;
+- `job_scope=ACTIVE_HISTORY_ALL`;
+- jobs terminais: histórico preservado;
+- presença do filesystem: reconciliada;
+- ContentID: rastreado;
+- metadata/manifesto: rastreados;
+- capa/GC: verificada;
+- `AURORA_PREPARED` explicitamente não equivale a `AURORA_READY`;
+- probe independente de visibilidade: obrigatório;
+- falso `AURORA_READY`: proibido;
+- confirmação manual obrigatória: proibida;
+- escrita direta em `content.db`: proibida;
+- pipeline legado: inalterado.
+
+Próxima validação física:
+
+1. reiniciar o backend com o código atual;
+2. comprovar que jobs terminais antigos não aparecem em `scope=active`;
+3. comprovar que os mesmos jobs permanecem em `scope=history`;
+4. validar a presença atual reconciliada, incluindo PES 2018 como `ABSENT`;
+5. somente depois testar um novo fluxo até `WAITING_FOR_AURORA_VISIBILITY`.
 
 #### Relação com XM-10
 
