@@ -4702,6 +4702,18 @@ Plano adversarial salvo:
 - sucesso do teste:
   `XM-10 STALE_PLAN_REJECTED`.
 
+Primeiro plan-next-stale falhou fechado:
+
+- regressão 1:
+  require_state_fingerprint recursivo;
+- regressão 2:
+  db_bytes de teste reutilizava SQLite e recriava tabela;
+- ambas corrigidas;
+- teste de regressão adicionado;
+- nenhum plano adversarial válido foi salvo;
+- execute-saved-plan posterior recusou por ausência de plano salvo;
+- nenhuma escrita/manifesto/DELETE ocorreu.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
