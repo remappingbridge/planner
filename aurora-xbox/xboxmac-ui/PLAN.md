@@ -4857,6 +4857,17 @@ Implementado:
 - helper físico: `scripts/physical-xm12.py`;
 - docs: `docs/XM-12.md`.
 
+Regressão observada no primeiro reteste físico:
+
+- HTML carregava, mas a UI permanecia em `Preparando conexões...` e não
+  populava as listas;
+- causa confirmada: escapes `\n` insuficientes dentro do JavaScript embutido
+  na string Python da página, produzindo JavaScript inválido no navegador;
+- corrigidos 20 escapes no `app.py`;
+- JavaScript renderizado validado sintaticamente;
+- teste de regressão adicionado ao XM-12;
+- reteste físico após reinstalação do runtime ainda pendente.
+
 Gate pendente:
 
 1. STATIC_OK;
