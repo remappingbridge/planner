@@ -4519,6 +4519,23 @@ Plano físico antigo deve ser aposentado antes de continuar:
 - arquiva manifesto/resultado localmente;
 - depois gerar plano novo contra o content.db atual.
 
+Novo plano físico pós-FATX aprovado:
+
+- suite `149/149 OK`;
+- plano antigo aposentado com
+  `FAILED_PLAN_RETIRED`;
+- filtro carregado:
+  `FILTER_PREFLIGHT_OK`;
+- SHA do filtro:
+  `88314b30a9fefd4b6032b455728ea1fd22a3a1c889f880260377b959700316ee`;
+- novo plan_id:
+  `da57feb71f49316e591778707f766f124440b97c1264ceb90df952205c8f1e8f`;
+- db_sha256:
+  `d82f91401d1a1a6381d9db32dffa33ddd86adb88fc65819ef8e09d501791759c`;
+- candidato:
+  PES 2018 / `4A3007D3` / `1CB7BE36` / ContentID 1;
+- nenhuma ação destrutiva executada ainda.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
