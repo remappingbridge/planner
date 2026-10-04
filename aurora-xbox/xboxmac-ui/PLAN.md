@@ -4640,14 +4640,30 @@ Rollback físico do PES 2018 aprovado:
 - capa reapareceu visualmente somente após reboot completo do Xbox;
 - rescan + restart do Aurora não foram suficientes para atualizar a apresentação.
 
-Próximo estado final do XM-10:
+Validação final do XM-10 usa inventário dinâmico:
 
-- remover novamente PES 2018;
-- remover Fuzion Frenzy 2;
-- remover SEGA Rally;
-- remover TMNT Mutants in Manhattan;
-- confirmar auditoria stale=0;
-- confirmar visualmente após reboot completo do Xbox.
+- não existe lista fixa de jogos a remover;
+- não existe stale_entries esperado;
+- o usuário pode remover/restaurar jogos entre verificações;
+- toda iteração começa com descoberta fresca;
+- cada snapshot recebe state_fingerprint;
+- plan usa o estado corrente;
+- execute recalcula e recusa qualquer plano invalidado por mudança de
+  estado;
+- listas anteriores de jogos são somente evidência histórica.
+
+Contrato de inventário dinâmico:
+
+- `inventory_assumption=NONE`;
+- nenhuma contagem, ordem, nome, TitleID, MediaID ou ContentID físico
+  pode ser hardcoded/esperado;
+- usuário pode excluir/restaurar jogos após cada verificação;
+- `GET /api/aurora/catalog/stale` é sempre uma leitura fresca;
+- resposta expõe `state_fingerprint`;
+- `next-stale` apenas seleciona a partir do snapshot corrente;
+- plan vincula candidato + content.db corrente;
+- execute recalcula o plano e deve recusar se o cenário mudou;
+- inventários registrados anteriormente são evidência histórica apenas.
 
 Gate físico:
 
