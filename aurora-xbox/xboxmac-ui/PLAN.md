@@ -4772,57 +4772,48 @@ Evidência final:
 
 ### XM-11 — histórico de automações
 
-Gate futuro, separado da fila operacional.
+Status:
 
-Objetivo:
+    IMPLEMENTED / PHYSICAL_VALIDATION_PENDING
 
-- preservar rastreabilidade dos jobs concluídos sem poluir a área principal `Automação`;
-- permitir que o usuário limpe histórico antigo conscientemente;
-- nunca confundir limpeza de histórico com exclusão de jogo.
+Implementado:
 
-Estrutura planejada:
-
-- seção/página `Histórico` separada da Automação atual;
-- listar apenas jobs terminais:
+- seção `Histórico` separada da Automação atual;
+- `GET /api/jobs?scope=history` exibe somente
   `SUCCEEDED`, `FAILED`, `CANCELLED`;
-- mostrar por job:
-  - data/hora;
-  - estado final;
-  - jogos;
-  - TitleID/MediaID/ContentID quando disponíveis;
-  - resultado final;
-  - presença atual reconciliada (`ISO_PRESENT`, `CONNECTX_PRESENT`, `BOTH_PRESENT`, `ABSENT`);
-  - erro resumido quando houver;
-- permitir abrir detalhes/log de um job sem misturá-lo com a fila atual.
+- presença atual reconciliada continua disponível;
+- detalhe/log usa `GET /api/jobs/{job_id}`;
+- `POST /api/jobs/history/purge`;
+- confirmação explícita obrigatória;
+- purge remove somente jobs terminais do mesmo store;
+- jobs ativos preservados;
+- persistência continua atômica via tmp + replace;
+- nenhum helper de ISO/ConnectX/Aurora é chamado pelo purge;
+- UI informa explicitamente que arquivos de jogos e Aurora não serão
+  alterados;
+- testes:
+  `backend/server/tests/test_xm11_history.py`;
+- verificador:
+  `scripts/verify-xm11.py`;
+- helper físico:
+  `scripts/physical-xm11.py`;
+- documentação:
+  `docs/XM-11.md`.
 
-Ações planejadas:
+Gate físico pendente:
 
-- `Limpar histórico concluído`:
-  - exige confirmação;
-  - remove somente jobs terminais do store de histórico;
-  - nunca remove job ativo;
-  - nunca remove ISO;
-  - nunca remove ConnectX;
-  - nunca altera catálogo/assets do Aurora;
-  - persistência reescrita de forma atômica;
-- opcionalmente oferecer exclusão de um único registro histórico;
-- ausência física de ISO/ConnectX não apaga o histórico automaticamente;
-- limpeza automática por TTL fica fora do escopo inicial.
+1. STATIC_OK + suíte completa;
+2. `physical-xm11.py inspect`;
+3. validar visualmente seção Histórico;
+4. `physical-xm11.py purge --confirm`;
+5. confirmar terminais removidos e ativos preservados;
+6. reiniciar backend/app;
+7. confirmar persistência do store restante;
+8. confirmar que ISO, ConnectX e Aurora não foram afetados.
 
-Compatibilidade:
-
-- `GET /api/jobs` permanece compatível;
-- visão `history` usa o filtro/API planejado no XM-07A;
-- endpoint destrutivo de purge deve ser específico de histórico e nunca reutilizar os endpoints de exclusão de jogos.
-
-Gate:
-
-- jobs concluídos não aparecem na Automação atual;
-- Histórico os preserva;
-- `Limpar histórico concluído` remove apenas registros terminais;
-- arquivos de jogos e Aurora permanecem byte-for-byte inalterados;
-- jobs ativos sobrevivem à limpeza;
-- reiniciar o backend mantém corretamente o histórico restante.
+Não há TTL automático no XM-11.
+Exclusão individual de um registro histórico permanece opcional e fora
+do gate inicial.
 
 
 ## Critérios finais
