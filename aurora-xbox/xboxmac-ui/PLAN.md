@@ -4113,16 +4113,246 @@ Resultado: **XM-09 aceito e encerrado.**
 
 Gate final XM-09: **APROVADO — operação cotidiana sem terminal.**
 
-### XM-10 — remoção do catálogo Aurora — EM IMPLEMENTAÇÃO
+### XM-10 — remoção do catálogo Aurora — IMPLEMENTADO / VALIDAÇÃO ESTÁTICA E FÍSICA PENDENTES
 
-Gate separado e opcional:
+Gate separado e opcional.
 
-- backup;
-- remoção segura da entrada;
-- remoção dos assets associados;
+Objetivo:
+
+- remover somente entradas antigas do catálogo Aurora;
+- nunca reutilizar a exclusão local de ISO/ConnectX;
+- backup obrigatório;
+- transação;
 - integrity check;
 - rollback;
-- confirmação visual.
+- confirmação explícita;
+- confirmação visual no Aurora.
+
+#### Escopo restrito
+
+Uma entrada só é candidata quando:
+
+- TitleID + MediaID pertencem ao histórico gerenciado pelo XboxMac:
+  `ingest-state.json` ou `catalog.json`;
+- a identidade não existe mais no ConnectX real;
+- a linha ainda existe em `ContentItems`.
+
+Entradas do Aurora nunca gerenciadas pelo XboxMac não são oferecidas.
+
+ConnectX ainda presente torna a entrada inelegível.
+
+#### Serviço backend
+
+Arquivo:
+
+```text
+backend/server/xboxmac/aurora_catalog_delete.py
+```
+
+Descoberta:
+
+```text
+GET /api/aurora/catalog/stale
+```
+
+Plano:
+
+```text
+POST /api/aurora/catalog/remove/plan
+```
+
+O plan_id vincula:
+
+- candidate_id;
+- ContentID;
+- TitleID;
+- MediaID;
+- título;
+- diretório GameData;
+- SHA-256 do content.db;
+- SHA-256 do SQL interno de rollback.
+
+Execução:
+
+```text
+POST /api/aurora/catalog/remove/execute
+```
+
+Status:
+
+```text
+GET /api/aurora/catalog/remove/status/{plan_id}
+```
+
+Rollback:
+
+```text
+POST /api/aurora/catalog/remove/rollback
+```
+
+A API do navegador não aceita:
+
+- path;
+- SQL;
+- ContentID arbitrário;
+- nome de tabela.
+
+#### Backup
+
+Mac:
+
+```text
+/usr/local/var/xbox-connectx/aurora-delete-backups/<plan_id>/
+```
+
+Inclui:
+
+- content.db;
+- plan.json;
+- manifesto usado;
+- SQL de rollback somente no backup interno.
+
+Xbox:
+
+```text
+game:\User\Scripts\XboxMacDeleteBackup\<plan_id>
+```
+
+Inclui:
+
+- cópia de content.db;
+- cópia do GameData associado quando ele existe.
+
+Se assets existem e o backup dos assets falha, a exclusão é recusada.
+
+#### Processamento dentro do Aurora
+
+Processador existente estendido:
+
+```text
+aurora/User/Scripts/Content/Filters/XboxMacProbe.lua
+```
+
+Manifesto:
+
+```text
+/Hdd1/Apps/Aurora/User/Scripts/xboxmac-delete.manifest
+```
+
+Fluxo:
+
+1. validar ContentID/TitleID/MediaID;
+2. backup;
+3. `BEGIN IMMEDIATE`;
+4. DELETE exato em ContentItems;
+5. SELECT confirma ausência;
+6. remover GameData associado;
+7. `COMMIT`;
+8. em falha: `ROLLBACK` + restauração de assets quando necessário.
+
+O desenho acompanha o mecanismo usado pelo Database Cleaner oficial do
+Aurora, acrescentando as garantias do XboxMac.
+
+#### Verificação
+
+Só considerar removido quando:
+
+- resultado Lua contém `status=VERIFIED`;
+- plan_id coincide;
+- content.db recém-baixado passa:
+  `PRAGMA integrity_check = ok`;
+- ContentID está ausente;
+- diretório GameData associado está ausente.
+
+#### Rollback
+
+O navegador fornece somente plan_id.
+
+O backend recupera o SQL original exclusivamente do backup local.
+
+O Lua:
+
+- inicia transação;
+- reinsere a linha original;
+- verifica a identidade;
+- faz commit;
+- restaura assets do backup Xbox.
+
+#### UI
+
+Nova seção separada:
+
+```text
+Catálogo Aurora
+```
+
+Ações:
+
+- `Procurar entradas antigas`;
+- `Remover entrada antiga do Aurora`;
+- `Consultar status`;
+- `Rollback`.
+
+A confirmação mostra TitleID, MediaID e ContentID e deixa explícito que
+ISO/ConnectX locais não serão removidos.
+
+#### Instalação do filtro
+
+Script:
+
+```text
+scripts/install-xm10-aurora-probe.py
+```
+
+Ele:
+
+- baixa a versão instalada;
+- cria backup local com SHA-256;
+- envia a nova versão;
+- relê por FTP;
+- exige igualdade byte-for-byte.
+
+Após instalação:
+
+```text
+next=AURORA_RESTART_REQUIRED
+```
+
+#### Validação
+
+Estática:
+
+```text
+.venv/bin/python scripts/verify-xm10.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Helper físico:
+
+```text
+scripts/physical-xm10.py
+```
+
+Primeiro passo é estritamente não destrutivo:
+
+```text
+.venv/bin/python scripts/physical-xm10.py discover
+```
+
+Planejamento também não exclui nada.
+
+`execute` e `rollback` exigem flag explícita `--confirm`.
+
+Gate físico:
+
+- filtro instalado e verificado byte-for-byte;
+- candidato stale real;
+- plano confirmado;
+- remoção verificada no banco e no GameData;
+- entrada desaparece visualmente no Aurora;
+- rollback restaura banco/assets;
+- entrada reaparece visualmente;
+- nenhuma ISO/ConnectX local é alterada.
 
 Não implementar junto com XM-06.
 
