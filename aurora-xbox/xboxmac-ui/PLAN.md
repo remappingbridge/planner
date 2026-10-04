@@ -3715,7 +3715,7 @@ indisponível, a interface configurada como `en7` deixou de existir no
 macOS. Os serviços launchd continuaram `running`, mas
 NetISO/Samba/NetBIOS ficaram sem sockets úteis em `192.168.50.1`.
 
-### XM-09 — scheduler e robustez — REDE + SCHEDULER ACEITOS / GATE DE REBOOT PENDENTE
+### XM-09 — scheduler e robustez — ACEITO / CONCLUÍDO
 
 Escopo completo continua:
 
@@ -4099,11 +4099,23 @@ XM-09 REBOOT_RECOVERY_OK
 ```
 
 
-Gate final XM-09: operação cotidiana sem terminal.
+Validação final XM-09 aprovada em 2026-10-04:
 
-### XM-10 — remoção do catálogo Aurora
+- reboot real concluído;
+- `XM-09 REBOOT_RECOVERY_OK`;
+- backend saudável após abrir o app;
+- reconciliador root carregado;
+- Ethernet/NetISO/Samba/NetBIOS/Xbox/Aurora FTP todos `up`;
+- 7 jobs persistidos preservados;
+- nenhum comando manual de reparo.
 
-Gate futuro, separado e opcional:
+Resultado: **XM-09 aceito e encerrado.**
+
+Gate final XM-09: **APROVADO — operação cotidiana sem terminal.**
+
+### XM-10 — remoção do catálogo Aurora — EM IMPLEMENTAÇÃO
+
+Gate separado e opcional:
 
 - backup;
 - remoção segura da entrada;
