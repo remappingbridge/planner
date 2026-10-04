@@ -4421,6 +4421,21 @@ Preflight somente leitura adicional:
 - DELETE continua bloqueado até:
   `XM-10 FILTER_PREFLIGHT_OK`.
 
+Preflight físico aprovado em 2026-10-04:
+
+- `146/146 OK`;
+- `XM-10 FILTER_PREFLIGHT_OK`;
+- filtro remoto V2 conhecido byte-for-byte;
+- SHA-256:
+  `7b5fa378178fb04e998e49a6bd8eed13bf9064d912ccd3c2217ee4149813fa2e`;
+- candidato:
+  PES 2018 / `4A3007D3` / `1CB7BE36` / ContentID 1;
+- plan_id atual:
+  `dfc73a352853be51e66abfc1602c7f0eee5a0b9130d0c3fd6611ab16348e6b92`;
+- db_sha256:
+  `92b97f64332beb05b1d957f62290512c2b87d6738ba0d60bc7e8b5593eb1d706`;
+- nenhuma ação destrutiva executada até este ponto.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
