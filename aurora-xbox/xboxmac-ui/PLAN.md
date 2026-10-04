@@ -4756,6 +4756,20 @@ Gate físico:
 
 Não implementar junto com XM-06.
 
+
+
+XM-10 = ACCEPTED / COMPLETE
+
+Evidência final:
+
+- 165/165 testes OK;
+- inventário sem expectativa fixa;
+- operator_behavior=ARBITRARY;
+- branch física UNCHANGED validada;
+- remoção real + rollback real já validados;
+- desaparecimento/reaparecimento visual confirmados;
+- fingerprint/state binding e fail-closed aprovados.
+
 ### XM-11 — histórico de automações
 
 Gate futuro, separado da fila operacional.
