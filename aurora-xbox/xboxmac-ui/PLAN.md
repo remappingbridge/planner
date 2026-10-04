@@ -1984,7 +1984,14 @@ Relação com Histórico futuro (XM-11):
 - este filtro responde `o que posso/preciso automatizar agora?`;
 - XM-11 responde `o que aconteceu em jobs anteriores?`;
 - `Já rodaram job` pode usar a mesma correlação histórica, mas não substitui a tela Histórico;
-- limpar histórico no XM-11 fará um jogo voltar a `NEVER_RUN` somente se a definição de produto adotada for “sem registro histórico”; essa consequência deve ser explicitamente validada no XM-11 antes da implementação do purge.
+- **decisão de produto aceita em 2026-10-04:** limpar o histórico no XM-11 faz o jogo voltar a `NEVER_RUN`; `Nunca rodou job` significa literalmente “não existe mais nenhum registro de job associado no store de histórico”; o purge deve deixar essa consequência explícita na confirmação.
+
+Decisão vinculante para XM-11:
+
+- a classificação de histórico é derivada somente dos registros de jobs existentes;
+- se todos os registros associados a um jogo forem removidos pelo usuário em `Limpar histórico concluído`, esse jogo volta imediatamente a `NEVER_RUN`;
+- nenhum marcador/tombstone separado será mantido apenas para lembrar que o jogo já rodou;
+- limpar histórico não altera ISO, ConnectX nem Aurora.
 
 Gate XM-07A.1:
 
