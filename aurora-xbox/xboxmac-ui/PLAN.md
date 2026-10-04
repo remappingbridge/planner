@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — PROBE RUNTIME EM VALIDAÇÃO FÍSICA
+### XM-07 — assets/Aurora e ações manuais guiadas — PROBE V2 IMPLEMENTADO / REVALIDAÇÃO ESTÁTICA PENDENTE
 
 - estado de scan;
 - ContentID;
@@ -2506,6 +2506,48 @@ Próximo teste físico:
    - `aurora_verified=true`;
    - probe -> `VERIFIED`;
 8. nenhum novo job/ingest/rescan deve ser necessário.
+
+#### Falha física do probe v1 e correção para v2 — 2026-10-04
+
+Primeiro teste físico do probe runtime:
+
+- instalação/armação via FTP: OK;
+- snapshot antigo removido: OK;
+- reboot completo do console: executado;
+- snapshot novo gerado: OK;
+- snapshot retornou:
+  - `schema=xboxmac-visibility-snapshot-v1`;
+  - `count=0`;
+  - `status=READY`;
+- GTA IV permaneceu em `WAITING_FOR_AURORA_VISIBILITY`;
+- probe ficou em `MISSING`;
+- visualmente o GTA IV estava presente no Aurora.
+
+Causa:
+
+- o probe v1 exigia `item.Id`;
+- `Content.FindContent()` expõe de forma comprovada `TitleId`, `MediaId`, `Name` e `BaseVersion`;
+- no teste físico, exigir `item.Id` descartou toda a coleção runtime.
+
+Correção implementada:
+
+- novo schema `xboxmac-visibility-snapshot-v2`;
+- protocolo `title-media-v2`;
+- snapshot contém somente `TitleID + MediaID`;
+- `ContentID` continua obrigatório em `AURORA_PREPARED`, mas não participa da identidade runtime;
+- correspondência final usa `TitleID + MediaID`;
+- jobs aguardando com protocolo antigo/ausente são automaticamente rearmados;
+- rearm instala o probe v2 e remove o snapshot v1 anterior;
+- snapshot v1 nunca pode validar o protocolo v2;
+- teste de migração de protocolo adicionado.
+
+Próxima etapa:
+
+- revalidar testes estáticos;
+- reiniciar backend;
+- confirmar que o job GTA IV é rearmado como `protocol=title-media-v2`;
+- reboot completo do console;
+- esperado: snapshot v2 com coleção não vazia e GTA IV promovido a `AURORA_READY/SUCCEEDED`.
 
 #### Relação com XM-10
 
