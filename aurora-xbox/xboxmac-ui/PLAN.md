@@ -4460,6 +4460,34 @@ Correção:
 - manifesto pendente será reutilizado;
 - proibido repetir `execute` para esse plan_id.
 
+Falha controlada seguinte: `DATABASE_BACKUP_FAILED`.
+
+Evidência:
+
+- Lua processou o manifesto;
+- `database_backup=false`;
+- ContentID 1 permaneceu presente;
+- GameData permaneceu presente;
+- content.db íntegro;
+- nenhuma transação começou;
+- rollback não necessário.
+
+Correção:
+
+- não copiar mais o content.db ativo com `FileSystem.CopyFile`;
+- backend envia o backup completo pelo Mac via FTP antes do manifesto;
+- releitura remota e comparação byte-for-byte obrigatórias;
+- local:
+  `aurora-delete-backups/<plan_id>/content.db`;
+- Xbox:
+  `User/Scripts/XboxMacDeleteBackup/<plan_id>/content.db`;
+- Lua exige backup presente e tamanho esperado;
+- log:
+  `database_backup_source=MAC_FTP`;
+- reparo do plan_id já pendente:
+  `scripts/repair-xm10-remote-db-backup.py`;
+- reparo não altera manifesto e não executa SQL.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
