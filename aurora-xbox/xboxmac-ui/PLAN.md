@@ -3281,9 +3281,9 @@ Após o Rescan do caminho ConnectX:
   restart/reload do Aurora; reboot completo do console ainda não é
   necessário nesta etapa.
 
-#### XM-07D — Korra preparado; aguardando prova runtime
+#### XM-07D — Korra preparado após reboot; aguardando prova runtime
 
-Após restart/reload do Aurora:
+Após reboot completo do Xbox:
 
 - job:
   `0bb08d0df50d41a3833d740eb418b839`;
@@ -3299,9 +3299,9 @@ Após restart/reload do Aurora:
 - QuickView probe:
   - `ARMED`;
   - `quickview-callback-v3`;
-- próximo passo:
-  reboot completo do Xbox para obter a evidência runtime de visibilidade
-  e finalizar a adoção.
+- não houve teste isolado de restart/reload simples do Aurora nesta etapa;
+- não registrar restart simples como suficiente;
+- próximo passo: selecionar o Korra no Aurora para o QuickView observar a identidade e testar a execução do jogo.
 
 Depois da validação estática, o teste físico usa o arquivo real de
 `The Legend of Korra` já existente:
