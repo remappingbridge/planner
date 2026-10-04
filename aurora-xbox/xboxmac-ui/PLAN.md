@@ -4323,7 +4323,7 @@ Ele:
 Após instalação:
 
 ```text
-next=AURORA_RESTART_REQUIRED
+next=XBOX_POWER_CYCLE_REQUIRED
 ```
 
 #### Validação
@@ -4396,6 +4396,17 @@ Evidência física já obtida:
 - plano:
   `ba3e9753357e048b84602742ee311d754984605542cc751ec9129f4fcf610740`;
 - nenhuma ação destrutiva executada.
+
+Restart apenas do Aurora foi insuficiente na primeira prova de
+carregamento:
+
+- `FILTER_LOADED_FAILED / marker=ABSENT`;
+- nenhuma ação destrutiva executada;
+- filtro estava instalado byte-for-byte;
+- gate passa a exigir power cycle completo do Xbox 360;
+- após o boot:
+  `physical-xm10.py loaded` precisa retornar
+  `XM-10 FILTER_LOADED_OK`.
 
 Gate físico:
 
