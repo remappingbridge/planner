@@ -4227,11 +4227,19 @@ Se assets existem e o backup dos assets falha, a exclusão é recusada.
 
 #### Processamento dentro do Aurora
 
-Processador existente estendido:
+Processador XM-10 isolado:
+
+```text
+aurora/User/Scripts/Content/Filters/ZZXboxMacCatalogDelete.lua
+```
+
+Baseline preservado:
 
 ```text
 aurora/User/Scripts/Content/Filters/XboxMacProbe.lua
 ```
+
+permanece byte-for-byte igual ao `connectx-v1.0.0`.
 
 Manifesto:
 
@@ -4342,6 +4350,26 @@ Primeiro passo é estritamente não destrutivo:
 Planejamento também não exclui nada.
 
 `execute` e `rollback` exigem flag explícita `--confirm`.
+
+Primeira validação física não destrutiva:
+
+- `verify-xm10.py` detectou corretamente uma mutação indevida no
+  `XboxMacProbe.lua`;
+- baseline não foi atualizado;
+- probe congelado foi restaurado no repositório;
+- lógica XM-10 foi movida para filtro separado
+  `ZZXboxMacCatalogDelete.lua/.ini`;
+- instalador passa a restaurar o probe baseline no Xbox e instalar o
+  filtro separado;
+- descoberta já executada:
+  - managed=17;
+  - live=16;
+  - stale=1;
+  - candidato `PRO EVOLUTION SOCCER 2018`;
+  - TitleID `4A3007D3`;
+  - MediaID `1CB7BE36`;
+  - ContentID `1`;
+- nenhuma ação destrutiva foi executada.
 
 Gate físico:
 
