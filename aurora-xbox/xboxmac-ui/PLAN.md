@@ -4950,6 +4950,63 @@ Gate aceito:
 - XM-12 `ACCEPTED / COMPLETE`.
 
 
+
+### Melhorias de experiência pós-XM-12 — navegação por abas e Biblioteca em cards
+
+Status:
+
+    IMPLEMENTED / PHYSICAL_UI_VALIDATION_PENDING
+
+Escopo:
+
+- substituir a tela única longa por abas, mantendo o conteúdo funcional de
+  cada seção;
+- ordem e rótulos curtos das abas:
+  1. Conexões;
+  2. Arquivos;
+  3. Biblioteca;
+  4. Catálogo;
+  5. Pacotes;
+  6. Automação;
+  7. Histórico;
+- os títulos completos dentro das páginas permanecem, inclusive
+  `Biblioteca e exclusão`, `Catálogo Aurora` e `Pacotes Xbox 360`;
+- barra de abas permanece visível durante a rolagem por `position: sticky`;
+- em telas estreitas, a barra aceita rolagem horizontal.
+
+Biblioteca:
+
+- a tabela extensa foi removida;
+- os jogos são apresentados em um seletor/dropdown;
+- ao selecionar um jogo, são mostrados cinco cards:
+  - linha superior: Estado, TitleID e MediaID;
+  - linha inferior: ISO e ConnectX;
+- cards ISO/ConnectX mostram tamanho em GB;
+- `Excluir ISO` usa botão com texto e borda amarelos;
+- `Excluir ConnectX` permanece uma ação separada;
+- a ação combinada `Excluir ISO + ConnectX` foi removida por segurança;
+- resíduos `AURORA_STALE` continuam tratáveis sem criar um sexto card:
+  o aviso e `Limpar do Aurora` aparecem dentro do card ConnectX;
+- seleção atual é preservada quando possível após refresh/reconciliação.
+
+Contratos adicionados:
+
+- `backend/server/tests/test_post_xm12_ux.py`;
+- teste legado XM-06 atualizado para a Biblioteca em cards e para a remoção
+  da ação combinada;
+- `scripts/verify-post-xm12-ux.py`.
+
+Validação pendente:
+
+1. `verify-post-xm12-ux.py` => STATIC_OK;
+2. suíte completa;
+3. reinstalar o runtime;
+4. validar visualmente as sete abas e a barra sticky;
+5. validar dropdown e disposição 3+2 dos cards;
+6. confirmar botão ISO amarelo e ausência da exclusão combinada;
+7. confirmar que limpeza `AURORA_STALE` continua disponível no card ConnectX.
+
+
 ## Critérios finais
 
 O projeto estará pronto para uso cotidiano quando uma pessoa que não conhece o backend puder:
