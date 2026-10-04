@@ -3683,6 +3683,15 @@ Validação final aprovada em 2026-10-04:
 
 Resultado: **XM-08 aceito e encerrado.**
 
+Robustez pós-gate:
+
+- durante o início do XM-09 foi observado plist presente com LaunchAgent
+  ausente do domínio `gui/<uid>`;
+- launcher passa a fazer auto-`bootstrap` do
+  `io.remappingbridge.xboxmacd` quando necessário;
+- em seguida valida o job e executa `kickstart`;
+- perda transitória do registro não exige reinstalação manual.
+
 ### Observação operacional para XM-09 — interface privada após desconexão prolongada
 
 Detectado em uso real: após horas com o equipamento/ligação Ethernet
