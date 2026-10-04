@@ -4827,7 +4827,7 @@ Evidência final:
 
 Status:
 
-    IMPLEMENTED / AUTOMATED_AND_PHYSICAL_VALIDATION_PENDING
+    IMPLEMENTED / GLOBAL_RECONCILIATION_PHYSICAL_VALIDATION_PENDING
 
 Objetivo:
 
@@ -4888,6 +4888,39 @@ Decisão arquitetural adotada — reconciliação global Aurora × ConnectX:
   que o usuário não precise distinguir manualmente XM-10 de XM-12;
 - PES 2018, removido manualmente e ainda visível no CoverFlow, passa a ser a
   evidência física de referência para este caso de reconciliação global.
+Implementação da decisão arquitetural:
+
+- `discover_catalog_inventory()` passou a inventariar as entradas gerenciadas
+  do `content.db` e classificá-las por presença atual do ConnectX;
+- `discover_stale_entries()` continua compatível e deriva desse inventário;
+- `merge_aurora_inventory()` integra o resultado à Biblioteca;
+- um resíduo sem ISO e sem ConnectX recebe linha sintética `AURORA_STALE`,
+  portanto não desaparece da UI apenas porque os arquivos locais sumiram;
+- `GET /api/library/aurora-reconcile` executa a comparação com timeout curto
+  e falha aberta: Aurora/Xbox offline não bloqueia a Biblioteca local;
+- a UI mostra uma coluna Aurora com o estado
+  `ConnectX ausente · ainda presente no Aurora`;
+- filtro `AURORA_STALE` adicionado;
+- resíduos elegíveis recebem botão `Limpar do Aurora` diretamente na
+  Biblioteca;
+- o botão reutiliza o pipeline XM-10 de plano, backup, execute e status;
+- polling do inventário Aurora a cada 15s;
+- polling de uma remoção manual ativa a cada 4s;
+- `physical-xm12.py` passa a listar também resíduos globais detectados;
+- testes de regressão adicionados para:
+  - resíduo sem qualquer arquivo local ainda aparecer como `AURORA_STALE`;
+  - Aurora offline preservar a Biblioteca local.
+
+Nova evidência física parcial:
+
+- após a correção do JavaScript, a UI voltou a popular as listas;
+- exclusão ConnectX feita pela aplicação funcionou;
+- Rescan + restart do Aurora foram suficientes nesse teste para o jogo
+  excluído desaparecer do CoverFlow;
+- PES 2018 removido manualmente continuou visível, exatamente o caso de
+  referência agora coberto pela reconciliação global;
+- falta validar fisicamente a nova linha `AURORA_STALE` e a limpeza do PES
+  pela ação `Limpar do Aurora`.
 
 Regressão observada no primeiro reteste físico:
 
@@ -4902,14 +4935,16 @@ Regressão observada no primeiro reteste físico:
 
 Gate pendente:
 
-1. STATIC_OK;
-2. suíte completa;
-3. instalar runtime;
-4. confirmar feedback visual;
-5. em alguma exclusão ConnectX feita pela aplicação, observar reconciliação
-   automática sem assumir qual jogo/ISO existe;
-6. após ação indicada no Xbox, confirmar COMPLETE e desaparecimento visual;
-7. confirmar Histórico XM-11 preservado.
+1. STATIC_OK e suíte completa após a reconciliação global;
+2. instalar runtime atualizado;
+3. confirmar que a Biblioteca continua populando normalmente;
+4. confirmar que o PES 2018 aparece como `AURORA_STALE` /
+   `ConnectX ausente · ainda presente no Aurora`;
+5. usar `Limpar do Aurora` para o PES 2018 e confirmar o plano seguro;
+6. após Rescan/restart ou ação indicada, confirmar remoção visual e status
+   verificado;
+7. rodar `physical-xm12.py` e confirmar ausência do resíduo removido;
+8. confirmar Histórico XM-11 preservado.
 
 
 ## Critérios finais
