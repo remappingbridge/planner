@@ -3007,7 +3007,7 @@ Validação visual:
 
 Resultado: XM-07C aceito fisicamente e concluído.
 
-### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
+### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX — IMPLEMENTADO / VALIDAÇÃO ESTÁTICA PENDENTE
 
 Motivação real:
 
@@ -3064,6 +3064,116 @@ Dependências:
 - antes da implementação, escolher uma biblioteca/ferramenta de extração STFS adequada ao macOS arm64;
 - ferramenta deve ser auditável, automatizável e utilizável sem GUI;
 - se não houver dependência aceitável, manter o formato como detectado porém não suportado em vez de usar conversão insegura.
+
+#### Implementação XM-07D — 2026-10-04
+
+Dependência escolhida:
+
+- `xverter==1.5.0`;
+- projeto MIT;
+- Python 3.9+;
+- CLI;
+- distribuição macOS Apple Silicon disponível;
+- suporte STFS LIVE/PIRS/CON;
+- leitor segue cadeias de blocos e valida hash tree;
+- versão diferente de 1.5.0 encontrada no ambiente é recusada.
+
+Nova raiz dedicada:
+
+- `/Users/Shared/xbox360-packages`.
+
+Compatibilidade com arquivos existentes:
+
+- filhos diretos não-.iso da raiz de ISOs também são inspecionados;
+- arquivos diretos no ConnectX legado também são inspecionados;
+- pastas ConnectX que não pertencem a um XEX válido são inspecionadas
+  com profundidade limitada;
+- pastas de jogos XEX já válidos são protegidas da varredura de pacote.
+
+Detecção:
+
+- por magic/estrutura, nunca por extensão;
+- STFS:
+  - `LIVE`;
+  - `PIRS`;
+  - `CON `;
+- XDVDFS/ISO é reconhecido e encaminhado conceitualmente ao pipeline de
+  ISO já existente, sem conversão pelo XM-07D;
+- XEX isolado é reconhecido, mas não publicado como árvore;
+- formato desconhecido fica `UNKNOWN / normalizable=false`.
+
+Normalização STFS:
+
+1. UI envia apenas `package_id`;
+2. backend reconcilia esse ID com descoberta/fingerprint atuais;
+3. origem é revalidada por device/inode/size/mtime_ns;
+4. extração ocorre em
+   `/Users/Shared/.xbox360-connectx-staging/packages`;
+5. `xverter convert <source> -o <staging>/extracted/`;
+6. resultado deve conter exatamente um `default.xex` válido;
+7. XEX fornece TitleID + MediaID;
+8. identidade do header STFS é conferida quando presente;
+9. identidade já existente retorna `ALREADY_PRESENT`;
+10. árvore é copiada para
+    `.xboxmac-package-<uuid>` dentro do ConnectX;
+11. XEX da cópia é revalidado;
+12. publicação final usa rename atômico no mesmo filesystem;
+13. árvore publicada é redescoberta pelo scanner live;
+14. origem é revalidada e nunca movida, renomeada ou apagada;
+15. staging é removido.
+
+Integração com XM-07C:
+
+- após publicação, a Biblioteca classifica o XEX como
+  `MANUAL_CONNECTX_UNADOPTED`;
+- `POST /api/packages/prepare` cria automaticamente o job XM-07C;
+- usuário não precisa selecionar novamente o jogo na Automação;
+- metadata, capa, Aurora e probe runtime reutilizam o fluxo já aceito.
+
+API/UI:
+
+- `GET /api/packages`;
+- `POST /api/packages/prepare`;
+- painel `Pacotes Xbox 360`;
+- ação `Normalizar / Preparar selecionado`;
+- nenhuma entrada de path arbitrário pelo navegador.
+
+Arquivos principais:
+
+- `backend/server/xboxmac/package_import.py`;
+- `backend/server/xboxmac/app.py`;
+- `backend/contracts/defaults.json`;
+- `backend/server/requirements.txt`;
+- `backend/server/tests/test_xm07d_packages.py`;
+- `scripts/verify-xm07d.py`;
+- `docs/XM-07D.md`.
+
+O pipeline congelado `connectx-v1.0.0` não foi alterado.
+
+Validação estática necessária:
+
+```text
+git pull
+.venv/bin/python -m pip install -r backend/server/requirements.txt
+.venv/bin/python scripts/verify-xm07.py
+.venv/bin/python scripts/verify-xm07c.py
+.venv/bin/python scripts/verify-xm07d.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Depois da validação estática, o teste físico usa o arquivo real de
+`The Legend of Korra` já existente:
+
+1. confirmar local onde o detector o encontrou;
+2. confirmar formato/magic real;
+3. sendo STFS, confirmar subtipo LIVE/PIRS/CON;
+4. normalizar pelo painel;
+5. confirmar arquivo original preservado;
+6. confirmar XEX válido publicado;
+7. confirmar job XM-07C criado automaticamente;
+8. completar Aurora/probe;
+9. testar o jogo no Xbox;
+10. aceitar XM-07D somente após `AURORA_READY / ADOPTED`.
 
 #### XM-07D.1 — identificação assistida e metadata manual
 
