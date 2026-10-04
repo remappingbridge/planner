@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — EM VALIDAÇÃO FÍSICA
+### XM-07 — assets/Aurora e ações manuais guiadas — PROBE RUNTIME IMPLEMENTADO / REVALIDAÇÃO ESTÁTICA PENDENTE
 
 - estado de scan;
 - ContentID;
@@ -2420,6 +2420,62 @@ Próxima implementação experimental:
 3. backend lê o snapshot via FTP;
 4. jogo do job só chega a `AURORA_READY` se sua identidade aparecer no snapshot runtime;
 5. validar primeiro sem alterar o filtro Lua congelado.
+
+#### Implementação do probe runtime Content.FindContent — 2026-10-04
+
+Implementado sem modificar o `XboxMacProbe.lua` congelado:
+
+Novos arquivos auxiliares:
+
+- `aurora/User/Scripts/Content/Filters/XboxMacVisibilityProbe.lua`;
+- `aurora/User/Scripts/Content/Filters/XboxMacVisibilityProbe.ini`;
+- `backend/server/xboxmac/aurora_visibility.py`;
+- `backend/server/tests/test_xm07_visibility_probe.py`.
+
+Comportamento:
+
+- o probe Lua é somente-leitura em relação ao catálogo;
+- aguarda a enumeração runtime estabilizar;
+- usa `Content.FindContent()`;
+- grava `ContentID/TitleID/MediaID` em:
+  `game:\User\Scripts\xboxmac-visibility.snapshot`;
+- o backend instala/atualiza o probe via FTP;
+- o snapshot anterior é removido antes de armar a validação;
+- isso impede snapshot antigo de validar job novo;
+- jobs antigos já parados em `WAITING_FOR_AURORA_VISIBILITY` são armados automaticamente após restart do backend;
+- o worker verifica snapshots em background;
+- correspondência exige `ContentID + TitleID + MediaID`;
+- todos os games não-erro do job precisam estar presentes;
+- se presentes: `AURORA_READY` e `SUCCEEDED`;
+- se ausentes: permanece `WAITING_FOR_AURORA_VISIBILITY`;
+- a UI mostra `Probe runtime: <status>`;
+- um reboot/reload global pode satisfazer vários jobs preparados;
+- jogos não selecionados nunca são adicionados retroativamente ao job.
+
+Estados do probe:
+
+- `NEEDS_ARM`;
+- `ARMED`;
+- `WAITING_SNAPSHOT`;
+- `MISSING`;
+- `VERIFIED`;
+- `ARM_FAILED`.
+
+Freshness:
+
+- qualquer snapshot anterior é apagado ao armar;
+- somente snapshot recriado depois de reload/reboot pode ser utilizado.
+
+Testes adicionados/alterados:
+
+- parser do snapshot;
+- schema/status obrigatório;
+- correspondência exata dos três IDs;
+- snapshot correto promove para `AURORA_READY`;
+- snapshot sem o jogo mantém espera;
+- probe auxiliar não usa setters de metadata.
+
+Revalidação estática necessária antes do teste físico.
 
 #### Relação com XM-10
 
