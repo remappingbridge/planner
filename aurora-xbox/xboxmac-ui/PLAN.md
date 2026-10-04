@@ -4681,6 +4681,16 @@ Falha local de retomada do backend:
 - falha futura inclui estado do LaunchAgent + tail de xboxmacd.log;
 - nenhuma ação Aurora foi executada durante essa falha.
 
+Teste adversarial de plano obsoleto:
+
+- backend self-recovery validado;
+- descoberta válida exige fingerprint SHA-256;
+- `plan-next-stale` faz descoberta + plano e compara fingerprints;
+- se mudar durante essas chamadas, retorna RETRY sem ação destrutiva;
+- state_fingerprint entra no plan_id;
+- depois do plano, usuário deve mudar inventário de propósito;
+- execute deve recusar plano obsoleto antes de backup/manifesto.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
