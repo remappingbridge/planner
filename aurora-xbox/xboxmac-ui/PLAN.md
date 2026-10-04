@@ -3626,6 +3626,26 @@ Correção aplicada:
 - launcher não acessa Documents depois de instalado;
 - segundo health check antes de abrir o navegador.
 
+Segunda tentativa física do launcher:
+
+- runtime fora de Documents iniciou corretamente;
+- health check respondeu 200;
+- ensure respondeu 200;
+- frontend respondeu 200;
+- backend encerrou aproximadamente um segundo depois junto com o processo
+  do app;
+- comportamento reproduzido duas vezes.
+
+Correção:
+
+- substituir `nohup &` por LaunchAgent de usuário;
+- plist:
+  `~/Library/LaunchAgents/io.remappingbridge.xboxmacd.plist`;
+- `RunAtLoad=false`;
+- instalador faz `launchctl bootstrap`;
+- app faz `launchctl kickstart` apenas quando necessário;
+- ciclo de vida do backend passa a ser independente do launcher gráfico.
+
 Gate físico XM-08:
 
 - instalar o app;
