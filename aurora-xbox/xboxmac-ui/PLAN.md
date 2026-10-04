@@ -2937,6 +2937,34 @@ Próxima ação física:
   - biblioteca `CONNECTX_READY / ADOPTED`;
   - validar visualmente a nova capa do Avatar no CoverFlow.
 
+#### Validação física XM-07C — restart do Aurora insuficiente
+
+Após executar restart do Aurora:
+
+- job permaneceu `WAITING_FOR_AURORA_REFRESH`;
+- Avatar permaneceu:
+  - `ContentID=16`;
+  - `metadata_state=MANIFEST_PENDING`;
+  - `cover_state=VERIFIED`;
+  - `aurora_verified=false`;
+- estado remoto do manifesto:
+  - `state=PENDING_AURORA_PROCESSING`;
+  - `waiting_for_aurora=YES`;
+  - `aurora_processing=TIMEOUT`;
+  - `manifest=PRESENT bytes=1813`;
+  - `result=ABSENT`;
+- banco continua íntegro;
+- Avatar ainda não aparece como metadata `VERIFIED`;
+- jogos anteriores permanecem verificados.
+
+Conclusão:
+
+- restart do Aurora isoladamente não processou o manifesto do Avatar;
+- não reenviar metadata/capa;
+- não criar novo job;
+- próximo teste é reboot completo do Xbox 360;
+- após reboot, o mesmo job deve continuar automaticamente e reavaliar o manifesto.
+
 ### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
 
 Motivação real:
