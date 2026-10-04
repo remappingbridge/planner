@@ -2839,6 +2839,37 @@ Próxima validação física com `Avatar: The Last Airbender`:
     - biblioteca `CONNECTX_READY`;
     - `manual_adoption_state=ADOPTED`.
 
+#### Validação física XM-07C — etapa Dry-run APROVADA em 2026-10-04
+
+Caso real:
+
+- jogo: `AVATAR THE LAST AIRBENDER`;
+- origem:
+  `/Users/Shared/xbox360-connectx/AVATAR THE LAST AIRBENDER/AVATAR THE LAST AIRBENDER`;
+- `game_id=xbox360-545107E1-117FE50B`;
+- `TitleID=545107E1`;
+- `MediaID=117FE50B`;
+- SHA-256 do `default.xex`:
+  `fc3b177a4f8d00dc0ee8ffee4203925d43bdc42ff12b232f7d16e1fd556233ae`;
+- tamanho da árvore: `5457685906` bytes.
+
+Dry-run real:
+
+- `schema=xboxmac-automation-plan-v2`;
+- `source_kind=manual_connectx`;
+- `action=adopt_manual_connectx`;
+- `ingest=0`;
+- `adopt_manual_connectx=1`;
+- `already_ingested=0`;
+- `already_adopted=0`.
+
+Conclusão parcial:
+
+- XEX manual foi descoberto e identificado corretamente;
+- XEX manual é planejável sem ISO;
+- o planejamento não tenta ingest de ISO;
+- próximo passo é executar o job real e validar metadata/capa/Aurora/probe/store de adoção.
+
 ### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
 
 Motivação real:
