@@ -4001,10 +4001,12 @@ Lock:
 Restart:
 
 - `WAITING_FOR_FILE_STABILITY` é retomável;
-- `WAITING_FOR_AURORA_VISIBILITY` também entra no conjunto de estados
-  recuperados;
 - após restart:
-  `QUEUED + RECOVERED_AFTER_BACKEND_RESTART`.
+  `QUEUED + RECOVERED_AFTER_BACKEND_RESTART`;
+- contrato XM-07 preservado:
+  `WAITING_FOR_AURORA_VISIBILITY` não é re-enfileirado;
+- o waiter de visibilidade permanece no próprio estado e continua pelo
+  reconciliador específico, sem repetir ingest/metadata/capa.
 
 Teste seguro:
 
@@ -4018,7 +4020,8 @@ Ele usa somente diretório temporário e valida:
 - rejeição de job duplicado;
 - retry com sucesso na terceira tentativa;
 - exclusão mútua do worker;
-- recuperação de waiter após restart;
+- recuperação de `WAITING_FOR_FILE_STABILITY` após restart;
+- preservação do waiter XM-07 de visibilidade;
 - contrato offline do Xbox;
 - cache-first de assets.
 
