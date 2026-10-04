@@ -2647,7 +2647,7 @@ XM-06 remove os arquivos locais.
 XM-10 continua responsável, futuramente, por remover com segurança a entrada e os assets do catálogo Aurora.
 
 
-### XM-07C — adoção automática de jogos XEX manuais
+### XM-07C — adoção automática de jogos XEX manuais — IMPLEMENTADO / VALIDAÇÃO ESTÁTICA PENDENTE
 
 Motivação real:
 
@@ -2709,6 +2709,89 @@ Gate XM-07C:
 - jogo continua jogável no Xbox;
 - chega a `AURORA_READY`;
 - nenhuma duplicação no catálogo/Aurora.
+
+#### Implementação XM-07C — 2026-10-04
+
+Implementado no `remappingbridge/xboxmac-ui` sem modificar o pipeline
+congelado `backend/connectx/*`.
+
+Biblioteca:
+
+- XEX vivo sem `ingest-state` passa a ser classificado como
+  `MANUAL_CONNECTX_UNADOPTED`;
+- novos campos:
+  - `manual_connectx`;
+  - `manual_adoption_state=UNADOPTED|ADOPTED`;
+  - `manual_adoption_job_id`;
+- adoção é invalidada automaticamente se o SHA-256 do `default.xex`
+  mudar.
+
+Store persistente:
+
+- `/usr/local/var/xbox-connectx/manual-adoptions.json`;
+- schema `xboxmac-manual-adoptions-v1`;
+- chave por `TitleID + MediaID`;
+- fingerprint pelo SHA-256 do XEX;
+- registro só é gravado após prova final `AURORA_READY`;
+- Histórico de jobs e store de adoção são independentes.
+
+Automação:
+
+- novo planejamento `xboxmac-automation-plan-v2`;
+- mantém compatibilidade com `iso_filenames`;
+- adiciona `game_ids` para alvos XEX manuais;
+- ações:
+  - `adopt_manual_connectx`;
+  - `already_adopted`;
+- XEX manual é revalidado por identidade/fingerprint antes de processar;
+- resultado inicial `MANUAL_CONNECTX_VALID`;
+- XEX alterado/ausente:
+  `MANUAL_XEX_CHANGED_OR_MISSING / VALIDATE_MANUAL_XEX`;
+- branch manual nunca chama `xbox-connectx-ingest`;
+- segue diretamente para metadata, capa e Aurora;
+- probe runtime v3 continua sendo a condição para `AURORA_READY`.
+
+UI/API:
+
+- `AutomationRequest` aceita `iso_filenames` e `game_ids`;
+- XEX manual ConnectX-only fica selecionável mesmo sem ISO;
+- ação exibida: `Adotar / Preparar`;
+- botão principal:
+  `Adotar / Preparar selecionadas`;
+- ConnectX-only que não é XEX manual adotável continua não selecionável.
+
+Arquivos principais:
+
+- `backend/server/xboxmac/manual_adoptions.py`;
+- `backend/server/xboxmac/library.py`;
+- `backend/server/xboxmac/automation.py`;
+- `backend/server/xboxmac/app.py`;
+- `backend/server/tests/test_xm04_library.py`;
+- `backend/server/tests/test_xm07c_manual_xex.py`;
+- `scripts/verify-xm07c.py`;
+- `docs/XM-07C.md`.
+
+Validação estática necessária:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm07.py
+.venv/bin/python scripts/verify-xm07c.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Validação física planejada com `Avatar: The Last Airbender`:
+
+1. aparecer como `MANUAL_CONNECTX_UNADOPTED`;
+2. filtro `Somente ConnectX` permite seleção;
+3. Dry-run retorna `adopt_manual_connectx`;
+4. job não executa ingest;
+5. metadata/capa são processadas;
+6. capa ilustrada é gerada/instalada;
+7. Aurora chega a `AURORA_READY`;
+8. store de adoção é persistido;
+9. biblioteca passa a `CONNECTX_READY / ADOPTED`;
+10. jogo continua jogável no Xbox.
 
 ### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
 
