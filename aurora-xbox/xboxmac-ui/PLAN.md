@@ -3919,6 +3919,22 @@ Depois da aceitação desta etapa, prosseguir automaticamente com os
 demais itens do XM-09: estabilidade de arquivos, offline/cache,
 retries/locks e recuperação final pós-reboot.
 
+Evidência física parcial da etapa de rede — 2026-10-04:
+
+- estado antes: Ethernet/NetISO/Samba/Xbox/Aurora FTP `up`;
+- após remover a docking, reconciliador registrou
+  `SET_MANUAL / WAITING_FOR_IP`;
+- após reconectar, sem reparo manual, voltou a:
+  `READY ... en7 ... 192.168.50.1`;
+- recuperação IPv4 automática: **aprovada**;
+- NetBIOS ficou inconclusivo por probe do backend não localizar
+  `nmblookup` Homebrew no PATH mínimo do LaunchAgent;
+- correção aplicada:
+  lookup Homebrew absoluto + fallback UDP 137/138 separado + check root
+  exigindo ambos os sockets;
+- gate de rede permanece pendente somente até repetir a confirmação com
+  o probe corrigido.
+
 Gate final XM-09: operação cotidiana sem terminal.
 
 ### XM-10 — remoção do catálogo Aurora
