@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — IMPLEMENTADO / REVALIDAÇÃO ESTÁTICA PENDENTE
+### XM-07 — assets/Aurora e ações manuais guiadas — EM VALIDAÇÃO FÍSICA
 
 - estado de scan;
 - ContentID;
@@ -2055,6 +2055,33 @@ git pull
 .venv/bin/python scripts/verify-xm07.py
 .venv/bin/python -m unittest discover -s backend/server/tests -v
 ```
+
+#### Revalidação estática XM-07A.1 — CONCLUÍDA em 2026-10-04
+
+No Mac real:
+
+- `scripts/verify-xm07.py`: `STATIC_OK`;
+- 65/65 testes do backend passaram;
+- `candidate_default=NEVER_RUN`;
+- `candidate_history=NEVER_RUN_HAS_HISTORY_ALL`;
+- `candidate_presence=ISO_CONNECTX_BOTH_ALL`;
+- `history_purge=RESETS_TO_NEVER_RUN`;
+- `raw_iso_history=PATH_SIZE_MTIME`;
+- histórico terminal preservado;
+- filesystem reconciliado;
+- falso `AURORA_READY` continua proibido;
+- pipeline legado continua inalterado;
+- estado `WAITING_FOR_AURORA_VISIBILITY` continua preservado após restart e não bloqueia exclusão.
+
+Próxima validação física do XM-07A.1:
+
+- validar default `Nunca rodaram job`;
+- validar `Já rodaram job`;
+- validar `Todos`;
+- validar presença `Somente ISO`, `Somente ConnectX`, `ISO + ConnectX`;
+- validar combinação com busca;
+- confirmar ConnectX-only visível e não selecionável;
+- não criar job durante essa validação.
 
 ##### XM-07B — Semântica forte de prontidão no Aurora
 
