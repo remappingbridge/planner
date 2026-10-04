@@ -1868,6 +1868,19 @@ Depois, validação física com uma ISO nova deve comprovar:
 
 Gate: usuário não técnico consegue iniciar e usar o painel clicando no app.
 
+### Observação operacional para XM-09 — interface privada após desconexão prolongada
+
+Detectado em uso real: após horas com o equipamento/ligação Ethernet indisponível, a interface configurada como `en7` deixou de existir no macOS. Os serviços launchd continuaram `running`, mas NetISO/Samba/NetBIOS ficaram sem sockets úteis em `192.168.50.1`.
+
+XM-09 deve tratar:
+
+- renumeração da interface privada (`en7` -> outro `enX`);
+- identificação persistente do adaptador por hardware/service em vez de depender apenas do nome BSD;
+- restauração de `192.168.50.1/24`;
+- daemon `running` porém socket indisponível;
+- recuperação automática de NetISO/Samba/NetBIOS;
+- retorno a READY sem terminal.
+
 ### XM-09 — scheduler e robustez
 
 - reconciliação periódica;
