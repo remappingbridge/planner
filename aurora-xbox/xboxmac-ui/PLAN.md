@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — EM VALIDAÇÃO FÍSICA
+### XM-07 — assets/Aurora e ações manuais guiadas — IMPLEMENTADO / REVALIDAÇÃO ESTÁTICA PENDENTE
 
 - estado de scan;
 - ContentID;
@@ -2004,6 +2004,57 @@ Gate XM-07A.1:
 - resultado permanece correto após excluir/restaurar ISO/ConnectX pelo Finder;
 - histórico antigo do PES não reaparece na fila operacional.
 
+
+#### Implementação XM-07A.1 — 2026-10-04
+
+Implementado:
+
+- nova rota `GET /api/automation/candidates`;
+- filtros `automation_history=never|has_history|all`;
+- filtros `presence=iso|connectx|both|all`;
+- busca por título, arquivo, TitleID, MediaID e diretório ConnectX;
+- default da UI: `Nunca rodaram job` + `Todos`;
+- contador `N de T jogos`;
+- classificação por candidato:
+  - `NEVER_RUN`;
+  - `HAS_HISTORY`;
+- último job exposto por:
+  - `automation_last_job_id`;
+  - `automation_last_state`;
+  - `automation_last_run_at`;
+- presença:
+  - `ISO_ONLY`;
+  - `CONNECTX_ONLY`;
+  - `ISO_AND_CONNECTX`;
+- ConnectX-only aparece, mas fica não selecionável com `ISO ausente`;
+- jobs novos persistem `source_iso`, `source_size` e `source_mtime_ns`;
+- ISO sem identidade só herda histórico quando caminho canônico + tamanho + mtime coincidem;
+- arquivo diferente no mesmo caminho não herda histórico antigo;
+- classificação é derivada exclusivamente do store atual de jobs;
+- remover todos os registros de um jogo no XM-11 faz o jogo voltar a `NEVER_RUN`;
+- nenhum tombstone ou marcador paralelo de histórico será mantido;
+- filtros são read-only e não criam job;
+- `GET /api/jobs?scope=...` continua separado e compatível.
+
+Testes adicionados:
+
+- classificação antes/depois de criar job;
+- purge do store voltando a `NEVER_RUN`;
+- filtros ISO, ConnectX e ambos;
+- ConnectX-only não selecionável;
+- busca combinada;
+- substituição de ISO no mesmo caminho sem herdar histórico;
+- validação de parâmetros;
+- contrato da rota;
+- contrato visual dos filtros.
+
+Revalidação necessária:
+
+```text
+git pull
+.venv/bin/python scripts/verify-xm07.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
 
 ##### XM-07B — Semântica forte de prontidão no Aurora
 
