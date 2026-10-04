@@ -3685,6 +3685,16 @@ Resultado: **XM-08 aceito e encerrado.**
 
 Robustez pós-gate:
 
+Validação da autocorreção em 2026-10-04:
+
+- `XM-08: STATIC_OK`;
+- suíte backend `117/117 OK`;
+- `/healthz = ok`;
+- `io.remappingbridge.xboxmacd` voltou a `state=running`;
+- PID observado: `6389`;
+- auto-bootstrap do LaunchAgent: validado fisicamente.
+
+
 - durante o início do XM-09 foi observado plist presente com LaunchAgent
   ausente do domínio `gui/<uid>`;
 - launcher passa a fazer auto-`bootstrap` do
