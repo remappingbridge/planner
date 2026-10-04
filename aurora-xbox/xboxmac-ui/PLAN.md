@@ -4601,6 +4601,12 @@ Escopo stale ampliado sob investigação:
 - inclui Directory, ScanPathId e ScanPath quando possível;
 - gate destrutivo fica congelado até analisar essa auditoria.
 
+Confirmação visual:
+
+- `visual_removal=PES2018_CONFIRMED`;
+- PES 2018 desapareceu da biblioteca Aurora;
+- rollback pausado até concluir auditoria global dos demais órfãos.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
