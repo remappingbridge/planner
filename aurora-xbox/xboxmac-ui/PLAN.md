@@ -3342,7 +3342,7 @@ The Legend of Korra concluiu o fluxo completo:
 
 Resultado: **XM-07D aceito e encerrado.**
 
-### XM-07D.1 — identificação assistida e metadata manual — IMPLEMENTADO / VALIDAÇÃO ESTÁTICA PENDENTE
+### XM-07D.1 — identificação assistida e metadata manual — ESTÁTICA APROVADA / VALIDAÇÃO FÍSICA PENDENTE
 
 Objetivo de UX:
 
@@ -3470,6 +3470,14 @@ Validação estática:
 Suíte esperada:
 
 - 104 testes.
+
+Validação estática aprovada em 2026-10-04:
+
+- `XM-07D: STATIC_OK`;
+- `korra_physical=PASSED`;
+- `XM-07D.1: STATIC_OK`;
+- suíte backend: `104/104` testes aprovados;
+- próximo passo: validação física com arquivo UNKNOWN inofensivo.
 
 Gate físico XM-07D.1:
 
