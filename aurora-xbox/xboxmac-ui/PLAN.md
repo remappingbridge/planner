@@ -3715,7 +3715,7 @@ indisponível, a interface configurada como `en7` deixou de existir no
 macOS. Os serviços launchd continuaram `running`, mas
 NetISO/Samba/NetBIOS ficaram sem sockets úteis em `192.168.50.1`.
 
-### XM-09 — scheduler e robustez — REDE ACEITA / ROBUSTEZ DO SCHEDULER EM IMPLEMENTAÇÃO
+### XM-09 — scheduler e robustez — REDE + SCHEDULER ACEITOS / GATE DE REBOOT PENDENTE
 
 Escopo completo continua:
 
@@ -4025,6 +4025,30 @@ Ele usa somente diretório temporário e valida:
 - contrato offline do Xbox;
 - cache-first de assets.
 
+
+Etapa 2 aceita em 2026-10-04:
+
+- `XM-09: STATIC_OK`;
+- suíte backend `128/128 OK`;
+- `XM-09 SCHEDULER_ROBUSTNESS_OK`;
+- ISO em cópia esperou estabilidade;
+- job ativo duplicado recusado;
+- retry transitório recuperou na terceira tentativa;
+- worker lock exclusivo;
+- `WAITING_FOR_FILE_STABILITY` recuperado após restart;
+- Xbox offline permanece wait-state recuperável;
+- cache de assets confirmado cache-first;
+- contrato XM-07 de `WAITING_FOR_AURORA_VISIBILITY` preservado;
+- runtime do app reinstalado após a validação.
+
+Próximo e último gate do XM-09:
+
+- reboot real do Mac;
+- login normal;
+- abrir `XboxMac.app`;
+- nenhum comando de reparo;
+- backend e serviços voltam ao estado operacional;
+- jobs persistidos permanecem coerentes.
 
 Gate final XM-09: operação cotidiana sem terminal.
 
