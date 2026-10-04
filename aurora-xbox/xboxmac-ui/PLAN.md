@@ -3685,6 +3685,12 @@ Resultado: **XM-08 aceito e encerrado.**
 
 Robustez pós-gate:
 
+- reinstalação do app não executa mais `bootout + bootstrap` quando
+  o LaunchAgent já está registrado;
+- isso elimina o falso `Bootstrap failed: 5` observado durante XM-09;
+- bootstrap só ocorre quando o job está ausente e o resultado é
+  verificado explicitamente.
+
 Validação da autocorreção em 2026-10-04:
 
 - `XM-08: STATIC_OK`;
