@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — PROBE V3 IMPLEMENTADO / REVALIDAÇÃO ESTÁTICA PENDENTE
+### XM-07 — assets/Aurora e ações manuais guiadas — CONCLUÍDO
 
 - estado de scan;
 - ContentID;
@@ -2602,6 +2602,42 @@ Próxima etapa:
 - reboot completo do console;
 - esperado: snapshot v3 com `count>0`;
 - GTA IV deve ser observado pelo callback do QuickView e promovido a `AURORA_READY/SUCCEEDED`.
+
+#### Validação física final do probe v3 — APROVADA em 2026-10-04
+
+Teste real com o job já existente do GTA IV:
+
+- `verify-xm07.py`: `STATIC_OK`;
+- 73/73 testes do backend passaram;
+- probe armado com:
+  - `protocol=quickview-callback-v3`;
+  - `status=ARMED`;
+- reboot completo do console executado;
+- snapshot criado pelo QuickView ativo:
+  - `schema=xboxmac-visibility-snapshot-v3`;
+  - `status=READY`;
+  - `count=16`;
+- GTA IV observado pelo callback do `XboxMac Probe`;
+- job removido de `scope=active`;
+- job final:
+  - `state=SUCCEEDED`;
+  - `probe.status=VERIFIED`;
+  - `probe.protocol=quickview-callback-v3`;
+- GTA IV final:
+  - `state=AURORA_READY`;
+  - `aurora_verified=true`.
+
+Conclusão:
+
+- a prova final de visibilidade não depende de `content.db`;
+- a prova é produzida pelo próprio caminho de avaliação do QuickView/CoverFlow;
+- `TitleID + MediaID` identificam o item observado no runtime;
+- `ContentID` continua sendo evidência da etapa `AURORA_PREPARED`;
+- nenhum botão manual de confirmação é necessário;
+- um reload/reboot global pode tornar visíveis outros jogos preparados sem adicioná-los ao job atual;
+- o pipeline congelado `connectx-v1.0.0` permanece inalterado.
+
+Resultado: XM-07 aceito e concluído.
 
 #### Relação com XM-10
 
