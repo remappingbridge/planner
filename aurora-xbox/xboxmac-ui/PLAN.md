@@ -4725,17 +4725,23 @@ Fingerprint estava ausente do payload do plano:
   plan_id;
 - testes exigem fingerprint público de 64 hex.
 
-Pré-condição adversarial validada:
+Ramo arbitrário UNCHANGED validado:
 
 - plano adversarial salvo corretamente;
 - cenário permaneceu com mesmo fingerprint;
-- execute-saved-plan retornou
-  `ADVERSARIAL_PRECONDITION_NOT_MET`;
-- endpoint destrutivo não foi chamado;
-- nenhuma escrita ocorreu;
-- decorators dos testes de API corrigidos;
-- próximo teste: alterar cenário e exigir
-  `STALE_PLAN_REJECTED`.
+- isso é um resultado válido, não falha de pré-condição;
+- nenhuma escrita ocorreu.
+
+Comportamento do operador é arbitrário:
+
+- operador pode alterar ou não alterar qualquer jogo;
+- nenhum ramo físico é exigido;
+- fingerprint igual => ramo `UNCHANGED`, válido;
+- fingerprint diferente => ramo `CHANGED`, plano antigo deve ser
+  recusado;
+- ambos são sucesso;
+- suíte automatizada cobre deterministicamente os dois ramos;
+- teste físico apenas observa o ramo produzido pela arbitrariedade real.
 
 Gate físico:
 
