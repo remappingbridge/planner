@@ -2110,6 +2110,27 @@ Resultado:
 
 Próxima investigação: procurar sinal separado em `settings.db`, cache/runtime ou outra estrutura que mude somente após reload/reboot do Aurora.
 
+#### Robustez do estado de visibilidade + diagnóstico estrutural
+
+Correções adicionais implementadas após a primeira validação física do XM-07B:
+
+- `WAITING_FOR_AURORA_VISIBILITY` não é mais reencolado após restart do backend;
+- o estado e a ação guiada são preservados como estavam;
+- `WAITING_FOR_AURORA_VISIBILITY` não bloqueia exclusões, pois a etapa mutável já terminou;
+- estados realmente em processamento continuam protegendo exclusão;
+- testes adicionados para restart e delete guard.
+
+Novo diagnóstico read-only:
+
+- `scripts/diagnose-xm07-aurora-library.py`;
+- baixa cópias temporárias de `content.db` e `settings.db` para `/tmp`;
+- valida `PRAGMA integrity_check`;
+- imprime campos estruturais de `ContentItems`;
+- imprime `ScanPaths`, `QuickViews` e `SystemSettings`;
+- não executa `UPDATE`, `DELETE`, upload ou alteração remota.
+
+Objetivo: comparar os cinco jogos novos não visíveis contra jogos antigos visíveis e verificar diferenças em `ScanPathId`, grupos, flags, profundidade, CaseIndex ou configuração de QuickView.
+
 #### Relação com XM-10
 
 A permanência do PES 2018 na própria biblioteca do Aurora continua fora do XM-07.
