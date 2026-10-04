@@ -3317,7 +3317,34 @@ Depois da validação estática, o teste físico usa o arquivo real de
 9. testar o jogo no Xbox;
 10. aceitar XM-07D somente após `AURORA_READY / ADOPTED`.
 
-#### XM-07D.1 — identificação assistida e metadata manual
+#### Validação física final XM-07D — APROVADA em 2026-10-04
+
+The Legend of Korra concluiu o fluxo completo:
+
+- container STFS/LIVE detectado sem depender de extensão;
+- origem preservada byte-for-byte;
+- árvore XEX publicada e validada;
+- TitleID `58411447`;
+- MediaID `41E4449D`;
+- `ContentID=17`;
+- metadata e capa verificadas;
+- QuickView callback v3 verificou a presença runtime;
+- job final:
+  `0bb08d0df50d41a3833d740eb418b839 = SUCCEEDED`;
+- game final:
+  `AURORA_READY`;
+- Biblioteca:
+  `CONNECTX_READY / ADOPTED`;
+- confirmação física do usuário:
+  jogo visível, capa correta, informações corretas e execução do jogo bem-sucedida;
+- não houve teste isolado de restart simples do Aurora nessa etapa:
+  o avanço final foi observado após reboot completo do Xbox.
+
+Resultado: **XM-07D aceito e encerrado.**
+
+### XM-07D.1 — identificação assistida e metadata manual — EM IMPLEMENTAÇÃO
+
+XM-07D.1 — identificação assistida e metadata manual
 
 Objetivo de UX:
 
