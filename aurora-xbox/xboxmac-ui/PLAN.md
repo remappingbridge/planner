@@ -3540,7 +3540,7 @@ Implementação do launcher:
   - `Contents/MacOS/XboxMac`;
   - `Contents/Resources/runtime-root.txt`;
 - runtime operacional:
-  `~/Library/Application Support/XboxMac/runtime`;
+  `~/Library/XboxMac/runtime`;
 - health check:
   `GET http://127.0.0.1:8742/healthz`;
 - backend saudável é reutilizado sem restart;
@@ -3620,7 +3620,7 @@ Primeira tentativa física do launcher:
 Correção aplicada:
 
 - runtime operacional instalado em
-  `~/Library/Application Support/XboxMac/runtime`;
+  `~/Library/XboxMac/runtime`;
 - `backend/` + `.venv/` copiados na instalação;
 - shebangs dos console scripts da virtualenv copiada são reescritos;
 - launcher não acessa Documents depois de instalado;
