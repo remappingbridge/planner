@@ -3342,7 +3342,7 @@ The Legend of Korra concluiu o fluxo completo:
 
 Resultado: **XM-07D aceito e encerrado.**
 
-### XM-07D.1 — identificação assistida e metadata manual — ESTÁTICA APROVADA / VALIDAÇÃO FÍSICA PENDENTE
+### XM-07D.1 — identificação assistida e metadata manual — ACEITO / CONCLUÍDO
 
 Objetivo de UX:
 
@@ -3505,6 +3505,19 @@ Gate físico XM-07D.1:
   `AURORA_READY`;
 - override vinculado a um XEX existente pode alimentar o staging sem
   alterar TitleID/MediaID.
+
+Validação física final aprovada em 2026-10-04:
+
+- busca de catálogo retornou Korra com capa;
+- nenhuma seleção automática ocorreu;
+- escolha do TitleID foi explícita;
+- UNKNOWN permaneceu não normalizável;
+- normalização de UNKNOWN foi recusada;
+- conflito de identidade resultou em `DETECTED_WINS`;
+- overrides sobreviveram ao restart do backend;
+- compatibilidade técnica permaneceu inalterada.
+
+Resultado: **XM-07D.1 aceito e encerrado.**
 
 ### XM-08 — launcher macOS e atalhos de operação no Finder
 
