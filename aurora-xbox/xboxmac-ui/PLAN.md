@@ -2647,7 +2647,7 @@ XM-06 remove os arquivos locais.
 XM-10 continua responsável, futuramente, por remover com segurança a entrada e os assets do catálogo Aurora.
 
 
-### XM-07C — adoção automática de jogos XEX manuais — IMPLEMENTADO / VALIDAÇÃO ESTÁTICA PENDENTE
+### XM-07C — adoção automática de jogos XEX manuais — EM VALIDAÇÃO FÍSICA
 
 Motivação real:
 
@@ -2792,6 +2792,52 @@ Validação física planejada com `Avatar: The Last Airbender`:
 8. store de adoção é persistido;
 9. biblioteca passa a `CONNECTX_READY / ADOPTED`;
 10. jogo continua jogável no Xbox.
+
+#### Validação estática XM-07C — CONCLUÍDA em 2026-10-04
+
+No Mac real:
+
+- `scripts/verify-xm07.py`: `STATIC_OK`;
+- `scripts/verify-xm07c.py`: `STATIC_OK`;
+- 80/80 testes do backend passaram;
+- `manual_xex=DISCOVERED`;
+- `manual_state=MANUAL_CONNECTX_UNADOPTED`;
+- `manual_without_iso=SELECTABLE`;
+- `manual_ingest=SKIPPED`;
+- `manual_identity=TITLE_ID_MEDIA_ID`;
+- `manual_fingerprint=XEX_SHA256`;
+- `manual_adoption_store=PERSISTENT`;
+- `manual_adoption_final=AURORA_READY_ONLY`;
+- `legacy_pipeline=UNCHANGED`.
+
+Próxima validação física com `Avatar: The Last Airbender`:
+
+1. reiniciar backend XboxMac;
+2. confirmar na Biblioteca:
+   - `state=MANUAL_CONNECTX_UNADOPTED`;
+   - `manual_connectx=true`;
+   - `manual_adoption_state=UNADOPTED`;
+3. na Automação:
+   - Histórico `Nunca rodaram job`;
+   - Presença `Somente ConnectX`;
+   - Avatar deve estar selecionável sem ISO;
+   - UI deve mostrar `Adotar / Preparar`;
+4. executar Dry-run;
+5. confirmar:
+   - `action=adopt_manual_connectx`;
+   - `source_kind=manual_connectx`;
+   - `ingest=0`;
+6. executar `Adotar / Preparar selecionadas`;
+7. confirmar no log que não há `xbox-connectx-ingest`;
+8. acompanhar metadata/capa/Aurora;
+9. executar Rescan/reload/reboot somente se a UI pedir;
+10. esperado final:
+    - job `SUCCEEDED`;
+    - game `AURORA_READY`;
+    - `aurora_verified=true`;
+    - capa ilustrada no CoverFlow;
+    - biblioteca `CONNECTX_READY`;
+    - `manual_adoption_state=ADOPTED`.
 
 ### XM-07D — importação e normalização de pacotes Xbox 360 não-ISO/não-XEX
 
