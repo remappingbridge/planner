@@ -3171,6 +3171,45 @@ Validação estática concluída no Mac físico em 2026-10-04:
 - suíte após essa correção: 92/92 testes aprovados;
 - inventário físico atual mostra apenas `.DS_Store` e `CX-01-READY.txt` como candidatos `UNKNOWN`; o arquivo real do Korra ainda não está dentro da profundidade/caminho atualmente alcançado pelo detector.
 
+#### Validação física XM-07D — normalização real do Korra
+
+Evidência obtida em 2026-10-04:
+
+- detecção física:
+  - `format=STFS`;
+  - `subtype=LIVE`;
+  - `TitleID=58411447`;
+  - `MediaID=41E4449D`;
+  - `normalizable=true`;
+- suíte após correção de profundidade/filtro de housekeeping:
+  `94/94` testes aprovados;
+- origem:
+  `/Users/Shared/xbox360-connectx/The Legend of Korra/58411447/000D0000/6681F6A8D4443C7A1DB9AA844200B3DB644BC4DF58`;
+- baseline e pós-normalização idênticos:
+  - SHA-256:
+    `000039444e7c3049aed3fcdf6b6e650f166c0a71c7ce2d685ebc9838939588c9`;
+  - tamanho: `1928855552` bytes;
+  - inode: `4066957`;
+  - mtime: `1414103522`;
+- preparação real:
+  - HTTP `202`;
+  - `action=NORMALIZED`;
+  - `source_preserved=true`;
+- árvore publicada:
+  `/Users/Shared/xbox360-connectx/The Legend of Korra [58411447-41E4449D]`;
+- tamanho publicado: `1916401362` bytes;
+- SHA-256 do `default.xex`:
+  `79dfa5a66a93154b8139946336c55983e3ca6dc5ebf56a45bf46a48336ae3230`;
+- Biblioteca:
+  - `MANUAL_CONNECTX_UNADOPTED`;
+  - `manual_connectx=true`;
+  - `manual_adoption_state=UNADOPTED`;
+- job XM-07C criado automaticamente:
+  `4dbd2ed03850447b996f17964ffedf7f`;
+- a consulta imediatamente posterior a `scope=active` não listou jobs;
+  antes de avançar é necessário consultar esse job específico e registrar
+  seu estado terminal/erro.
+
 Depois da validação estática, o teste físico usa o arquivo real de
 `The Legend of Korra` já existente:
 
