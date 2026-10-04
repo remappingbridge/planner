@@ -4691,6 +4691,17 @@ Teste adversarial de plano obsoleto:
 - depois do plano, usuário deve mudar inventário de propósito;
 - execute deve recusar plano obsoleto antes de backup/manifesto.
 
+Plano adversarial salvo:
+
+- `plan-next-stale` salva metadados públicos em
+  `~/Library/XboxMac/xm10-adversarial-plan.json`;
+- após mudança deliberada do inventário,
+  `execute-saved-plan --confirm` compara fingerprint novo com o salvo;
+- se cenário não mudou, não chama endpoint destrutivo;
+- se mudou, envia o plano antigo e exige rejeição do backend;
+- sucesso do teste:
+  `XM-10 STALE_PLAN_REJECTED`.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
