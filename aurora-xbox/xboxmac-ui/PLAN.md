@@ -3715,7 +3715,7 @@ indisponível, a interface configurada como `en7` deixou de existir no
 macOS. Os serviços launchd continuaram `running`, mas
 NetISO/Samba/NetBIOS ficaram sem sockets úteis em `192.168.50.1`.
 
-### XM-09 — scheduler e robustez — ETAPA DE REDE IMPLEMENTADA / VALIDAÇÃO FÍSICA PENDENTE
+### XM-09 — scheduler e robustez — REDE ACEITA / ROBUSTEZ DO SCHEDULER EM IMPLEMENTAÇÃO
 
 Escopo completo continua:
 
@@ -3940,6 +3940,16 @@ Evidência física parcial da etapa de rede — 2026-10-04:
   exigindo ambos os sockets;
 - gate de rede permanece pendente somente até repetir a confirmação com
   o probe corrigido.
+
+Etapa de rede aceita em 2026-10-04:
+
+- ciclo real docking off/on executado;
+- reconciliador registrou
+  `SET_MANUAL -> WAITING_FOR_IP -> READY`;
+- retorno sem comando manual;
+- Ethernet/NetISO/Samba/NetBIOS/Xbox/Aurora FTP todos `up`;
+- `XM-09 NETWORK_RECOVERY_OK`;
+- próxima etapa: estabilidade de arquivo, offline/cache, retries e locks.
 
 Gate final XM-09: operação cotidiana sem terminal.
 
