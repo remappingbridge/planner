@@ -4834,7 +4834,7 @@ Objetivo:
 - excluir ConnectX pela aplicação => limpar automaticamente catálogo Aurora;
 - ISO presente ou ausente não interfere;
 - ISO-only não toca Aurora;
-- Finder/manual ConnectX removal continua no fluxo stale manual consciente;
+- Finder/manual ConnectX removal será detectado posteriormente pela reconciliação global Aurora × ConnectX e oferecido como stale/órfão para limpeza consciente;
 - Histórico XM-11 permanece preservado.
 
 Implementado:
@@ -4856,6 +4856,38 @@ Implementado:
 - verificador: `scripts/verify-xm12.py`;
 - helper físico: `scripts/physical-xm12.py`;
 - docs: `docs/XM-12.md`.
+
+Decisão arquitetural adotada — reconciliação global Aurora × ConnectX:
+
+- a aplicação não perde definitivamente o controle quando um ConnectX é
+  removido manualmente pelo Finder ou por outro meio externo;
+- ela perde somente o evento causal da exclusão, portanto não deve assumir
+  automaticamente que a entrada correspondente no Aurora pode ser apagada;
+- em reconciliação periódica e também sob ação explícita do usuário, o
+  XboxMac deve comparar o inventário atual do ConnectX com o catálogo atual
+  do Aurora (`content.db`), usando TitleID + MediaID e o histórico de
+  identidades conhecidas pelo XboxMac;
+- uma entrada presente no Aurora cuja identidade gerenciada não possui mais
+  ConnectX correspondente deve ser classificada como stale/órfã;
+- esse estado deve aparecer diretamente na Biblioteca, por exemplo:
+  `ConnectX ausente · ainda presente no Aurora`;
+- a Biblioteca deve oferecer uma ação explícita equivalente a
+  `Limpar do Aurora` para esse resíduo;
+- essa ação deve reutilizar o mesmo pipeline seguro já validado no XM-10/XM-12:
+  descoberta fresca, identidade exata, plano, backup, execução, verificação,
+  polling e instrução de refresh/restart quando necessária;
+- resíduos descobertos por reconciliação não serão apagados automaticamente,
+  pois a ausência do ConnectX pode ser temporária (volume indisponível,
+  diretório movido ou outra condição externa);
+- regra final de UX:
+  - ConnectX excluído pelo próprio XboxMac => cleanup Aurora automático;
+  - ConnectX ausente detectado posteriormente => oferecer cleanup com uma
+    confirmação explícita;
+- a seção atual `Catálogo Aurora` permanece como mecanismo técnico compatível,
+  mas a experiência alvo é integrar essa detecção e ação à Biblioteca para
+  que o usuário não precise distinguir manualmente XM-10 de XM-12;
+- PES 2018, removido manualmente e ainda visível no CoverFlow, passa a ser a
+  evidência física de referência para este caso de reconciliação global.
 
 Regressão observada no primeiro reteste físico:
 
