@@ -3519,48 +3519,102 @@ Validação física final aprovada em 2026-10-04:
 
 Resultado: **XM-07D.1 aceito e encerrado.**
 
-### XM-08 — launcher macOS e atalhos de operação no Finder
+### XM-08 — launcher macOS e atalhos de operação no Finder — IMPLEMENTADO / VALIDAÇÃO ESTÁTICA PENDENTE
+
+Objetivo:
 
 - `XboxMac.app`;
-- iniciar/find backend;
+- iniciar/encontrar backend;
 - `ensure_ready`;
-- abrir browser;
-- não exigir terminal.
+- abrir navegador;
+- não exigir Terminal no uso cotidiano.
+
+Implementação do launcher:
+
+- instalador:
+  `scripts/install-xboxmac-app.sh`;
+- destino:
+  `~/Applications/XboxMac.app`;
+- bundle:
+  - `Contents/Info.plist`;
+  - `Contents/MacOS/XboxMac`;
+  - `Contents/Resources/repo-root.txt`;
+- health check:
+  `GET http://127.0.0.1:8742/healthz`;
+- backend saudável é reutilizado sem restart;
+- backend ausente é iniciado por:
+  `.venv/bin/python -m backend.server.xboxmac.cli`;
+- readiness é delegada a:
+  `POST /api/connections/ensure`;
+- painel aberto em:
+  `http://127.0.0.1:8742`;
+- log do backend iniciado pelo app:
+  `~/Library/Logs/XboxMac/xboxmacd.log`;
+- launcher não usa `sudo`, `kill`, `pkill` ou `killall`.
 
 #### Atalhos no painel web
 
-Adicionar uma área de acesso rápido com botões:
+Área:
 
-- `Abrir pasta de ISOs`
-  - abre `/Users/Shared/xbox360` no Finder;
-- `Abrir pasta de jogos XEX / ConnectX`
-  - abre `/Users/Shared/xbox360-connectx` no Finder;
-- `Abrir Lixeira`
-  - abre a Lixeira do usuário atual no Finder.
+- `Arquivos`, próxima ao topo e separada das ações destrutivas.
 
-Regras de segurança/UX:
+Botões:
 
-- endpoints somente locais em `127.0.0.1`;
-- ações POST explícitas, nunca disparadas por simples GET da página;
-- nenhum path arbitrário vindo do navegador;
-- backend usa apenas destinos fixos configurados;
-- botão de pasta cria a pasta somente se isso já fizer parte do contrato de instalação; caso contrário informa que está ausente;
-- abrir Lixeira nunca esvazia Lixeira;
-- nenhum botão move ou exclui arquivo;
-- erros do Finder aparecem no painel;
-- botões devem ter texto grande e ícones não essenciais, mantendo boa acessibilidade visual.
+- `Abrir pasta de ISOs`;
+- `Abrir pasta de jogos XEX / ConnectX`;
+- `Abrir Lixeira`.
 
-Posicionamento:
+Endpoints explícitos:
 
-- bloco `Arquivos` próximo ao topo do painel, separado das ações destrutivas;
-- esses botões são conveniência operacional e não alteram estado de jobs.
+- `POST /api/files/open-isos`;
+- `POST /api/files/open-connectx`;
+- `POST /api/files/open-trash`.
 
-Gate XM-08:
+Não existe rota genérica com path arbitrário.
 
-- usuário não técnico consegue iniciar e usar o painel clicando no app;
-- consegue abrir pasta de ISOs, pasta ConnectX e Lixeira pelo painel;
-- nenhuma dessas ações exige Terminal;
-- nenhuma ação de abertura modifica arquivos.
+Destinos:
+
+- ISO:
+  `/Users/Shared/xbox360`;
+- ConnectX:
+  `/Users/Shared/xbox360-connectx`;
+- Lixeira:
+  `~/.Trash`.
+
+Serviço:
+
+- `backend/server/xboxmac/finder.py`;
+- usa somente `/usr/bin/open <destino-fixo>`;
+- não cria destino ausente;
+- não move/exclui arquivo;
+- não esvazia a Lixeira;
+- não altera jobs ou Aurora;
+- resposta inclui `destructive=false`.
+
+Acessibilidade:
+
+- reutiliza padrão ampliado do XM-07D.1:
+  fonte-base 22 px, controles 56 px e foco forte;
+- botões usam texto completo e não dependem de ícones.
+
+Validação estática planejada:
+
+```text
+.venv/bin/python scripts/verify-xm08.py
+.venv/bin/python -m unittest discover -s backend/server/tests -v
+```
+
+Gate físico XM-08:
+
+- instalar o app;
+- desligar backend manual;
+- abrir `XboxMac.app` pelo Finder;
+- backend iniciar sem Terminal;
+- navegador abrir automaticamente;
+- abrir o app novamente com backend saudável sem duplicar processo;
+- abrir ISO, ConnectX e Lixeira pelos botões;
+- confirmar que nenhuma ação de abertura modifica arquivos;
+- após a instalação, operação cotidiana sem Terminal.
 
 ### Observação operacional para XM-09 — interface privada após desconexão prolongada
 
