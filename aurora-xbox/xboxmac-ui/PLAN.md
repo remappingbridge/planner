@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — PROBE V2 IMPLEMENTADO / REVALIDAÇÃO ESTÁTICA PENDENTE
+### XM-07 — assets/Aurora e ações manuais guiadas — PROBE V3 IMPLEMENTADO / REVALIDAÇÃO ESTÁTICA PENDENTE
 
 - estado de scan;
 - ContentID;
@@ -2548,6 +2548,60 @@ Próxima etapa:
 - confirmar que o job GTA IV é rearmado como `protocol=title-media-v2`;
 - reboot completo do console;
 - esperado: snapshot v2 com coleção não vazia e GTA IV promovido a `AURORA_READY/SUCCEEDED`.
+
+#### Falha física do probe v2 e correção para QuickView callback v3 — 2026-10-04
+
+Segundo teste físico:
+
+- protocolo v2 foi armado corretamente;
+- reboot completo executado;
+- snapshot novo foi gerado com:
+  - `schema=xboxmac-visibility-snapshot-v2`;
+  - `status=READY`;
+  - `count=0`;
+- GTA IV permaneceu corretamente em `WAITING_FOR_AURORA_VISIBILITY`;
+- o job registrou `protocol=title-media-v2`;
+- visualmente o jogo continua presente no Aurora.
+
+Conclusão:
+
+- o problema não era mais identidade;
+- `Content.FindContent()` executado no top-level do carregamento do script ocorre cedo demais;
+- nesse estágio a biblioteca runtime ainda não está disponível;
+- esperar dentro desse mesmo carregamento não é um sinal confiável.
+
+Probe v3 implementado:
+
+- protocolo `quickview-callback-v3`;
+- schema `xboxmac-visibility-snapshot-v3`;
+- auxiliar renomeado para:
+  - `ZZXboxMacVisibilityProbe.lua`;
+  - `ZZXboxMacVisibilityProbe.ini`;
+- prefixo `ZZ` prioriza carregamento depois do `XboxMacProbe.lua`;
+- o auxiliar captura a função existente:
+  `GameListFilterCategories.User["XboxMac Probe"]`;
+- registra um wrapper que chama primeiro o filtro original;
+- quando o filtro original aceita um item, observa `TitleID + MediaID`;
+- snapshot é atualizado incrementalmente conforme o QuickView real avalia jogos;
+- isso transforma o probe em evidência do caminho real de exibição, e não de uma consulta prematura no startup;
+- arquivos auxiliares antigos são removidos automaticamente do Xbox ao instalar o v3;
+- `WRAP_UNAVAILABLE` é tratado como falha do probe, nunca como jogo ausente;
+- protocolos antigos são rearmados automaticamente;
+- snapshot antigo nunca valida protocolo novo.
+
+Também corrigido:
+
+- `verify-xm07.py` deixou de procurar a string do protocolo dentro de `automation.py`;
+- agora valida `PROBE_PROTOCOL` e `SNAPSHOT_SCHEMA` no módulo `aurora_visibility`.
+
+Próxima etapa:
+
+- revalidar estaticamente;
+- reiniciar backend;
+- confirmar `protocol=quickview-callback-v3`;
+- reboot completo do console;
+- esperado: snapshot v3 com `count>0`;
+- GTA IV deve ser observado pelo callback do QuickView e promovido a `AURORA_READY/SUCCEEDED`.
 
 #### Relação com XM-10
 
