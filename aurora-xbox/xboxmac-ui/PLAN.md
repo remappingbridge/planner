@@ -4508,6 +4508,17 @@ Correção:
 - backend recusa qualquer componente FATX >42;
 - FTP MKD cria o componente final dentro do diretório pai.
 
+Plano físico antigo deve ser aposentado antes de continuar:
+
+- hash do banco mudou desde a criação do plano;
+- não reutilizar manifesto `dfc73a...`;
+- script:
+  `scripts/retire-xm10-failed-plan.py`;
+- só retira manifesto/resultado após provar:
+  FAILED, não VERIFIED, linha ainda presente e identidade igual;
+- arquiva manifesto/resultado localmente;
+- depois gerar plano novo contra o content.db atual.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
