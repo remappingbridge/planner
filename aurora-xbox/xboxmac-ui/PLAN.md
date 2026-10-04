@@ -3479,6 +3479,20 @@ Validação estática aprovada em 2026-10-04:
 - suíte backend: `104/104` testes aprovados;
 - próximo passo: validação física com arquivo UNKNOWN inofensivo.
 
+Evidência física parcial em 2026-10-04:
+
+- fixture UNKNOWN abriu no formulário;
+- overrides manuais foram salvos;
+- API confirmou `UNKNOWN / supported=false / normalizable=false`;
+- proveniência dos campos preenchidos: `MANUAL`;
+- store persistente criado corretamente;
+- feedback de acessibilidade: o formulário diagnóstico original estava
+  visualmente difícil para baixa visão;
+- UI diagnóstica ajustada com fonte 22 px, controles 56 px, foco/bordas
+  reforçados, radios maiores, capa maior e proveniência em linhas;
+- restante da validação passa a ter caminho equivalente por Terminal
+  através de `scripts/physical-xm07d1.py`, sem exigir inspeção visual.
+
 Gate físico XM-07D.1:
 
 - item desconhecido pode ser aberto no formulário;
