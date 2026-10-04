@@ -4570,6 +4570,23 @@ Correção:
 - plano `da57...` pode ser reutilizado porque o banco permanece no
   mesmo SHA-256 e nenhuma operação ocorreu.
 
+Remoção física XM-10 aprovada:
+
+- plan_id:
+  `da57feb71f49316e591778707f766f124440b97c1264ceb90df952205c8f1e8f`;
+- `AURORA_REMOVED`;
+- integrity ok;
+- linha ausente;
+- assets ausentes;
+- verified=true.
+
+Antes do rollback:
+
+- assets serão restaurados antes do COMMIT;
+- falha de restauração => ROLLBACK da linha;
+- backend exige assets presentes quando havia backup;
+- helper mostra `asset_backup_present`.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
