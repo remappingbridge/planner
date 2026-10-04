@@ -3166,7 +3166,10 @@ Validação estática concluída no Mac físico em 2026-10-04:
 - `scripts/verify-xm07d.py` retornou `XM-07D: STATIC_OK`;
 - suíte completa do backend: 91/91 testes aprovados;
 - correção aplicada no teste para a canonização macOS `/var` -> `/private/var`;
-- `korra_physical` permanece `PENDING`.
+- `korra_physical` permanece `PENDING`;
+- correção adicional validada para localizar `xverter` dentro da virtualenv no macOS;
+- suíte após essa correção: 92/92 testes aprovados;
+- inventário físico atual mostra apenas `.DS_Store` e `CX-01-READY.txt` como candidatos `UNKNOWN`; o arquivo real do Korra ainda não está dentro da profundidade/caminho atualmente alcançado pelo detector.
 
 Depois da validação estática, o teste físico usa o arquivo real de
 `The Legend of Korra` já existente:
