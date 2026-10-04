@@ -4774,7 +4774,7 @@ Evidência final:
 
 Status:
 
-    IMPLEMENTED / PHYSICAL_VALIDATION_PENDING
+    PHYSICAL_VALIDATION_PASSED / FINAL_AUTOMATED_RERUN_PENDING
 
 Implementado:
 
@@ -4800,16 +4800,18 @@ Implementado:
 - documentação:
   `docs/XM-11.md`.
 
-Gate físico pendente:
+Physical validation evidence: history_before=7, purged=7,
+active_before=0, active_after=0; restart confirmou history_jobs=0.
+UI Histórico confirmada visualmente pelo usuário.
+Único failure restante era assertion de formatação do teste da URL active;
+corrigido sem alteração de produção.
 
-1. STATIC_OK + suíte completa;
-2. `physical-xm11.py inspect`;
-3. validar visualmente seção Histórico;
-4. `physical-xm11.py purge --confirm`;
-5. confirmar terminais removidos e ativos preservados;
-6. reiniciar backend/app;
-7. confirmar persistência do store restante;
-8. confirmar que ISO, ConnectX e Aurora não foram afetados.
+Gate final pendente:
+
+- rerun do verifier XM-11;
+- rerun da suíte completa;
+- se ambos passarem, XM-11 pode ser marcado ACCEPTED / COMPLETE.
+
 
 Não há TTL automático no XM-11.
 Exclusão individual de um registro histórico permanece opcional e fora
