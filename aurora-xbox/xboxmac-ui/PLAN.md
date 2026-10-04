@@ -2362,6 +2362,34 @@ Próximo teste físico:
 
 Objetivo: determinar se a divergência restante está no estado/cache/runtime carregado do Aurora/ConnectX e é resolvida apenas por reboot completo.
 
+#### Validação física adicional XM-07B — reboot global do Aurora em 2026-10-04
+
+Observação real:
+
+- após reboot completo do console, os cinco jogos novos ficaram visíveis no Aurora;
+- GTA IV, GH Warriors of Rock, Guitar Hero 5, Guitar Hero II e Guitar Hero III aparecem corretamente;
+- o usuário observou que os cinco provavelmente já haviam aparecido quando executou o fluxo posterior selecionando somente GTA IV;
+- o job atual do painel contém somente GTA IV, pois foi o único jogo selecionado naquele job;
+- isso é coerente com o pipeline atual: `xbox-connectx-sync-metadata --apply` e `xbox-connectx-sync-covers` percorrem o catálogo global, embora o job operacional acompanhe apenas os jogos selecionados;
+- a visibilidade/reload do Aurora é, portanto, uma ação global do console, não necessariamente limitada aos games do job que a desencadeou.
+
+Conclusão operacional:
+
+- `AURORA_PREPARED` continua sendo evidência por jogo;
+- refresh/reboot do Aurora é um evento global que pode tornar visíveis vários jogos preparados de uma vez;
+- a UI não deve adicionar automaticamente jogos não selecionados ao job atual apenas porque a sincronização global os tocou;
+- a UI deve deixar claro que a ação de visibilidade pode afetar outros jogos preparados;
+- o job GTA IV permanecer em `WAITING_FOR_AURORA_VISIBILITY` após o reboot evidencia apenas a ausência de detecção automática do evento de reload, não falha de preparação.
+
+Direção de implementação:
+
+- detectar automaticamente um ciclo completo de indisponibilidade/retorno do console/Aurora após entrar em `WAITING_FOR_AURORA_VISIBILITY`;
+- distinguir restart simples do Aurora de reboot completo quando tecnicamente possível;
+- após um reboot completo detectado e com evidência `AURORA_PREPARED` íntegra, avaliar promoção automática para `AURORA_READY`;
+- a promoção deve permanecer restrita aos jogos acompanhados pelo job;
+- não importar jogos não selecionados para o job atual;
+- registrar que um único reboot pode satisfazer a etapa de visibilidade de múltiplos jobs preparados simultaneamente.
+
 #### Relação com XM-10
 
 A permanência do PES 2018 na própria biblioteca do Aurora continua fora do XM-07.
