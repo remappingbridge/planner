@@ -2096,6 +2096,20 @@ Pendência restante do XM-07:
 - localizar e validar um sinal independente de visibilidade real no Aurora;
 - se nenhum sinal confiável existir, formalizar `WAITING_FOR_AURORA_VISIBILITY` como limite observável automático do produto, sem falso sucesso.
 
+#### Investigação de probe independente — Australis descartado
+
+O cliente público Australis foi inspecionado porque oferece uma tela chamada `Game Library`.
+
+Resultado:
+
+- Australis baixa `/Game/Data/Databases/content.db` por FTP;
+- a lista de jogos é construída com `SELECT Id, TitleName FROM ContentItems`;
+- portanto usa a mesma fonte de verdade já observada pelo XboxMac;
+- isso não prova que o CoverFlow/biblioteca carregada em memória pelo Aurora já incorporou o item;
+- Australis não serve como probe independente para `AURORA_READY`.
+
+Próxima investigação: procurar sinal separado em `settings.db`, cache/runtime ou outra estrutura que mude somente após reload/reboot do Aurora.
+
 #### Relação com XM-10
 
 A permanência do PES 2018 na própria biblioteca do Aurora continua fora do XM-07.
