@@ -1800,7 +1800,7 @@ Implementação mínima aplicada no `xboxmac-ui/main`:
 - verificações automatizadas exigem esses marcadores visuais.
 
 
-### XM-07 — assets/Aurora e ações manuais guiadas — PROBE RUNTIME IMPLEMENTADO / REVALIDAÇÃO ESTÁTICA PENDENTE
+### XM-07 — assets/Aurora e ações manuais guiadas — PROBE RUNTIME EM VALIDAÇÃO FÍSICA
 
 - estado de scan;
 - ContentID;
@@ -2476,6 +2476,36 @@ Testes adicionados/alterados:
 - probe auxiliar não usa setters de metadata.
 
 Revalidação estática necessária antes do teste físico.
+
+#### Revalidação estática do probe runtime — CONCLUÍDA em 2026-10-04
+
+No Mac real:
+
+- `scripts/verify-xm07.py`: `STATIC_OK`;
+- 69/69 testes do backend passaram;
+- `visibility_probe=CONTENT_FIND_CONTENT`;
+- `visibility_snapshot=FRESH_AFTER_ARM`;
+- `visibility_probe_mutation=FORBIDDEN`;
+- `false_aurora_ready=FORBIDDEN`;
+- `legacy_pipeline=UNCHANGED`;
+- `runtime_visibility_probe=IMPLEMENTED_PHYSICAL_PENDING`.
+
+Próximo teste físico:
+
+1. reiniciar somente o backend XboxMac;
+2. confirmar que o job GTA IV existente continua em `WAITING_FOR_AURORA_VISIBILITY`;
+3. aguardar o backend instalar/armar o probe e apagar snapshot anterior;
+4. confirmar `Probe runtime: ARMED` ou estado equivalente de espera por snapshot;
+5. executar reboot completo do console;
+6. após o Aurora carregar, aguardar reconciliação automática;
+7. esperado:
+   - snapshot novo gerado por `Content.FindContent()`;
+   - GTA IV reconhecido por ContentID 13 + TitleID 545407F2 + MediaID 6AC07221;
+   - job -> `SUCCEEDED`;
+   - game -> `AURORA_READY`;
+   - `aurora_verified=true`;
+   - probe -> `VERIFIED`;
+8. nenhum novo job/ingest/rescan deve ser necessário.
 
 #### Relação com XM-10
 
