@@ -3161,6 +3161,13 @@ git pull
 .venv/bin/python -m unittest discover -s backend/server/tests -v
 ```
 
+Validação estática concluída no Mac físico em 2026-10-04:
+
+- `scripts/verify-xm07d.py` retornou `XM-07D: STATIC_OK`;
+- suíte completa do backend: 91/91 testes aprovados;
+- correção aplicada no teste para a canonização macOS `/var` -> `/private/var`;
+- `korra_physical` permanece `PENDING`.
+
 Depois da validação estática, o teste físico usa o arquivo real de
 `The Legend of Korra` já existente:
 
