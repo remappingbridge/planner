@@ -4536,6 +4536,21 @@ Novo plano físico pós-FATX aprovado:
   PES 2018 / `4A3007D3` / `1CB7BE36` / ContentID 1;
 - nenhuma ação destrutiva executada ainda.
 
+Backup remoto FATX-safe validado fisicamente:
+
+- plan_id:
+  `da57feb71f49316e591778707f766f124440b97c1264ceb90df952205c8f1e8f`;
+- key:
+  `p-da57feb71f49316e591778707f766f12`;
+- bytes:
+  39936;
+- SHA:
+  `d82f91401d1a1a6381d9db32dffa33ddd86adb88fc65819ef8e09d501791759c`;
+- `BYTE_FOR_BYTE_VERIFIED`;
+- estado atual:
+  `WAITING_FOR_AURORA`;
+- não repetir execute enquanto não houver diagnóstico do resultado remoto.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
