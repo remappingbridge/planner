@@ -3646,6 +3646,18 @@ Correção:
 - app faz `launchctl kickstart` apenas quando necessário;
 - ciclo de vida do backend passa a ser independente do launcher gráfico.
 
+Terceira tentativa física do launcher:
+
+- backend previamente parado;
+- app aberto pelo Finder;
+- frontend abriu no navegador;
+- health check permaneceu `ok` após o launcher terminar;
+- LaunchAgent `io.remappingbridge.xboxmacd` permaneceu
+  `state=running`;
+- PID observado: `5607`;
+- ciclo de vida independente do app: aprovado;
+- pendente: atalhos Finder + validação estática final.
+
 Gate físico XM-08:
 
 - instalar o app;
