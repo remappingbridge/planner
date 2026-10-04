@@ -3255,6 +3255,32 @@ Job após a correção de metadata:
 - o mesmo job deve retomar automaticamente quando o jogo aparecer no
   catálogo do Aurora.
 
+#### XM-07D — Korra indexado no Aurora e assets preparados
+
+Após o Rescan do caminho ConnectX:
+
+- job:
+  `0bb08d0df50d41a3833d740eb418b839`;
+- Aurora content.db passou de 16 para 17 itens;
+- Korra:
+  - `ContentID=17`;
+  - `TitleID=58411447`;
+  - `MediaID=41E4449D`;
+- metadata:
+  - estado `MANIFEST_PENDING`;
+  - manifesto enviado;
+  - campos pendentes:
+    `Description, Publisher, Developer, ReleaseDate`;
+- capa:
+  - placeholder remoto anterior de 2048 bytes;
+  - nova capa de 566272 bytes enviada;
+  - `cover_state=VERIFIED`;
+- job:
+  `WAITING_FOR_AURORA_REFRESH`;
+- próximo passo:
+  restart/reload do Aurora; reboot completo do console ainda não é
+  necessário nesta etapa.
+
 Depois da validação estática, o teste físico usa o arquivo real de
 `The Legend of Korra` já existente:
 
