@@ -4665,6 +4665,14 @@ Contrato de inventário dinâmico:
 - execute recalcula o plano e deve recusar se o cenário mudou;
 - inventários registrados anteriormente são evidência histórica apenas.
 
+Fingerprint ausente detectou backend runtime antigo:
+
+- helper novo recebeu `state_fingerprint=` vazio;
+- snapshot é inválido para qualquer decisão operacional;
+- candidate/count desse snapshot não podem ser reutilizados;
+- helper passa a falhar fechado se fingerprint não for SHA-256 válido;
+- atualizar XboxMac runtime e fazer nova descoberta do zero.
+
 Gate físico:
 
 - filtro instalado e verificado byte-for-byte;
