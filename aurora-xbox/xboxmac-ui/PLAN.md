@@ -1904,6 +1904,100 @@ Gate XM-07A:
 - jobs ativos nunca desaparecem por falta temporária de ISO/ConnectX;
 - nenhuma perda automática de histórico.
 
+##### XM-07A.1 — filtro de candidatos da Automação
+
+Objetivo:
+
+- facilitar a seleção de jogos para automação sem misturar estado do filesystem com histórico de jobs;
+- tornar imediatamente visíveis jogos nunca processados, jogos com somente ISO, somente ConnectX ou ambos;
+- manter a fila `Automação atual` separada: o filtro atua na lista de candidatos/seleção, não nos jobs já em execução.
+
+Modelo de filtros planejado:
+
+1. **Histórico de automação**
+   - `Nunca rodaram job` — **default**;
+   - `Já rodaram job`;
+   - `Todos`.
+
+2. **Presença**
+   - `Todos` — default;
+   - `Somente ISO`;
+   - `Somente ConnectX`;
+   - `ISO + ConnectX`;
+   - `Nenhum` — útil apenas para reconciliação/histórico, não selecionável para nova automação.
+
+3. **Busca por texto**
+   - mesma ergonomia da seção `Biblioteca e exclusão`;
+   - filtra por título, nome do arquivo e, quando disponíveis, TitleID/MediaID.
+
+Semântica de `Nunca rodaram job`:
+
+- significa que não existe registro histórico de automação associado ao jogo;
+- correlação preferencial por `game_id`;
+- fallback por `TitleID + MediaID` quando disponíveis;
+- para ISO ainda não identificada/ingerida, fallback por caminho ISO canônico + fingerprint já usado pela biblioteca (`size + mtime_ns`);
+- simples renome de arquivo não deve criar falso histórico quando uma identidade forte já existir;
+- arquivo diferente colocado no mesmo caminho não deve herdar histórico antigo se o fingerprint divergir.
+
+Enriquecimento planejado da biblioteca/candidatos:
+
+- `automation_history`:
+  - `NEVER_RUN`;
+  - `HAS_HISTORY`;
+- `automation_last_job_id`;
+- `automation_last_state`;
+- `automation_last_run_at`;
+- `presence`:
+  - `ISO_ONLY`;
+  - `CONNECTX_ONLY`;
+  - `ISO_AND_CONNECTX`;
+  - `ABSENT`.
+
+Regras de seleção:
+
+- jogo com ISO presente pode ser selecionado para Dry-run/Preparar;
+- jogo somente ConnectX aparece para diagnóstico, mas checkbox/botão de preparação fica desabilitado com explicação `ISO ausente`;
+- jogo sem ISO nem ConnectX não deve aparecer na lista operacional normal; só em visões de histórico/reconciliação;
+- filtros nunca alteram arquivos, jobs ou estado do Aurora;
+- trocar filtro não dispara automação.
+
+Comportamento inicial da UI:
+
+- ao abrir a página, `Histórico de automação = Nunca rodaram job`;
+- `Presença = Todos`;
+- resultado esperado: destacar prioritariamente jogos que ainda nunca passaram pelo XboxMac;
+- contador deve indicar quantidade visível e quantidade total, por exemplo:
+  `7 de 14 jogos · Nunca rodaram job`.
+
+Arquitetura/API planejada:
+
+- não reutilizar `scope=active|history|all` para candidatos; `scope` continua significando visão de jobs;
+- criar parâmetros próprios na fonte de candidatos, por exemplo:
+  - `automation_history=never|has_history|all`;
+  - `presence=iso|connectx|both|all`;
+- preferir enriquecer a resposta da biblioteca/candidatos em uma única chamada em vez de a UI baixar todos os jobs e fazer correlação no navegador;
+- evitar varredura pesada do filesystem a cada polling; reutilizar `library_revision`/reconciliação já existente e recalcular somente quando biblioteca ou histórico de jobs mudar;
+- manter `GET /api/jobs` compatível.
+
+Relação com Histórico futuro (XM-11):
+
+- este filtro responde `o que posso/preciso automatizar agora?`;
+- XM-11 responde `o que aconteceu em jobs anteriores?`;
+- `Já rodaram job` pode usar a mesma correlação histórica, mas não substitui a tela Histórico;
+- limpar histórico no XM-11 fará um jogo voltar a `NEVER_RUN` somente se a definição de produto adotada for “sem registro histórico”; essa consequência deve ser explicitamente validada no XM-11 antes da implementação do purge.
+
+Gate XM-07A.1:
+
+- default mostra somente jogos `NEVER_RUN`;
+- filtros de presença distinguem ISO, ConnectX e ambos;
+- combinação dos filtros funciona de forma composável;
+- jogo ConnectX-only é visível mas não selecionável para preparar;
+- jobs ativos continuam aparecendo separadamente em `Automação atual`;
+- nenhum job ou arquivo é criado/modificado ao apenas filtrar;
+- resultado permanece correto após excluir/restaurar ISO/ConnectX pelo Finder;
+- histórico antigo do PES não reaparece na fila operacional.
+
+
 ##### XM-07B — Semântica forte de prontidão no Aurora
 
 Problema observado:
