@@ -4919,8 +4919,13 @@ Nova evidência física parcial:
   excluído desaparecer do CoverFlow;
 - PES 2018 removido manualmente continuou visível, exatamente o caso de
   referência agora coberto pela reconciliação global;
-- falta validar fisicamente a nova linha `AURORA_STALE` e a limpeza do PES
-  pela ação `Limpar do Aurora`.
+- validação física concluída para o resíduo manual:
+  - PES 2018 apareceu como resíduo elegível na Biblioteca;
+  - ação `Limpar do Aurora` foi executada com sucesso;
+  - após atualização/restart do Aurora, o PES 2018 desapareceu do CoverFlow;
+  - a reconciliação global Aurora × ConnectX está funcional no ambiente real;
+- falta somente a checagem final do verificador/suíte/helper físico atualizados
+  antes de marcar XM-12 como ACCEPTED / COMPLETE.
 
 Regressão observada no primeiro reteste físico:
 
@@ -4935,16 +4940,10 @@ Regressão observada no primeiro reteste físico:
 
 Gate pendente:
 
-1. STATIC_OK e suíte completa após a reconciliação global;
-2. instalar runtime atualizado;
-3. confirmar que a Biblioteca continua populando normalmente;
-4. confirmar que o PES 2018 aparece como `AURORA_STALE` /
-   `ConnectX ausente · ainda presente no Aurora`;
-5. usar `Limpar do Aurora` para o PES 2018 e confirmar o plano seguro;
-6. após Rescan/restart ou ação indicada, confirmar remoção visual e status
-   verificado;
-7. rodar `physical-xm12.py` e confirmar ausência do resíduo removido;
-8. confirmar Histórico XM-11 preservado.
+1. rodar STATIC_OK e suíte completa após a reconciliação global;
+2. rodar `physical-xm12.py` e confirmar ausência do resíduo removido;
+3. confirmar Histórico XM-11 preservado;
+4. com essas evidências, marcar XM-12 como ACCEPTED / COMPLETE.
 
 
 ## Critérios finais
