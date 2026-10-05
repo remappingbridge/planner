@@ -5517,6 +5517,12 @@ Correção:
   - no máximo um novo manifesto por ciclo;
   - WAITING antigos sem manifesto/result são reagendados;
   - manifesto XM-10 legado pode ser adotado pelo backup do plan_id.
+- erro ao inspecionar o canal remoto (FTP/timeout) fecha em segurança:
+  nenhuma nova exclusão é enviada enquanto não for possível provar se já há
+  manifesto ativo;
+- transição v4 -> v5 é recuperável: se o filtro antigo registrar FAILED mas
+  o manifesto exato ainda permanecer no Xbox, o cleanup continua
+  WAITING_FOR_AURORA e pede restart em vez de virar ERROR terminal;
 
 Validação física alvo:
 
