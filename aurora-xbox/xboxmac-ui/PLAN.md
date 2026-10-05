@@ -5100,6 +5100,21 @@ Contratos adicionados:
 - extensão dos testes de UX em `test_post_xm12_ux.py`;
 - `scripts/verify-post-xm12-controls.py`.
 
+Validação local observada em 2026-10-05:
+
+- `verify-post-xm12-controls.py` => `STATIC_OK`;
+- primeira suíte pós-implementação: 201 testes, com 1 falha e 2 erros;
+- os dois erros eram testes XM-10 de serialização do plano chamando o endpoint
+  diretamente enquanto o `job_manager` global carregava jobs reais ativos;
+  esses testes foram isolados de `_delete_jobs_idle()`, pois não testam
+  concorrência;
+- a falha XM-07 ainda exigia o cabeçalho removido `Jogos / Aurora`; o
+  contrato foi atualizado para os novos acordeões (`job-accordion` e
+  `Fluxo do jogo`);
+- CSS residual da tabela antiga removido e corrigido typo
+  `solidvar(--border)` -> `solid var(--border)`;
+- novo reteste da suíte completa ainda pendente.
+
 Validação pendente:
 
 1. `verify-post-xm12-controls.py` => STATIC_OK;
