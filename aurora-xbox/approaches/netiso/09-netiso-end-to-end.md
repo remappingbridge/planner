@@ -224,3 +224,27 @@ Próxima validação deve comparar a mesma ISO em:
 
 Não rodar `physical-netiso-diagnose.py` entre `arm` e `read`, porque seus
 mount probes locais contaminam o log.
+
+
+## Status congelado por decisão do usuário — 2026-10-05
+
+O usuário decidiu congelar temporariamente a investigação do NetISO para
+priorizar problemas de exclusão de resíduos Aurora/ConnectX.
+
+Estado preservado para retomada:
+
+- servidor `netiso-srv` responde `ISVRokOK`;
+- 8 ISOs locais são enumeradas pelo protocolo;
+- as 8 passam no mount probe local;
+- `Nova.xex` corresponde ao hash do baseline;
+- `NetISO.xex`, `NetISO.xex.txt` e `plugin1` correspondem ao baseline;
+- houve conexões históricas vindas de `192.168.50.2`;
+- hipótese ainda aberta: runtime do plugin/integração pós-mount e influência
+  da QuickView;
+- ferramentas preparadas:
+  `scripts/netiso-attempt-trace.py` e
+  `scripts/inspect-netiso-aurora-view.py`.
+
+Status:
+
+    FROZEN_BY_USER / RESUME_ONLY_ON_REQUEST
