@@ -149,3 +149,37 @@ Critério para considerar NetISO novamente validado:
 Status:
 
     IMPLEMENTED / PHYSICAL_REVALIDATION_PENDING
+
+### Evidência física de revalidação — diagnóstico inicial
+
+Em 2026-10-05 o diagnóstico físico retornou:
+
+- LaunchDaemon NetISO running;
+- ProgramArguments iguais ao baseline:
+  `/usr/local/libexec/netiso-srv -r -v /Users/Shared/xbox360`;
+- protocolo respondeu `ISVRokOK`;
+- 8 ISOs locais e exatamente as mesmas 8 enumeradas pelo protocolo;
+- mount probe local de `Chavo Kart` retornou mounted=true,
+  sector_count=3827488 e sector_size=2048;
+- `Nova.xex` remoto possui exatamente o hash congelado do baseline:
+  `7be2e01f60065ac642e4393228fa845d4e7b7fa02e8c1183636ee20907e05eee`;
+- `Usb0:\\NetISO\\NetISO.xex` presente com 28672 bytes;
+- `NetISO.xex.txt = 192.168.50.1`;
+- `launch.ini plugin1 = Usb:\\NetISO\\NetISO.xex`;
+- logs registraram 2 conexões vindas do Xbox `192.168.50.2`;
+- houve comando `Mounting:` para Guitar Hero Live.
+
+O único failure do diagnóstico foi timeout tardio de FTP depois que os
+artefatos relevantes já haviam sido confirmados; isso foi corrigido para
+warning.
+
+Também foi corrigida a leitura dos logs: stdout e stderr não devem ser
+concatenados como se preservassem ordem temporal entre arquivos diferentes.
+
+Próxima validação:
+
+- mount/read probe de todas as ISOs atuais;
+- leitura real de bytes via comando NetISO ReadData;
+- tentativa física de boot de um título atual;
+- correlação com conexão originada de `192.168.50.2`.
+
