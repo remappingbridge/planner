@@ -1259,7 +1259,8 @@ Quando o jogo já está em `/Users/Shared/xbox360-connectx`, mas ainda não exis
 status=WAITING_FOR_AURORA_SCAN
 ```
 
-O usuário executa Rescan no path ConnectX do Aurora.
+O usuário confirma que o path ConnectX do Aurora está configurado com
+`Depth = 3` e então executa Rescan.
 
 Na CLI atual, o mesmo comando é executado novamente. Na aplicação web final, **não** deve haver essa segunda ação no Mac: o backend deve reconciliar periodicamente `content.db` e continuar automaticamente quando encontrar TitleID + MediaID e obter o ContentID.
 
@@ -1375,3 +1376,38 @@ Enquanto Rescan/refresh remoto não estiver validado:
 - o usuário não volta ao terminal;
 - quando o backend detecta a condição, o job continua sozinho.
 
+
+
+### Requisito físico confirmado — Depth 3
+
+Em 2026-10-05 foi confirmada fisicamente uma pré-condição que o baseline
+anterior não havia formalizado.
+
+Snapshot anterior de `settings.db`:
+
+    ScanPaths.Id=1
+    Depth=2
+
+Com Depth 2, vários jogos novos podiam estar executáveis, possuir metadata no
+`content.db` e até ter `GC<TitleID>.asset` correto, mas as capas não
+apareciam no CoverFlow.
+
+Após alterar o Scan Path ConnectX para:
+
+    Depth=3
+
+e executar Rescan, as capas apareceram.
+
+Importante:
+
+- `ContentItems.FoundAtDepth=1` não significa que `ScanPaths.Depth=1` ou
+  que Depth 2 é suficiente;
+- `FoundAtDepth` descreve o item já indexado;
+- `ScanPaths.Depth` controla a profundidade máxima do Rescan.
+
+Contrato permanente da automação:
+
+    ConnectX Scan Path Depth = 3
+
+A automação deve orientar esse valor sempre que retornar
+`WAITING_FOR_AURORA_SCAN`.
