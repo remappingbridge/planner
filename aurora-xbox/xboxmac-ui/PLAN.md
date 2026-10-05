@@ -5223,6 +5223,32 @@ Validação observada em 2026-10-05:
 - sequência física corrigida: instalar runtime, parar xboxmacd, executar
   `physical-cover-repair.py`, somente depois reabrir XboxMac.
 
+Correção sistêmica para backlog de jogos sem capa:
+
+- evidência física mostrou que o problema afeta vários jogos novos, não apenas
+  Gears of War: Judgment;
+- causa operacional adicional: um `xboxmac-metadata.manifest` pendente no
+  Xbox bloqueava novas pendências com retorno 4;
+- `xbox-connectx-sync-metadata --apply` agora:
+  - interpreta o manifesto já pendente;
+  - mescla jogos novos por identidade exata `TitleID + MediaID`;
+  - preserva entradas pendentes anteriores;
+  - substitui dados da mesma identidade pelos valores atuais;
+  - grava `manifest_action=MERGED`;
+  - retorna `PENDING_MANIFEST` somente quando não há nada novo a acrescentar;
+- isso elimina o bloqueio em cascata no fluxo normal da Automação;
+- novo helper `scripts/physical-cover-reconcile-all.py`:
+  - usa o catálogo gerenciado atual;
+  - deduplica `TitleID + MediaID`;
+  - força refresh de artwork por TitleID;
+  - acumula metadata de todos os jogos pendentes em um manifesto;
+  - não sincroniza capa antes de a metadata do jogo estar aplicada;
+  - após refresh/restart do Aurora, sincroniza/verifica cada capa por
+    `TitleID + MediaID`;
+  - resume estados por jogo e informa a próxima ação global;
+- objetivo: um único refresh/restart do Aurora para todo o backlog, seguido
+  de uma segunda passagem de verificação/capas.
+
 Validação pendente:
 
 1. suíte completa sem falhas;
