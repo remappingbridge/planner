@@ -5469,3 +5469,54 @@ O projeto estará pronto para uso cotidiano quando uma pessoa que não conhece o
 13. receber instruções claras quando Rescan ou refresh/restart do Aurora ainda forem necessários;
 14. não precisar executar um segundo comando no Mac depois dessas ações manuais;
 15. ver a UI continuar automaticamente assim que o backend detectar que o Aurora avançou de estado.
+
+
+### Correção v5 — stale após exclusão do ConnectX
+
+Status:
+
+    IMPLEMENTED / PHYSICAL_VALIDATION_PENDING
+
+Cenário físico:
+
+- ConnectX removido pelo app;
+- ISO mantida em `/Users/Shared/xbox360`;
+- entrada XEX antiga continua no Aurora;
+- botão `Remover entrada antiga do Aurora` não elimina a linha após
+  Rescan/Refresh/Restart/Reboot.
+
+Causa raiz confirmada no código:
+
+- filtro v4 validava stale com `Content.GetInfo(contentId)`;
+- após apagar o ConnectX, o source deixa de existir;
+- `Content.GetInfo` pode retornar nil embora `ContentItems` ainda contenha
+  a linha;
+- o filtro retornava `CONTENT_NOT_FOUND` antes do DELETE.
+
+Correção:
+
+- filtro `ZZXboxMacCatalogDelete.lua` v5;
+- identidade stale validada diretamente em SQLite por
+  ContentID + TitleID + MediaID;
+- ausência da linha vira sucesso idempotente `ALREADY_REMOVED`;
+- filtro v5 empacotado no runtime XboxMac;
+- auto-upload e verificação byte-a-byte antes de qualquer cleanup;
+- marker v5 obrigatório;
+- botão manual usa o reconciliador XM-12, não mais o executor isolado;
+- cleanup continua removendo duplicatas XEX da mesma identidade até
+  `remaining_matches=0`;
+- ISO local permanece intacta;
+- conteúdo não-XEX permanece protegido;
+- backups de tentativas anteriores podem ser reutilizados quando idênticos.
+
+Validação física alvo:
+
+1. instalar nova versão do XboxMac;
+2. manter as oito ISOs atuais no Mac;
+3. localizar os resíduos em `Procurar entradas antigas`;
+4. usar `Remover entrada antiga do Aurora`;
+5. Restart do Aurora quando solicitado;
+6. confirmar desaparecimento do registro no CoverFlow;
+7. confirmar que a ISO correspondente continua presente;
+8. repetir para os demais resíduos;
+9. cleanup final deve reportar `completion_verified=true`.
