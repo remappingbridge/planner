@@ -2346,13 +2346,17 @@ Com `content.db` e `settings.db` reais:
 - o filtro Lua congelado `XboxMacProbe.lua` retorna `true` para todo item após executar `processManifest()`;
 - portanto não há regra no filtro XboxMac Probe que exclua seletivamente os cinco novos jogos.
 
-Hipóteses descartadas:
+Hipóteses descartadas naquele estágio:
 
 - ScanPathId incorreto;
 - ContentGroup/DefaultGroup divergente;
 - ContentFlags/ContentType/FileType divergentes;
-- profundidade/CaseIndex divergentes;
+- CaseIndex divergente;
 - QuickView XboxMac Probe retornando false para os novos jogos.
+
+Observação corrigida posteriormente: a hipótese de profundidade não deveria
+ter sido descartada com base em `FoundAtDepth=1`. O limite configurado do
+Scan Path fica em `settings.db.ScanPaths.Depth` e é uma variável diferente.
 
 Próximo teste físico:
 
@@ -5260,6 +5264,45 @@ Validação pendente:
 6. reabrir XboxMac;
 7. executar refresh/restart do Aurora quando solicitado;
 8. confirmar visualmente a capa no CoverFlow.
+
+
+
+### Evidência física final — Scan Path ConnectX Depth 3
+
+Em 2026-10-05 o usuário aumentou manualmente o `Depth` do Scan Path ConnectX
+no Aurora de 2 para 3 e executou Rescan.
+
+Resultado físico:
+
+- capas que permaneciam ausentes passaram a aparecer;
+- Gears of War: Judgment já tinha asset GC com hash correto antes da mudança;
+- outros jogos também tinham assets `COVER_VERIFIED` ou
+  `COVER_UPDATED`, mas nem todos apareciam visualmente;
+- portanto a causa final da ausência visual não era geração/upload do asset,
+  e sim profundidade insuficiente do Scan Path no Aurora.
+
+Evidência histórica:
+
+- snapshot anterior de `settings.db`:
+  `ScanPaths(Id=1, Depth=2)`;
+- os mesmos jogos podiam mostrar `ContentItems.FoundAtDepth=1`;
+- `FoundAtDepth` não equivale ao limite `ScanPaths.Depth`.
+
+Contrato operacional definitivo:
+
+    Aurora > Scan Paths > ConnectX > Depth = 3
+
+Implementação XboxMac:
+
+- `WAITING_FOR_AURORA_SCAN` orienta explicitamente Depth 3;
+- reconciliador global imprime `required_scan_depth=3`;
+- o XboxMac não altera silenciosamente `settings.db`;
+- geração/hash/upload determinísticos de capas permanecem como validação de
+  integridade, não como substituto de um Rescan com profundidade correta.
+
+Status da causa de capas:
+
+    ROOT_CAUSE_CONFIRMED / DEPTH_3_PHYSICALLY_VALIDATED
 
 
 ## Critérios finais
