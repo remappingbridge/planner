@@ -5305,6 +5305,99 @@ Status da causa de capas:
     ROOT_CAUSE_CONFIRMED / DEPTH_3_PHYSICALLY_VALIDATED
 
 
+
+### Correção pós-XM-12 — resíduos ConnectX e duplicidade XBLA/XEX
+
+Status:
+
+    IMPLEMENTED / PHYSICAL_VALIDATION_PENDING
+
+Problemas físicos reportados em 2026-10-05:
+
+- jogos com ISO e ConnectX apagados manualmente deixaram entradas antigas no
+  Aurora, mas não apareciam em `Procurar entradas antigas`;
+- em outro caso, `Excluir ConnectX` removeu o conteúdo local, porém a entrada
+  continuou no Xbox mesmo após Rescan, refresh e reboot;
+- o caso envolvia um XBLA convertido/normalizado para XEX e havia duplicidade.
+
+Causas identificadas:
+
+1. a descoberta stale dependia somente do estado corrente de
+   `ingest-state.json` e `catalog.json`;
+2. depois da exclusão manual dos arquivos, o scanner podia esquecer justamente
+   o TitleID + MediaID necessário para reencontrar o resíduo;
+3. a limpeza automática identificava entradas somente por TitleID + MediaID,
+   insuficiente quando uma entrada nativa/container e uma entrada XEX/ConnectX
+   compartilham a mesma identidade;
+4. o manifesto de delete era processado apenas quando o filtro Lua era
+   efetivamente chamado pela QuickView ativa; restart/reboot não garantiam o
+   consumo do manifesto;
+5. registros antigos podiam estar congelados como `COMPLETE` sem evidência
+   explícita de que uma nova descoberta não encontrava mais o XEX stale.
+
+Correções:
+
+- identidades gerenciadas passam a ser recuperadas de fontes duráveis:
+  - ingest state;
+  - catálogo atual;
+  - adoções manuais;
+  - histórico persistente de jobs XM-11;
+  - store de reconciliação de exclusões;
+  - planos/backups históricos de delete;
+- quando a identidade não existe mais em nenhuma fonte local, o XboxMac
+  infere o `ScanPathId` ConnectX a partir dos XEXs ativos e recupera entradas
+  `default.xex` órfãs no mesmo ScanPath;
+- elegibilidade de limpeza ConnectX passa a exigir entrada de pasta/XEX
+  (`Executable=default.xex`);
+- pacote/container nativo XBLA com a mesma identidade não é candidato à
+  limpeza ConnectX;
+- entradas de conteúdo separadas com a mesma identidade são reportadas na UI,
+  mas preservadas;
+- a aba Catálogo mostra a origem do resíduo:
+  `Histórico XboxMac` ou `ScanPath ConnectX`;
+- o alerta após `Excluir ConnectX` diferencia:
+  - remoção local concluída;
+  - remoção Aurora ainda pendente;
+- um cleanup só recebe `completion_verified=true` quando nova descoberta
+  confirma zero XEXs elegíveis;
+- registros `COMPLETE` antigos sem essa evidência são reauditados uma vez;
+- o filtro `ZZXboxMacCatalogDelete.lua` v4 processa o manifesto de exclusão
+  também na carga do script, além dos callbacks de filtro;
+- restart do Aurora passa a ser a primeira ação para consumir o manifesto,
+  com reboot completo apenas como fallback;
+- a conclusão de uma remoção continua exigindo:
+  - linha ContentItems alvo ausente;
+  - diretório GameData correspondente ausente;
+  - `PRAGMA integrity_check = ok`.
+
+Ferramentas adicionadas:
+
+- `scripts/verify-post-xm12-delete-reconcile.py`;
+- `scripts/physical-xm12-residue-audit.py` somente leitura.
+
+Contrato XBLA / ConnectX:
+
+- ConnectX gerencia jogos em formato de pasta/XEX;
+- um XBLA normalizado para XEX pode ser tratado como ConnectX;
+- a entrada nativa/container XBLA é conteúdo separado e nunca deve ser
+  apagada implicitamente por `Excluir ConnectX`;
+- se o usuário quiser remover também o XBLA nativo, isso é uma operação
+  separada do cleanup ConnectX.
+
+Validação física pendente:
+
+1. verificador estático;
+2. suíte completa;
+3. instalar filtro Lua v4 no Aurora;
+4. restart do Aurora;
+5. executar auditoria read-only e confirmar que resíduos antigos agora
+   aparecem;
+6. confirmar que duplicidade XBLA/XEX lista somente o XEX como candidato;
+7. limpar um resíduo antigo pela aba Catálogo e verificar remoção real;
+8. repetir com `Excluir ConnectX` e confirmar que o estado só conclui após
+   ContentItems + GameData desaparecerem.
+
+
 ## Critérios finais
 
 O projeto estará pronto para uso cotidiano quando uma pessoa que não conhece o backend puder:
