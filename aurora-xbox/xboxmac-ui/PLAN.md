@@ -5179,6 +5179,20 @@ Correções:
 Validação observada em 2026-10-05:
 
 - verificador estático => `POST-XM12-COVER-REPAIR: STATIC_OK`;
+- suíte completa após correção dos fixtures: 210 testes, todos OK;
+- tentativa física seguinte chegou ao staging e confirmou:
+  - TitleID `4D530A26`;
+  - MediaID `4AF734C4`;
+  - região `Japan`;
+  - cover local 900x600;
+- sincronização física não iniciou porque o FTP Aurora em
+  `192.168.50.2:21` ficou indisponível e expirou por timeout;
+- contexto físico: o jogo estava/esteve em execução no Xbox; o Aurora precisa
+  estar aberto para servir FTP;
+- helper físico passa a validar FTP antes do staging e falhar imediatamente
+  com instrução para sair do jogo e deixar o Aurora aberto;
+- reparo físico passa a usar `--refresh-artwork`, descartando artwork
+  antigo/cacheado antes de gerar o asset;
 - primeira suíte após endurecimento por hash executou 210 testes e revelou
   4 fixtures legados que ainda simulavam sucesso de capa apenas por tamanho;
 - fixtures XM-05 e XM-07C foram atualizados para incluir evidência SHA-256,
