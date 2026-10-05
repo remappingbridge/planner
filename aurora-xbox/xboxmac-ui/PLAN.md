@@ -4955,7 +4955,7 @@ Gate aceito:
 
 Status:
 
-    IMPLEMENTED / PHYSICAL_UI_VALIDATION_PENDING
+    ACCEPTED / COMPLETE
 
 Escopo:
 
@@ -4996,15 +4996,11 @@ Contratos adicionados:
   da ação combinada;
 - `scripts/verify-post-xm12-ux.py`.
 
-Validação pendente:
+Validação física concluída em 2026-10-05:
 
-1. `verify-post-xm12-ux.py` => STATIC_OK;
-2. suíte completa;
-3. reinstalar o runtime;
-4. validar visualmente as sete abas e a barra sticky;
-5. validar dropdown e disposição 3+2 dos cards;
-6. confirmar botão ISO amarelo e ausência da exclusão combinada;
-7. confirmar que limpeza `AURORA_STALE` continua disponível no card ConnectX.
+- usuário confirmou que a experiência reorganizada por abas funciona;
+- Biblioteca em dropdown/cards aprovada no uso real;
+- controles visuais e fluxo geral aprovados.
 
 
 
@@ -5012,7 +5008,7 @@ Validação pendente:
 
 Status:
 
-    IMPLEMENTED / PHYSICAL_VALIDATION_PENDING
+    ACCEPTED / COMPLETE
 
 Conexões — ciclo do servidor:
 
@@ -5115,20 +5111,73 @@ Validação local observada em 2026-10-05:
   `solidvar(--border)` -> `solid var(--border)`;
 - novo reteste da suíte completa ainda pendente.
 
+Validação física concluída em 2026-10-05:
+
+- usuário confirmou que os botões de servidor funcionam;
+- usuário confirmou que a experiência de Automação/Jobs funciona como um todo;
+- controles e acordeões aprovados para uso cotidiano.
+
+
+
+### Correção pós-XM-12 — reconciliação determinística de capas
+
+Status:
+
+    IMPLEMENTED / PHYSICAL_VALIDATION_PENDING
+
+Caso físico de referência:
+
+- jogo: Gears of War: Judgment;
+- TitleID confirmado: `4D530A26`;
+- ConnectX funcional e jogo executando no Xbox;
+- capa ausente no CoverFlow mesmo após reboot do console.
+
+Diagnóstico:
+
+- o x360db possui metadata e artwork para `4D530A26`;
+- existe `boxart.jpg` versionado no repositório x360db para esse TitleID;
+- o helper `xbox-connectx-sync-covers` considerava qualquer
+  `GC<TitleID>.asset` remoto com mais de 2048 bytes como já sincronizado;
+- portanto um asset placeholder/antigo do Aurora podia produzir falso
+  `SYNCED` sem comparação com o asset gerado pelo XboxMac;
+- o scheduler aceitava `SYNCED`/ `UPLOADED` como capa verificada sem
+  evidência criptográfica.
+
+Correções:
+
+- `xbox-connectx-sync-covers` agora:
+  - gera o asset desejado para títulos gerenciados pelo XboxMac;
+  - compara bytes/SHA-256 do asset local e remoto;
+  - só retorna `SYNCED` quando o conteúdo é idêntico;
+  - substitui o remoto mesmo quando o tamanho é igual, se o conteúdo divergir;
+  - verifica o upload por igualdade exata de conteúdo;
+  - aceita `--title-id` para sincronização direcionada;
+  - ignora ContentItems sem staging XboxMac;
+- jobs com apenas um TitleID conhecido chamam o sincronizador de capa com
+  `--title-id <TitleID>`, evitando tocar jogos não relacionados;
+- o scheduler só marca `cover_state=VERIFIED` quando a saída contém
+  evidência SHA-256;
+- `xbox-connectx-stage-assets` passa a preferir o artwork versionado atual
+  do x360db antes do URL legado do Xbox Marketplace;
+- se a fonte primária não trouxer cover, permanece fallback para XboxUnity
+  900x600;
+- testes adicionados cobrem:
+  - asset remoto do mesmo tamanho mas conteúdo diferente;
+  - asset remoto realmente idêntico;
+  - título Aurora não gerenciado ignorado;
+  - prioridade do artwork x360db;
+  - fallback XboxUnity;
+  - rejeição de evidência de capa sem hash.
+
 Validação pendente:
 
-1. `verify-post-xm12-controls.py` => STATIC_OK;
-2. suíte completa;
-3. reinstalar runtime para registrar o supervisor;
-4. validar Parar → Iniciar servidor sem terminal;
-5. validar Reiniciar servidor com recuperação do backend;
-6. criar ao menos dois jobs e confirmar:
-   - primeiro rodando com acordeão aberto;
-   - segundo `QUEUED` e recolhido;
-7. pausar o primeiro e confirmar que o segundo assume o worker;
-8. retomar o primeiro e confirmar que volta ao fim da fila;
-9. cancelar um job e confirmar `CANCELLED` no Histórico;
-10. confirmar que acordeões não atuais respeitam abertura/recolhimento manual.
+1. suíte completa;
+2. reinstalar runtime;
+3. reexecutar o fluxo de Automação para Gears of War: Judgment;
+4. confirmar no log `UPLOADED ... TitleID=4D530A26 ... new_sha256=...`
+   ou `SYNCED ... TitleID=4D530A26 ... sha256=...`;
+5. executar refresh/restart do Aurora quando solicitado;
+6. confirmar visualmente a capa no CoverFlow.
 
 
 ## Critérios finais
