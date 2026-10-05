@@ -5363,6 +5363,10 @@ Correções:
 - registros `COMPLETE` antigos sem essa evidência são reauditados uma vez;
 - o filtro `ZZXboxMacCatalogDelete.lua` v4 processa o manifesto de exclusão
   também na carga do script, além dos callbacks de filtro;
+- a aba Conexões expõe `Filtro de exclusão Aurora` e valida por FTP o
+  marcador v4 carregado no Xbox;
+- filtro ausente/desatualizado aparece como warning diagnóstico, sem derrubar
+  o readiness de NetISO/ConnectX;
 - restart do Aurora passa a ser a primeira ação para consumir o manifesto,
   com reboot completo apenas como fallback;
 - a conclusão de uma remoção continua exigindo:
