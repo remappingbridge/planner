@@ -5185,6 +5185,23 @@ Validação observada em 2026-10-05:
   - MediaID `4AF734C4`;
   - região `Japan`;
   - cover local 900x600;
+- tentativa física posterior, com FTP disponível, confirmou:
+  - asset remoto byte-a-byte idêntico ao asset gerado;
+  - `ContentID=26`;
+  - porém a linha do Aurora para `TitleID=4D530A26` apareceu como
+    `TitleName=Gears of War 3`;
+- referência externa confirma:
+  - Gears of War: Judgment = `4D530A26`;
+  - Gears of War 3 = `4D5308AB`;
+- diagnóstico migrou de artwork para associação/metadata da linha
+  `ContentItems`;
+- sincronização de capa passa a exigir TitleID + MediaID exatos;
+- Automação passa a enviar TitleID + MediaID ao helper quando ambos são
+  conhecidos;
+- reparo físico extrai o MediaID do staging e executa primeiro
+  `xbox-connectx-sync-metadata --apply --title-id <TitleID>`;
+- se metadata precisar ser aplicada, o reparo para com
+  `METADATA_REFRESH_REQUIRED`; a capa só é verificada após o refresh;
 - sincronização física não iniciou porque o FTP Aurora em
   `192.168.50.2:21` ficou indisponível e expirou por timeout;
 - contexto físico: o jogo estava/esteve em execução no Xbox; o Aurora precisa
