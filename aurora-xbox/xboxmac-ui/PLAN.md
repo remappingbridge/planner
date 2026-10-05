@@ -5535,3 +5535,43 @@ Validação física alvo:
 7. confirmar que a ISO correspondente continua presente;
 8. repetir para os demais resíduos;
 9. cleanup final deve reportar `completion_verified=true`.
+
+
+### Regressão de frontend — escape de newline
+
+Status:
+
+    FIXED / PHYSICAL_REVALIDATION_PENDING
+
+Sintomas físicos:
+
+- nenhum botão/tab/campo clicável respondia;
+- Conexões não carregava;
+- ConnectX continuava funcionando no Xbox.
+
+Causa:
+
+- commit `81409f66057a87c1d25aee41b536ba3e65e7326f`;
+- diálogo `removeAuroraCandidate()` usou `\n` com escape insuficiente
+  dentro da string Python que gera o HTML;
+- o HTML renderizado recebeu newline literal dentro de string JavaScript;
+- SyntaxError abortou o único `<script>` da GUI antes de registrar eventos
+  e antes de `ensureThenRefresh()/refreshStatus()`.
+
+Correção:
+
+- source Python usa `\\n` para renderizar `\n` válido no JavaScript;
+- commit principal:
+  `5e66c60e5e922406957e3d01ebbc6040d410fa2f`;
+- teste XM-12 verifica os escapes específicos;
+- teste adicional rejeita newline literal dentro de strings JS no
+  `<script>` renderizado.
+
+Validação física pendente:
+
+1. suíte automatizada limpa;
+2. reinstalar XboxMac;
+3. confirmar tabs e botões responsivos;
+4. confirmar Conexões preenchida;
+5. confirmar ConnectX continua operacional;
+6. somente depois retomar teste do botão stale v5.
