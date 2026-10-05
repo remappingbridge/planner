@@ -5345,10 +5345,16 @@ Correções:
   - store de reconciliação de exclusões;
   - planos/backups históricos de delete;
 - quando a identidade não existe mais em nenhuma fonte local, o XboxMac
-  infere o `ScanPathId` ConnectX a partir dos XEXs ativos e recupera entradas
-  `default.xex` órfãs no mesmo ScanPath;
-- elegibilidade de limpeza ConnectX passa a exigir entrada de pasta/XEX
-  (`Executable=default.xex`);
+  infere o `ScanPathId` ConnectX a partir de XEXs ativos **ou de XEXs com
+  identidade duravelmente conhecida**, e recupera entradas `default.xex`
+  órfãs no mesmo ScanPath; isso continua funcionando mesmo sem nenhum
+  ConnectX atualmente vivo;
+- elegibilidade de limpeza ConnectX passa a exigir entrada de pasta/XEX:
+  - `Executable=default.xex`;
+  - quando presente, `ContentType=0x7000` (28672), valor observado
+    fisicamente nos jogos ConnectX;
+  - quando presente, `FileType=1`;
+  - valores conhecidos incompatíveis são recusados;
 - pacote/container nativo XBLA com a mesma identidade não é candidato à
   limpeza ConnectX;
 - entradas de conteúdo separadas com a mesma identidade são reportadas na UI,
@@ -5367,8 +5373,10 @@ Correções:
   marcador v4 carregado no Xbox;
 - filtro ausente/desatualizado aparece como warning diagnóstico, sem derrubar
   o readiness de NetISO/ConnectX;
-- restart do Aurora passa a ser a primeira ação para consumir o manifesto,
-  com reboot completo apenas como fallback;
+- restart do Aurora passa a ser a primeira ação para carregar o filtro v4 e
+  consumir o manifesto, com reboot completo apenas como fallback;
+- `install-xm10-aurora-probe.py` passa a reportar
+  `next=AURORA_RESTART_REQUIRED`;
 - a conclusão de uma remoção continua exigindo:
   - linha ContentItems alvo ausente;
   - diretório GameData correspondente ausente;
