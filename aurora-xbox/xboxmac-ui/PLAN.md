@@ -5305,6 +5305,46 @@ Status da causa de capas:
     ROOT_CAUSE_CONFIRMED / DEPTH_3_PHYSICALLY_VALIDATED
 
 
+### Correção posterior — MediaID ausente no catálogo externo
+
+Em 2026-10-05 foi identificado um segundo defeito, independente de Depth 3,
+com `The Legend of Korra`:
+
+    TitleID=58411447
+    MediaID=41E4449D
+
+Evidência:
+
+- XEX manual válido e jogo executável via ConnectX;
+- job falhava em APPLYING_METADATA;
+- `xbox-connectx-stage-assets` lançava erro porque o MediaID não existia no
+  x360db;
+- x360db do TitleID 58411447 possui metadata/artwork de nível TitleID e
+  `media=[]`;
+- a aba Capas falhava especificamente em `TITLE 58411447`;
+- `PENDING_MANIFEST` de outro título ainda era contabilizado como
+  `METADATA_ERROR`, inflando o resumo de erros.
+
+Correção:
+
+- MediaID do XEX continua sendo fonte de verdade e nunca é inventado/trocado;
+- ausência do MediaID no x360db usa
+  `metadata_scope=TITLE_ID_FALLBACK`;
+- TitleID divergente continua fatal;
+- job de um único jogo escopa metadata com `--title-id`;
+- `PENDING_MANIFEST` vira espera por Refresh/Restart, não erro;
+- helper usado pela aba Capas passa a ser arquivo rastreado no Git e em
+  paridade obrigatória com `scripts/physical-cover-reconcile-all.py`.
+
+Validação física pendente:
+
+1. staging de `58411447/41E4449D` sem RuntimeError;
+2. job do Korra não terminar em FAILED/METADATA;
+3. botão Capas não registrar `STAGING_ERROR` para 58411447;
+4. capa enviada/verificada por hash;
+5. após Refresh/Restart/Rescan Depth 3, ilustração visível no CoverFlow.
+
+
 
 ### Correção pós-XM-12 — resíduos ConnectX e duplicidade XBLA/XEX
 
