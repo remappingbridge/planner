@@ -102,3 +102,50 @@ cabo reconectado  -> ISO remota reaparece
 Não houve travamento no teste. Isso confirma recuperação normal do NetISO quando o enlace físico volta.
 
 O servidor foi posteriormente migrado para um LaunchDaemon de sistema e a biblioteca para `/Users/Shared/xbox360`; consulte [10-netiso-launchdaemon.md](10-netiso-launchdaemon.md).
+
+
+## Revalidação após integração XboxMac — 2026-10-05
+
+O usuário relatou que não consegue mais carregar um jogo via NetISO.
+
+O baseline continua sendo a validação física de 2026-10-02, quando PES 2018
+foi montado e executado com sucesso. Portanto, a investigação deve detectar
+qual camada divergiu desse estado conhecido em vez de reinstalar componentes
+às cegas.
+
+Foi identificado que o indicador `NetISO=UP` do XboxMac verificava apenas:
+
+- LaunchDaemon `io.remappingbridge.netiso-srv` running;
+- TCP `192.168.50.1:4323` aberto.
+
+Isso não comprova o protocolo NetISO nem o lado Xbox.
+
+Correção de diagnóstico:
+
+- o status do XboxMac passa a exigir resposta de protocolo:
+  `ISVR -> ISVRokOK`;
+- novo diagnóstico somente leitura:
+  `scripts/physical-netiso-diagnose.py`;
+- o diagnóstico compara o estado atual ao baseline:
+  - ProgramArguments do LaunchDaemon;
+  - biblioteca `/Users/Shared/xbox360`;
+  - enumeração real das ISOs pelo protocolo NetISO;
+  - mount/read probe local pelo protocolo;
+  - `NetISO.xex` no USB;
+  - `NetISO.xex.txt = 192.168.50.1`;
+  - `plugin1 = Usb:\\NetISO\\NetISO.xex`;
+  - hash do `Hdd1:\\Apps\\Aurora\\Plugins\\Nova.xex` modificado;
+  - logs de conexões originadas do Xbox `192.168.50.2`;
+  - tentativas `Mounting:` ou `MountIso: Failed`.
+
+Critério para considerar NetISO novamente validado:
+
+    protocolo Mac OK
+    + biblioteca enumerada e mount probe OK
+    + artefatos Xbox iguais ao baseline
+    + conexão real do Xbox observada
+    + ISO montada e jogo aberto fisicamente
+
+Status:
+
+    IMPLEMENTED / PHYSICAL_REVALIDATION_PENDING
