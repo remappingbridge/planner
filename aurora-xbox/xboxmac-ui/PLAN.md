@@ -5007,6 +5007,115 @@ Validação pendente:
 7. confirmar que limpeza `AURORA_STALE` continua disponível no card ConnectX.
 
 
+
+### Melhorias de experiência pós-XM-12 — controles de servidor e fila de jobs
+
+Status:
+
+    IMPLEMENTED / PHYSICAL_VALIDATION_PENDING
+
+Conexões — ciclo do servidor:
+
+- a aba Conexões recebe:
+  - `Parar servidor`;
+  - `Reiniciar servidor`;
+  - `Iniciar servidor`;
+- como o próprio `xboxmacd` não pode receber um comando para iniciar depois
+  de estar parado, foi criado um plano de controle separado:
+  `io.remappingbridge.xboxmac-supervisor`;
+- o supervisor:
+  - roda somente em `127.0.0.1:8741`;
+  - usa um LaunchAgent separado e persistente;
+  - aceita comandos somente da origem local da UI e exige
+    `X-XboxMac-Supervisor: 1`;
+  - não serve conteúdo da aplicação;
+  - controla somente o LaunchAgent `io.remappingbridge.xboxmacd`;
+- `Parar servidor` envia SIGTERM ao backend principal;
+- `Reiniciar servidor` executa SIGTERM, aguarda a porta 8742 encerrar e
+  somente então faz `kickstart`;
+- `Iniciar servidor` faz `kickstart` do serviço registrado;
+- stop/restart preservam o mecanismo já existente que devolve o job ativo
+  para `QUEUED` em shutdown/recovery;
+- o instalador passa a registrar e manter o supervisor ativo com
+  `RunAtLoad=true` e `KeepAlive=true`.
+
+Automação — controles por job:
+
+- novos estados/controles do scheduler:
+  - `Pausar job`;
+  - `Retomar job`;
+  - `Cancelar job`;
+- `PAUSED` não é terminal e não volta automaticamente para a fila;
+- pausar:
+  - remove o job da fila;
+  - interrompe cooperativamente o helper filho atual quando houver;
+  - libera o worker para o próximo job `QUEUED`;
+  - registra `PAUSED_BY_USER`;
+- retomar:
+  - é permitido somente quando o worker já liberou completamente o job;
+  - muda o estado para `QUEUED`;
+  - coloca o job no final da fila;
+  - registra `RESUMED_TO_QUEUE`;
+- cancelar:
+  - remove o job da fila;
+  - interrompe o helper ativo quando necessário;
+  - muda para o estado terminal `CANCELLED`;
+  - registra `CANCELLED_BY_USER`;
+- o scheduler expõe `is_current`, `queue_position` e capacidades
+  `can_pause`, `can_resume`, `can_cancel`;
+- a submissão feita pela UI passa a criar um job separado por jogo, mesmo
+  quando vários jogos são selecionados de uma vez;
+- a API mantém compatibilidade com requests multi-alvo existentes.
+
+Automação — acordeões:
+
+- a antiga tabela de jobs ativos foi removida;
+- cada job aparece em um `details/summary` cujo título é o nome do jogo;
+- jobs antigos com múltiplos jogos usam o primeiro nome seguido da quantidade
+  adicional;
+- o job que possui o worker atual abre automaticamente;
+- jobs `QUEUED`, `PAUSED` ou aguardando fora do worker ficam recolhidos;
+- o usuário pode abrir um job não atual e essa preferência permanece durante
+  os refreshes;
+- um job atual não pode permanecer recolhido enquanto estiver executando;
+- dentro do acordeão ficam:
+  - Estado;
+  - Etapa;
+  - Ação necessária;
+  - posição na Fila;
+  - Progresso;
+  - identidade e evidências Aurora do jogo;
+  - botões Pausar / Retomar / Cancelar.
+
+APIs adicionadas:
+
+- `POST /api/jobs/{job_id}/pause`;
+- `POST /api/jobs/{job_id}/resume`;
+- `POST /api/jobs/{job_id}/cancel`.
+
+Contratos adicionados:
+
+- testes de scheduler em `test_xm09_scheduler.py`;
+- `backend/server/tests/test_post_xm12_controls.py`;
+- extensão dos testes de UX em `test_post_xm12_ux.py`;
+- `scripts/verify-post-xm12-controls.py`.
+
+Validação pendente:
+
+1. `verify-post-xm12-controls.py` => STATIC_OK;
+2. suíte completa;
+3. reinstalar runtime para registrar o supervisor;
+4. validar Parar → Iniciar servidor sem terminal;
+5. validar Reiniciar servidor com recuperação do backend;
+6. criar ao menos dois jobs e confirmar:
+   - primeiro rodando com acordeão aberto;
+   - segundo `QUEUED` e recolhido;
+7. pausar o primeiro e confirmar que o segundo assume o worker;
+8. retomar o primeiro e confirmar que volta ao fim da fila;
+9. cancelar um job e confirmar `CANCELLED` no Histórico;
+10. confirmar que acordeões não atuais respeitam abertura/recolhimento manual.
+
+
 ## Critérios finais
 
 O projeto estará pronto para uso cotidiano quando uma pessoa que não conhece o backend puder:
