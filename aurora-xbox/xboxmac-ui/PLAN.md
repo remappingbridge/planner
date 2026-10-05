@@ -5508,6 +5508,15 @@ Correção:
 - ISO local permanece intacta;
 - conteúdo não-XEX permanece protegido;
 - backups de tentativas anteriores podem ser reutilizados quando idênticos.
+- o Aurora possui um único `xboxmac-delete.manifest`; o reconciliador
+  antigo podia sobrescrever operações quando vários jogos eram excluídos
+  em sequência;
+- fila passa a ser serializada por `plan_id` remoto:
+  - manifesto ativo bloqueia novas submissões;
+  - result é conciliado antes de liberar o canal;
+  - no máximo um novo manifesto por ciclo;
+  - WAITING antigos sem manifesto/result são reagendados;
+  - manifesto XM-10 legado pode ser adotado pelo backup do plan_id.
 
 Validação física alvo:
 
