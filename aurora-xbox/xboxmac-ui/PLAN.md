@@ -5157,6 +5157,13 @@ Correções:
   `--title-id <TitleID>`, evitando tocar jogos não relacionados;
 - o scheduler só marca `cover_state=VERIFIED` quando a saída contém
   evidência SHA-256;
+- o JobManager passa a usar os helpers `backend/connectx` empacotados no
+  próprio runtime do XboxMac, eliminando dependência de cópias antigas em
+  `/usr/local/libexec`;
+- `xbox-connectx-ingest` e `xbox-connectx-sync-metadata` resolvem seus
+  helpers irmãos no mesmo diretório;
+- `scripts/physical-cover-repair.py --title-id <TITLEID>` executa reparo
+  físico direcionado usando exatamente o runtime instalado;
 - `xbox-connectx-stage-assets` passa a preferir o artwork versionado atual
   do x360db antes do URL legado do Xbox Marketplace;
 - se a fonte primária não trouxer cover, permanece fallback para XboxUnity
