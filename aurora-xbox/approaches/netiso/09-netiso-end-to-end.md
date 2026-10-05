@@ -183,3 +183,44 @@ Próxima validação:
 - tentativa física de boot de um título atual;
 - correlação com conexão originada de `192.168.50.2`.
 
+
+
+### Hipótese QuickView XboxMac Probe
+
+Após revalidar servidor, protocolo, biblioteca e artefatos do Xbox, o usuário
+relatou falha ao tentar montar Guitar Hero Live enquanto a QuickView ativa era
+`XboxMac Probe`.
+
+Análise do filtro instalado:
+
+- `GameListFilterCategories.User["XboxMac Probe"]` executa manutenção de
+  metadata e retorna `true` para todos os itens;
+- portanto o filtro isolado não deve bloquear um item;
+- porém a composição da QuickView em `settings.db.QuickViews` ainda precisa
+  ser inspecionada, pois filtros adicionais podem afetar a visibilidade do
+  disco depois do mount.
+
+A documentação do NetISO separa as etapas:
+
+1. Guide -> File Browser -> NetISO;
+2. selecionar/montar ISO;
+3. voltar ao dashboard Aurora;
+4. lançar o jogo montado.
+
+Logo, QuickView pode afetar 3/4, mas não deveria impedir a requisição de mount
+1/2.
+
+Novas ferramentas somente leitura:
+
+- `scripts/netiso-attempt-trace.py arm|read`: captura apenas o delta dos logs
+  gerado por uma tentativa física, sem probes locais;
+- `scripts/inspect-netiso-aurora-view.py`: inspeciona QuickViews,
+  SystemSettings, ScanPaths e logs Aurora relacionados a NetISO/Nova/disc.
+
+Próxima validação deve comparar a mesma ISO em:
+
+- QuickView `XboxMac Probe`;
+- QuickView padrão sem esse filtro.
+
+Não rodar `physical-netiso-diagnose.py` entre `arm` e `read`, porque seus
+mount probes locais contaminam o log.
