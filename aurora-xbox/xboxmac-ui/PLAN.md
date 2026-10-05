@@ -5176,15 +5176,33 @@ Correções:
   - fallback XboxUnity;
   - rejeição de evidência de capa sem hash.
 
+Validação observada em 2026-10-05:
+
+- verificador estático => `POST-XM12-COVER-REPAIR: STATIC_OK`;
+- primeira suíte após endurecimento por hash executou 210 testes e revelou
+  4 fixtures legados que ainda simulavam sucesso de capa apenas por tamanho;
+- fixtures XM-05 e XM-07C foram atualizados para incluir evidência SHA-256,
+  sem afrouxar o novo contrato;
+- primeira tentativa do helper físico foi recusada corretamente com
+  `worker da Automação está ocupado`;
+- causa: a sequência de teste abriu o XboxMac antes do reparo, o que iniciou
+  o backend e retomou um job persistido;
+- a saída `UPLOADED ... new_sha256=...` vista antes de `INSTALLED=` veio
+  dos testes unitários e não representa alteração física no Xbox;
+- sequência física corrigida: instalar runtime, parar xboxmacd, executar
+  `physical-cover-repair.py`, somente depois reabrir XboxMac.
+
 Validação pendente:
 
-1. suíte completa;
-2. reinstalar runtime;
-3. reexecutar o fluxo de Automação para Gears of War: Judgment;
-4. confirmar no log `UPLOADED ... TitleID=4D530A26 ... new_sha256=...`
+1. suíte completa sem falhas;
+2. reinstalar runtime atualizado;
+3. parar o backend XboxMac;
+4. executar `scripts/physical-cover-repair.py --title-id 4D530A26`;
+5. confirmar no log `UPLOADED ... TitleID=4D530A26 ... new_sha256=...`
    ou `SYNCED ... TitleID=4D530A26 ... sha256=...`;
-5. executar refresh/restart do Aurora quando solicitado;
-6. confirmar visualmente a capa no CoverFlow.
+6. reabrir XboxMac;
+7. executar refresh/restart do Aurora quando solicitado;
+8. confirmar visualmente a capa no CoverFlow.
 
 
 ## Critérios finais
