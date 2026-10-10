@@ -1,6 +1,6 @@
 # MOV-02 — Candidato para teste físico
 
-Status: HOST CI PASS / PICO 2 W CI EM EXECUÇÃO / ACEITAÇÃO FÍSICA PENDENTE.
+Status: HOST CI PASS / PICO 2 W CI PASS / ACEITAÇÃO FÍSICA PENDENTE.
 
 Branch do produto: `feature/movement-options-v1.0`.
 Commit candidato: `f13425c2c1ec8642803fa2398cd3f67606d440e6`.
@@ -14,4 +14,6 @@ Mudanças deste candidato:
 
 Compatibilidade: manter a v1.0 estável, demais gates não aceitos; todas as telas de implementação prévia permanecem na branch isolada.
 
-Artefato/UF2 final: registrar somente após sucesso do job Pico deste mesmo commit.
+Artefato da execução `38095384245`: `blu2usb-picow-production-pico2w`, artifact ID `11685218547`.
+UF2 final: `blu2usb_picow.uf2`, 925.184 bytes; SHA-256 `ef6b259dc2f75a8b71f441a94873aa2d23ed49b06ada23ad2c1fd70256d9e91d`.
+CI final: **49/49 testes host aprovados, firmware Pico 2 W compilado, validado e artefato publicado**. O arquivo possui cabeçalhos de UF2 válidos, incluindo os blocos family-specific de Pico 2 W.
