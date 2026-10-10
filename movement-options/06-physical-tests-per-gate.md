@@ -1,6 +1,10 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: CANDIDATO EM VALIDAÇÃO AUTOMATIZADA / ACEITAÇÃO FÍSICA PENDENTE.
+Status: CANDIDATO COM CI HOST E PICO APROVADOS / ACEITAÇÃO FÍSICA PENDENTE.
+Candidate commit: `ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8`.
+CI run: https://github.com/remappingbridge/remappingbridge/actions/runs/38093980816
+UF2 artifact ID: `11685815375` (`blu2usb-picow-production-pico2w`).
+Extracted UF2 SHA256: `1fc96263e95d682347b27f54f9831b92b948836d89001cedbbfda29321d00930`.
 Início: 2026-10-10.
 Produto: remappingbridge/remappingbridge, branch `feature/movement-options-v1.0`.
 Base congelada: `release/v1.0.0` @ `30c4dd87922bb566248832ba4716774c0cb29755`.
