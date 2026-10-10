@@ -1,6 +1,6 @@
-# RemappingBridge — Movement Options | Planning only
+# RemappingBridge — Movement Options | Implementation candidate
 
-Status: **PLANNED / IMPLEMENTATION NOT STARTED / PHYSICAL ACCEPTANCE PENDING**
+Status: **IMPLEMENTATION CANDIDATE / HOST CI PASSED (48/48) / PICO CI PENDING / PHYSICAL ACCEPTANCE PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -12,7 +12,7 @@ Do not modify release/v1.0.0, main, blu2usb or mouse-ui during this planning pha
 ## Scope
 Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent horizontal/vertical relative-pointer gain, four counterclockwise rotations, per-saved-Mouse persistence, Saved Devices display, and deletion/help copy. Preserve existing remapping, pairing, reconnect, keyboard Escape, Logitech HID++, lock and USB identity.
 
-**This commit is documentation only.** No runtime code, UF2, app screens, tests or migrations are implemented by creating these files; no gate is accepted.
+**Planning baseline is immutable.** Implementation began only after explicit authorization on 2026-10-10. The product branch now contains screen and runtime changes; this planner directory does not carry firmware code. No gate is accepted without operator physical validation.
 
 ## Sources and precedence
 1. Operator's attachment 'telas movement(1).md', supplied 2026-10-10, especially explicit controls, copy, gate split and cyan rules. Source text takes priority for this new flow.
@@ -34,6 +34,7 @@ Known final v1.0 authorities:
 - 03-identity-persistence-and-migration.md — per-Mouse storage, BLE identity, migration, removal, error handling, recovery.
 - 04-gates-tests-and-acceptance.md — exactly nine non-Help screen gates plus exactly one Help gate, dependencies, test/evidence matrix and status.
 - 05-requirement-traceability.md — attachment-to-decision-to-test traceability, alternatives, and deferred questions.
+- 06-physical-tests-per-gate.md — 30 physical test scenarios organized into MOV-01 through MOV-10, build/UF2 and operator acceptance instructions.
 
 ## Architectural invariants
 - No second Core layer, UI↔Core framework, global event bus, debug screens, CDC interface or USB descriptor change.
@@ -44,6 +45,12 @@ Known final v1.0 authorities:
 - Save succeeds before confirming APPLY/RESET on screen; explicit failure leaves previous settings effective.
 - UI actions fire on release; current values cyan, selected row white; saved Mouse controls remain available during reconnect/disconnect according to existing policies.
 - All layouts use existing 9×21 grid/240×240 pixel relocation.
+
+## Active implementation
+- PR Draft #22: https://github.com/remappingbridge/remappingbridge/pull/22
+- Product branch: `feature/movement-options-v1.0`, release base pinned as documented above.
+- On 2026-10-10 host CI for SHA `337d929744b29bd0b8ce484779200c9b2174f40c` passed all 48 tests. Check Pico job and the final UF2 artifact for exactly that SHA before physical tests.
+- Order changed at operator request: connected HOME is navigable from first development stage so tests start in HOME. No screen is physically ACCEPTED yet.
 
 ## To resume
 Check this directory, compare target branch HEAD to pinned release, read the gate plan, implement only an authorized gate in feature/movement-options-v1.0, record exact commit SHA/build/test evidence, obtain operator physical acceptance before marking any gate ACCEPTED. Do not merge or publish a release without a separate decision.
