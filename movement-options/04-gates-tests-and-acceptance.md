@@ -1,6 +1,8 @@
+> 2026-10-10 EXECUTION OVERRIDE (explicit operator authorization): implementation has begun, and all screens have been staged on the isolated product branch. The operator requires any testable candidate to start from connected HOME, so MOV-07 HOME entry was advanced as a minimal prerequisite during MOV-01. This overrides the original note that the first reachable candidate would be MOV-07. Individual gate **physical acceptance remains pending** even where code and host tests pass. Exact manual scenarios, UF2 procedure and acceptance log are now in [06-physical-tests-per-gate.md](06-physical-tests-per-gate.md). PR Draft #22 is unmerged. Source SHA under validation: 337d929744b29bd0b8ce484779200c9b2174f40c.
+
 # Movement Options — implementation gates and acceptance protocol
 
-Status: PLANNED ONLY; **zero gates implemented, zero accepted**.
+Status: **CODE CANDIDATE STAGED / ALL GATES PHYSICAL ACCEPTANCE PENDING**. This historical plan is preserved below with the override above.
 Target for future code: remappingbridge/remappingbridge / feature/movement-options-v1.0.
 Base: release/v1.0.0 @ 30c4dd87922bb566248832ba4716774c0cb29755.
 Planning evidence: remappingbridge/planner/movement-options/.
@@ -9,7 +11,7 @@ Planning evidence: remappingbridge/planner/movement-options/.
 - Exactly ONE implementation gate for EACH of 9 non-Help screens (existing edited or new) and exactly ONE gate for ALL Help screens. This is 10 implementation gates, no stand-alone refactor/foundation gate.
 - Infrastructure work belongs to the earliest screen gate requiring it, with explicit dependency and tests.
 - A gate's code/test completion does not mean acceptance. Operator must verify the physical UF2 for the relevant observable flow. No auto-promotion to main or release.
-- Planning files or creation of the target branch do NOT start MOV-01.
+- Planning files or creation of the target branch did not start MOV-01; execution began only after subsequent explicit authorization.
 - No speculative/parallel legacy screens to fake a gate pass. No old layout as fallback for the modified home/saved/remove screens.
 - Gates can be staged as one coherent feature branch; unreached screens remain host-test-only until user navigation is connected, and intermediate UF2 must NOT be presented as a full feature candidate. No debug-only navigation screens ship.
 - For every gate, future execution record under movement-options/executions/MOV-XX/ should include pre-implementation.md, candidate.md, physical-acceptance.md, exact source HEAD, changed paths, test results, defect/rollback notes. These directories/files do not exist yet (no work started).
@@ -82,16 +84,16 @@ Physical walkthrough (operator):
 9. Verify profile preset/custom remap, Lift Forward held correction, wheel, pan, drag, HID synthetic Escape, and fixed USB identity remained intact.
 
 ## Gate state ledger
-MOV-01 PLANNED
-MOV-02 PLANNED
-MOV-03 PLANNED
-MOV-04 PLANNED
-MOV-05 PLANNED
-MOV-06 PLANNED
-MOV-07 PLANNED
-MOV-08 PLANNED
-MOV-09 PLANNED
-MOV-10 PLANNED
+MOV-01 CODE STAGED / PHYSICAL PENDING
+MOV-02 CODE STAGED / PHYSICAL PENDING
+MOV-03 CODE STAGED / PHYSICAL PENDING
+MOV-04 CODE STAGED / PHYSICAL PENDING
+MOV-05 CODE STAGED / PHYSICAL PENDING
+MOV-06 CODE STAGED / PHYSICAL PENDING
+MOV-07 CODE STAGED / PHYSICAL PENDING (HOME route advanced)
+MOV-08 CODE STAGED / PHYSICAL PENDING
+MOV-09 CODE STAGED / PHYSICAL PENDING
+MOV-10 CODE STAGED / PHYSICAL PENDING
 
 ## Stop rule
 After this planning document is committed: **STOP**. Do not edit firmware, add runtime screen IDs, run a build as proof of implementation, merge main, open a release PR, or describe any gate as completed until the operator explicitly authorizes implementation.
