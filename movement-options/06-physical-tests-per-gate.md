@@ -1,6 +1,6 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01 ACEITO / MOV-02 CI VALIDADO E ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01 E MOV-02 ACEITOS / MOV-03 CI VALIDADO, UF2 E ACEITAÇÃO FÍSICA PENDENTES.
 Commit MOV-02: `f13425c2c1ec8642803fa2398cd3f67606d440e6`. CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38095384245
 Artefato MOV-02: `11685218547`, UF2 `blu2usb_picow.uf2`, SHA-256 `ef6b259dc2f75a8b71f441a94873aa2d23ed49b06ada23ad2c1fd70256d9e91d`, 49/49 testes host.
 Candidate commit: `ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8`.
@@ -36,17 +36,20 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C03: mover joystick Up/Down, confirmar envolvimento em 3 opções, seleção branca e valores confirmados ciano; duas linhas de rotação selecionadas como 1 item.
 - C04: KEY B retorna à HOME; remapeamento da primeira opção, Saved Devices e Pair New continuam acessíveis.
 
-### MOV-02 — horizontal-slow-dpi (em validação física; MOV-01 aceito)
+### MOV-02 — horizontal-slow-dpi (aceito pelo operador em 2026-10-10)
 - C05: HOME > MOVEMENT OPTIONS > HORIZONTAL DPI abre Slow quando H=1x; opção NORMAL selecionada.
 - C06: valores 1, 0.75, 0.5, 0.25 na coluna 16; selecionar 0.75 e pressionar KEY B: cancelar sem modificar.
 - C07: selecionar 0.5, KEY A aplica e volta ao menu mostrando H 0.5X em ciano; movimentação horizontal proporcional e valores V/rotação preservados.
 - C07A (refinamento solicitado no MOV-02): em ROTATION, confirmar a legenda exata `KEY A: APPLY AND BACK` na linha 7 (21 colunas), sem alterar o efeito da tecla; retornar ao menu e testar novamente o percurso pela HOME.
 - C07B: em H Slow, testar Key X Help e qualquer tecla Back (inclusive Key Y), mantendo a opção em branco e a aplicada em ciano; reboot confirma o H persistido.
 
-### MOV-03 — horizontal-fast-dpi
+### MOV-03 — horizontal-fast-dpi (próximo teste físico)
 - C08: horizontal Slow > JOY RIGHT passa ao Fast sem sair do eixo, JOY LEFT volta ao Slow; confirmar col17.
 - C09: escolher VERY FAST 2x, KEY A; menu H 2X. Movimento longitudinal do mouse percorre o dobro da distância padrão **somente se a rotação selecionada encaminhar esse movimento ao eixo horizontal**.
-- C10: usar valores 1.25 e 3x, percorrer diagonais e testar continuidade de movimento rápido.
+- C10: usar 1.25x, 1.5x, 2x e 3x, percorrer diagonais e testar continuidade de movimento rápido; verificar que vertical e rotação não são alterados ao aplicar horizontal.
+- C10A — melhoria de Saved Devices: HOME > SAVED DEVICES; na página do mouse conectado, SOMENTE o nome é ciano; contador, PROFILE, DPI, ROTATION, REMOVE DEVICE e hints são amarelos. Na página de qualquer outro mouse, TODOS os textos, incluindo nome, são amarelos. Desconectar e reconectar, verificar que o ciano desaparece do nome inativo e passa exclusivamente para o nome do novo mouse conectado.
+- C10B — testar JOY LEFT/RIGHT em Saved Devices e a tecla pressionada: nenhum destaque branco ou ciano extra além do nome conectado. Conferir que o amarelo corresponde ao tom STATIC padrão do sistema. A regra não deve alterar cores das outras telas.
+- C10C — Fast DPI: HELP via KEY X, voltar com KEY Y sem ativar lock, KEY B cancela, JOY LEFT/RIGHT alterna Fast↔Slow preservando página e preferências.
 
 ### MOV-04 — vertical-slow-dpi
 - C11: entrar em VERTICAL DPI, Slow, selecionar 0.25X e aplicar; menu mostra V 0.25X, sem alterar H.
