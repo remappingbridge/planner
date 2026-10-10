@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **IMPLEMENTATION CANDIDATE / HOST CI PASSED (48/48) / PICO UF2 PASSED / PHYSICAL ACCEPTANCE PENDING**
+Status: **MOV-01 ACCEPTED / MOV-02 HOST CI 49/49 + PICO UF2 PASSED / MOV-02 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -49,7 +49,7 @@ Known final v1.0 authorities:
 ## Active implementation
 - PR Draft #22: https://github.com/remappingbridge/remappingbridge/pull/22
 - Product branch: `feature/movement-options-v1.0`, release base pinned as documented above.
-- On 2026-10-10 host CI and Pico 2 W release build for SHA `ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8` passed. All 48 tests succeeded. The UF2 extracted from artifact `11685815375` has SHA-256 `1fc96263e95d682347b27f54f9831b92b948836d89001cedbbfda29321d00930`. Physical acceptance is pending.
+- On 2026-10-10 the operator accepted MOV-01 (see executions/MOV-01/physical-acceptance.md). MOV-02 candidate `f13425c2c1ec8642803fa2398cd3f67606d440e6` passed 49/49 host tests and Pico 2 W production build in run 38095384245. Artifact `11685218547`, extracted UF2 SHA-256 `ef6b259dc2f75a8b71f441a94873aa2d23ed49b06ada23ad2c1fd70256d9e91d`. Physical acceptance of MOV-02 and all other gates is pending.
 - Order changed at operator request: connected HOME is navigable from first development stage so tests start in HOME. No screen is physically ACCEPTED yet.
 
 ## To resume
