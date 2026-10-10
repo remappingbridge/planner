@@ -34,10 +34,12 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C03: mover joystick Up/Down, confirmar envolvimento em 3 opções, seleção branca e valores confirmados ciano; duas linhas de rotação selecionadas como 1 item.
 - C04: KEY B retorna à HOME; remapeamento da primeira opção, Saved Devices e Pair New continuam acessíveis.
 
-### MOV-02 — horizontal-slow-dpi
+### MOV-02 — horizontal-slow-dpi (em validação física; MOV-01 aceito)
 - C05: HOME > MOVEMENT OPTIONS > HORIZONTAL DPI abre Slow quando H=1x; opção NORMAL selecionada.
 - C06: valores 1, 0.75, 0.5, 0.25 na coluna 16; selecionar 0.75 e pressionar KEY B: cancelar sem modificar.
-- C07: selecionar 0.5, KEY A aplica, volta ao menu mostrando H 0.5X em ciano; movimentação horizontal proporcional.
+- C07: selecionar 0.5, KEY A aplica e volta ao menu mostrando H 0.5X em ciano; movimentação horizontal proporcional e valores V/rotação preservados.
+- C07A (refinamento solicitado no MOV-02): em ROTATION, confirmar a legenda exata `KEY A: APPLY AND BACK` na linha 7 (21 colunas), sem alterar o efeito da tecla; retornar ao menu e testar novamente o percurso pela HOME.
+- C07B: em H Slow, testar Key X Help e qualquer tecla Back (inclusive Key Y), mantendo a opção em branco e a aplicada em ciano; reboot confirma o H persistido.
 
 ### MOV-03 — horizontal-fast-dpi
 - C08: horizontal Slow > JOY RIGHT passa ao Fast sem sair do eixo, JOY LEFT volta ao Slow; confirmar col17.
