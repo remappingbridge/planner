@@ -1,4 +1,4 @@
-> 2026-10-10 EXECUTION OVERRIDE (explicit operator authorization): implementation has begun, and all screens have been staged on the isolated product branch. The operator requires any testable candidate to start from connected HOME, so MOV-07 HOME entry was advanced as a minimal prerequisite during MOV-01. This overrides the original note that the first reachable candidate would be MOV-07. Individual gate **physical acceptance remains pending** even where code and host tests pass. Exact manual scenarios, UF2 procedure and acceptance log are now in [06-physical-tests-per-gate.md](06-physical-tests-per-gate.md). PR Draft #22 is unmerged. Validated candidate SHA: ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8; 48 host tests and production UF2 build passed. Physical acceptance pending for all gates.
+> 2026-10-10 EXECUTION OVERRIDE (explicit operator authorization): implementation has begun, and all screens have been staged on the isolated product branch. The operator requires any testable candidate to start from connected HOME, so MOV-07 HOME entry was advanced as a minimal prerequisite during MOV-01. This overrides the original note that the first reachable candidate would be MOV-07. MOV-01 was physically accepted per operator statement on 2026-10-10; remaining gates await their own acceptance even where code and host tests pass. Exact manual scenarios, UF2 procedure and acceptance log are now in [06-physical-tests-per-gate.md](06-physical-tests-per-gate.md). PR Draft #22 is unmerged. Validated candidate SHA: ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8; 48 host tests and production UF2 build passed. Physical acceptance pending for all gates.
 
 # Movement Options — implementation gates and acceptance protocol
 
@@ -84,8 +84,8 @@ Physical walkthrough (operator):
 9. Verify profile preset/custom remap, Lift Forward held correction, wheel, pan, drag, HID synthetic Escape, and fixed USB identity remained intact.
 
 ## Gate state ledger
-MOV-01 CODE STAGED / PHYSICAL PENDING
-MOV-02 CODE STAGED / PHYSICAL PENDING
+MOV-01 ACCEPTED (operator confirmation 2026-10-10; record: executions/MOV-01/physical-acceptance.md)
+MOV-02 CANDIDATE UNDER CI / PHYSICAL PENDING (test: tests/test_mov02_horizontal_slow.c)
 MOV-03 CODE STAGED / PHYSICAL PENDING
 MOV-04 CODE STAGED / PHYSICAL PENDING
 MOV-05 CODE STAGED / PHYSICAL PENDING
