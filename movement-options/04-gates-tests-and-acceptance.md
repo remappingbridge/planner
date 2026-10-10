@@ -85,7 +85,7 @@ Physical walkthrough (operator):
 
 ## Gate state ledger
 MOV-01 ACCEPTED (operator confirmation 2026-10-10; record: executions/MOV-01/physical-acceptance.md)
-MOV-02 CANDIDATE UNDER CI / PHYSICAL PENDING (test: tests/test_mov02_horizontal_slow.c)
+MOV-02 CI PASS 49/49 + UF2 BUILT / PHYSICAL PENDING (SHA `f13425c2c1ec8642803fa2398cd3f67606d440e6`; test: tests/test_mov02_horizontal_slow.c)
 MOV-03 CODE STAGED / PHYSICAL PENDING
 MOV-04 CODE STAGED / PHYSICAL PENDING
 MOV-05 CODE STAGED / PHYSICAL PENDING
