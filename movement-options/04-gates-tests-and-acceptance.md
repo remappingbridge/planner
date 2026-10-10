@@ -1,8 +1,8 @@
-> 2026-10-10 EXECUTION OVERRIDE (explicit operator authorization): implementation has begun, and all screens have been staged on the isolated product branch. The operator requires any testable candidate to start from connected HOME, so MOV-07 HOME entry was advanced as a minimal prerequisite during MOV-01. This overrides the original note that the first reachable candidate would be MOV-07. MOV-01 was physically accepted per operator statement on 2026-10-10; remaining gates await their own acceptance even where code and host tests pass. Exact manual scenarios, UF2 procedure and acceptance log are now in [06-physical-tests-per-gate.md](06-physical-tests-per-gate.md). PR Draft #22 is unmerged. Validated candidate SHA: ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8; 48 host tests and production UF2 build passed. Physical acceptance pending for all gates.
+> 2026-10-10 EXECUTION OVERRIDE (explicit operator authorization): implementation has begun, and all screens have been staged on the isolated product branch. The operator requires any testable candidate to start from connected HOME, so MOV-07 HOME entry was advanced as a minimal prerequisite during MOV-01. This overrides the original note that the first reachable candidate would be MOV-07. MOV-01 and MOV-02 were physically accepted per operator statements on 2026-10-10; remaining gates await their own acceptance even where code and host tests pass. Exact manual scenarios, UF2 procedure and acceptance log are now in [06-physical-tests-per-gate.md](06-physical-tests-per-gate.md). PR Draft #22 is unmerged. Validated candidate SHA: ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8; 48 host tests and production UF2 build passed. Physical acceptance pending for all gates.
 
 # Movement Options — implementation gates and acceptance protocol
 
-Status: **CODE CANDIDATE STAGED / ALL GATES PHYSICAL ACCEPTANCE PENDING**. This historical plan is preserved below with the override above.
+Status: **MOV-01 E MOV-02 ACCEPTED; MOV-03 CI CANDIDATE; MOV-03–MOV-10 PHYSICAL ACCEPTANCE PENDING**. This historical plan is preserved below with the override above.
 Target for future code: remappingbridge/remappingbridge / feature/movement-options-v1.0.
 Base: release/v1.0.0 @ 30c4dd87922bb566248832ba4716774c0cb29755.
 Planning evidence: remappingbridge/planner/movement-options/.
@@ -85,8 +85,8 @@ Physical walkthrough (operator):
 
 ## Gate state ledger
 MOV-01 ACCEPTED (operator confirmation 2026-10-10; record: executions/MOV-01/physical-acceptance.md)
-MOV-02 CI PASS 49/49 + UF2 BUILT / PHYSICAL PENDING (SHA `f13425c2c1ec8642803fa2398cd3f67606d440e6`; test: tests/test_mov02_horizontal_slow.c)
-MOV-03 CODE STAGED / PHYSICAL PENDING
+MOV-02 ACCEPTED (operator confirmation 2026-10-10, SHA `f13425c2c1ec8642803fa2398cd3f67606d440e6`; record: executions/MOV-02/physical-acceptance.md)
+MOV-03 HOST CI 50/50 PASS, PICO BUILD PENDING / PHYSICAL PENDING (Fast DPI and Saved Devices active-name cyan; tests/test_mov03_horizontal_fast.c)
 MOV-04 CODE STAGED / PHYSICAL PENDING
 MOV-05 CODE STAGED / PHYSICAL PENDING
 MOV-06 CODE STAGED / PHYSICAL PENDING
