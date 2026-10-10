@@ -1,6 +1,8 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: CANDIDATO COM CI HOST E PICO APROVADOS / ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01 ACEITO / MOV-02 CI VALIDADO E ACEITAÇÃO FÍSICA PENDENTE.
+Commit MOV-02: `f13425c2c1ec8642803fa2398cd3f67606d440e6`. CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38095384245
+Artefato MOV-02: `11685218547`, UF2 `blu2usb_picow.uf2`, SHA-256 `ef6b259dc2f75a8b71f441a94873aa2d23ed49b06ada23ad2c1fd70256d9e91d`, 49/49 testes host.
 Candidate commit: `ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8`.
 CI run: https://github.com/remappingbridge/remappingbridge/actions/runs/38093980816
 UF2 artifact ID: `11685815375` (`blu2usb-picow-production-pico2w`).
