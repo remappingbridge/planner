@@ -110,11 +110,11 @@ Same rows/control colors/col17 as Horizontal Fast, title 'VERTICAL FAST DPI' and
      180-DEGREE
      270-DEGREE
 
-    KEY A: APPLY
+    KEY A: APPLY AND BACK
     KEY B: CANCEL
     KEY X: HELP
 
-Four options, Joy Up/Down implicit, wrap. Selected angle white. Actual persisted angle cyan when not selected. Rotation is counterclockwise in mathematical convention (with screen-space Y downward, see math document). KEY A returns Movement Options on confirmed save, B cancels.
+Four options, Joy Up/Down implicit, wrap. Selected angle white. Actual persisted angle cyan when not selected. Rotation is counterclockwise in mathematical convention (with screen-space Y downward, see math document). KEY A returns Movement Options on confirmed save, B cancels. Operator copy refinement accepted as a requirement on 2026-10-10: show `KEY A: APPLY AND BACK` (21 columns), instead of the old `KEY A: APPLY`.
 
 ### Existing SAVED-DEVICES, modified in place [MOV-08]
 
