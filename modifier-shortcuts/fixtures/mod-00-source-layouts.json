@@ -1,0 +1,288 @@
+{
+  "schema": "modifier-mod00-source-layout-fixture-v1",
+  "source": "TELAS MODIFIER.md (operator attachment, 2026-10-11)",
+  "status": "SOURCE_LITERAL_NOT_YET_NORMALIZED_OR_APPROVED",
+  "width": 21,
+  "height": 9,
+  "notes": [
+    "All strings from fenced screen sketches as drawn; parenthetical comments omitted; dynamic values are examples, not defaults.",
+    "The will-become block was a title placeholder; five concrete variants are expanded.",
+    "Typos PASSTHROUGT, 0F, WHELL preserved here for traceability; proposed corrections separately in candidate.",
+    "When runtime renders current shortcut, do not print sample value from fixture literally."
+  ],
+  "screens": [
+    {
+      "slug": "remapping-options",
+      "rows": [
+        "REMAPPING OPTIONS",
+        " PASSTHROUGT DEFAULT",
+        " CUSTOM REMAPPING",
+        " MODIFIER SHORTCUTS",
+        "",
+        "JOY UP\\DOWN: SELECT",
+        "JOY PRESS: ACCESS",
+        "KEY B: BACK",
+        "KEY X: HELP"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "combinations-1",
+      "rows": [
+        "COMBINATIONS 1 0F 6",
+        " MODIFIER RELEASED IS",
+        " NOT CUSTOMIZED",
+        " MOD + MIDDLE IS",
+        " PASTE",
+        "",
+        "JOY LEFT\\RIGHT: PAGE",
+        "JOY PRESS: ACCESS",
+        "KEY A: RESET SELECTED"
+      ],
+      "dynamic_rows": [
+        2,
+        4
+      ]
+    },
+    {
+      "slug": "combinations-2",
+      "rows": [
+        "COMBINATIONS 2 0F 6",
+        " MOD + LEFT CLICK IS",
+        " UNAVAILABLE",
+        " MOD + RIGHT CLICK IS",
+        " COPY",
+        "",
+        "JOY LEFT\\RIGHT: PAGE",
+        "JOY PRESS: ACCESS",
+        "KEY A: RESET SELECTED"
+      ],
+      "dynamic_rows": [
+        2,
+        4
+      ]
+    },
+    {
+      "slug": "combinations-3",
+      "rows": [
+        "COMBINATIONS 3 0F 6",
+        " MOD + FORWARD IS",
+        " NOT CUSTOMIZED",
+        " MOD + BACKWARD IS",
+        " NOT CUSTOMIZED",
+        "",
+        "JOY LEFT\\RIGHT: PAGE",
+        "JOY PRESS: ACCESS",
+        "KEY A: RESET SELECTED"
+      ],
+      "dynamic_rows": [
+        2,
+        4
+      ]
+    },
+    {
+      "slug": "combinations-4",
+      "rows": [
+        "COMBINATIONS 4 0F 6",
+        " MOD + WHELL UP IS",
+        " NOT CUSTOMIZED",
+        " MOD + WHELL DOWN IS",
+        " NOT CUSTOMIZED",
+        "",
+        "JOY LEFT\\RIGHT: PAGE",
+        "JOY PRESS: ACCESS",
+        "KEY A: RESET SELECTED"
+      ],
+      "dynamic_rows": [
+        2,
+        4
+      ]
+    },
+    {
+      "slug": "combinations-5",
+      "rows": [
+        "COMBINATIONS 5 0F 6",
+        " MOD + MOVE LEFT IS",
+        " NOT CUSTOMIZED",
+        " MOD + MOVE RIGHT IS",
+        " NOT CUSTOMIZED",
+        "",
+        "JOY LEFT\\RIGHT: PAGE",
+        "JOY PRESS: ACCESS",
+        "KEY A: RESET SELECTED"
+      ],
+      "dynamic_rows": [
+        2,
+        4
+      ]
+    },
+    {
+      "slug": "combinations-6",
+      "rows": [
+        "COMBINATIONS 6 0F 6",
+        " MOD + MOVE UP IS",
+        " NOT CUSTOMIZED",
+        " MOD + MOVE DOWN IS",
+        " NOT CUSTOMIZED",
+        "",
+        "JOY LEFT\\RIGHT: PAGE",
+        "JOY PRESS: ACCESS",
+        "KEY A: RESET SELECTED"
+      ],
+      "dynamic_rows": [
+        2,
+        4
+      ]
+    },
+    {
+      "slug": "shortcuts-1-6",
+      "rows": [
+        "SHORTCUTS 1-6 OF 30",
+        " COPY",
+        " CUT",
+        " SELECT ALL",
+        " PASTE",
+        " UNDO",
+        " REDO",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "shortcuts-7-12",
+      "rows": [
+        "SHORTCUTS 7-12 OF 30",
+        " ESCAPE",
+        " SPACE",
+        " ENTER\\RETURN",
+        " BACKSPACE",
+        " DELETE",
+        " RENAME",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "shortcuts-13-18",
+      "rows": [
+        "SHORTCUTS 13-18 OF 30",
+        " FULL SCREEN",
+        " SCREENSHOT FULL",
+        " SCREENSHOT AREA",
+        " REFRESH",
+        " FIND",
+        " SAVE",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "shortcuts-19-24",
+      "rows": [
+        "SHORTCUTS 19-24 OF 30",
+        " PLAY\\PAUSE",
+        " NEXT TRACK",
+        " PREVIOUS TRACK",
+        " VOLUME UP",
+        " VOLUME DOWN",
+        " MUTE",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "shortcuts-25-30",
+      "rows": [
+        "SHORTCUTS 25-30 OF 30",
+        " HOME SCREEN\\PAGE",
+        " ZOOM IN",
+        " ZOOM OUT",
+        " RESET ZOOM",
+        " BRIGHTNESS UP",
+        " BRIGHTNESS DOWN",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "left-will-become",
+      "rows": [
+        "LEFT WILL BECOME",
+        " LEFT",
+        " RIGHT",
+        " MIDDLE",
+        " FORWARD",
+        " BACKWARD",
+        " MODIFIER",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "right-will-become",
+      "rows": [
+        "RIGHT WILL BECOME",
+        " LEFT",
+        " RIGHT",
+        " MIDDLE",
+        " FORWARD",
+        " BACKWARD",
+        " MODIFIER",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "middle-will-become",
+      "rows": [
+        "MIDDLE WILL BECOME",
+        " LEFT",
+        " RIGHT",
+        " MIDDLE",
+        " FORWARD",
+        " BACKWARD",
+        " MODIFIER",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "forward-will-become",
+      "rows": [
+        "FORWARD WILL BECOME",
+        " LEFT",
+        " RIGHT",
+        " MIDDLE",
+        " FORWARD",
+        " BACKWARD",
+        " MODIFIER",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    },
+    {
+      "slug": "backward-will-become",
+      "rows": [
+        "BACKWARD WILL BECOME",
+        " LEFT",
+        " RIGHT",
+        " MIDDLE",
+        " FORWARD",
+        " BACKWARD",
+        " MODIFIER",
+        "",
+        "KEY A: APPLY AND BACK"
+      ],
+      "dynamic_rows": []
+    }
+  ]
+}
