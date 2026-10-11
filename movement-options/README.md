@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01 + MOV-02 + MOV-03 + MOV-04 ACCEPTED / MOV-05 HOST CI 52/52 PASS / MOV-05 PICO BUILD IN PROGRESS / PHYSICAL PENDING**
+Status: **MOV-01 + MOV-02 + MOV-03 + MOV-04 ACCEPTED / MOV-05 HOST CI 52/52 + PICO UF2 PASS / MOV-05 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -23,7 +23,7 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 ## Current execution gate MOV-05 (2026-10-10)
 - MOV-04 Vertical Slow received explicit operator acceptance on 2026-10-10; record: [executions/MOV-04/physical-acceptance.md](executions/MOV-04/physical-acceptance.md).
 - MOV-05 Vertical Fast (1.25/1.5/2/3x) has a dedicated 52nd host regression test and 52/52 PASS in CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097711254 for SHA `59c01a2bcec78267fa2b0baa0ddfa4989353a4c7`.
-- Runtime was already staged in previous integrated branch: this gate adds test evidence, not firmware code. A new UF2 is built for the source SHA and physical acceptance remains PENDING.
+- Runtime was already staged; MOV-05 adds focused tests, not firmware code. Pico UF2 artifact `11686186807` has SHA-256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`, identical to MOV-04. No additional flash is necessary if MOV-04 is still installed. Physical acceptance remains PENDING.
 - Physical walkthrough: [executions/MOV-05/physical-acceptance.md](executions/MOV-05/physical-acceptance.md).
 
 ## Sources and precedence
