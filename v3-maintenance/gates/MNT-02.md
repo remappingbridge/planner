@@ -7,7 +7,7 @@
 - Versão prevista somente após aceite físico: **v3.0.2 (PATCH)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
 ## Escopo exato
-Na tela `BLU2USB_SCREEN_REMOVE_THIS` trocar dica `KEY Y: HELP` por `KEY X: HELP` e implementar entrada real ao `BLU2USB_SCREEN_HELP_REMOVE_THIS` com KEY X no mesmo candidato. KEY Y continua LOCK; nenhum Help pode efetuar exclusão. Não modificar a semântica ALL-HELP until MNT-06, salvo correção indispensável ao retorno.
+Na tela `BLU2USB_SCREEN_REMOVE_THIS` trocar dica `KEY Y: HELP` por `KEY X: HELP` e implementar entrada real ao `BLU2USB_SCREEN_HELP_REMOVE_THIS` com KEY X no mesmo candidato. KEY Y continua LOCK; nenhum Help pode efetuar exclusão. Não modificar a semântica global das telas Help antes do MNT-05, salvo correção indispensável ao retorno.
 
 ## Preparação técnica — executada no candidato isolado
 Inspecionar ux_model.c (input handlers, help dispatch, return_screen, selected bond) e renderer; testar bordas press/release KEY X/Y, pending removal e retorno intacto.
