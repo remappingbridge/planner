@@ -91,7 +91,7 @@ MOV-04 ACCEPTED (operator confirmation 2026-10-10; SHA `036e5bd930b11b3c79ceeac6
 MOV-05 ACCEPTED (operator confirmation 2026-10-10; SHA `59c01a2bcec78267fa2b0baa0ddfa4989353a4c7`; record executions/MOV-05/physical-acceptance.md)
 MOV-06 ACCEPTED (operator confirmation 2026-10-10; SHA `e6834c3bc1a28b3ce20f0e6c192d15ba65daf5f5`; record executions/MOV-06/physical-acceptance.md)
 MOV-07 ACCEPTED (operator confirmation 2026-10-10; source SHA `23657734a172f4bd9dc61665ff57acf5230b3568`; record: executions/MOV-07/physical-acceptance.md)
-MOV-08 HOST CI 56/56 PASS / PICO BUILD PENDING / PHYSICAL PENDING (source SHA `7a18ee16a486a17d676f5ba10be58432a0965bc3`; test: tests/test_mov08_saved_devices.c)
+MOV-08 HOST CI 56/56 PASS + PICO UF2 PASS / PHYSICAL PENDING (source SHA `7a18ee16a486a17d676f5ba10be58432a0965bc3`, artifact 11686753895, UF2 SHA-256 bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e; bit-identical to accepted MOV-07; tests/test_mov08_saved_devices.c)
 MOV-09 CODE STAGED / PHYSICAL PENDING
 MOV-10 CODE STAGED / PHYSICAL PENDING
 
