@@ -4,7 +4,7 @@
 
 - Backlog: **MEL-07** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Base/dependência: **MNT-08 publicado**; a branch futura `maintenance/v3x-mnt-09` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
-- Versão prevista somente após aceite físico: **v3.1.3 (PATCH)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
+- Versão prevista somente após aceite físico: **v3.1.4 (PATCH)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
 ## Escopo exato
 A primeira opção da HOME CONNECTED deve sempre ler REMAPPING OPTIONS em vez de status do perfil. Manter destino selecionável, ordenação/ajudas e modelo interno de Custom/Passthrough.
