@@ -1,6 +1,6 @@
 # MOV-03 — Candidato CI e testes físicos
 
-Status: **50/50 testes host PASS / Pico 2 W production build em andamento / aceite físico PENDING**.
+Status: **50/50 testes host PASS / Pico 2 W production build PASS / aceite físico PENDING**.
 
 Produto: `remappingbridge/remappingbridge`
 Branch: `feature/movement-options-v1.0`
@@ -15,4 +15,7 @@ Alterações em relação ao MOV-02 aceito:
 
 Ainda não há aceite físico do MOV-03. Não mesclar a branch ao release/main.
 
-Dados de UF2: adicionar quando `pico2-w-production` concluir com sucesso para o commit exato acima.
+Pico 2 W production build e verificação de UF2: PASS no mesmo run do commit acima.
+Artefato GitHub Actions: `11686925370` (nome `blu2usb-picow-production-pico2w`).
+Firmware extraído: `remappingbridge-mov03-326c5f11.uf2`, 925.696 bytes, 1808 blocos UF2, family codes RP2350 metadata + firmware. SHA-256 do UF2: `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`.
+Todos os 50 testes do host e build/verificação Pico passaram. Gate MOV-03 **aguarda aceite físico do operador**.
