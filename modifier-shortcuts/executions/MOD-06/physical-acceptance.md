@@ -1,6 +1,6 @@
 # MOD-06 — Testes físicos desde HOME conectada
 
-**Status: PENDENTE DE ACEITE FÍSICO.** Use o candidato CI/UF2 descrito em [candidate.md](candidate.md) quando concluído. Mouse Bluetooth pareado ao Pico 2 W; Pico por USB no Linux desktop; sem `flash_nuke`.
+**Status: CI 70/70 PASS + UF2 VERIFICADO / ACEITE FÍSICO PENDENTE.** [Candidato MOD-06](candidate.md): CI [#354](https://github.com/remappingbridge/remappingbridge/actions/runs/38148853433), `blu2usb_picow.uf2` **941568 bytes**, SHA256 `6b9cbcd09a2aa3f66dba36498547e56e44e2cb07439150ade1bf584b6228837c`. [Artefato original](https://github.com/remappingbridge/remappingbridge/actions/runs/38148853433/artifacts/11706560759). Mouse Bluetooth pareado ao Pico 2 W; Pico por USB no Linux desktop; sem `flash_nuke`.
 
 - [ ] **01 — Upgrade e regressões:** gravar o MOD-06 UF2; HOME conectada, nome ativo ciano e demais linhas amarelas em Saved Devices, Custom/Modifier e Movement persistentes; cliques e USB keyboard MOD-05 ainda funcionam.
 - [ ] **02 — Wheel Up/Down:** HOME → REMAPPING OPTIONS → MODIFIER SHORTCUTS → COMBINATIONS 4 OF 6. Atribuir WHEEL UP=ESCAPE (catálogo página 2), WHEEL DOWN=COPY (página 1), aplicar com KEY A. Manter LEFT como MODIFIER no Custom aplicado.
