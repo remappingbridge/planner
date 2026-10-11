@@ -92,7 +92,7 @@ MOV-05 ACCEPTED (operator confirmation 2026-10-10; SHA `59c01a2bcec78267fa2b0baa
 MOV-06 ACCEPTED (operator confirmation 2026-10-10; SHA `e6834c3bc1a28b3ce20f0e6c192d15ba65daf5f5`; record executions/MOV-06/physical-acceptance.md)
 MOV-07 ACCEPTED (operator confirmation 2026-10-10; source SHA `23657734a172f4bd9dc61665ff57acf5230b3568`; record: executions/MOV-07/physical-acceptance.md)
 MOV-08 ACCEPTED (operator confirmation 2026-10-10; source SHA `7a18ee16a486a17d676f5ba10be58432a0965bc3`; record: executions/MOV-08/physical-acceptance.md)
-MOV-09 HOST CI 58/58 PASS / PICO BUILD PENDING / PHYSICAL PENDING (source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`; tests/test_mov09_remove_this.c, tests/test_mov09_remove_runtime_source.py; Pico BLE stale-bond failure fix)
+MOV-09 HOST CI 58/58 PASS + PICO UF2 PASS / PHYSICAL PENDING (source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`, artifact 11687290125, UF2 SHA-256 dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc; binary CHANGED vs MOV-08: must flash; tests/test_mov09_remove_this.c, tests/test_mov09_remove_runtime_source.py; BLE stale-bond failure fix)
 MOV-10 CODE STAGED / PHYSICAL PENDING
 
 ## Stop rule
