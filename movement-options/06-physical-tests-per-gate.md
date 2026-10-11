@@ -45,7 +45,7 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C07A (refinamento solicitado no MOV-02): em ROTATION, confirmar a legenda exata `KEY A: APPLY AND BACK` na linha 7 (21 colunas), sem alterar o efeito da tecla; retornar ao menu e testar novamente o percurso pela HOME.
 - C07B: em H Slow, testar Key X Help e qualquer tecla Back (inclusive Key Y), mantendo a opção em branco e a aplicada em ciano; reboot confirma o H persistido.
 
-### MOV-03 — horizontal-fast-dpi (próximo teste físico)
+### MOV-03 — horizontal-fast-dpi (ACCEPTED pelo operador em 2026-10-10)
 - C08: horizontal Slow > JOY RIGHT passa ao Fast sem sair do eixo, JOY LEFT volta ao Slow; confirmar col17.
 - C09: escolher VERY FAST 2x, KEY A; menu H 2X. Movimento longitudinal do mouse percorre o dobro da distância padrão **somente se a rotação selecionada encaminhar esse movimento ao eixo horizontal**.
 - C10: usar 1.25x, 1.5x, 2x e 3x, percorrer diagonais e testar continuidade de movimento rápido; verificar que vertical e rotação não são alterados ao aplicar horizontal.
@@ -53,9 +53,12 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C10B — testar JOY LEFT/RIGHT em Saved Devices e a tecla pressionada: nenhum destaque branco ou ciano extra além do nome conectado. Conferir que o amarelo corresponde ao tom STATIC padrão do sistema. A regra não deve alterar cores das outras telas.
 - C10C — Fast DPI: HELP via KEY X, voltar com KEY Y sem ativar lock, KEY B cancela, JOY LEFT/RIGHT alterna Fast↔Slow preservando página e preferências.
 
-### MOV-04 — vertical-slow-dpi
-- C11: entrar em VERTICAL DPI, Slow, selecionar 0.25X e aplicar; menu mostra V 0.25X, sem alterar H.
-- C12: verificar deslocamento pequeno/diagonal e que retorno KEY B não aplica outro valor.
+### MOV-04 — vertical-slow-dpi (próximo candidato)
+- C11: partir de HOME conectada > MOVEMENT OPTIONS > VERTICAL DPI; abrir VERTICAL SLOW DPI. Conferir linhas 9×21, opções 1x/0.75x/0.5x/0.25x alinhadas na coluna 16.
+- C12: selecionar 0.75x, KEY B cancela sem gravar. Retornar pela HOME/MOVEMENT OPTIONS para reabrir Vertical DPI.
+- C12A: selecionar 0.25x, KEY A aplica e volta. Confirmar somente V 0.25X ciano, H e Rotation inalterados. Testar deslocamento lento e diagonal; quatro deltas verticais pequenos devem produzir distância proporcional, sem perda.
+- C12B: alternar Vertical Slow ↔ Vertical Fast com JOY LEFT/RIGHT e verificar que nunca abre Horizontal; UP/DOWN envolve a seleção. KEY X abre Help Slow; KEY Y dentro do Help somente retorna à escolha exata, sem travar ou aplicar.
+- C12C: reiniciar Pico 2 W sem apagar bonds e confirmar persistência de V; testar que perfis, scroll, drag e Saved Devices com a cor ciano restrita ao nome ativo permanecem corretos. Aceite físico só com confirmação do operador.
 
 ### MOV-05 — vertical-fast-dpi
 - C13: navegar Vertical Slow <> Fast com JOY LEFT/RIGHT; escolher 1.5X e aplicar; H deve ficar idêntico.
