@@ -1,10 +1,10 @@
 # 06 — Gates MOD-00..MOD-10: dependências, testes e aceite físico
 
-**TODOS OS GATES ESTÃO PLANNED. NADA IMPLEMENTADO.** Futuro trabalho em branch nova de `remappingbridge/remappingbridge` partindo da tag imutável `v2.0.0`; documentos/registro de evidência apenas neste planner. Cada gate com alterações executáveis (MOD-01..10) exige CI host PASS, build de produção Pico 2 W, arquivo **.uf2**, SHA-256, roteiro específico de teste físico iniciando em `home-connected`, **aceite explícito do operador**, evidência e SHA. Não avançar em caso de regressão. MOD-00 é contratual/documental, sem firmware e sem UF2.
+**MOD-00: DOCUMENTATION CANDIDATE / AWAITING OPERATOR ACCEPTANCE (no firmware). MOD-01..MOD-10: PLANNED / NOT IMPLEMENTED.** Futuro trabalho em branch nova de `remappingbridge/remappingbridge` partindo da tag imutável `v2.0.0`; documentos/registro de evidência apenas neste planner. Cada gate com alterações executáveis (MOD-01..10) exige CI host PASS, build de produção Pico 2 W, arquivo **.uf2**, SHA-256, roteiro específico de teste físico iniciando em `home-connected`, **aceite explícito do operador**, evidência e SHA. Não avançar em caso de regressão. MOD-00 é contratual/documental, sem firmware e sem UF2.
 
 | Gate | Tema | Dependência | Resultado observável/limite de escopo |
 |---|---|---|---|
-| MOD-00 | Congelamento de decisões e fixtures de copy | v2.0.0 | ADR-HID/ADR-HOST, correção dos typos, contratos de gestos e exclusividade do Modifier aprovados; zero código |
+| MOD-00 | Contrato arquitetural, fontes e fixtures | v2.0.0 | [candidato/documentação preparada](executions/MOD-00/candidate.md), [aceite PENDING](executions/MOD-00/operator-acceptance.md); nenhum código ou UF2 |
 | MOD-01 | Remapping Options v3 + limpeza legado | MOD-00 | HOME → 3 opções; Standard/Escape fora de telas/status e Help; nenhuma função de teclado nova |
 | MOD-02 | 6 páginas Combinations | MOD-01 | HOME → combinations 1..6; seleção de pares, paginação/wrap, RESET idempotente, 9×21 correto; valores ainda NONE |
 | MOD-03 | 5 páginas Shortcuts + persistência | MOD-02 | HOME → combo → shortcuts → APPLY AND BACK; 30 itens, cancel, restaurar foco, reboot/reread, migração v2 |
@@ -15,6 +15,9 @@
 | MOD-08 | Consumer/Media/Brightness | MOD-07 + ADR-HID | 19..24,29..30 testados em host real, contrato USB/boot/enumeração aceito, sem promessas falsas |
 | MOD-09 | Recovery, BLE, UI/Help/lock e Saved Devices | MOD-08 | Disconnect, overflow, boot, migração, removal, color, legendas, compatibilidade Movement/Logitech |
 | MOD-10 | Paridade, segurança e release candidate | MOD-09 | Toda matriz, UF2 produção, rollback/upgrades, 30 ações verificadas e operador aprova candidato; **não publicar sem pedido separado** |
+
+## MOD-00 — sem testes físicos
+O gate é exclusivamente documental. A revisão ocorre em [operator-acceptance.md](executions/MOD-00/operator-acceptance.md); **nenhum UF2 é produzido**, e não se executam testes no Pico. Documentos não constituem aceite do operador.
 
 ## Testes físicos mínimos por gate
 **MOD-01**: conectar Mouse salvo, navegar desde HOME → Remapping Options, verificar 3 opções, `KEY B`, `KEY X` Help atualizado, `KEY Y` lock e retorno. Confirmar que Standard/Escape não aparecem mais em HOME nem Saved Devices. Mouse e movimento v2 intactos.
