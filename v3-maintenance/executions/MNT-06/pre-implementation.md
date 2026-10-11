@@ -5,3 +5,6 @@
 - Preservar 9 linhas × 21 colunas, todas as interações existentes, bloqueio universal e desbloqueio global para HOME, sem alterar outras telas.
 - Branch a partir de tag v3.1.0; PR draft, CI host completa + Pico 2 W produção, UF2 com SHA, teste físico desde FIRST MOUSE CONNECTED; somente após aceite versionar v3.1.1.
 - A partir do estado observado na main, rótulo atual é ` KEY Y: LOCK`. Não iniciar branch de fonte enquanto tag v3.1.0 estiver pendente.
+
+## Execução
+MNT-05 aceito e publicado como v3.1.0. Branch MNT-06 criada do commit exato dessa publicação. PR #36 em draft e CI #478 ativa. A mudança é visual e não modifica o lock nem o desbloqueio.
