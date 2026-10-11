@@ -18,7 +18,7 @@
 ## Evidence
 - Firmware commit: [`fb568154d88d3e984a89f0c7e0b69aaaa0fefffd`](https://github.com/remappingbridge/remappingbridge/commit/fb568154d88d3e984a89f0c7e0b69aaaa0fefffd).
 - Production UF2 for **original MOD-02, now superseded by corrective build**: [original artifact ZIP](https://github.com/remappingbridge/remappingbridge/actions/runs/38140599963/artifacts/11703161553) with SHA256 `84d2d478877c02c46dcba14d8fa83a2d3a122f1e63555d588dce19a877cb3d4a`. **Do not use this older UF2 to verify the two UI corrections.**
-- Corrected UF2 and SHA256: **PENDING new CI**; record in corrective-build.md after completion.
+- Corrected production UF2: [GitHub Actions #231 artifact](https://github.com/remappingbridge/remappingbridge/actions/runs/38142378835/artifacts/11703770361), firmware SHA256 **`bdd8abe1601336f852dcab9b2c57e7f95d8ed5e3700c53feaafa087c04e09a12`**, 926720 bytes, commit `88dcc6baa33390dfb9e55426746e8f874e0a0259`. Host CTest **61/61 PASS**, Pico 2 W build PASS. See [visual-bugfix.md](visual-bugfix.md).
 - Previous candidate CI: 61/61 PASS; Pico 2 W Release PASS. **Fresh corrective build required**. [CI run #225](https://github.com/remappingbridge/remappingbridge/actions/runs/38140599963).
 - Physical test verdict: **PENDING operator**.
 - Gate accepted: **NO**.
