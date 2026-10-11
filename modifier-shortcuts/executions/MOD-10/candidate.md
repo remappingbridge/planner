@@ -1,6 +1,6 @@
 # MOD-10 — Release qualification candidate
 
-**Status: CI SUCCESS 80/80 CTests + production UF2 verified; physical qualification PENDING (2026-10-11).** MOD-10 is NOT a published version.
+**Status: CI SUCCESS 80/80 CTests + production UF2 verified; MOD-10 gate accepted by operator (2026-10-11). Publishing RemappingBridge v3.0.0 separately authorized; check GitHub release state before marking published.**
 
 ## Provenance / frozen source
 - Gate MOD-09 accepted by the operator on 2026-10-11; exact approved dependency SHA `dcc85dfc86ef140bf8acb2be54488f0ce07b3000`.
@@ -20,6 +20,6 @@
 - Host action executor: 30/30 typed Keyboard/Consumer usages with down/up ACK, stalled endpoint and nonblocking minimum dwell; **NOT 30 observed effects in external software**.
 - Source safety: legacy v2 migration guarded; USB Report/Boot and no CDC descriptors, BLE removal identity-scope, motion flushing, cancel paths and name-only cyan Saved Devices.
 
-**Physical acceptance:** [24 scenarios Q01–Q24 PENDING](physical-acceptance.md), [30 individual actions PENDING](action-matrix.md). Upgrade/downgrade/host-specific Obsidian and brightness behavior cannot be proven in CI. No automatic physical PASS, no merge/tag/release without separate explicit authorization.
+**Operator gate-level acceptance:** [recorded in operator-acceptance.md](operator-acceptance.md). The [24 scenarios Q01–Q24](physical-acceptance.md) and [30 individual actions](action-matrix.md) remain individually unverified; do not invent checkmarks. Upgrade/downgrade and host-specific Obsidian/brightness behavior cannot be proven in CI. The operator has now separately authorized release v3.
 
 [Technical contract on product branch](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod10/docs/modifier-shortcuts/mod10-release-qualification.md).

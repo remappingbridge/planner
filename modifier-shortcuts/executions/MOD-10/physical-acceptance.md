@@ -1,6 +1,6 @@
 # MOD-10 — Full physical candidate qualification, starting HOME CONNECTED
 
-**Status: PENDING OPERATOR TESTS AND EXPLICIT ACCEPTANCE.** CI 80/80 PASS, official Pico 2 W UF2 SHA256 `a1facaa830183b3f971d49a8b6228c20803817d207733ec42bc6fb004d3a63a0`, exact commit `2c40f1be9fd47771bf6bb51fa72fd7b9825394d2`. The MOD-10 firmware is byte-identical to accepted MOD-09; release is not authorized.
+**Status: GATE-LEVEL ACCEPTED BY OPERATOR 2026-10-11; INDIVIDUAL Q01–Q24 EVIDENCE NOT SUPPLIED.** CI 80/80 PASS, official Pico 2 W UF2 SHA256 `a1facaa830183b3f971d49a8b6228c20803817d207733ec42bc6fb004d3a63a0`, exact commit `2c40f1be9fd47771bf6bb51fa72fd7b9825394d2`. The MOD-10 firmware is byte-identical to accepted MOD-09; release is not authorized.
 
 Prerequisites: saved BLE mouse connected, Pico 2 W on production UF2 from [candidate.md](candidate.md). Record host OS + desktop/application; keep external keyboard for ownership tests and a second saved mouse if available. Use BOOTSEL copy, **not flash_nuke**.
 
@@ -39,7 +39,7 @@ Prerequisites: saved BLE mouse connected, Pico 2 W on production UF2 from [candi
 - Production UF2 SHA256: `a1facaa830183b3f971d49a8b6228c20803817d207733ec42bc6fb004d3a63a0`
 - Platform and test apps: PENDING
 - Actual outcomes/exceptions: PENDING
-- Gate MOD-10 accepted by operator: **NO / PENDING**
-- Permission to merge/tag/release: **NO**, requires an additional explicit instruction.
+- Gate MOD-10 accepted by operator: **YES**, 2026-10-11; individual scenarios remain unverified
+- Permission to merge/tag/release: **YES**, explicitly granted by the operator in a separate 2026-10-11 message: “gate aceito. publique como v3 do remappingbridge”.
 
 **If any failure occurs:** record exact action, screen, OS, firmware SHA and observation; do not silently mark PASS. KDE Obsidian zoom and Consumer brightness limitations must be explicitly resolved/accepted as known exceptions before release.
