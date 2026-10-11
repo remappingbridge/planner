@@ -1,6 +1,8 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01 E MOV-02 ACEITOS / MOV-03 CI VALIDADO, UF2 E ACEITAÇÃO FÍSICA PENDENTES.
+Status: MOV-01 E MOV-02 ACEITOS / MOV-03 50/50 CI E PICO UF2 APROVADOS; ACEITAÇÃO FÍSICA PENDENTE.
+Commit MOV-03: `326c5f11164932aad5415783197d01cbc180de2e`; CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38096841875
+Artefato GitHub Actions MOV-03: `11686925370`. UF2 SHA-256: `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`; 925.696 bytes.
 Commit MOV-02: `f13425c2c1ec8642803fa2398cd3f67606d440e6`. CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38095384245
 Artefato MOV-02: `11685218547`, UF2 `blu2usb_picow.uf2`, SHA-256 `ef6b259dc2f75a8b71f441a94873aa2d23ed49b06ada23ad2c1fd70256d9e91d`, 49/49 testes host.
 Candidate commit: `ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8`.
