@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01–MOV-10 PHYSICALLY ACCEPTED / REMAPPINGBRIDGE v2.0.0 RELEASE AUTHORIZED — PUBLICATION IN PROGRESS**
+Status: **MOV-01–MOV-10 ACCEPTED / REMAPPINGBRIDGE v2.0.0 PUBLISHED**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -62,7 +62,7 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 - Operator's explicit instruction: `gate aceito. publique como a versão v2.0 do remappingbridge`.
 - MOV-10 physical acceptance now recorded at [executions/MOV-10/physical-acceptance.md](executions/MOV-10/physical-acceptance.md). **All 10 implementation gates accepted.**
 - The v2 release preparation is in `remappingbridge/remappingbridge` PR #22, retargeted to `main`; version bump to 2.0.0, dedicated release notes, release automation for tag `v2.0.0` and Pico 2 W UF2 + SHA256SUMS.
-- Publication is **not counted complete** until GitHub reports a published v2.0.0 Release with downloadable UF2 and checksum; no premature claim of release success.
+- **Release published and verified**: https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0; official Pico 2 W UF2 and SHA256SUMS available, release CI https://github.com/remappingbridge/remappingbridge/actions/runs/38137256052 SUCCESS; main merge SHA `35dec22ef8ce60275dd2b812bca2e225b7d0edc3`, release branch `release/v2.0.0`. Complete audit: [release-v2.0.0.md](release-v2.0.0.md).
 - Final candidate pre-release source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`, CI 59/59 and Pico PASS, physical acceptance supplied by the operator; versioned release source SHA will be recorded separately.
 
 ## Sources and precedence
