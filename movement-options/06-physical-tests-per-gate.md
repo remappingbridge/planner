@@ -1,6 +1,6 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01–MOV-04 ACEITOS / MOV-05 HOST 52/52 + PICO UF2 PASS, ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01–MOV-05 ACEITOS / MOV-06 HOST 53/53 PASS; PICO E ACEITAÇÃO FÍSICA PENDENTES.
 MOV-05 commit `59c01a2bcec78267fa2b0baa0ddfa4989353a4c7`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097711254, artifact `11686186807`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo firmware MOV-04; não precisa gravar novamente).
 MOV-04 SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097344728; artifact `11686156439`; SHA256 UF2 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo binário do MOV-03, com novos testes host).
 Commit MOV-03: `326c5f11164932aad5415783197d01cbc180de2e`; CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38096841875
@@ -62,7 +62,7 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C12B: alternar Vertical Slow ↔ Vertical Fast com JOY LEFT/RIGHT e verificar que nunca abre Horizontal; UP/DOWN envolve a seleção. KEY X abre Help Slow; KEY Y dentro do Help somente retorna à escolha exata, sem travar ou aplicar.
 - C12C: reiniciar Pico 2 W sem apagar bonds e confirmar persistência de V; testar que perfis, scroll, drag e Saved Devices com a cor ciano restrita ao nome ativo permanecem corretos. Aceite físico só com confirmação do operador.
 
-### MOV-05 — vertical-fast-dpi (atual: candidato, aceite físico pendente)
+### MOV-05 — vertical-fast-dpi (ACEITO pelo operador em 2026-10-10)
 - C13: HOME conectada → MOVEMENT OPTIONS (segunda opção) → VERTICAL DPI (segunda opção) → VERTICAL SLOW DPI → JOY RIGHT para Vertical Fast. Confirmar layout 9×21, valores 1.25X/1.5X/2X/3X iniciando na coluna 17, hint KEY A: APPLY AND BACK e KEY X: HELP FAST DPI.
 - C14: selecionar 1.5X e cancelar com KEY B: não alterar valor confirmado. Reabrir Vertical Fast, aplicar 1.5X com KEY A; menu mostra V 1.5X ciano e mantém H e ROTATION.
 - C14A: com V>1X, entrar diretamente em Fast pelo VERTICAL DPI; ver valor aplicado selecionado branco, mover foco para ver valor confirmado ciano; voltar com KEY B sem gravar outro candidato.
@@ -70,10 +70,12 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C14C: testar 1.25X, 2X e 3X, movimentos verticais e diagonais, continuidade sem truncamento em movimentos grandes; confirmar que perfis de botões, wheel, pan e Saved Devices preservam comportamentos aceitos.
 - C14D: reiniciar Pico sem apagar bonds; reconectar mouse e conferir persistência; selecionar V=3X e H=1X/rot=270° para conferir que ganho V age sobre a direção USB vertical pós-rotação.
 
-### MOV-06 — rotation
-- C15: acessar ROTATION, escolher 0/90/180/270 e confirmar que KEY B cancela e KEY A persiste.
-- C16: configurar H=2X, V=1X, 270-DEGREE; mouse frente -> ponteiro direita 2x, mouse trás -> esquerda 2x; esquerda -> cima 1x; direita -> baixo 1x.
-- C17: desenhar círculo físico lento: elipse deitada; confirmar que roda, scroll, clique e arraste não rotacionam. Ciclos de movimento longo não perdem distância.
+### MOV-06 — rotation (candidato atual, aceite físico pendente)
+- C15: HOME conectada > MOVEMENT OPTIONS > ROTATION; conferir layout 9×21, 0/90/180/270 graus, KEY A: APPLY AND BACK (21 colunas), KEY B: CANCEL, KEY X: HELP; UP/DOWN deve fazer wrap.
+- C16: selecionar ângulo diferente e cancelar com KEY B: ângulo persistido não muda. Depois aplicar separadamente 90, 180 e 270 graus com KEY A, confirmar retorno a Movement Options, valor ciano e H/V preservados. Reabrir: atual branco; mover seleção: atual ciano.
+- C17: KEY X abre ROTATION HELP; procurar texto ANTICLOCKWISE; KEY Y retorna ao item exato sem Lock. Verificar persistência após reinicialização e reconexão.
+- C17A: configurar H=2X, V=1X, ROT=270-DEGREE; mouse frente/trás -> ponteiro horizontal 2x; mouse esquerda/direita -> ponteiro vertical 1x. Desenhar círculo físico lento: elipse deitada. Scroll, pan, clique e arraste NÃO giram.
+- C17B: verificar sentido de giro para 0/90/180/270, movimentos diagonais e deslocamentos longos sem perda por saturação USB. Aplicar KEY A RESET ALL no menu Movement Options e confirmar H=1X, V=1X, Rotation=0-DEGREE, com persistência após reinicializar. Detalhes em executions/MOV-06/physical-acceptance.md.
 
 ### MOV-07 — home-connected
 - C18: confirmar 4 opções em ordem (Remapping, Movement, Saved, Pair), ida/volta e HELP original da HOME (KEY X).
