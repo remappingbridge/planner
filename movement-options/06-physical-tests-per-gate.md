@@ -1,6 +1,6 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01, MOV-02 E MOV-03 ACEITOS / MOV-04 HOST 51/51 E PICO UF2 PASS; ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01, MOV-02, MOV-03 E MOV-04 ACEITOS / MOV-05 HOST 52/52 PASS; PICO E ACEITAÇÃO FÍSICA PENDENTES.
 MOV-04 SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097344728; artifact `11686156439`; SHA256 UF2 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo binário do MOV-03, com novos testes host).
 Commit MOV-03: `326c5f11164932aad5415783197d01cbc180de2e`; CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38096841875
 Artefato GitHub Actions MOV-03: `11686925370`. UF2 SHA-256: `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`; 925.696 bytes.
@@ -54,16 +54,20 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C10B — testar JOY LEFT/RIGHT em Saved Devices e a tecla pressionada: nenhum destaque branco ou ciano extra além do nome conectado. Conferir que o amarelo corresponde ao tom STATIC padrão do sistema. A regra não deve alterar cores das outras telas.
 - C10C — Fast DPI: HELP via KEY X, voltar com KEY Y sem ativar lock, KEY B cancela, JOY LEFT/RIGHT alterna Fast↔Slow preservando página e preferências.
 
-### MOV-04 — vertical-slow-dpi (atual: CI validado, aceite físico pendente) (próximo candidato)
+### MOV-04 — vertical-slow-dpi (ACCEPTED pelo operador em 2026-10-10)
 - C11: partir de HOME conectada > MOVEMENT OPTIONS > VERTICAL DPI; abrir VERTICAL SLOW DPI. Conferir linhas 9×21, opções 1x/0.75x/0.5x/0.25x alinhadas na coluna 16.
 - C12: selecionar 0.75x, KEY B cancela sem gravar. Retornar pela HOME/MOVEMENT OPTIONS para reabrir Vertical DPI.
 - C12A: selecionar 0.25x, KEY A aplica e volta. Confirmar somente V 0.25X ciano, H e Rotation inalterados. Testar deslocamento lento e diagonal; quatro deltas verticais pequenos devem produzir distância proporcional, sem perda.
 - C12B: alternar Vertical Slow ↔ Vertical Fast com JOY LEFT/RIGHT e verificar que nunca abre Horizontal; UP/DOWN envolve a seleção. KEY X abre Help Slow; KEY Y dentro do Help somente retorna à escolha exata, sem travar ou aplicar.
 - C12C: reiniciar Pico 2 W sem apagar bonds e confirmar persistência de V; testar que perfis, scroll, drag e Saved Devices com a cor ciano restrita ao nome ativo permanecem corretos. Aceite físico só com confirmação do operador.
 
-### MOV-05 — vertical-fast-dpi
-- C13: navegar Vertical Slow <> Fast com JOY LEFT/RIGHT; escolher 1.5X e aplicar; H deve ficar idêntico.
-- C14: verificar 1.25X, 2X, 3X, seleção branca contra valor aplicado em ciano, paginação sem vazamento entre eixos.
+### MOV-05 — vertical-fast-dpi (atual: candidato, aceite físico pendente)
+- C13: HOME conectada → MOVEMENT OPTIONS (segunda opção) → VERTICAL DPI (segunda opção) → VERTICAL SLOW DPI → JOY RIGHT para Vertical Fast. Confirmar layout 9×21, valores 1.25X/1.5X/2X/3X iniciando na coluna 17, hint KEY A: APPLY AND BACK e KEY X: HELP FAST DPI.
+- C14: selecionar 1.5X e cancelar com KEY B: não alterar valor confirmado. Reabrir Vertical Fast, aplicar 1.5X com KEY A; menu mostra V 1.5X ciano e mantém H e ROTATION.
+- C14A: com V>1X, entrar diretamente em Fast pelo VERTICAL DPI; ver valor aplicado selecionado branco, mover foco para ver valor confirmado ciano; voltar com KEY B sem gravar outro candidato.
+- C14B: navegar Vertical Slow<>Fast com JOY LEFT/RIGHT; preservar a seleção própria de cada página sem alternar para Horizontal. KEY X abre Help Fast; KEY Y retorna sem Lock.
+- C14C: testar 1.25X, 2X e 3X, movimentos verticais e diagonais, continuidade sem truncamento em movimentos grandes; confirmar que perfis de botões, wheel, pan e Saved Devices preservam comportamentos aceitos.
+- C14D: reiniciar Pico sem apagar bonds; reconectar mouse e conferir persistência; selecionar V=3X e H=1X/rot=270° para conferir que ganho V age sobre a direção USB vertical pós-rotação.
 
 ### MOV-06 — rotation
 - C15: acessar ROTATION, escolher 0/90/180/270 e confirmar que KEY B cancela e KEY A persiste.
