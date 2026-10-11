@@ -1,6 +1,6 @@
 # MOD-04 — Correção após teste físico (quatro bugs de interface)
 
-**Situação:** candidato corretivo em `feature/modifier-shortcuts-mod04`; **MOD-04 ainda NÃO aceito fisicamente**. Não iniciar MOD-05.
+**Situação:** CORREÇÃO ACEITA pelo operador em 2026-10-11; MOD-05 autorizado. Commit corrigido `1147e79cb80d23412488cd10e92f14a9f75f26a5`.
 
 ## Defeitos informados pelo operador
 
@@ -26,7 +26,7 @@
 4. Em `MIDDLE WILL BECOME`, confirmar FORWARD, reabrir e confirmar BACKWARD; ao reabrir, somente BACKWARD deve estar ciano, FORWARD não. A linha selecionada continua branca.
 5. Verificar `KEY Y` Lock e unlock com retorno à HOME, máscaras UNAVAILABLE, reconexão Bluetooth e configurações anteriores.
 
-**Aceite:** exigir confirmação explícita após novo UF2 de produção e checklist físico. O firmware original MOD-04 em [candidate.md](candidate.md) é antecedente, não serve para validar as correções.
+**Aceite:** operador confirmou explicitamente «gate aceito. prossiga» após o novo UF2 de produção e checklist físico. O firmware original MOD-04 em [candidate.md](candidate.md) é antecedente, não serve para validar as correções.
 
 ## Compilação corretiva verificada
 
@@ -36,4 +36,4 @@
 - **Firmware extraído:** `blu2usb_picow.uf2`, **936.960 bytes**, SHA256 **`a93cb3ec8b1289ad87e48b2f03ce4e1830589cc538fe3122a6fa24f98daf41f0`**, confirmado independentemente no container contra o job log.
 - **SHA256 do ZIP** `e2af90a3dff42d40ac9fe183fe7eaa2ad4a94aa6548784c2be5109cf57d8e543` (não confundir com hash do UF2).
 - Arquivo nomeado para entrega ao operador: `remappingbridge-mod04-corrigido-pico2w.uf2`, byte a byte igual ao UF2 oficial.
-- **Estado:** correção implementada, CI e arquivo físico prontos; aguarda novo teste e aprovação física do MOD-04. Não iniciar MOD-05.
+- **Estado:** correção CI 66/66 e UF2 aprovada fisicamente pelo operador; MOD-05 desbloqueado. Não foram fornecidos screenshots/medições individuais.
