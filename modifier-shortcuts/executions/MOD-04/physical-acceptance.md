@@ -1,6 +1,6 @@
 # MOD-04 — Physical operator acceptance (Raspberry Pi Pico 2 W)
 
-**Status: PENDING PHYSICAL ACCEPTANCE** after final CI and UF2 checksum verification. Start every scenario from HOME connected with previously bonded Mouse. Do not use flash_nuke.
+**Status: CI 65/65 PASS + UF2 VERIFIED / PENDING PHYSICAL ACCEPTANCE.** [Candidate and SHA evidence](candidate.md). Start every scenario from HOME connected with previously bonded Mouse. Do not use flash_nuke.
 
 - [ ] **01 — Upgrade:** Flash candidate MOD-04 UF2 in BOOTSEL without flash erase; saved Mouse reconnects, its bonds, name, H/V DPI and rotation remain.
 - [ ] **02 — New WILL BECOME order:** HOME → REMAPPING OPTIONS → CUSTOM REMAPPING → LEFT WILL BECOME. Six options: LEFT, RIGHT, MIDDLE, FORWARD, BACKWARD, MODIFIER (last row). No ESCAPE here. Repeat other four source screens.
@@ -15,7 +15,7 @@
 - [ ] **11 — Runtime boundary:** With Modifier active in Custom, its source click is not sent as ordinary mouse click, but no shortcut/keyboard command is emitted yet (MOD-05). Other buttons and scrolling behave per existing remap settings.
 
 ## Evidence
-- Candidate commit and SHA256 UF2: pending final CI artifact.
-- Host CI and Pico 2 W production: pending final run.
+- Candidate [commit `b3ff70e4c632adf66580e67fc2aec94a363b0ab1`](https://github.com/remappingbridge/remappingbridge/commit/b3ff70e4c632adf66580e67fc2aec94a363b0ab1). Firmware 936960 bytes, **SHA256 `a78a9624d06587f6554e16058ccbc0219b04c2f84e01e6aff3c0c81019836b4f`**; [CI production artifact ZIP](https://github.com/remappingbridge/remappingbridge/actions/runs/38144659332/artifacts/11704048785).
+- Host CI 65/65 PASS, Pico 2 W production PASS: [Actions run #297](https://github.com/remappingbridge/remappingbridge/actions/runs/38144659332).
 - Operator verdict: **PENDING**.
 - Gate MOD-04 accepted: **NO**. MOD-05 remains blocked.
