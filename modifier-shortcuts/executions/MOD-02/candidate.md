@@ -1,7 +1,9 @@
 # MOD-02 — Candidate build: 6 combinations screens
 
-**Status: CI PASS + PICO 2 W UF2 VERIFIED / PHYSICAL ACCEPTANCE PENDING**  
+**Status: ORIGINAL BUILD SUPERSEDED BY MOD-02 VISUAL BUGFIX / PHYSICAL ACCEPTANCE PENDING**  
 Date: 2026-10-11.
+
+**Superseded for operator tests:** this document records the original candidate with wrong inactive-pair color and nonrendered `+`. Use [visual-bugfix.md](visual-bugfix.md) for the corrected UF2/CI run/firmware hash instead.
 
 ## Immutable candidate
 
