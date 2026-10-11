@@ -1,6 +1,6 @@
 # MOD-05 — Testes físicos do Modifier: Escape e Copy
 
-**Status: PENDENTE DE ACEITE FÍSICO.** Não iniciar MOD-06. Partir sempre da HOME com Mouse BLE salvo conectado e Pico 2 W em USB de um desktop Linux. O [candidato](candidate.md) está validado: CI **68/68 PASS**, Pico 2 W production **PASS**, SHA256 do UF2 **`8f1015d2081c83707ee33f524478cbef98780dee32e4a0fd46e43af6ebbaa3ad`**, 939008 bytes, [artifact 11704924925](https://github.com/remappingbridge/remappingbridge/actions/runs/38147899079/artifacts/11704924925).
+**Status: MOD-05 ACEITO FISICAMENTE PELO OPERADOR em 2026-10-11. MOD-06 LIBERADO.** Partir sempre da HOME com Mouse BLE salvo conectado e Pico 2 W em USB de um desktop Linux. O [candidato](candidate.md) está validado: CI **68/68 PASS**, Pico 2 W production **PASS**, SHA256 do UF2 **`8f1015d2081c83707ee33f524478cbef98780dee32e4a0fd46e43af6ebbaa3ad`**, 939008 bytes, [artifact 11704924925](https://github.com/remappingbridge/remappingbridge/actions/runs/38147899079/artifacts/11704924925).
 
 1. [ ] Gravar UF2 MOD-05 em BOOTSEL **sem flash_nuke**; confirmar reconexão do mouse, Saved Devices, H/V DPI e rotação.
 2. [ ] HOME → REMAPPING OPTIONS → CUSTOM REMAPPING → LEFT WILL BECOME → MODIFIER → KEY A; voltar a EDIT CUSTOM REMAP, confirmar LEFT IS MODIFIER, e KEY A APPLY CUSTOM.
@@ -15,4 +15,4 @@
 11. [ ] Desconectar/reconectar USB em ambiente controlado, trocar perfil ou desconectar BLE após combinação: nenhuma tecla Ctrl, C ou Escape permanece presa. Registre se não for possível simular USB ocupado.
 12. [ ] Configurar outro ID ainda não implementado (ex.: PLAY/PAUSE): não deverá disparar falsamente COPY/Escape. Movimento e wheel sem implementação de atalhos até MOD-06.
 
-**Saída:** decisão do operador, não inferir aceite de CI. MOD-05 contém apenas ação Keyboard ID=1 COPY e ID=7 ESCAPE, com confirmação USB de down/up, sem alterações de descritor ou Consumer HID.
+**Saída:** aceite explícito do operador por mensagem «gate aceito. prossiga» após entrega do UF2 SHA256 `8f1015d2081c83707ee33f524478cbef98780dee32e4a0fd46e43af6ebbaa3ad`. Itens individuais não acompanhados de screenshots/medições; aceite global registrado sem inventar logs físicos. MOD-05 contém apenas ação Keyboard ID=1 COPY e ID=7 ESCAPE, com confirmação USB de down/up, sem alterações de descritor ou Consumer HID.
