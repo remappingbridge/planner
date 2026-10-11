@@ -16,3 +16,10 @@
 - Publication outcome (release URL, tag SHA, asset SHA, final CI) must be documented **only after verification**.
 
 [Candidate evidence](candidate.md) · [Physical acceptance scenarios](physical-acceptance.md) · [30-action checklist](action-matrix.md).
+
+## Confirmed publication
+- **Release:** [RemappingBridge 3.0 / tag v3.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.0.0) published successfully 2026-10-11.
+- **Tag/main SHA:** `d7c7950fe595bd0e14a970cf60a29d085f065db4`.
+- **Final UF2 SHA-256:** `77c772cb987196fb04248c147fa0d1ae6fc303085d5e962215e33a66f19a46a9`.
+- **Release workflow:** [80/80 PASS + production build SUCCESS](https://github.com/remappingbridge/remappingbridge/actions/runs/38175676759).
+- [Publication audit with exact links](v3-release-audit.md).

@@ -1,6 +1,6 @@
 # MOD-10 — Release qualification candidate
 
-**Status: CI SUCCESS 80/80 CTests + production UF2 verified; MOD-10 gate accepted by operator (2026-10-11). Publishing RemappingBridge v3.0.0 separately authorized; check GitHub release state before marking published.**
+**Status: MOD-10 ACCEPTED AND RELEASED as RemappingBridge v3.0.0 (2026-10-11); [official release](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.0.0).**
 
 ## Provenance / frozen source
 - Gate MOD-09 accepted by the operator on 2026-10-11; exact approved dependency SHA `dcc85dfc86ef140bf8acb2be54488f0ce07b3000`.
@@ -23,3 +23,8 @@
 **Operator gate-level acceptance:** [recorded in operator-acceptance.md](operator-acceptance.md). The [24 scenarios Q01–Q24](physical-acceptance.md) and [30 individual actions](action-matrix.md) remain individually unverified; do not invent checkmarks. Upgrade/downgrade and host-specific Obsidian/brightness behavior cannot be proven in CI. The operator has now separately authorized release v3.
 
 [Technical contract on product branch](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod10/docs/modifier-shortcuts/mod10-release-qualification.md).
+
+## Released firmware (distinct from MOD-10 candidate build)
+- Final merged commit/tag: `d7c7950fe595bd0e14a970cf60a29d085f065db4`.
+- Final production UF2 SHA256: `77c772cb987196fb04248c147fa0d1ae6fc303085d5e962215e33a66f19a46a9` (version bump from v2 to v3 changes binary).
+- [Release audit](v3-release-audit.md).
