@@ -9,8 +9,13 @@ Escopo exclusivo HF-01: contraste das dicas e seleção única em `SAVED DEVICES
 2. Atualizar Pico 2 W pelo modo **BOOTSEL**, copiando o UF2 sem `flash_nuke` nem apagar flash/bonds. Confirmar boot normal, reconexão BLE e mouse funcional.
 3. Partir da tela **HOME CONNECTED** e acessar a terceira opção `SAVED DEVICES` com o HAT.
 
+## Correção do candidato após relato do operador
+- O operador observou que **o título (linha 0) de SAVED DEVICES não estava magenta**, contrariando o design system existente. Não é uma melhoria adicional: é regressão do candidato MNT-01.
+- Correção no **mesmo gate e mesma branch**: linha 0 deve preservar `BLU2USB_UI_TONE_TITLE` → `BLU2USB_COLOR_MAGENTA`, além dos requisitos originais (nome conectado CURRENT/ciano, corpo amarelo, remoção branca, dicas cinza).
+- O candidato anterior / UF2 anterior foi **substituído**; nenhuma aprovação física foi inferida. Reiniciar validação com o novo UF2 cujo SHA será registrado em [candidate.md](candidate.md).
+
 ## Testes — marcar manualmente PASS / FAIL / N/A
-- [ ] **01 — Mouse ativo:** título `1 OF N`, nome do mouse conectado somente ele em ciano; PROFILE/DPI/ROTATION continuam amarelos padrão.
+- [ ] **01 — Cabeçalho obrigatório:** título `1 OF N` da primeira linha em **MAGENTA padrão do sistema** (mesmo tom dos títulos das demais telas); nome do mouse conectado somente ele em ciano; PROFILE/DPI/ROTATION continuam amarelos padrão.
 - [ ] **02 — Única opção selecionada:** `REMOVE DEVICE` aparece toda em **branco**, sem precisar acionar joystick para selecionar.
 - [ ] **03 — Dicas cinza:** `JOY RIGHT\\LEFT: PAGE` e `JOY PRESS: ACCESS` aparecem em **cinza padrão**. Texto literal/separador não foi alterado neste gate; o `/` global será MNT-04.
 - [ ] **04 — Cor resistente à interação:** pressione/segure JOY LEFT/RIGHT e JOY PRESS, sem pressionar KEY A: dicas continuam cinza e REMOVE DEVICE permanece branco; nenhuma cor cai na linha errada.
