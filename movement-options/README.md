@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01–MOV-06 ACCEPTED / MOV-07 HOST CI 55/55 + PICO UF2 PASS / MOV-07 PHYSICAL PENDING**
+Status: **MOV-01–MOV-07 ACCEPTED / MOV-08 HOST CI 56/56 PASS / PICO BUILD PENDING / MOV-08 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -38,6 +38,12 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 - Dedicated host navigation test and Pico runtime-source guard added: `test_mov07_home_connected.c`, `test_mov07_home_runtime_source.py` (+2 tests), 55/55 PASS at source SHA `23657734a172f4bd9dc61665ff57acf5230b3568`.
 - CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38098381892, host 55/55 PASS and Pico UF2 PASS, artifact `11686122817`. Extracted UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`, byte-identical to the operator-accepted MOV-06.
 - Physical instructions: [executions/MOV-07/physical-acceptance.md](executions/MOV-07/physical-acceptance.md). No physical acceptance yet.
+
+## MOV-08 active gate (2026-10-10)
+- Operator accepted MOV-07 Home Connected; the signed-off candidate is recorded at [executions/MOV-07/physical-acceptance.md](executions/MOV-07/physical-acceptance.md).
+- MOV-08 Saved Devices tests per-mouse H/V/Rotation by logical bond and pagination, front-page current identity, identity-only cyan color, global-profile provenance, long names, disconnected/reconnected view, zero saved devices and safe Remove This navigation. No new screen is added.
+- New test `tests/test_mov08_saved_devices.c` registered in CTest; 56/56 host tests PASS. Source SHA `7a18ee16a486a17d676f5ba10be58432a0965bc3`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38098664052.
+- Full physical checklist: [executions/MOV-08/physical-acceptance.md](executions/MOV-08/physical-acceptance.md). Awaiting operator confirmation.
 
 ## Sources and precedence
 1. Operator's attachment 'telas movement(1).md', supplied 2026-10-10, especially explicit controls, copy, gate split and cyan rules. Source text takes priority for this new flow.
