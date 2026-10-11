@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 ACCEPTED; MOD-06 PHYSICALLY ACCEPTED; MOD-07 PHYSICALLY ACCEPTED; MOD-08 IMPLEMENTED, CI and UF2 candidate pending physical acceptance; MOD-09..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 ACCEPTED; MOD-06 PHYSICALLY ACCEPTED; MOD-07 PHYSICALLY ACCEPTED; MOD-08 IMPLEMENTED, CI 74/74 PASS + verified Pico 2 W UF2, physical acceptance pending; MOD-09..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -91,6 +91,7 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 - IDs 1..18/25..28 em Keyboard; IDs 19..24/29..30 aguardam Consumer no MOD-08.
 
 ## MOD-08 — Consumer Media / Volume / Brightness
+- [Candidato CI 74/74 PASS, UF2 e SHA256](executions/MOD-08/candidate.md)
 - [Contrato de implementação e ADR-HID A](executions/MOD-08/pre-implementation.md)
 - [Testes físicos USB e Linux desde HOME, aceite PENDING](executions/MOD-08/physical-acceptance.md)
 - [Branch dedicada](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod08), [PR #28 draft](https://github.com/remappingbridge/remappingbridge/pull/28)
