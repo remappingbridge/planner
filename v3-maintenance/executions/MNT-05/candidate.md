@@ -23,3 +23,10 @@ Executar [physical-acceptance.md](physical-acceptance.md) desde HOME CONNECTED e
 
 ## Correção posterior ao candidato inicial
 Por solicitação do operador, foi removida a exceção `if (!is_help(ux->screen))` no tratamento global de `BLU2USB_INTERACTION_UNLOCK`. Agora toda tela, incluindo Help, retorna à HOME ao desbloquear, sem workaround exclusivo. O UF2 e o SHA acima correspondem ao candidato **anterior** e não devem ser usados para testar esta revisão; aguardar artefato da CI 473 para a revisão atual.
+
+## Candidato corrigido — desbloqueio global para HOME
+- Fonte: [commit 308e6a266000e1c1babb5d385bd102dff75330f5](https://github.com/remappingbridge/remappingbridge/commit/308e6a266000e1c1babb5d385bd102dff75330f5), branch MNT-05.
+- [CI #473, run 38184271662](https://github.com/remappingbridge/remappingbridge/actions/runs/38184271662): host 85/85 PASS e Pico 2 W produção SUCCESS.
+- Artifact de produção ID `11718792476`, arquivo `blu2usb_picow.uf2`, 945152 bytes, SHA256 `fb862630cd367f03d83d2914480706cde409832f5dade91096bfb79fab00fd31` confirmado com log de produção.
+- Código remove apenas a guarda `!is_help(ux->screen)` do caminho global de unlock; KEY Y segue bloqueando a partir de Help, desbloqueio sempre retorna HOME. Sem nova tela, estado ou workaround.
+- **Este substitui todos candidatos MNT-05 anteriores**. Versão embarcada ainda 3.0.4; v3.1.0 permanece condicionada ao aceite físico.
