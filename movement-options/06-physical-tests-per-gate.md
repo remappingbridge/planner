@@ -1,6 +1,7 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01 E MOV-02 ACEITOS / MOV-03 50/50 CI E PICO UF2 APROVADOS; ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01, MOV-02 E MOV-03 ACEITOS / MOV-04 HOST 51/51 E PICO UF2 PASS; ACEITAÇÃO FÍSICA PENDENTE.
+MOV-04 SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097344728; artifact `11686156439`; SHA256 UF2 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo binário do MOV-03, com novos testes host).
 Commit MOV-03: `326c5f11164932aad5415783197d01cbc180de2e`; CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38096841875
 Artefato GitHub Actions MOV-03: `11686925370`. UF2 SHA-256: `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`; 925.696 bytes.
 Commit MOV-02: `f13425c2c1ec8642803fa2398cd3f67606d440e6`. CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38095384245
@@ -53,7 +54,7 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C10B — testar JOY LEFT/RIGHT em Saved Devices e a tecla pressionada: nenhum destaque branco ou ciano extra além do nome conectado. Conferir que o amarelo corresponde ao tom STATIC padrão do sistema. A regra não deve alterar cores das outras telas.
 - C10C — Fast DPI: HELP via KEY X, voltar com KEY Y sem ativar lock, KEY B cancela, JOY LEFT/RIGHT alterna Fast↔Slow preservando página e preferências.
 
-### MOV-04 — vertical-slow-dpi (próximo candidato)
+### MOV-04 — vertical-slow-dpi (atual: CI validado, aceite físico pendente) (próximo candidato)
 - C11: partir de HOME conectada > MOVEMENT OPTIONS > VERTICAL DPI; abrir VERTICAL SLOW DPI. Conferir linhas 9×21, opções 1x/0.75x/0.5x/0.25x alinhadas na coluna 16.
 - C12: selecionar 0.75x, KEY B cancela sem gravar. Retornar pela HOME/MOVEMENT OPTIONS para reabrir Vertical DPI.
 - C12A: selecionar 0.25x, KEY A aplica e volta. Confirmar somente V 0.25X ciano, H e Rotation inalterados. Testar deslocamento lento e diagonal; quatro deltas verticais pequenos devem produzir distância proporcional, sem perda.
