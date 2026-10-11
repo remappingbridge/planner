@@ -1,6 +1,6 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01–MOV-05 ACEITOS / MOV-06 HOST 53/53 + PICO UF2 PASS; ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01–MOV-06 ACEITOS / MOV-07 HOST CI 55/55 PASS; PICO E ACEITAÇÃO FÍSICA PENDENTES.
 MOV-06 SHA `e6834c3bc1a28b3ce20f0e6c192d15ba65daf5f5`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38098014017, artifact `11686117401`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (binário idêntico ao MOV-05 aceito).
 MOV-05 commit `59c01a2bcec78267fa2b0baa0ddfa4989353a4c7`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097711254, artifact `11686186807`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo firmware MOV-04; não precisa gravar novamente).
 MOV-04 SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097344728; artifact `11686156439`; SHA256 UF2 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo binário do MOV-03, com novos testes host).
@@ -71,17 +71,19 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C14C: testar 1.25X, 2X e 3X, movimentos verticais e diagonais, continuidade sem truncamento em movimentos grandes; confirmar que perfis de botões, wheel, pan e Saved Devices preservam comportamentos aceitos.
 - C14D: reiniciar Pico sem apagar bonds; reconectar mouse e conferir persistência; selecionar V=3X e H=1X/rot=270° para conferir que ganho V age sobre a direção USB vertical pós-rotação.
 
-### MOV-06 — rotation (candidato atual, aceite físico pendente)
+### MOV-06 — rotation (ACEITO pelo operador em 2026-10-10)
 - C15: HOME conectada > MOVEMENT OPTIONS > ROTATION; conferir layout 9×21, 0/90/180/270 graus, KEY A: APPLY AND BACK (21 colunas), KEY B: CANCEL, KEY X: HELP; UP/DOWN deve fazer wrap.
 - C16: selecionar ângulo diferente e cancelar com KEY B: ângulo persistido não muda. Depois aplicar separadamente 90, 180 e 270 graus com KEY A, confirmar retorno a Movement Options, valor ciano e H/V preservados. Reabrir: atual branco; mover seleção: atual ciano.
 - C17: KEY X abre ROTATION HELP; procurar texto ANTICLOCKWISE; KEY Y retorna ao item exato sem Lock. Verificar persistência após reinicialização e reconexão.
 - C17A: configurar H=2X, V=1X, ROT=270-DEGREE; mouse frente/trás -> ponteiro horizontal 2x; mouse esquerda/direita -> ponteiro vertical 1x. Desenhar círculo físico lento: elipse deitada. Scroll, pan, clique e arraste NÃO giram.
 - C17B: verificar sentido de giro para 0/90/180/270, movimentos diagonais e deslocamentos longos sem perda por saturação USB. Aplicar KEY A RESET ALL no menu Movement Options e confirmar H=1X, V=1X, Rotation=0-DEGREE, com persistência após reinicializar. Detalhes em executions/MOV-06/physical-acceptance.md.
 
-### MOV-07 — home-connected
-- C18: confirmar 4 opções em ordem (Remapping, Movement, Saved, Pair), ida/volta e HELP original da HOME (KEY X).
-- C19: desconectar mouse e confirmar Home Searching/Retry SEM MOVEMENT OPTIONS; reconectar e abrir Movement novamente, preservando valores.
-- C20: KEY Y bloqueia tela comum; ponteiro continua andando com valores configurados; primeira tecla somente desbloqueia e retorna à HOME.
+### MOV-07 — home-connected (candidato atual, aceite físico pendente)
+- C18: com mouse conectado, confirmar 4 opções em ordem: Remapping, Movement, Saved, Pair. Entrar e voltar (KEY B) de cada rota sem alterar preferências. UP/DOWN faz wrap, navega no release e destaca em branco a opção atual.
+- C19: selecionar a quarta opção, abrir KEY X HELP HOME CONNECTED, voltar com KEY Y sem bloquear nem perder seleção; confirmar JOY PRESS acessa Pair New. KEY B na HOME não provoca ação.
+- C20: bloquear HOME com KEY Y, conferir LCD apagado mas mouse/teclas HID continuam; a primeira pressão/soltura (JOY PRESS, por exemplo) apenas desbloqueia e volta à HOME, sem entrar em menus nem alterar H/V/rotação/remap.
+- C20A: com H=2X/V=0.75X/ROT=270°, desligar mouse: HOME SEARCHING, depois HOME RETRY no timeout. As duas telas mostram só Saved Devices/Pair New, jamais Movement Options. KEY A no Retry inicia busca novamente; KEY B no Searching cancela para Retry.
+- C20B: reconectar mouse salvo e conferir HOME Connected com 4 opções e preferências H/V/Rotation preservadas; repetir após reboot. Preservar regra de Saved Devices: só nome do conectado ciano. Roteiro expandido: executions/MOV-07/physical-acceptance.md.
 
 ### MOV-08 — saved-devices
 - C21: na HOME, Saved Devices mostra PROFILE e `DPI: H ... - V ...` e ROTATION; paginação direita/esquerda por mouse, dados não se confundem quando conectado aparece primeiro.
