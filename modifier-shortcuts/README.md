@@ -52,3 +52,9 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 - [Contrato técnico e roteiro no firmware](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod01/docs/modifier-shortcuts/mod02-combinations.md)
 - 6 novas telas, 12 slots estáveis, 40 telas runtime; RESET em NONE não grava flash; o catálogo de atalhos só surge em MOD-03.
 - Não iniciar MOD-03 antes da CI, build UF2 e aceite físico do operador.
+
+## MOD-03 — cinco telas de atalhos e persistência
+- [Escopo e migração v3](executions/MOD-03/pre-implementation.md)
+- [Cenários físicos e aceite pendente](executions/MOD-03/physical-acceptance.md)
+- [Contrato e fluxo no firmware](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod01/docs/modifier-shortcuts/mod03-shortcuts.md)
+- 45 telas, 30 ações configuráveis, 12 combinações globais; sem execução HID até gates posteriores.
