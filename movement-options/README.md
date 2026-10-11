@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01 + MOV-02 + MOV-03 ACCEPTED / MOV-04 HOST CI 51/51 PASSED / PICO BUILD RUNNING / MOV-04 PHYSICAL PENDING**
+Status: **MOV-01 + MOV-02 + MOV-03 ACCEPTED / MOV-04 HOST 51/51 + PICO UF2 PASSED / MOV-04 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -17,7 +17,7 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 
 ## Current execution gate (2026-10-10)
 - Operator accepted MOV-03 after testing candidate `326c5f11164932aad5415783197d01cbc180de2e` (50 host tests and Pico UF2 passed), including Saved Devices only-connected-name cyan rule.
-- MOV-04 Vertical Slow dedicated host test added and passed as part of 51/51 tests for source SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; Pico job https://github.com/remappingbridge/remappingbridge/actions/runs/38097344728.
+- MOV-04 Vertical Slow dedicated host test added and passed as part of 51/51 tests for source SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; Pico production build completed: https://github.com/remappingbridge/remappingbridge/actions/runs/38097344728, artifact `11686156439`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`. Binary is identical to MOV-03 because no firmware runtime changes were required in MOV-04, only new tests.
 - Read `executions/MOV-04/{pre-implementation,candidate,physical-acceptance}.md`; no physical acceptance for MOV-04 yet.
 
 ## Sources and precedence
