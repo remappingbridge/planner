@@ -58,3 +58,11 @@ Definir alvo principal e política para Linux (ambiente desktop e compositor), W
 
 ## Contrato de testes por ação
 Para os 30 IDs: 1 teste de catálogo/ordem/texto; 1 teste de encoding/executor/keyup; 1 teste integração saída USB na plataforma alvo (observando ação real, não apenas bytes); repetição em outras plataformas declaradas suportadas. Os oito IDs de Consumer/brightness (19..24,29..30) exigem validar interface/relatório HID antes da afirmação de cobertura. Critério de publicação **não é** "compila": é "30 IDs mapeados + comportamento aceito, ou suporte limitado explicitamente aprovado".
+
+
+## ADR-HOST-02 — emenda solicitada pelo operador em 2026-10-11
+Durante a validação física MOD-08, o operador esclareceu que **HOME SCREEN/PAGE deve voltar à Home do sistema Android/Google TV**, e não mover o cursor para o começo do texto/página. Isto SUPERA a interpretação provisional aceita no MOD-00. O MOD-08 corrigido usa HID Consumer `AC Home` **0x0223** (Android `KEYCODE_HOME`) e não Keyboard Home `0x4a`. O efeito Linux pode ser abrir página inicial do navegador; não implica Show Desktop. A funcionalidade Android/Google TV exige teste de host real. A distribuição de classes muda para **21 Keyboard + 9 Consumer**.
+
+O operador também verificou `SCREENSHOT AREA` no KDE Plasma disparando screenshot inteiro. O mapeamento corretivo usa `Meta+Shift+PrintScreen` conforme documentação oficial KDE Spectacle; para arraste mantendo Modifier, segundo clique do botão acionador produz LEFT sintético com MOVEs liberados até concluir seleção. `ZOOM IN/OUT` corrige Keypad Plus/Minus para main-row Equal/Minus (Ctrl+Shift+=, Ctrl+-) tentando compatibilidade com Obsidian/Electron. Falta aceite físico KDE e Android.
+
+Mídia, volume e brilho continuam sendo Consumer; emissão de Usage correto **não comprova** evento Linux ou alteração de backlight. Correção candidata MOD-08 retém Consumer pressionado por 60ms e pede diagnóstico `evtest` se os comandos permanecerem sem efeito. Os status dos testes físicos estão em [MOD-08](executions/MOD-08/operator-bugfix-20261011.md).
