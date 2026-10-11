@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: PLANNED / NOT IMPLEMENTED / ZERO GATES EXECUTED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 DOCUMENTATION CANDIDATE / OPERATOR ACCEPTANCE PENDING; MOD-01..MOD-10 NOT STARTED / FIRMWARE UNCHANGED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -28,5 +28,12 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 - Antes de qualquer mudança de descritor USB, decidir compatibilidade das 30 ações, sobretudo multimídia/brilho. Nenhuma alegação genérica de suporte multiplataforma sem testes.
 - A implementação futura usa uma branch separada **criada a partir da tag `v2.0.0`**, nunca altera essa tag. Um gate de cada vez, cada gate implementado testável desde `home-connected`, CI + UF2 e cenários físicos; aceite humano antes do próximo gate.
 
+## MOD-00 — candidato documental para aceite (2026-10-11)
+- [Preflight e baseline](executions/MOD-00/pre-implementation.md)
+- [Contrato candidato + decisões propostas](executions/MOD-00/candidate.md)
+- [Revisão e aceite do operador — PENDING](executions/MOD-00/operator-acceptance.md)
+- [Fixture literal do anexo: 17 telas em 9×21](fixtures/mod-00-source-layouts.json)
+- MOD-00 não cria UF2 e não exige testes físicos; nenhum arquivo do firmware foi modificado. A aprovação explícita das decisões propostas é pré-requisito para marcar MOD-00 ACCEPTED e começar MOD-01.
+
 ## Próximo passo
-**Somente após autorização explícita para implementar**: resolver os bloqueios em `07-traceability-decisions.md`, congelar os layouts literais e abrir a branch de firmware. Até lá, todos os gates `MOD-00..MOD-10` permanecem `PLANNED`.
+Revisar os ADRs e o checklist de MOD-00. O início de MOD-01 exige aceite explícito do operador; nenhuma branch de firmware ou release é criada pelo gate documental.
