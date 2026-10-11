@@ -16,8 +16,8 @@
 | MNT-02 | HOME → SAVED DEVICES → REMOVE DEVICE → REMOVE THIS; KEY X Help, KEY B retorna/cancela, KEY Y Lock | `KEY X: HELP` visível e funcional; KEY Y nunca abre Help; sem apagar mouse por entrar/sair da ajuda |
 | MNT-03 | HOME → MOVEMENT OPTIONS, configurar H/V 0.25, 1, 1.5, 3 | Linhas HORIZONTAL/ VERTICAL DPI não exibem `x`; valores continuam corretos, rotação/movimento inalterados |
 | MNT-04 | Abrir todas as telas que usam `\` nas dicas, incluindo JOY LEFT/RIGHT e HOME SCREEN/PAGE | Todo separador visual do LCD é `/` e cabe em 21 colunas; armazenamento/código/USB não mudam |
-| MNT-05 | Fluxo FIRST MOUSE CONNECTED e KEY Y | Dica exata `KEY Y: LOCKS ANYWHERE` legível, sem truncar; KEY Y efetivamente bloqueia |
-| MNT-06 | Abrir todos os HELP de todas as telas, testar KEY A/B/X/Y, JOY/joy press, lock e unlock | Apenas B volta e restaura contexto; Y bloqueia; todos demais comandos não executam ação; Help persiste após unlock |
+| MNT-05 | Abrir todos os HELP de todas as telas, testar KEY A/B/X/Y, JOY/joy press, lock e unlock | Apenas B volta e restaura contexto; Y bloqueia; todos demais comandos não executam ação; Help persiste após unlock |
+| MNT-06 | Fluxo FIRST MOUSE CONNECTED e KEY Y após MNT-05 | Dica exata `KEY Y: LOCKS ANYWHERE` legível, sem truncar; KEY Y já bloqueia em todas as telas e Helps |
 | MNT-07 | Percorrer HOME, Saved Devices, Movement, Custom, Combinations, Shortcuts, Helps, comparar fotografias do LCD | Todos textos antes em ciano normal tornam-se ciano claro esbranquiçado; outros tons preservados; legível e consistente |
 | MNT-08 | Em páginas com valores de estado ciano, alternar item selecionado/desselecionado; Saved Devices | Texto ciano claro selecionado vira ciano normal e volta ao ciano claro ao perder foco; cinza→branco comum preservado |
 | MNT-09 | HOME CONNECTED em PASSTHROUGH e CUSTOM; JOY PRESS primeira opção | Rótulo fixo `REMAPPING OPTIONS` independentemente do perfil; destino e dados do perfil intactos |
