@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01–MOV-08 ACCEPTED / MOV-09 HOST CI 58/58 PASS / PICO BUILD PENDING / MOV-09 PHYSICAL PENDING**
+Status: **MOV-01–MOV-08 ACCEPTED / MOV-09 HOST CI 58/58 + PICO UF2 PASS / MOV-09 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -48,7 +48,7 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 ## MOV-09 active gate (2026-10-10)
 - Operator accepted MOV-08 Saved Devices (per-bond DPI/rotation and identity-only cyan): [executions/MOV-08/physical-acceptance.md](executions/MOV-08/physical-acceptance.md).
 - MOV-09 Remove This Mouse tests bond-scoped deletion, Help/Cancel, pending single-command safety, storage rollback and failure handling. Firmware fix publishes `REMOVE_FAILED` when logical bond vanishes before removal, so UI can leave pending state.
-- New C host test and Pico BLE source-contract test give 58/58 PASS on source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203.
+- New C host test and Pico BLE source-contract test give 58/58 PASS on source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203. Pico 2 W production build verified; artifact `11687290125`, UF2 SHA256 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`, differs from MOV-08 and REQUIRES reflash for this gate.
 - Physical checklist (involves actual deletion of one mouse's bond/preferences): [executions/MOV-09/physical-acceptance.md](executions/MOV-09/physical-acceptance.md); requires operator confirmation.
 
 ## Sources and precedence
