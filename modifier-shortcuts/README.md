@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 ACCEPTED / MOD-01 CANDIDATE IMPLEMENTED, CI + PHYSICAL ACCEPTANCE PENDING / MOD-02..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 ACCEPTED / MOD-01 CANDIDATE IMPLEMENTED + CI 59/59 PASS + UF2, PHYSICAL ACCEPTANCE PENDING / MOD-02..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -37,6 +37,7 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 
 ## MOD-01 — branch de firmware e validação
 - [Baseline e escopo](executions/MOD-01/pre-implementation.md)
+- [Build candidato CI PASS + hash UF2](executions/MOD-01/candidate.md)
 - [Cenários físicos, aceite PENDING](executions/MOD-01/physical-acceptance.md)
 - [Branch do firmware](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod01) — derivada de v2.0.0.
 - [PR de revisão em draft #23](https://github.com/remappingbridge/remappingbridge/pull/23) — não mesclado.
