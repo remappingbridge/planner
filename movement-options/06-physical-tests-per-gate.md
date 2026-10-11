@@ -1,6 +1,6 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01–MOV-09 ACEITOS / MOV-10 HOST CI 59/59 + PICO UF2 PASS; ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01–MOV-10 ACEITOS FISICAMENTE pelo operador. RemappingBridge v2.0.0 autorizado para publicação em 2026-10-11; validar GitHub Release antes de marcar publicação como concluída.
 MOV-10 commit `f38c4984c2c1ebe28401dc9a3f410a62e132160a`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704, artifact `11701285206`, UF2 SHA256 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc` (mesmo binário do MOV-09 aceito, sem necessidade de gravar novamente).
 MOV-10 source `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704. Gate MOV-10 exige aceite físico próprio e **NÃO** autoriza merge.
 MOV-09 SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203; artifact `11687290125`, SHA-256 UF2 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`. **Novo UF2 diferente do MOV-08; deve gravar antes dos testes.**
@@ -101,7 +101,7 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C26: pressionar KEY A várias vezes enquanto remoção pendente não pode produzir múltiplas exclusões; KEY B/Y durante pending não deve provocar outro pedido ou Lock. Se remoção falhar (incluindo bond desaparecido), interface volta a SAVED DEVICES e permite tentar novamente, sem apagar preferências de outros mouses.
 - C26A: se seguro, repetir com mouse conectado como alvo e confirmar liberação de HID e desconexão antes da exclusão. Remover último bond direciona à SEARCHING FIRST MOUSE. Roteiro detalhado em executions/MOV-09/physical-acceptance.md.
 
-### MOV-10 — Help unificado (candidato atual, aceite físico pendente)
+### MOV-10 — Help unificado (ACEITO pelo operador em 2026-10-11)
 - C27: KEY X de H/V Slow abre SLOW DPI HELP, ANY KEY retorna à página exata sem mudar opção/candidato.
 - C28: KEY X de H/V Fast abre FAST DPI HELP idem, KEY Y em Help apenas volta, jamais trava a tela.
 - C29: KEY X de ROTATION abre ROTATION HELP, confirma explicação anticlockwise, retorno restaura seleção.
