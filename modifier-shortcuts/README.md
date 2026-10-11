@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 ACCEPTED; MOD-06 PHYSICALLY ACCEPTED; MOD-07 PHYSICALLY ACCEPTED; MOD-08 PHYSICALLY ACCEPTED by operator; MOD-09 PHYSICALLY ACCEPTED by operator; MOD-10 qualification candidate, CI/UF2 and physical validation pending.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 ACCEPTED; MOD-06 PHYSICALLY ACCEPTED; MOD-07 PHYSICALLY ACCEPTED; MOD-08 PHYSICALLY ACCEPTED by operator; MOD-09 PHYSICALLY ACCEPTED by operator; MOD-10 qualification CI 80/80 PASS and production UF2 verified, physical acceptance pending.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -107,7 +107,8 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 
 ## MOD-10 — release qualification, not publication
 - [Contract/dependencies](executions/MOD-10/pre-implementation.md)
-- [Candidate, CI and UF2](executions/MOD-10/candidate.md)
+- [Candidate, CI 80/80 and verified UF2](executions/MOD-10/candidate.md)
+- [30-action physical evidence matrix](executions/MOD-10/action-matrix.md)
 - [Full physical regression / downgrade plan](executions/MOD-10/physical-acceptance.md)
 - [Firmware branch](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod10), descending from MOD-09 SHA `dcc85dfc86ef140bf8acb2be54488f0ce07b3000`.
 - No merge, tag or release before an explicit separate request.

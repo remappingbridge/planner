@@ -1,8 +1,10 @@
 # MOD-10 — Full physical candidate qualification, starting HOME CONNECTED
 
-**Status: PENDING OPERATOR TESTS AND EXPLICIT ACCEPTANCE.** No release is authorized at this step.
+**Status: PENDING OPERATOR TESTS AND EXPLICIT ACCEPTANCE.** CI 80/80 PASS, official Pico 2 W UF2 SHA256 `a1facaa830183b3f971d49a8b6228c20803817d207733ec42bc6fb004d3a63a0`, exact commit `2c40f1be9fd47771bf6bb51fa72fd7b9825394d2`. The MOD-10 firmware is byte-identical to accepted MOD-09; release is not authorized.
 
 Prerequisites: saved BLE mouse connected, Pico 2 W on production UF2 from [candidate.md](candidate.md). Record host OS + desktop/application; keep external keyboard for ownership tests and a second saved mouse if available. Use BOOTSEL copy, **not flash_nuke**.
+
+[Separate 30-action per-ID evidence sheet](action-matrix.md). Each row must record actual host/app effect, not only a correct HID code.
 
 ## Numbered scenarios
 | ID | Test from HOME CONNECTED | Criteria | Operator result |
@@ -33,8 +35,8 @@ Prerequisites: saved BLE mouse connected, Pico 2 W on production UF2 from [candi
 | Q24 | Confirm no diagnostic USB CDC, UART debug, reset of BLE credentials, forced enumeration | Production-only identity and safety contract unchanged | PENDING |
 
 ## Gate decision record
-- Tested firmware commit: PENDING exact SHA
-- Production UF2 SHA256: PENDING build verification
+- Tested firmware commit: `2c40f1be9fd47771bf6bb51fa72fd7b9825394d2` (physical run still pending)
+- Production UF2 SHA256: `a1facaa830183b3f971d49a8b6228c20803817d207733ec42bc6fb004d3a63a0`
 - Platform and test apps: PENDING
 - Actual outcomes/exceptions: PENDING
 - Gate MOD-10 accepted by operator: **NO / PENDING**

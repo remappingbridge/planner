@@ -43,8 +43,8 @@
 5. **Exceções previamente conhecidas:** Obsidian KDE zoom in/out pelo RemappingBridge não tinham confirmação de funcionamento; o zoom de navegador e Reset Zoom funcionaram anteriormente. Brilho real do host Linux não pode ser inferido de Consumer HID. Ações de mídia/volume e Android Home dependem do host. Anotar resultado, sem ajuste oculto no RC.
 
 ## Resultado e assinatura de aceite
-- SHA de código MOD-10: PENDING
-- SHA-256 do UF2 usado: PENDING
+- SHA de código MOD-10: `2c40f1be9fd47771bf6bb51fa72fd7b9825394d2`
+- SHA-256 do UF2 usado: `a1facaa830183b3f971d49a8b6228c20803817d207733ec42bc6fb004d3a63a0` (testes físicos pendentes)
 - Sistema operacional, sessão gráfica e apps: PENDING
 - Quantidade ações com efeito comprovado: PENDING
 - Exceções deliberadamente aceitas: PENDING
