@@ -2,7 +2,7 @@
 
 # Movement Options — implementation gates and acceptance protocol
 
-Status: **MOV-01 A MOV-10 ACCEPTED; v2.0.0 RELEASE AUTHORIZED, PUBLISHING**. This historical plan is preserved below with the override above.
+Status: **MOV-01 A MOV-10 ACCEPTED; v2.0.0 PUBLISHED (tag, UF2 and SHA256SUMS verified)**. This historical plan is preserved below with the override above.
 Target for future code: remappingbridge/remappingbridge / feature/movement-options-v1.0.
 Base: release/v1.0.0 @ 30c4dd87922bb566248832ba4716774c0cb29755.
 Planning evidence: remappingbridge/planner/movement-options/.
@@ -96,4 +96,4 @@ MOV-09 ACCEPTED (operator confirmation 2026-10-11; source SHA `6a75b6212a152e34f
 MOV-10 ACCEPTED (operator confirmation 2026-10-11; source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; CI 59/59 and Pico PASS; record: executions/MOV-10/physical-acceptance.md). Release v2.0.0 separately authorized in the same operator message.
 
 ## Stop rule
-Gate-by-gate implementation has already been expressly authorized. **All MOV-01–MOV-10 gates were explicitly accepted.** The operator separately authorized publishing v2.0, so merging to main and creating v2.0.0 is permitted. Preserve the original v1.0.0 tag and verify final release assets/checksums. Use the existing Draft PR #22 for isolated development.
+Gate-by-gate implementation has already been expressly authorized. **All MOV-01–MOV-10 gates were explicitly accepted.** The operator authorized publishing v2.0. The merge to main and published GitHub Release v2.0.0 have been verified; previous v1.0.0 preserved. See release-v2.0.0.md. Use the existing Draft PR #22 for isolated development.
