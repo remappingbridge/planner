@@ -4,7 +4,7 @@
 
 - Backlog: **MEL-06** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Base/dependência: **MNT-07 publicado**; a branch futura `maintenance/v3x-mnt-08` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
-- Versão prevista somente após aceite físico: **v3.1.2 (PATCH)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
+- Versão prevista somente após aceite físico: **v3.1.3 (PATCH)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
 ## Escopo exato
 Ao selecionar item cuja cor normal é ciano claro esbranquiçado, renderizar estado selecionado em ciano normal, mais destacado. Ao perder seleção voltar ao ciano claro. Para itens padrão, continuar cinza→branco. Respeitar os spans/linhas em UI v3.
