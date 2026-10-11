@@ -1,15 +1,17 @@
-# MOV-07 — HOME Connected | Testes físicos
+# MOV-07 — HOME Connected | Aceite físico
 
-**Status: PENDING — aguardando confirmação do operador.**
+**Status: ACCEPTED — declaração do operador em 2026-10-10 (horário de São Paulo).**
 
-1. Com mouse salvo conectado ao Pico 2 W, conferir que a HOME exibe nome do mouse, resumo de remap atual e as quatro opções na ordem: remap, MOVEMENT OPTIONS, SAVED DEVICES e PAIR NEW MOUSE; sem linhas cortadas.
-2. Navegar com JOY UP/DOWN e confirmar wrap da primeira para quarta opção e vice-versa. Seleção branca, demais itens conforme a paleta v1.0; o menu não deve mudar antes de soltar o controle.
-3. Entrar em REMAPPING OPTIONS, voltar com KEY B. Repetir com MOVEMENT OPTIONS e SAVED DEVICES; verificar que o menu não abre outras telas ao retornar à HOME.
-4. Selecionar a quarta opção PAIR NEW MOUSE e retornar com KEY B sem parear um mouse novo; não alterar os bonds existentes.
-5. Na quarta opção, abrir HELP com KEY X; confirmar o texto REMOVE CONNECTED HELP e passos para remover. Pressionar KEY Y dentro de Help: voltar à HOME, ainda na quarta opção, SEM bloquear o visor. JOY PRESS deve abrir PAIR NEW MOUSE.
-6. Na HOME, pressionar KEY Y para bloquear. Confirmar que o display apaga. Movimentar o mouse: ponteiro e remap continuam ativos com os últimos ganhos H/V/rotação. Pressionar e soltar JOY PRESS uma vez: desbloqueia e volta à HOME, **sem entrar em nenhum menu** e sem resetar os ganhos.
-7. Ajustar H=2×, V=0.75×, ROT=270° e sair para HOME. Desligar o mouse. Verificar HOME SEARCHING; aguardar timeout para HOME RETRY. Em ambas as telas devem existir APENAS SAVED DEVICES e PAIR NEW MOUSE, nunca MOVEMENT OPTIONS. KEY A em RETRY reinicia busca. KEY B de HOME SEARCHING cancela para RETRY (contrato v1.0).
-8. Religar o mouse salvo. Confirmar HOME Connected, quatro opções e que MOVEMENT OPTIONS conserva H=2×, V=0.75×, ROT=270°. Reiniciar Pico sem apagar bonds e confirmar novamente. Conferir que Saved Devices preserva a regra: apenas nome do mouse efetivamente conectado em ciano.
-9. Testar que nenhuma tela de erro, pareamento e remapeamento da v1.0 foi indevidamente alterada pelo fluxo de HOME.
+O operador informou: **“gate aceito. prossiga”**, após receber e validar o candidato MOV-07. A confirmação autoriza iniciar o MOV-08, mas não aceita gates subsequentes.
 
-Preencher após executar: resultado PASS/FAIL, SHA-256 do UF2 utilizado, mouse, anomalias e observações. Aceite de MOV-07 não implica aceite de MOV-08 a MOV-10.
+Candidato aceito:
+- Produto: `remappingbridge/remappingbridge` | branch: `feature/movement-options-v1.0`
+- Commit: `23657734a172f4bd9dc61665ff57acf5230b3568`
+- CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38098381892
+- Host: **55/55 PASS**; Pico 2 W: build e UF2 **PASS**.
+- Artefato: `11686122817`; UF2 SHA-256: `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`.
+- Firmware binário idêntico ao do MOV-06 (tela HOME já integrada no início do trabalho; gate adicionou testes próprios, sem alterar runtime).
+
+Escopo: tela HOME CONNECTED com quatro destinos Remapping/Movement/Saved Devices/Pair New, Help/Back, bloqueio sem interromper HID, estados Searching/Retry quando offline e restauração de configurações após reconexão.
+
+O operador não forneceu resultados individuais nem medições físicas; este registro preserva a declaração explícita sem inventar evidências. **MOV-08–MOV-10 continuam pendentes de aceite próprio.**
