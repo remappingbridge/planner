@@ -1,0 +1,18 @@
+# MOD-06 — Testes físicos desde HOME conectada
+
+**Status: PENDENTE DE ACEITE FÍSICO.** Use o candidato CI/UF2 descrito em [candidate.md](candidate.md) quando concluído. Mouse Bluetooth pareado ao Pico 2 W; Pico por USB no Linux desktop; sem `flash_nuke`.
+
+- [ ] **01 — Upgrade e regressões:** gravar o MOD-06 UF2; HOME conectada, nome ativo ciano e demais linhas amarelas em Saved Devices, Custom/Modifier e Movement persistentes; cliques e USB keyboard MOD-05 ainda funcionam.
+- [ ] **02 — Wheel Up/Down:** HOME → REMAPPING OPTIONS → MODIFIER SHORTCUTS → COMBINATIONS 4 OF 6. Atribuir WHEEL UP=ESCAPE (catálogo página 2), WHEEL DOWN=COPY (página 1), aplicar com KEY A. Manter LEFT como MODIFIER no Custom aplicado.
+- [ ] **03 — Wheel isolado e múltiplo:** com LEFT pressionado, scroll UP uma unidade, várias unidades, DOWN e várias DOWN. Observar uma ação por unidade, sem vazamento de scroll vertical ao desktop, sem Escape extra na liberação LEFT. Sem scroll = nenhuma ação.
+- [ ] **04 — Wheel sem atribuição e pan:** resetar somente WHEEL UP e verificar scroll normal com LEFT; roda horizontal/pan, se disponível, deve permanecer pan sem emitir atalhos indevidos; restaurar atribuição para o teste seguinte.
+- [ ] **05 — MOVE:** COMBINATIONS 5 OF 6: MOVE LEFT=COPY, MOVE RIGHT=ESCAPE. COMBINATIONS 6 OF 6: MOVE UP=COPY, MOVE DOWN=ESCAPE. Com Modifier LEFT mantido, mover intencionalmente cada direção; um atalho por gesto, sem deslocamento do cursor.
+- [ ] **06 — Diagonal e tremor:** com Modifier pressionado, diagonal equilibrada e pequenos tremores não podem gerar duas ações nem acionamento acidental. Movimento contínuo na mesma direção não deve repetir.
+- [ ] **07 — Inversão e pausa:** mover rapidamente um sentido e inverter antes do limiar; evitar combinação indevida. Executar gesto, parar ~160ms ou mais, executar outro gesto deliberado mantendo Modifier; deve rearmar apenas depois da quietude.
+- [ ] **08 — Rotação:** testar 0°, 90°, 180°, 270° em Movement → Rotation. Gestos usam eixos do cursor rotacionado (aos 90°, deslocamento bruto +X é MOVE UP, e aos 270° é MOVE DOWN), não eixos físicos.
+- [ ] **09 — H/V DPI:** ajustar H 2× e V 1× e depois normal; comparar as ações/limiar do gesto, que devem seguir rotação mas não variar com ganho. Não deve haver transformação dupla nem cursor saltando depois da liberação do Modifier.
+- [ ] **10 — Sem MOVE atribuído:** resetar as quatro atribuições MOVE; com Modifier pressionado, cursor deve voltar a se mover normalmente. Sem Modifier ou em PASSTHROUGH, cursor sempre se move normalmente e roda faz scroll habitual.
+- [ ] **11 — USB e reconexão:** Mouse desconectar/reconectar, Lock Y/unlock, reiniciar Pico, mudar entre Custom/Passthrough; sem teclas presas, movimento ou scroll acumulado que vaze após reconexão. As 12 atribuições persistem.
+- [ ] **12 — Catálogo futuro e limites:** atribuir ação ainda não implementada (ex.: PLAY/PAUSE) a WHEEL/MOVE; ela permanece salva sem emitir teclado falsamente. Para MOVE configurado, a captura ainda congela cursor mesmo se atalho estiver aguardando MOD-07/08. Verificar comportamento com rolagem rápida (fila limitada).
+
+**Calibração experimental:** limiar 24 raw counts / dominância 2:1 / rearme após 160ms sem MOVE. Esses números são proposta de implementação, NÃO foram validados pelo operador em hardware. Reportar diferença de sensibilidade, diagonal ou espera. **Aceite físico PENDING.** MOD-07 bloqueado.
