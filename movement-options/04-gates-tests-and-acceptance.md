@@ -87,7 +87,7 @@ Physical walkthrough (operator):
 MOV-01 ACCEPTED (operator confirmation 2026-10-10; record: executions/MOV-01/physical-acceptance.md)
 MOV-02 ACCEPTED (operator confirmation 2026-10-10, SHA `f13425c2c1ec8642803fa2398cd3f67606d440e6`; record: executions/MOV-02/physical-acceptance.md)
 MOV-03 ACCEPTED (operator confirmation 2026-10-10; SHA `326c5f11164932aad5415783197d01cbc180de2e`; record: executions/MOV-03/physical-acceptance.md)
-MOV-04 HOST CI 51/51 PASS / PICO PRODUCTION BUILD IN PROGRESS / PHYSICAL PENDING (candidate SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; tests/test_mov04_vertical_slow.c)
+MOV-04 HOST CI 51/51 + PICO UF2 PASS / PHYSICAL PENDING (SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`, artifact 11686156439, UF2 sha256 bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e; binary unchanged vs MOV-03, tests/test_mov04_vertical_slow.c)
 MOV-05 CODE STAGED / PHYSICAL PENDING
 MOV-06 CODE STAGED / PHYSICAL PENDING
 MOV-07 CODE STAGED / PHYSICAL PENDING (HOME route advanced)
