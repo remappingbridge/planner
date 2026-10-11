@@ -1,6 +1,6 @@
 # MOD-09 — physical operator scenarios (HOME CONNECTED)
 
-**Status: PENDING PHYSICAL ACCEPTANCE.** CI tests and a UF2 are not physical PASS.
+**Status: PHYSICALLY ACCEPTED BY OPERATOR on 2026-10-11.** This is the gate-level decision; individually unchecked rows below remain unsubstantiated and are not retroactively marked PASS. See [operator acceptance](operator-acceptance.md).
 
 Prerequisites: start on HOME CONNECTED with the saved mouse, keep existing bonds/flash (do **not** flash_nuke). Use the MOD-09 production UF2 from the CI artifact documented in [candidate.md](candidate.md). Keep another keyboard/device connected for cross-source ownership checks if available.
 
