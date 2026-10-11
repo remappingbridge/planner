@@ -1,0 +1,13 @@
+# MOD-06 — Implementação de scroll e gestos MOVE
+
+**Status:** código implementado, CI e aceite físico pendentes. Data: 2026-10-11.
+
+MOD-05 aceito explicitamente pelo operador (mensagem "gate aceito. prossiga"), conforme registro em [MOD-05/physical-acceptance.md](../MOD-05/physical-acceptance.md). Base de firmware exata: commit `ee11c4dedad7e1699912982d6469f3675cae2e88` (UF2 SHA256 `8f1015d2081c83707ee33f524478cbef98780dee32e4a0fd46e43af6ebbaa3ad`), mantendo v2.0.0, main, bonds e Movement intocados. Branch [feature/modifier-shortcuts-mod06](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod06), [PR draft #26](https://github.com/remappingbridge/remappingbridge/pull/26).
+
+MOD-06 implementa combos WHEEL UP/DOWN (IDs de slot 6/7) e MOVE L/R/U/D (slots 8..11) sem criar telas adicionais. Somente IDs de atalho COPY=1 e ESCAPE=7 já suportados pelo executor Keyboard do MOD-05 podem emitir USB. Ações salvas cujo executor depende de MOD-07/08 não são representadas falsamente como executadas.
+
+Roda antes do remap no evento Mouse canônico: Wheel vertical por unidade com captura apenas da componente vertical atribuída, pan horizontal preservado; FIFO 8 limitado, USB down/up confirmados. MOVE capturado desde o início da sessão Modifier se qualquer slot direcional tem atribuição (mesmo se ainda não executável); gestos não alimentam acumulador Movement nem ponteiro. Classificação usa função pura de rotação **compartilhada** com Movement já existente, **pré-H/V DPI**. Cada gesto deliberado gera só uma ação, com dominância e quiet period para rearme. Parâmetros iniciais a validar fisicamente: limiar 24 contagens de entrada, dominância 2:1, pausa 160ms. Diagonal igual não gera duas ações, tremor abaixo do limiar não dispara ação, inversão abrupta reinicia o candidato.
+
+Com Modifier não pressionado, em Passthrough, sem fonte configurada ou sem nenhum MOVE atribuído, movimento convencional segue o pipeline e os ACKs de antes. Wheel não configurado, ou atribuído a ação ainda não suportada, passa ao host e cancela MODIFIER RELEASED, evitando saída falsa. Modificador solto após Wheel/MOVE deliberado não gera Escape extra. Cancelamentos de MOD-05 por desconexão BLE/USB, troca de perfil, Lock, remoção e overflow são mantidos.
+
+Não alterar arquitetura HID, seis opções WILL BECOME, 45 telas, v3 global, stored Mouse identities/Movement, Logitech HID++ nem liberar MOD-07 até teste físico e aceite explícito do MOD-06. Detalhes de implementação em [docs do firmware](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod06/docs/modifier-shortcuts/mod06-wheel-and-move.md).
