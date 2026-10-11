@@ -1,6 +1,6 @@
 # MOD-04 — Physical operator acceptance (Raspberry Pi Pico 2 W)
 
-**Status: PREVIOUS UF2 SUPERSEDED / CORRECTED MOD-04 PHYSICAL ACCEPTANCE PENDING.** Use [visual-correction.md](visual-correction.md) for the corrected firmware evidence. Do **not** use the original 65-test UF2 for bugfix acceptance. Start every scenario from HOME connected with previously bonded Mouse. Do not use flash_nuke.
+**Status: CORRECTIVE CI 66/66 PASS + VERIFIED UF2 / MOD-04 PHYSICAL ACCEPTANCE PENDING.** Use [visual-correction.md](visual-correction.md) for the corrected firmware evidence. Do **not** use the original 65-test UF2 for bugfix acceptance. Start every scenario from HOME connected with previously bonded Mouse. Do not use flash_nuke.
 
 - [ ] **01 — Upgrade:** Flash candidate MOD-04 UF2 in BOOTSEL without flash erase; saved Mouse reconnects, its bonds, name, H/V DPI and rotation remain.
 - [ ] **02 — New WILL BECOME order:** HOME → REMAPPING OPTIONS → CUSTOM REMAPPING → LEFT WILL BECOME. Six options: LEFT, RIGHT, MIDDLE, FORWARD, BACKWARD, MODIFIER (last row). No ESCAPE here. Repeat other four source screens.
@@ -15,8 +15,8 @@
 - [ ] **11 — Runtime boundary:** With Modifier active in Custom, its source click is not sent as ordinary mouse click, but no shortcut/keyboard command is emitted yet (MOD-05). Other buttons and scrolling behave per existing remap settings.
 
 ## Evidence
-- Candidate [commit `b3ff70e4c632adf66580e67fc2aec94a363b0ab1`](https://github.com/remappingbridge/remappingbridge/commit/b3ff70e4c632adf66580e67fc2aec94a363b0ab1). Firmware 936960 bytes, **SHA256 `a78a9624d06587f6554e16058ccbc0219b04c2f84e01e6aff3c0c81019836b4f`**; [CI production artifact ZIP](https://github.com/remappingbridge/remappingbridge/actions/runs/38144659332/artifacts/11704048785).
-- Host CI 65/65 PASS, Pico 2 W production PASS: [Actions run #297](https://github.com/remappingbridge/remappingbridge/actions/runs/38144659332).
+- **Current corrective commit:** [`1147e79cb80d23412488cd10e92f14a9f75f26a5`](https://github.com/remappingbridge/remappingbridge/commit/1147e79cb80d23412488cd10e92f14a9f75f26a5); production UF2 **936960 bytes**, **SHA256 `a93cb3ec8b1289ad87e48b2f03ce4e1830589cc538fe3122a6fa24f98daf41f0`**, [CI artifact 11704518123](https://github.com/remappingbridge/remappingbridge/actions/runs/38146526719/artifacts/11704518123). The old checksum `a78a9624d06587f6554e16058ccbc0219b04c2f84e01e6aff3c0c81019836b4f` was **superseded**, not for acceptance.
+- Corrective host CI **66/66 PASS**, Pico 2 W production PASS: [Actions run #312](https://github.com/remappingbridge/remappingbridge/actions/runs/38146526719).
 - Operator verdict: **PENDING**.
 - Gate MOD-04 accepted: **NO**. MOD-05 remains blocked.
 
