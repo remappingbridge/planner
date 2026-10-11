@@ -12,3 +12,10 @@
 
 ## Revisão de cor solicitada pelo operador
 O operador avaliou o primeiro ciano `0xBFFF` como razoável, mas pediu um tom mais fraco e próximo do cinza claro padrão. A branch e o PR #37 foram atualizados com **`BLU2USB_COLOR_CYAN = 0xB65A`** (R 22/31, G 50/63, B 26/31). Comparação: cinza claro do sistema `0xC618` (R 24/31, G 48/63, B 24/31). Assim o destaque mantém leve tendência ciano, com luminosidade próxima do cinza. Teste host 87/87 passou no workflow #484. Artefato e hash do candidato anterior estão obsoletos; validar somente o novo UF2 do commit `902a0e06d8801971d6e85981b1d73c121cfecd4d`.
+
+## Novo UF2 revisado — válido para teste físico
+- Commit `902a0e06d8801971d6e85981b1d73c121cfecd4d`; PR #37 permanece draft.
+- CI [#484](https://github.com/remappingbridge/remappingbridge/actions/runs/38185774233): **87/87 testes host PASS** e **Pico 2 W production SUCCESS**.
+- Artifact ID `11719059430`; firmware `remappingbridge-mnt07-muted-cyan-pico2w.uf2`, **945152 bytes**.
+- SHA-256 do UF2: `1ffb230f36e9c84ede884ba06c5b254c7a5b9fdfe85ced90c6efec32590d2dfa` — conferido localmente e comparado ao log de produção GitHub Actions.
+- Cor revisada `0xB65A`; contraste/aceite físico continuam pendentes. Substitui integralmente o firmware MNT-07 anterior (`0xBFFF`).
