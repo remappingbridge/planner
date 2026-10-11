@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01–MOV-09 ACCEPTED / MOV-10 HOST CI 59/59 PASS / PICO PRODUCTION BUILD IN PROGRESS / MOV-10 PHYSICAL PENDING**
+Status: **MOV-01–MOV-09 ACCEPTED / MOV-10 HOST CI 59/59 + PICO UF2 PASS / MOV-10 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -55,7 +55,7 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 - Operator physically accepted MOV-09 on 2026-10-11. Acceptance record: [executions/MOV-09/physical-acceptance.md](executions/MOV-09/physical-acceptance.md).
 - MOV-10 tests all new or updated Help screens as ONE combined gate: shared H/V Slow DPI Help, shared H/V Fast DPI Help, Rotation Help and Remove Mouse Help.
 - Dedicated `tests/test_mov10_all_help.c` validates every full 9×21 Help screen, Any Key return including Y/A/B/JOY, no accidental APPLY/REMOVE/lock, exact parent and candidate/selection restore and pending removal safety. Test registered in CMake; host 59/59 PASS.
-- CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704 for source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; Pico production artifact to be pinned after build succeeds.
+- CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704 for source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; Pico production UF2 PASS, artifact `11701285206`, SHA-256 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`, byte-for-byte identical to accepted MOV-09; reflash unnecessary if MOV-09 remains installed.
 - Operator physical checklist: [executions/MOV-10/physical-acceptance.md](executions/MOV-10/physical-acceptance.md). This final gate is **NOT yet accepted** and PR #22 stays Draft/unmerged.
 
 ## Sources and precedence
