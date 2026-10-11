@@ -86,7 +86,7 @@ Physical walkthrough (operator):
 ## Gate state ledger
 MOV-01 ACCEPTED (operator confirmation 2026-10-10; record: executions/MOV-01/physical-acceptance.md)
 MOV-02 ACCEPTED (operator confirmation 2026-10-10, SHA `f13425c2c1ec8642803fa2398cd3f67606d440e6`; record: executions/MOV-02/physical-acceptance.md)
-MOV-03 HOST CI 50/50 PASS, PICO BUILD PENDING / PHYSICAL PENDING (Fast DPI and Saved Devices active-name cyan; tests/test_mov03_horizontal_fast.c)
+MOV-03 HOST CI 50/50 PASS + PICO UF2 PASS / PHYSICAL PENDING (SHA `326c5f11164932aad5415783197d01cbc180de2e`, artifact 11686925370; Fast DPI and Saved Devices active-name cyan; tests/test_mov03_horizontal_fast.c)
 MOV-04 CODE STAGED / PHYSICAL PENDING
 MOV-05 CODE STAGED / PHYSICAL PENDING
 MOV-06 CODE STAGED / PHYSICAL PENDING
