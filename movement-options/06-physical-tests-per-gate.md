@@ -1,6 +1,6 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01–MOV-10 ACEITOS FISICAMENTE pelo operador. RemappingBridge v2.0.0 autorizado para publicação em 2026-10-11; validar GitHub Release antes de marcar publicação como concluída.
+Status: MOV-01–MOV-10 ACEITOS FISICAMENTE pelo operador. RemappingBridge v2.0.0 PUBLICADO em 2026-10-11: https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0; publicação e hash registrados em release-v2.0.0.md.
 MOV-10 commit `f38c4984c2c1ebe28401dc9a3f410a62e132160a`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704, artifact `11701285206`, UF2 SHA256 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc` (mesmo binário do MOV-09 aceito, sem necessidade de gravar novamente).
 MOV-10 source `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704. Gate MOV-10 exige aceite físico próprio e **NÃO** autoriza merge.
 MOV-09 SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203; artifact `11687290125`, SHA-256 UF2 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`. **Novo UF2 diferente do MOV-08; deve gravar antes dos testes.**
