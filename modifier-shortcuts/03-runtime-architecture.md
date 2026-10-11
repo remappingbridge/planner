@@ -14,6 +14,8 @@ A lógica reside num módulo de domínio pequeno, proposto `modifier_shortcuts` 
 - `ShortcutAction` define semântica (KeyboardChord / KeyboardKey / ConsumerUsage / HostSpecific / UnsupportedUntilResolved), não códigos USB codificados na UI.
 - `ChordState`: modifierDown, pressedButtons, consumedCombo, consumedButtons, directionalAccumulator, directionLatch, queuedActions e generation/session. Não persistir nenhum estado transitório de botão.
 
+> **MOD-00 — ressalva de precedência:** o contrato candidato em [executions/MOD-00/candidate.md](executions/MOD-00/candidate.md) propõe um tratamento mais conservador para o tap (qualquer gesto secundário suprime MODIFIER RELEASED, mesmo sem atribuição) e captura/supressão de movimento enquanto o Modifier estiver pressionado e houver MOVE configurado. Os detalhes desta seção são históricos/propostas; estas opções só serão normativas após aceite explícito do MOD-00.
+
 ## Máquina de estados do MODIFIER
 | Estado | Evento | Transição/saída |
 |---|---|---|
