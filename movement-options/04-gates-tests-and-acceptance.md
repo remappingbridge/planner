@@ -1,8 +1,8 @@
-> 2026-10-10 EXECUTION OVERRIDE (explicit operator authorization): implementation has begun, and all screens have been staged on the isolated product branch. The operator requires any testable candidate to start from connected HOME, so MOV-07 HOME entry was advanced as a minimal prerequisite during MOV-01. This overrides the original note that the first reachable candidate would be MOV-07. MOV-01, MOV-02, MOV-03, MOV-04, MOV-05, MOV-06, MOV-07 and MOV-08 were physically accepted per operator statements on 2026-10-10; remaining gates await their own acceptance even where code and host tests pass. Exact manual scenarios, UF2 procedure and acceptance log are now in [06-physical-tests-per-gate.md](06-physical-tests-per-gate.md). PR Draft #22 is unmerged. Validated candidate SHA: ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8; 48 host tests and production UF2 build passed. Physical acceptance pending for all gates.
+> 2026-10-10 EXECUTION OVERRIDE (explicit operator authorization): implementation has begun, and all screens have been staged on the isolated product branch. The operator requires any testable candidate to start from connected HOME, so MOV-07 HOME entry was advanced as a minimal prerequisite during MOV-01. This overrides the original note that the first reachable candidate would be MOV-07. MOV-01 through MOV-08 were physically accepted per operator statements on 2026-10-10; MOV-09 was explicitly accepted by the operator on 2026-10-11; remaining gates await their own acceptance even where code and host tests pass. Exact manual scenarios, UF2 procedure and acceptance log are now in [06-physical-tests-per-gate.md](06-physical-tests-per-gate.md). PR Draft #22 is unmerged. Validated candidate SHA: ba64fdf9e1edd75c3f4f9be5116da8bb9f79fde8; 48 host tests and production UF2 build passed. Physical acceptance pending for all gates.
 
 # Movement Options — implementation gates and acceptance protocol
 
-Status: **MOV-01 A MOV-08 ACCEPTED; MOV-09 CANDIDATE; MOV-09–MOV-10 PHYSICAL ACCEPTANCE PENDING**. This historical plan is preserved below with the override above.
+Status: **MOV-01 A MOV-09 ACCEPTED; MOV-10 CANDIDATE; SOMENTE MOV-10 PHYSICAL ACCEPTANCE PENDING**. This historical plan is preserved below with the override above.
 Target for future code: remappingbridge/remappingbridge / feature/movement-options-v1.0.
 Base: release/v1.0.0 @ 30c4dd87922bb566248832ba4716774c0cb29755.
 Planning evidence: remappingbridge/planner/movement-options/.
@@ -92,8 +92,8 @@ MOV-05 ACCEPTED (operator confirmation 2026-10-10; SHA `59c01a2bcec78267fa2b0baa
 MOV-06 ACCEPTED (operator confirmation 2026-10-10; SHA `e6834c3bc1a28b3ce20f0e6c192d15ba65daf5f5`; record executions/MOV-06/physical-acceptance.md)
 MOV-07 ACCEPTED (operator confirmation 2026-10-10; source SHA `23657734a172f4bd9dc61665ff57acf5230b3568`; record: executions/MOV-07/physical-acceptance.md)
 MOV-08 ACCEPTED (operator confirmation 2026-10-10; source SHA `7a18ee16a486a17d676f5ba10be58432a0965bc3`; record: executions/MOV-08/physical-acceptance.md)
-MOV-09 HOST CI 58/58 PASS + PICO UF2 PASS / PHYSICAL PENDING (source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`, artifact 11687290125, UF2 SHA-256 dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc; binary CHANGED vs MOV-08: must flash; tests/test_mov09_remove_this.c, tests/test_mov09_remove_runtime_source.py; BLE stale-bond failure fix)
-MOV-10 CODE STAGED / PHYSICAL PENDING
+MOV-09 ACCEPTED (operator confirmation 2026-10-11; source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`; CI 58/58 + Pico UF2 PASS; record: executions/MOV-09/physical-acceptance.md)
+MOV-10 HOST CI 59/59 PASS / PICO PRODUCTION BUILD IN PROGRESS / PHYSICAL PENDING (source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; tests/test_mov10_all_help.c; all Help copy and Any Key return)
 
 ## Stop rule
 Gate-by-gate implementation has already been expressly authorized. **STOP after generating each gate's verified UF2 and checklist** until the operator gives that gate's explicit physical acceptance; do not automatically accept later gates or merge into stable main/release. Use the existing Draft PR #22 for isolated development.
