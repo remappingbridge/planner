@@ -27,3 +27,13 @@
 5. Verificar `KEY Y` Lock e unlock com retorno à HOME, máscaras UNAVAILABLE, reconexão Bluetooth e configurações anteriores.
 
 **Aceite:** exigir confirmação explícita após novo UF2 de produção e checklist físico. O firmware original MOD-04 em [candidate.md](candidate.md) é antecedente, não serve para validar as correções.
+
+## Compilação corretiva verificada
+
+- **Commit exato:** [`1147e79cb80d23412488cd10e92f14a9f75f26a5`](https://github.com/remappingbridge/remappingbridge/commit/1147e79cb80d23412488cd10e92f14a9f75f26a5), branch `feature/modifier-shortcuts-mod04`, draft PR #24. O arquivo de documentação do próprio firmware também foi corrigido para especificar que `JOY PRESS` não aplica.
+- **CI:** [`BLU2USB Canonical CI #312`](https://github.com/remappingbridge/remappingbridge/actions/runs/38146526719), `host-architecture` SUCCESS, **66/66 CTests PASS** com asserts ativos em Release; `pico2-w-production` SUCCESS.
+- **Artifact oficial:** [Pico 2 W production UF2](https://github.com/remappingbridge/remappingbridge/actions/runs/38146526719/artifacts/11704518123), artifact ID `11704518123`.
+- **Firmware extraído:** `blu2usb_picow.uf2`, **936.960 bytes**, SHA256 **`a93cb3ec8b1289ad87e48b2f03ce4e1830589cc538fe3122a6fa24f98daf41f0`**, confirmado independentemente no container contra o job log.
+- **SHA256 do ZIP** `e2af90a3dff42d40ac9fe183fe7eaa2ad4a94aa6548784c2be5109cf57d8e543` (não confundir com hash do UF2).
+- Arquivo nomeado para entrega ao operador: `remappingbridge-mod04-corrigido-pico2w.uf2`, byte a byte igual ao UF2 oficial.
+- **Estado:** correção implementada, CI e arquivo físico prontos; aguarda novo teste e aprovação física do MOD-04. Não iniciar MOD-05.
