@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01–MOV-05 ACCEPTED / MOV-06 HOST CI 53/53 PASS / PICO BUILD IN PROGRESS / MOV-06 PHYSICAL PENDING**
+Status: **MOV-01–MOV-05 ACCEPTED / MOV-06 HOST CI 53/53 + PICO UF2 PASS / MOV-06 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -29,7 +29,7 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 ## Current execution gate MOV-06 (2026-10-10)
 - The operator accepted MOV-05 (Vertical Fast): see executions/MOV-05/physical-acceptance.md.
 - MOV-06 Rotation (0/90/180/270) with H/V output-axis scaling and 270° + H2x has dedicated host test tests/test_mov06_rotation.c; 53/53 tests PASS on commit `e6834c3bc1a28b3ce20f0e6c192d15ba65daf5f5`.
-- CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38098014017
+- CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38098014017, host 53/53 PASS and Pico UF2 PASS, artifact `11686117401`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`. It is bit-for-bit identical to MOV-05.
 - Physical checklist: executions/MOV-06/physical-acceptance.md. No physical acceptance yet.
 
 ## Sources and precedence
