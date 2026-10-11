@@ -2,7 +2,7 @@
 
 # Movement Options — implementation gates and acceptance protocol
 
-Status: **MOV-01 A MOV-09 ACCEPTED; MOV-10 CANDIDATE; SOMENTE MOV-10 PHYSICAL ACCEPTANCE PENDING**. This historical plan is preserved below with the override above.
+Status: **MOV-01 A MOV-10 ACCEPTED; v2.0.0 RELEASE AUTHORIZED, PUBLISHING**. This historical plan is preserved below with the override above.
 Target for future code: remappingbridge/remappingbridge / feature/movement-options-v1.0.
 Base: release/v1.0.0 @ 30c4dd87922bb566248832ba4716774c0cb29755.
 Planning evidence: remappingbridge/planner/movement-options/.
@@ -93,7 +93,7 @@ MOV-06 ACCEPTED (operator confirmation 2026-10-10; SHA `e6834c3bc1a28b3ce20f0e6c
 MOV-07 ACCEPTED (operator confirmation 2026-10-10; source SHA `23657734a172f4bd9dc61665ff57acf5230b3568`; record: executions/MOV-07/physical-acceptance.md)
 MOV-08 ACCEPTED (operator confirmation 2026-10-10; source SHA `7a18ee16a486a17d676f5ba10be58432a0965bc3`; record: executions/MOV-08/physical-acceptance.md)
 MOV-09 ACCEPTED (operator confirmation 2026-10-11; source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`; CI 58/58 + Pico UF2 PASS; record: executions/MOV-09/physical-acceptance.md)
-MOV-10 HOST CI 59/59 + PICO UF2 PASS / PHYSICAL PENDING (source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`, CI run 38136123704, artifact 11701285206, UF2 SHA-256 dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc; bit-identical to accepted MOV-09; tests/test_mov10_all_help.c)
+MOV-10 ACCEPTED (operator confirmation 2026-10-11; source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; CI 59/59 and Pico PASS; record: executions/MOV-10/physical-acceptance.md). Release v2.0.0 separately authorized in the same operator message.
 
 ## Stop rule
-Gate-by-gate implementation has already been expressly authorized. **STOP after generating each gate's verified UF2 and checklist** until the operator gives that gate's explicit physical acceptance; do not automatically accept later gates or merge into stable main/release. Use the existing Draft PR #22 for isolated development.
+Gate-by-gate implementation has already been expressly authorized. **All MOV-01–MOV-10 gates were explicitly accepted.** The operator separately authorized publishing v2.0, so merging to main and creating v2.0.0 is permitted. Preserve the original v1.0.0 tag and verify final release assets/checksums. Use the existing Draft PR #22 for isolated development.
