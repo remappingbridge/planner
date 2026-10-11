@@ -1,6 +1,8 @@
 # MOD-04 — Validated candidate, physical acceptance pending
 
-**Status: CI 65/65 PASS + VERIFIED PICO 2 W UF2 / PHYSICAL ACCEPTANCE PENDING**. Date 2026-10-11.
+**Status: ORIGINAL MOD-04 CANDIDATE SUPERSEDED BY OPERATOR-REPORTED UI BUGFIX / PHYSICAL ACCEPTANCE PENDING**. Date 2026-10-11.
+
+**IMPORTANT:** This candidate is retained for historical evidence only. The operator found four UI regressions while testing it. Use the **[MOD-04 corrective build and physical checklist](visual-correction.md)** instead; do not flash the old UF2 to validate the fixes.
 
 ## Dependency and immutable candidate
 - MOD-03 physically accepted by operator before starting MOD-04, as recorded in [MOD-03 acceptance](../MOD-03/physical-acceptance.md).
