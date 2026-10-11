@@ -1,26 +1,22 @@
-# MNT-06 — Todos os Helps: KEY B volta, KEY Y bloqueia
+# MNT-06 — First Mouse Connected: KEY Y LOCKS ANYWHERE
 
-**Status: PLANNED / NÃO INICIADO.** Nenhuma alteração de código, UF2, CI ou release executada neste gate.
+**Status: PLANNED / NÃO INICIADO.** Este arquivo altera o planejamento, não o firmware.
 
-- Backlog: **MEL-04** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
-- Base/dependência: **MNT-05 publicado**; a branch futura `maintenance/v3x-mnt-06` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
-- Versão prevista somente após aceite físico: **v3.1.0 (MINOR)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
+- Item original: **MEL-03**; veja [backlog literal](../01-backlog-and-contract.md).
+- Dependência: **MNT-05 publicado (lock em todos os Helps já validado)**. Criar branch futura `maintenance/v3x-mnt-06` da última tag estável v3.x publicada.
+- Tag-alvo prevista APÓS aceite físico: **v3.1.1 (PATCH)** (recalcular se outras releases surgirem).
 
-## Escopo exato
-Modificar TODOS os tipos Help: dica ANY KEY: BACK vira KEY B: BACK, KEY B é o único comando de retorno; KEY Y executa lock/unlock com consumo de evento, e KEY A/X/direcionais/JOY PRESS não executam ação. Preservar a tela de origem e foco ao sair. Aborda também Help Remove This.
+## Escopo
+Na tela FIRST MOUSE CONNECTED / BLU2USB_SCREEN_MOUSE_SAVED alterar dica KEY Y: LOCK para KEY Y: LOCKS ANYWHERE. Nenhuma lógica adicional: lock universal já implantado no MNT-05.
 
-## Preparação técnica — para execução futura
-Centralizar no is_help/handler UX e stack de lock, preferir contrato comum único em vez de if por tela; reconciliação com release-edge input; cobrir HELP de Bluetooth, Movement, Combinations/Shortcuts e outras telas.
+## Investigação antes de implementar
+Atualizar texto e fixture 9×21 do FIRST MOUSE CONNECTED; garantir largura exata, sem truncamento e sem mudança dos demais controles.
 
-## Teste físico individual desde HOME CONNECTED
-Para cada Help, tentar todos os HAT inputs; somente B fecha e Y bloqueia, sem alterações de perfil, atalho, remoção ou paginação; após unlock permanece no Help, B volta ao ponto exato.
+## Cenários de teste físico desde HOME CONNECTED
+Iniciar conectando primeiro Mouse, observar dica exata KEY Y: LOCKS ANYWHERE, testar Lock em FIRST MOUSE CONNECTED e Help; texto cabe em 21 caracteres.
 
-## Riscos/limites
-Mudança funcional deliberada exige versão MINOR 3.1.0, regressão de Help será bloqueante.
+## Restrição
+Antecipar a legenda ao gate de HELP geraria promessa falsa; por isso MEL-03 vem APÓS MEL-04.
 
-## Contrato de entrega
-1. Antes de implementar: registrar fonte imutável, diff mínimo, fixtures 9×21 e baseline de regressão no `executions/MNT-06/pre-implementation.md`.
-2. Implementar **apenas este gate**, criar testes host/CI novos e conservar regressões completas. Build de produção Pico 2 W, baixar UF2 oficial, comparar SHA-256 local com log CI, disponibilizar para teste; PR draft.
-3. Registrar `executions/MNT-06/candidate.md` e `physical-acceptance.md`. **Somente o usuário testa e aceita fisicamente**; se falhar, corrigir na mesma branch e repetir.
-4. Após **aceite explícito**, fazer bump SemVer adequado, build/CI do código versionado, integrar e publicar **um único GitHub Release** com UF2, SHA256SUMS e changelog rastreáveis, registrar release e então habilitar o gate seguinte. Se este for MNT-10 e nenhum patch genérico for validado, **marcar DEFERRED/NO RELEASE** após decisão, não publicar software sem alteração.
-5. **Neste momento: não iniciar passo 1, 2, 3 ou 4.** Este arquivo é planejamento, não execução.
+## Gate e release (não executados)
+Preflight e commit-base; PR draft exclusiva; implementação mínima; CI host e build Pico 2 W produção; UF2 oficial e SHA-256; registro de candidato/roteiro e aceite físico explícito do operador. Só depois do aceite: versionar, gerar CI/UF2 definitivo, publicar Release GitHub com SHA256SUMS, verificar tag e registrar no planner. Falhas impedem publicação e são corrigidas na mesma branch. Nenhum código ou tag foi criado agora.
