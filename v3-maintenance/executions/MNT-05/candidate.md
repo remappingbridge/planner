@@ -13,10 +13,13 @@
 - Versão embarcada **3.0.4** (candidato). Somente após aceite físico criar versão oficial **v3.1.0 MINOR**.
 
 ## Implementação
-- Uma única regra `is_help` cobre 10 Helps. KEY B retorna, Y bloqueia sem sair, o evento usado para desbloquear é consumido e conserva Help; A, X e JOY não modificam estado nem iniciam comandos.
+- Uma única regra `is_help` cobre 10 Helps. KEY B retorna, Y bloqueia sem sair, o evento usado para desbloquear é consumido e retorna à HOME pelo fluxo global; A, X e JOY não modificam estado nem iniciam comandos.
 - Os 10 templates de Help exibem `KEY B: BACK` na última linha, sem `ANY KEY: BACK`.
 - Salvos seleção, tela de retorno e bond da remoção. Não foram alterados persistência, BLE, HID/USB, Movement ou Modifier.
-- Teste novo `tests/test_mnt05_help_lock.c` cobre todos os Helps, os sete controles inertes, lock/unlock, B e retorno seguro; testes herdados preservados e adaptados às novas regras.
+- Teste novo `tests/test_mnt05_help_lock.c` cobre todos os Helps, os sete controles inertes, lock/unlock universal para HOME, B e retorno seguro; testes herdados preservados e adaptados às novas regras.
 
 ## Teste físico
 Executar [physical-acceptance.md](physical-acceptance.md) desde HOME CONNECTED e verificar as telas e retorno. **Não publicar v3.1.0 nem iniciar MNT-06 antes do aceite explícito.**
+
+## Correção posterior ao candidato inicial
+Por solicitação do operador, foi removida a exceção `if (!is_help(ux->screen))` no tratamento global de `BLU2USB_INTERACTION_UNLOCK`. Agora toda tela, incluindo Help, retorna à HOME ao desbloquear, sem workaround exclusivo. O UF2 e o SHA acima correspondem ao candidato **anterior** e não devem ser usados para testar esta revisão; aguardar artefato da CI 473 para a revisão atual.
