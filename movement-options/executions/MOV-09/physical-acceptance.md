@@ -1,6 +1,12 @@
 # MOV-09 — Remove This Mouse | Aceite físico
 
-**Status: PENDING — aguardando teste/aceite do operador.**
+**Status: ACCEPTED — confirmado pelo operador em 2026-10-11 (America/Sao_Paulo).**
+
+O operador declarou neste chat: **“gate aceito prossiga”**, após receber o MOV-09 com a correção de erro de remoção. Não foram fornecidos logs ou métricas individuais dos testes, portanto a confirmação física é registrada como declaração do operador, sem inventar observações.
+
+**Candidato aceito:** branch `feature/movement-options-v1.0`, commit `6a75b6212a152e34fec457b481e9bb513e5898ae`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203; 58/58 testes host PASS; build Pico 2 W PASS; artifact `11687290125`; UF2 SHA-256 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`.
+
+MOV-10, último gate, continua não aceito fisicamente.
 
 **Atenção:** este gate envolve exclusão **real** de pareamento e preferências daquele mouse. É necessário pareá-lo novamente após confirmar exclusão. Não execute `KEY A: REMOVE` se quiser manter esse pareamento.
 
@@ -14,4 +20,4 @@
 8. Se possível, repita com o **mouse atualmente conectado** como alvo. Confirme que ele é desconectado, removido e que a interface segue para Saved Devices ou para busca do primeiro mouse se não existir outro bond. Nenhum botão HID deve permanecer pressionado após a remoção.
 9. Se algum pedido falhar, conferir que a UI volta a Saved Devices em vez de travar em pending e permite nova tentativa; o outro mouse e suas preferências devem permanecer intactos.
 
-Registrar PASS/FAIL, SHA fonte/UF2, modelos e identities dos mouses, resultados e qualquer anomalia. **MOV-09 ainda não aceito por CI**. MOV-10 permanece não aceito.
+Registrar PASS/FAIL, SHA fonte/UF2, modelos e identities dos mouses, resultados e qualquer anomalia. MOV-09 aceito por confirmação física do operador após CI; MOV-10 permanece não aceito.
