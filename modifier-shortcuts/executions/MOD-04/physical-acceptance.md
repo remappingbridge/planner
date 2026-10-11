@@ -1,6 +1,6 @@
 # MOD-04 — Physical operator acceptance (Raspberry Pi Pico 2 W)
 
-**Status: CI 65/65 PASS + UF2 VERIFIED / PENDING PHYSICAL ACCEPTANCE.** [Candidate and SHA evidence](candidate.md). Start every scenario from HOME connected with previously bonded Mouse. Do not use flash_nuke.
+**Status: PREVIOUS UF2 SUPERSEDED / CORRECTED MOD-04 PHYSICAL ACCEPTANCE PENDING.** Use [visual-correction.md](visual-correction.md) for the corrected firmware evidence. Do **not** use the original 65-test UF2 for bugfix acceptance. Start every scenario from HOME connected with previously bonded Mouse. Do not use flash_nuke.
 
 - [ ] **01 — Upgrade:** Flash candidate MOD-04 UF2 in BOOTSEL without flash erase; saved Mouse reconnects, its bonds, name, H/V DPI and rotation remain.
 - [ ] **02 — New WILL BECOME order:** HOME → REMAPPING OPTIONS → CUSTOM REMAPPING → LEFT WILL BECOME. Six options: LEFT, RIGHT, MIDDLE, FORWARD, BACKWARD, MODIFIER (last row). No ESCAPE here. Repeat other four source screens.
@@ -19,3 +19,11 @@
 - Host CI 65/65 PASS, Pico 2 W production PASS: [Actions run #297](https://github.com/remappingbridge/remappingbridge/actions/runs/38144659332).
 - Operator verdict: **PENDING**.
 - Gate MOD-04 accepted: **NO**. MOD-05 remains blocked.
+
+## 12–15 — Correções exigidas pelo operador
+- [ ] **12 — Texto MODIFIER nas cinco fontes:** selecionar MODIFIER em cada WILL BECOME, aplicar com KEY A, confirmar `LEFT/RIGHT/MIDDLE/FORWARD/BACKWARD IS MODIFIER` completo na EDIT CUSTOM REMAP.
+- [ ] **13 — Botões WILL BECOME:** JOY PRESS não grava nem volta (todas as cinco telas); KEY B cancela e volta; apenas KEY A aplica e volta após sucesso. KEY X e JOY LEFT/RIGHT não aplicam. KEY Y faz Lock e o desbloqueio retorna à HOME conectada.
+- [ ] **14 — Dicas depois de APPLY CUSTOM:** EDIT CUSTOM REMAP mostra simultaneamente `JOY PRESS: ACCESS` e `KEY B: BACK`. Antes de aplicar o rascunho, mantém `KEY A: APPLY CUSTOM`.
+- [ ] **15 — Um único ciano:** MIDDLE WILL BECOME, aplicar FORWARD, reabrir e aplicar BACKWARD; voltar à WILL BECOME, FORWARD não pode estar ciano, somente BACKWARD. Selecionado continua branco. Repetir com MODIFIER como última opção.
+
+**Veredicto dos bugs:** PENDING operador no UF2 corrigido. O aceite anterior de MOD-03 não é alterado.
