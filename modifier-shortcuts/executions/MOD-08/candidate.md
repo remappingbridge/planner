@@ -1,6 +1,6 @@
 # MOD-08 — Candidato Consumer HID, CI PASS e UF2 Pico 2 W
 
-**Status: HOST CI 74/74 PASS + PICO 2 W UF2 VERIFICADO / ACEITE FÍSICO PENDENTE (2026-10-11).**
+**Status: CANDIDATO ORIGINAL SUBSTITUÍDO POR CORREÇÃO CI 75/75 PASS + NOVO UF2; ACEITE FÍSICO PENDENTE (2026-10-11).**
 
 ## Base de aceite e proveniência
 - MOD-07 aceito pelo operador em 2026-10-11 («gate aceito prossiga»), sobre commit **`0b62137494ce34a86bbecb8d8ee42a7cdfa42385`** e UF2 SHA256 `2f934c507e8502029114ffc4075363b108e23185c51cf28abb022884fc35a576`; [registro](../MOD-07/physical-acceptance.md).
@@ -20,3 +20,16 @@
 - CTests novos `mod08_consumer_8_usages_ack`, `mod08_combined_descriptor_boot_source`, herança de todos os tests 01..07. Testes MOD-05/06 passaram a usar ID de ação inválido 31 como caso negative, pois Media/Volume 19..24 agora têm execução Consumer correta; teste MOD-07 diferencia catálogo Keyboard de catálogo Consumer.
 - **74 testes de host e compilação não provam enumeração nem efeito funcional no host real.** Especialmente os usages de brilho podem chegar ao Linux sem alterar a iluminação de notebook/monitor; isso **não** é sucesso completo da ação. Validação exige observação no equipamento do operador (hardware, compositor, driver e painel).
 - [12 cenários de validação física](physical-acceptance.md) aguardam aceite explícito. Não avançar ao MOD-09 em caso de falha/limitação sem análise do operador; nenhum merge/publicação autorizada.
+
+
+## Candidato CORRETIVO após testes físicos (substitui o UF2 original)
+- Relato do operador documentado em [operator-bugfix-20261011.md](operator-bugfix-20261011.md): screenshot área fazia desktop inteiro, mídia/volume/brilho sem efeito no KDE, HOME Android não ia à HOME do sistema e zoom Obsidian não funcionava.
+- Correções exatas na **mesma** branch `feature/modifier-shortcuts-mod08`, sem avançar MOD-09. Código da correção: [commit `5bfde2c4dc21aef3505ea9884a4878ae8ee8ec6f`](https://github.com/remappingbridge/remappingbridge/commit/5bfde2c4dc21aef3505ea9884a4878ae8ee8ec6f).
+- [CI #418](https://github.com/remappingbridge/remappingbridge/actions/runs/38169247457): `host-architecture` SUCCESS **75/75 CTests** incluindo `mod08_operator_kde_android_zooms_and_media_dwell`; `pico2-w-production` SUCCESS.
+- [Artifact produção ZIP #11713092459](https://github.com/remappingbridge/remappingbridge/actions/runs/38169247457/artifacts/11713092459), digest ZIP `fadb81b07b60b3d2243f7196373c42d496e18295df2f65eebfa6e6a2eb5f6beb`.
+- UF2 real `blu2usb_picow.uf2` **944640 bytes**, SHA256 **`b07dc971d6849569d2884ac3b2fc895eb5de666e0a7679ec0c1eeb72be658fac`**, extraído e validado independentemente contra hash da CI. Entregue como `remappingbridge-mod08-corrected-pico2w.uf2`. O UF2 anterior (943616 bytes, SHA256 `6440583a...`) foi substituído como candidato a novos testes, sem alterar versões publicadas.
+- SCREENSHOT AREA: HID **Left Meta+Shift+PrintScreen** abre Spectacle modo seleção retangular; enquanto o Modifier segue pressionado o Mouse continua movendo. Primeiro clique do botão secundário ativa a ferramenta; após soltar esse botão (mantendo Modifier), pressioná-lo novamente corresponde a **LEFT synthetic drag**, soltar finaliza a seleção; Modifier release/cancel libera o clique sintético e evita teclas presas. Não há garantia de seleção sobre a janela antes que Spectacle esteja visível.
+- HOME ID25 foi movido de Keyboard Home para HID Consumer **AC Home 0x0223** (Android KEYCODE_HOME). Mantém 30 IDs semânticos: agora **21 Keyboard + 9 Consumer**, sem alterar interface de tela.
+- Obsidian ZOOM IN agora Ctrl+Shift+Equal (plus US), ZOOM OUT Ctrl+main Minus; RESET Ctrl+0 inalterado.
+- MEDIA/VOLUME/BRIGHTNESS mantêm os usages Consumer corretos; tentativa de corrigir pulsos breves mantendo keydown por pelo menos **60ms** após USB ACK antes de enviar usage zero. Keyboard keydown dura pelo menos 25ms. É um teste de hipótese; se não houver efeito, usar diagnóstico `evtest` para distinguir ausência de eventos USB de mapeamento/suporte Plasma/backlight.
+- **Não atribuir PASS físico a mídia/volume/brilho nem a Android HOME apenas porque 75 testes passaram.** [Repetir cenários físicos](operator-bugfix-20261011.md) no firmware corretivo. MOD-08 **PENDING**, MOD-09 bloqueado.
