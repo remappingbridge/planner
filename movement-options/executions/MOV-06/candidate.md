@@ -1,6 +1,6 @@
 # MOV-06 — Rotation | Candidato para teste físico
 
-**Status:** host CI **53/53 PASS**, compilação de produção Pico 2 W em andamento, aceite físico **PENDING**.
+**Status:** host CI **53/53 PASS**, Pico 2 W **UF2 PASS**, aceite físico **PENDING**.
 
 Código: `remappingbridge/remappingbridge`, branch `feature/movement-options-v1.0`.
 Commit: `e6834c3bc1a28b3ce20f0e6c192d15ba65daf5f5`.
@@ -17,6 +17,6 @@ ROTATION era uma das telas já integradas no firmware validado anteriormente; ne
 - H=2×, V=1×, rotação 270° => (-2y,x), elipse horizontal; H/V independentes de ângulo; passos fracionários e drenagem de deltas > signed int8;
 - Confirma que outros gates continuam testados na suíte existente.
 
-Host CTest: **53/53 PASS**, source SHA acima. Pico 2 W compilado no CI para mesmo SHA; registrar artifact UF2 e SHA256 ao completar; não presumir identidade binária sem comparar.
+Host CTest: **53/53 PASS**, source SHA acima. Pico 2 W production build/UF2 verification PASS. Artifact `11686117401` (`blu2usb-picow-production-pico2w`), UF2 de **925.696 bytes**, 1.808 blocos, SHA-256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`. O ZIP do GitHub Actions foi extraído e os blocos UF2 verificados. O binário é **idêntico byte por byte** ao UF2 MOV-05 aceito; nenhuma gravação adicional é necessária se o dispositivo permanece com MOV-05.
 
 O operador **ainda não aceitou MOV-06 fisicamente**. Cenários em `physical-acceptance.md`; gates MOV-07–MOV-10 não aprovados.
