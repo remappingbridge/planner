@@ -1,6 +1,12 @@
 # MOV-10 — Help unificado | Teste físico final
 
-**Status: PENDING — aguardando aceite específico do operador.**
+**Status: ACCEPTED — confirmação explícita do operador em 2026-10-11 (America/Sao_Paulo).**
+
+O operador declarou: **“gate aceito. publique como a versão v2.0 do remappingbridge”**. O aceite final do MOV-10 foi concedido e a publicação da v2.0 foi autorizada separadamente nessa mesma mensagem. Não há logs físicos de cada teste; registramos a confirmação textual, sem inventar resultados individuais.
+
+**Candidato físico aceito:** firmware branch `feature/movement-options-v1.0` commit `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704 com **59/59 testes host PASS e Pico 2 W produção PASS**; artifact `11701285206`; UF2 SHA-256 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`. Artefato era binariamente idêntico ao MOV-09 anteriormente aceito.
+
+**Movimentos e Help do MOV-01 ao MOV-10: TODOS ACEITOS**. O operador autorizou a publicação como RemappingBridge v2.0; realizar versionamento, merge e release em ações rastreadas, com novas evidências de CI.
 
 Usar o firmware MOV-10 validado neste gate; **começar todos os percursos a partir da `home-connected`** com pelo menos um mouse salvo.
 
@@ -13,4 +19,4 @@ Usar o firmware MOV-10 validado neste gate; **começar todos os percursos a part
 7. **Segurança/regressão:** nas telas Help, tecla Y não bloqueia o visor; retorno B/X/A/JOY não altera H/V/Rotation, perfis ou bonds; Mouse, wheel, pan, clique e drag continuam funcionando. Após retornar do Help, confirmar que as teclas retomam suas funções normais. Testar desligar/religar o Pico com preferências mantidas; não apagar bonds.
 8. **Opcional:** reabrir a confirmação Remove This e iniciar exclusão somente se desejar efetivamente remover um pareamento; enquanto a remoção estiver pendente, KEY Y não deve abrir Help nem bloquear. Este teste destrutivo já foi aceito no MOV-09 e não é requisito repeti-lo.
 
-Registrar PASS/FAIL, dispositivo, SHA exato do firmware/UF2, observações e eventual falha. **O aceite físico MOV-10 será a última validação, mas não concede automaticamente autorização de merge/release.**
+Registrar PASS/FAIL, dispositivo, SHA exato do firmware/UF2, observações e eventual falha. **O operador confirmou o aceite MOV-10 e também autorizou explicitamente o lançamento como v2.0 nesta conversa; merge/release devem ser executados e verificados separadamente.**
