@@ -10,20 +10,20 @@
 | [MNT-02](gates/MNT-02.md) | HF-02 + HF-03 | Remove This: rótulo KEY X: HELP e funcionamento real do Help pelo X no mesmo build | **v3.0.2** (PATCH) | MNT-01 publicado |
 | [MNT-03](gates/MNT-03.md) | MEL-01 | Movement Options: números DPI sem `x` apenas no resumo | **v3.0.3** (PATCH) | MNT-02 |
 | [MNT-04](gates/MNT-04.md) | MEL-02 | separadores visuais do LCD normalizados para `/` | **v3.0.4** (PATCH) | MNT-03 |
-| [MNT-05](gates/MNT-05.md) | MEL-03 | First Mouse Connected: `KEY Y: LOCKS ANYWHERE` | **v3.0.5** (PATCH) | MNT-04 |
-| [MNT-06](gates/MNT-06.md) | MEL-04 | todo Help: somente KEY B retorna; KEY Y bloqueia; demais teclas não agem | **v3.1.0** (**MINOR**) | MNT-05 |
-| [MNT-07](gates/MNT-07.md) | MEL-05 | ciano do sistema passa a ciano claro esbranquiçado | **v3.1.1** (PATCH) | MNT-06 |
-| [MNT-08](gates/MNT-08.md) | MEL-06 | selecionado ciano claro passa a ciano normal de destaque | **v3.1.2** (PATCH) | MNT-07 |
-| [MNT-09](gates/MNT-09.md) | MEL-07 | opção HOME CONNECTED fixa `REMAPPING OPTIONS` | **v3.1.3** (PATCH) | MNT-08 |
-| [MNT-10](gates/MNT-10.md) | MEL-08 | diagnóstico + **eventual correção HID genérica** de Zoom In/Out (Obsidian/KDE) | **v3.1.4** (PATCH, **somente se houver correção aprovada**) | MNT-09 |
-| [MNT-11](gates/MNT-11.md) | MEL-09 | nome BLE contendo `MOUSE` como substring não recebe sufixo | **v3.1.5** (PATCH, se MNT-10 publicar; caso contrário **v3.1.4**) | MNT-10 decidido |
+| [MNT-05](gates/MNT-05.md) | MEL-04 | Todo Help: KEY B volta, KEY Y bloqueia, demais entradas não agem | **v3.1.0** (**MINOR**) | MNT-04 publicado |
+| [MNT-06](gates/MNT-06.md) | MEL-03 | First Mouse Connected: `KEY Y: LOCKS ANYWHERE` já é verdadeiro após MNT-05 | **v3.1.1** (PATCH) | MNT-05 publicado |
+| [MNT-07](gates/MNT-07.md) | MEL-05 | ciano do sistema passa a ciano claro esbranquiçado | **v3.1.2** (PATCH) | MNT-06 |
+| [MNT-08](gates/MNT-08.md) | MEL-06 | selecionado ciano claro passa a ciano normal de destaque | **v3.1.3** (PATCH) | MNT-07 |
+| [MNT-09](gates/MNT-09.md) | MEL-07 | opção HOME CONNECTED fixa `REMAPPING OPTIONS` | **v3.1.4** (PATCH) | MNT-08 |
+| [MNT-10](gates/MNT-10.md) | MEL-08 | diagnóstico + **eventual correção HID genérica** de Zoom In/Out (Obsidian/KDE) | **v3.1.5** (PATCH, **somente se houver correção aprovada**) | MNT-09 |
+| [MNT-11](gates/MNT-11.md) | MEL-09 | nome BLE contendo `MOUSE` como substring não recebe sufixo | **v3.1.6** (PATCH, se MNT-10 publicar; caso contrário **v3.1.5**) | MNT-10 decidido |
 
 **Por que 11 gates para 12 itens:** os hotfixes 2 e 3 compõem uma única correção transacional; rótulo que anuncia KEY X sem implementação seria regressão. Cada uma das nove melhorias tem um gate isolado; nenhum release combina melhorias separadas. A numeração dos gates refere-se à **sequência de execução**, a numeração MEL refere-se ao **backlog**.
 
 ## Regra de cálculo da versão
 1. Usar SemVer `MAJOR.MINOR.PATCH`; apenas versões estáveis 3.x. **Não publicar v4.0.0** neste programa. Nunca editar/ressobrescrever v3.0.0 ou tags existentes.
 2. HOTFIX e melhorias de *copy*, apresentação/cores, normalização e mapeamento HID corretivo preservando contrato externo são **PATCH** (incrementa último componente: 3.0.0 → 3.0.1).
-3. MEL-04 muda deliberadamente semântica de controles em todos os Help; é uma mudança funcional compatível de UI, portanto **MINOR**: da hipotética 3.0.5 para **3.1.0**, reiniciando PATCH.
+3. MEL-04 muda deliberadamente semântica de controles em todos os Help; é uma mudança funcional compatível de UI, portanto **MINOR**: da hipotética 3.0.4 para **3.1.0**, reiniciando PATCH.
 4. Versões da matriz **não são reservas irrevogáveis**. Se outra publicação surgir antes do gate, derivar próximo número da última tag estável v3.x realmente publicada (nunca reutilizar/rebaixar).
 5. Se um gate for **somente diagnóstico sem alteração executável** (ex.: MEL-08 Zoom se nenhuma solução genérica funcionar), **não criar tag, não gerar release vazio, não pular números por causa de tabela**. Registrar conclusão *DEFERRED / NO RELEASE* e usar a próxima versão disponível no gate seguinte. Se o comportamento modificar contrato incompatível, **reabrir planejamento antes de implementá-lo**, não impor v4 por omissão.
 6. Um único release para cada gate aceito, associado a seu commit-fonte exato; nenhuma release antecipada mesmo que CI passe.
