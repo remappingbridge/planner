@@ -1,6 +1,6 @@
 # MOD-01 — Teste físico do operador
 
-**Status: PENDING PHYSICAL ACCEPTANCE.** A geração do UF2 depende de CI para o SHA final registrado no candidato. Não afirmar nenhum teste manual aprovado antes do retorno do operador.
+**Status: CI + PRODUCTION BUILD PASS / PENDING PHYSICAL ACCEPTANCE.** Firmware candidato confirmado por [GitHub Actions run 203](https://github.com/remappingbridge/remappingbridge/actions/runs/38139759253). Não afirmar nenhum teste manual aprovado antes do retorno do operador.
 
 Origem do roteiro completo: [documento no repositório de firmware](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod01/docs/modifier-shortcuts/mod01-remapping-options.md).
 
@@ -17,7 +17,9 @@ Origem do roteiro completo: [documento no repositório de firmware](https://gith
 - [ ] **10 — Regressão física:** ponteiro, cliques, scroll, Movement 2 eixos, rotação 90/270, desconectar/reconectar BLE, outros Mouse/bonds continuam funcionando.
 
 ## Evidências a preencher após testes físicos
-- SHA256 do arquivo instalado: PENDING CI.
+- **SHA256 esperado do UF2 instalado:** `0dca28109abff950cced3d1d8c5c570ff92dc1dc522ce861fa014d190eb6ca08`.
+- **UF2 (ZIP original da CI):** [Artifact 11702229882](https://github.com/remappingbridge/remappingbridge/actions/runs/38139759253/artifacts/11702229882); arquivo interno `blu2usb_picow.uf2`.
+- **CI:** 59/59 host tests e build Pico Release PASS. Registro completo em [candidate.md](candidate.md).
 - Resultado de cada cenário e regressão: PENDING OPERATOR.
 - Aceite explícito do operador: **NÃO RECEBIDO**.
 - Liberação para MOD-02: **BLOQUEADA**.
