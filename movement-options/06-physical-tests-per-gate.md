@@ -1,6 +1,6 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01–MOV-06 ACEITOS / MOV-07 HOST CI 55/55 + PICO UF2 PASS; ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01–MOV-07 ACEITOS / MOV-08 HOST CI 56/56 PASS; PICO E ACEITAÇÃO FÍSICA PENDENTES.
 MOV-07 commit `23657734a172f4bd9dc61665ff57acf5230b3568`, run `38098381892`, artifact `11686122817`, UF2 SHA-256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo binário do MOV-06 aceito, nenhuma gravação extra necessária).
 MOV-06 SHA `e6834c3bc1a28b3ce20f0e6c192d15ba65daf5f5`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38098014017, artifact `11686117401`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (binário idêntico ao MOV-05 aceito).
 MOV-05 commit `59c01a2bcec78267fa2b0baa0ddfa4989353a4c7`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097711254, artifact `11686186807`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo firmware MOV-04; não precisa gravar novamente).
@@ -79,17 +79,17 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C17A: configurar H=2X, V=1X, ROT=270-DEGREE; mouse frente/trás -> ponteiro horizontal 2x; mouse esquerda/direita -> ponteiro vertical 1x. Desenhar círculo físico lento: elipse deitada. Scroll, pan, clique e arraste NÃO giram.
 - C17B: verificar sentido de giro para 0/90/180/270, movimentos diagonais e deslocamentos longos sem perda por saturação USB. Aplicar KEY A RESET ALL no menu Movement Options e confirmar H=1X, V=1X, Rotation=0-DEGREE, com persistência após reinicializar. Detalhes em executions/MOV-06/physical-acceptance.md.
 
-### MOV-07 — home-connected (candidato atual, aceite físico pendente)
+### MOV-07 — home-connected (ACEITO pelo operador em 2026-10-10)
 - C18: com mouse conectado, confirmar 4 opções em ordem: Remapping, Movement, Saved, Pair. Entrar e voltar (KEY B) de cada rota sem alterar preferências. UP/DOWN faz wrap, navega no release e destaca em branco a opção atual.
 - C19: selecionar a quarta opção, abrir KEY X HELP HOME CONNECTED, voltar com KEY Y sem bloquear nem perder seleção; confirmar JOY PRESS acessa Pair New. KEY B na HOME não provoca ação.
 - C20: bloquear HOME com KEY Y, conferir LCD apagado mas mouse/teclas HID continuam; a primeira pressão/soltura (JOY PRESS, por exemplo) apenas desbloqueia e volta à HOME, sem entrar em menus nem alterar H/V/rotação/remap.
 - C20A: com H=2X/V=0.75X/ROT=270°, desligar mouse: HOME SEARCHING, depois HOME RETRY no timeout. As duas telas mostram só Saved Devices/Pair New, jamais Movement Options. KEY A no Retry inicia busca novamente; KEY B no Searching cancela para Retry.
 - C20B: reconectar mouse salvo e conferir HOME Connected com 4 opções e preferências H/V/Rotation preservadas; repetir após reboot. Preservar regra de Saved Devices: só nome do conectado ciano. Roteiro expandido: executions/MOV-07/physical-acceptance.md.
 
-### MOV-08 — saved-devices
-- C21: na HOME, Saved Devices mostra PROFILE e `DPI: H ... - V ...` e ROTATION; paginação direita/esquerda por mouse, dados não se confundem quando conectado aparece primeiro.
-- C22: parear outro mouse, definir valores diferentes, alternar; desconectado mantém os valores próprios; reiniciar Pico e reconectar.
-- C23: verificar nomes longos/truncamento dentro da tela 9x21 sem caracteres fora da área.
+### MOV-08 — saved-devices (candidato atual, aceite físico pendente)
+- C21: HOME conectada > SAVED DEVICES (terceira opção). Mouse conectado deve ser a página 1 OF N. Conferir PROFILE (perfil global v1.0), H/V por bond e ROTATION corretos. Só o **nome do conectado** fica ciano; contador, profile, DPI, rotação, remover e dicas em amarelo padrão. Quando página mostra mouse inativo, **tudo amarelo**, inclusive nome.
+- C22: com 2–3 mouses pareados e valores H/V/rotação distintos, navegar JOY RIGHT/LEFT com wrap; verificar que ordem e valores persistentes seguem a identidade lógica, nunca a posição visual. Desligar mouse ativo: ciano desaparece. Conectar outro mouse: este vai à primeira página e só o nome dele fica ciano. Sem confundir valores entre os dispositivos.
+- C23: reiniciar Pico sem apagar bonds, reconectar alternadamente 2 mouses, checar valores próprios; testar nomes longos/truncamento dentro de 9×21 colunas. JOY PRESS em página inativa abre confirmação de remover **aquele mouse**; KEY B cancela, sem excluir. Contrato completo em executions/MOV-08/physical-acceptance.md.
 
 ### MOV-09 — remove-this
 - C24: Saved Devices > REMOVE DEVICE mostra o mouse certo, aviso de pareamento e preferências excluídas; KEY B cancela e mantém tudo.
