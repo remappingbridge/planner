@@ -1,6 +1,6 @@
 # MOD-07 — Candidato Keyboard HID 22/30 pronto para teste físico
 
-**Status: CI 72/72 PASS + PICO 2 W UF2 VERIFIED / ACEITE FÍSICO PENDENTE — 2026-10-11.**
+**Status: CI 72/72 PASS + PICO 2 W UF2 VERIFIED / ACEITO FISICAMENTE PELO OPERADOR — 2026-10-11.**
 
 ## Base, source e artefato auditados
 - Dependência: [MOD-06 aceito fisicamente](../MOD-06/physical-acceptance.md) pelo operador através de «gate aceito. prossiga» em 2026-10-11. Commit base **`751b24f6c2a22fe0f4130dc57b8073c774faceee`**, UF2 aprovado SHA256 `6b9cbcd09a2aa3f66dba36498547e56e44e2cb07439150ade1bf584b6228837c`.
@@ -30,4 +30,4 @@
 - CTest `mod07_keyboard_catalog_22_actions` valida todos os 22 pares id→keycode/modifiers, 8 IDs futuros excluídos, ack em endpoint ocupado e keyup, FIFO, 6KRO e ownership alheio; `mod07_keyboard_runtime_source_contract` inspeciona ligação com backend, descriptor e exclusões. Testes compilados com asserts habilitados até sob Release.
 
 ## Aceite pendente
-[12 cenários físicos desde HOME](physical-acceptance.md) exigem editor, browser e gerenciador de arquivos Linux. Byte HID correto **não** comprova que compositor/aplicativo executará o efeito sem teste de hardware. **MOD-07 não aceito fisicamente, MOD-08 bloqueado.** Nada publicado ou mergeado.
+[12 cenários físicos desde HOME](physical-acceptance.md) exigem editor, browser e gerenciador de arquivos Linux. Byte HID correto **não** comprova que compositor/aplicativo executará o efeito sem teste de hardware. **MOD-07 ACEITO pelo operador por «gate aceito prossiga»; MOD-08 autorizado.** Nada publicado ou mergeado.
