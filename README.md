@@ -7,6 +7,8 @@ Planejamento, evidências e documentação operacional do ecossistema Remapping 
 - `RP-2350/mouse-bridge-remapper/` — programa histórico MBR para RP-2350.
 - `RP-2350/mouse/` — UI/Core/integração modular para RP-2350.
 - `RP-2350/hope/` — série HOPE do RemappingBridge; série concluída e RemappingBridge 1.0 publicado.
+- `movement-options/` — planejamento, execução e aceite da funcionalidade Movement Options publicada como RemappingBridge 2.0.0.
+- `modifier-shortcuts/` — planejamento arquitetural ainda não implementado da função Modifier Shortcuts, baseado na tag v2.0.0.
 - `batocera/monitor5x4/` — configuração documentada do Batocera v43 para o monitor Dell P1917S 5:4.
 - `aurora-xbox/` — registro rastreável do Xbox 360 E 1538: ABadAvatar/XeUnshackle, backup validado da NAND, Aurora 0.7b.2 e próximos passos de NetISO/macOS.
 - `office-drive/` — planejamento independente existente.
