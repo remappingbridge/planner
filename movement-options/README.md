@@ -1,18 +1,24 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01 + MOV-02 ACCEPTED / MOV-03 HOST CI 50/50 + PICO UF2 PASSED / MOV-03 PHYSICAL PENDING**
+Status: **MOV-01 + MOV-02 + MOV-03 ACCEPTED / MOV-04 HOST CI 51/51 PASSED / PICO BUILD RUNNING / MOV-04 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
 Target branch already created: feature/movement-options-v1.0.
 Immutable implementation baseline: release/v1.0.0 @ 30c4dd87922bb566248832ba4716774c0cb29755.
-Baseline comparison: feature/movement-options-v1.0 is identical to release/v1.0.0 (0 ahead / 0 behind).
-Do not modify release/v1.0.0, main, blu2usb or mouse-ui during this planning phase.
+Baseline at branch creation: identical to release/v1.0.0 (0 ahead / 0 behind), before implementation. The feature branch now contains unmerged Movement Options changes.
+Do not modify release/v1.0.0, product main, blu2usb or mouse-ui for this feature; work only on the isolated implementation branch.
 
 ## Scope
 Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent horizontal/vertical relative-pointer gain, four counterclockwise rotations, per-saved-Mouse persistence, Saved Devices display, and deletion/help copy. Preserve existing remapping, pairing, reconnect, keyboard Escape, Logitech HID++, lock and USB identity.
 
 **Planning baseline is immutable.** Implementation began only after explicit authorization on 2026-10-10. The product branch now contains screen and runtime changes; this planner directory does not carry firmware code. No gate is accepted without operator physical validation.
+
+
+## Current execution gate (2026-10-10)
+- Operator accepted MOV-03 after testing candidate `326c5f11164932aad5415783197d01cbc180de2e` (50 host tests and Pico UF2 passed), including Saved Devices only-connected-name cyan rule.
+- MOV-04 Vertical Slow dedicated host test added and passed as part of 51/51 tests for source SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; Pico job https://github.com/remappingbridge/remappingbridge/actions/runs/38097344728.
+- Read `executions/MOV-04/{pre-implementation,candidate,physical-acceptance}.md`; no physical acceptance for MOV-04 yet.
 
 ## Sources and precedence
 1. Operator's attachment 'telas movement(1).md', supplied 2026-10-10, especially explicit controls, copy, gate split and cyan rules. Source text takes priority for this new flow.
