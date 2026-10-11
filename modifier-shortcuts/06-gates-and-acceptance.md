@@ -1,11 +1,11 @@
 # 06 — Gates MOD-00..MOD-10: dependências, testes e aceite físico
 
-**MOD-00: ACCEPTED BY OPERATOR (no firmware). MOD-01: IMPLEMENTED, CI/physical acceptance pending. MOD-02..MOD-10: PLANNED.** Futuro trabalho em branch nova de `remappingbridge/remappingbridge` partindo da tag imutável `v2.0.0`; documentos/registro de evidência apenas neste planner. Cada gate com alterações executáveis (MOD-01..10) exige CI host PASS, build de produção Pico 2 W, arquivo **.uf2**, SHA-256, roteiro específico de teste físico iniciando em `home-connected`, **aceite explícito do operador**, evidência e SHA. Não avançar em caso de regressão. MOD-00 é contratual/documental, sem firmware e sem UF2.
+**MOD-00: ACCEPTED BY OPERATOR (no firmware). MOD-01: IMPLEMENTED + CI PASS + UF2, physical acceptance pending. MOD-02..MOD-10: PLANNED.** Futuro trabalho em branch nova de `remappingbridge/remappingbridge` partindo da tag imutável `v2.0.0`; documentos/registro de evidência apenas neste planner. Cada gate com alterações executáveis (MOD-01..10) exige CI host PASS, build de produção Pico 2 W, arquivo **.uf2**, SHA-256, roteiro específico de teste físico iniciando em `home-connected`, **aceite explícito do operador**, evidência e SHA. Não avançar em caso de regressão. MOD-00 é contratual/documental, sem firmware e sem UF2.
 
 | Gate | Tema | Dependência | Resultado observável/limite de escopo |
 |---|---|---|---|
 | MOD-00 | Contrato arquitetural, fontes e fixtures | v2.0.0 | [Candidato documental](executions/MOD-00/candidate.md), [ACCEPTED](executions/MOD-00/operator-acceptance.md); nenhum código ou UF2 |
-| MOD-01 | Remapping Options v3 + limpeza legado | MOD-00 | [Candidato implementado](executions/MOD-01/pre-implementation.md); 3 opções, Standard/Escape fora de telas/status/Help; 34 telas runtime; [aceite físico pendente](executions/MOD-01/physical-acceptance.md) |
+| MOD-01 | Remapping Options v3 + limpeza legado | MOD-00 | [Candidato CI PASS + UF2](executions/MOD-01/candidate.md); 3 opções, Standard/Escape fora de telas/status/Help; 34 telas runtime; [aceite físico pendente](executions/MOD-01/physical-acceptance.md) |
 | MOD-02 | 6 páginas Combinations | MOD-01 | HOME → combinations 1..6; seleção de pares, paginação/wrap, RESET idempotente, 9×21 correto; valores ainda NONE |
 | MOD-03 | 5 páginas Shortcuts + persistência | MOD-02 | HOME → combo → shortcuts → APPLY AND BACK; 30 itens, cancel, restaurar foco, reboot/reread, migração v2 |
 | MOD-04 | Custom MODIFIER + máscaras | MOD-03 | 5 WILL BECOME usam MODIFIER, source único, UNAVAILABLE derivado, dados mascarados preservados, Custom Apply |
