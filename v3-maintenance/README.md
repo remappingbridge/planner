@@ -11,7 +11,7 @@
 
 ## Organização
 1. [01 — Backlog literal e critérios por item](01-backlog-and-contract.md): **3 hotfixes, 9 melhorias**; Zoom Obsidian definido como **Melhoria 8**; nome redundante do mouse renumerado **Melhoria 9** porque o rascunho tinha dois títulos `8`.
-2. [02 — Gates, dependências e versões](02-gates-and-versioning.md): **11 gates**, os hotfixes 2/3 empacotados atomicamente, e **uma publicação condicionada a cada gate fisicamente aceito**.
+2. [02 — Gates, dependências e versões](02-gates-and-versioning.md): **11 gates**, os hotfixes 2/3 empacotados atomicamente, Help/Lock realizado **antes** da legenda LOCKS ANYWHERE, e **uma publicação condicionada a cada gate fisicamente aceito**.
 3. [03 — Cenários físicos e regressão](03-tests-and-acceptance.md): cada candidato nasce testável desde HOME CONNECTED e requer CI + UF2 Pico 2 W, checksum e aceite.
 4. [04 — Decisões, semântica visual e riscos](04-decisions-and-risks.md): diferencia cores, controles, nomes, compatibilidade de layout e semver.
 5. [gates/](gates/): contrato independente de cada MNT-01..MNT-11, pronto para implementação futura.
