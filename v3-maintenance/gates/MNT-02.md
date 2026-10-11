@@ -1,15 +1,15 @@
 # MNT-02 — Remove This: KEY X abre Help e KEY Y conserva Lock
 
-**Status: PLANNED / NÃO INICIADO.** Nenhuma alteração de código, UF2, CI ou release executada neste gate.
+**Status: CANDIDATO IMPLEMENTADO — CI #445 82/82 PASS + UF2 Pico 2 W SHA256 verificado; aceite físico PENDING.** [PR #32 DRAFT](https://github.com/remappingbridge/remappingbridge/pull/32), [candidato](../executions/MNT-02/candidate.md), [roteiro físico](../executions/MNT-02/physical-acceptance.md); nenhuma v3.0.2 publicada.
 
 - Backlog: **HF-02 + HF-03 (atômicos)** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
-- Base/dependência: **MNT-01 publicado**; a branch futura `maintenance/v3x-mnt-02` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
+- Base/dependência: **MNT-01 publicado**; branch `maintenance/v3x-mnt-02` criada exatamente da tag oficial `v3.0.1`, SHA `b776fec2cf2c89788d1bdfed7aa257aa766f2dc6`.
 - Versão prevista somente após aceite físico: **v3.0.2 (PATCH)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
 ## Escopo exato
 Na tela `BLU2USB_SCREEN_REMOVE_THIS` trocar dica `KEY Y: HELP` por `KEY X: HELP` e implementar entrada real ao `BLU2USB_SCREEN_HELP_REMOVE_THIS` com KEY X no mesmo candidato. KEY Y continua LOCK; nenhum Help pode efetuar exclusão. Não modificar a semântica ALL-HELP until MNT-06, salvo correção indispensável ao retorno.
 
-## Preparação técnica — para execução futura
+## Preparação técnica — executada no candidato isolado
 Inspecionar ux_model.c (input handlers, help dispatch, return_screen, selected bond) e renderer; testar bordas press/release KEY X/Y, pending removal e retorno intacto.
 
 ## Teste físico individual desde HOME CONNECTED
