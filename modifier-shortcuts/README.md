@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 DOCUMENTATION CANDIDATE / OPERATOR ACCEPTANCE PENDING; MOD-01..MOD-10 NOT STARTED / FIRMWARE UNCHANGED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 ACCEPTED / MOD-01 CANDIDATE IMPLEMENTED, CI + PHYSICAL ACCEPTANCE PENDING / MOD-02..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -31,9 +31,14 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 ## MOD-00 — candidato documental para aceite (2026-10-11)
 - [Preflight e baseline](executions/MOD-00/pre-implementation.md)
 - [Contrato candidato + decisões propostas](executions/MOD-00/candidate.md)
-- [Revisão e aceite do operador — PENDING](executions/MOD-00/operator-acceptance.md)
+- [Revisão e aceite do operador — ACCEPTED](executions/MOD-00/operator-acceptance.md)
 - [Fixture literal do anexo: 17 telas em 9×21](fixtures/mod-00-source-layouts.json)
-- MOD-00 não cria UF2 e não exige testes físicos; nenhum arquivo do firmware foi modificado. A aprovação explícita das decisões propostas é pré-requisito para marcar MOD-00 ACCEPTED e começar MOD-01.
+- MOD-00 foi **aprovado explicitamente** em 2026-10-11. Não criou UF2 nem alterou firmware.
 
-## Próximo passo
-Revisar os ADRs e o checklist de MOD-00. O início de MOD-01 exige aceite explícito do operador; nenhuma branch de firmware ou release é criada pelo gate documental.
+## MOD-01 — branch de firmware e validação
+- [Baseline e escopo](executions/MOD-01/pre-implementation.md)
+- [Cenários físicos, aceite PENDING](executions/MOD-01/physical-acceptance.md)
+- [Branch do firmware](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod01) — derivada de v2.0.0.
+- [PR de revisão em draft #23](https://github.com/remappingbridge/remappingbridge/pull/23) — não mesclado.
+- Executa a remoção real das quatro telas antigas de confirmação Standard/Escape e atualiza Remapping Options, Help e status. O botão MODIFIER SHORTCUTS é visível, mas só acessará COMBINATIONS no MOD-02.
+- Não iniciar MOD-02 antes de testes físicos e aceite explícito MOD-01.
