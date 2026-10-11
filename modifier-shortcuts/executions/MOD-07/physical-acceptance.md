@@ -1,6 +1,6 @@
 # MOD-07 — Aceite físico desde HOME conectada
 
-**Status: PENDING PHYSICAL ACCEPTANCE**. Candidato e SHA256 no arquivo [candidate.md](candidate.md) após o fechamento da CI. Gravar UF2 sem flash_nuke. Primeiro host de referência: **Linux desktop**, com editor, gerenciador de arquivos e navegador. Não iniciar MOD-08.
+**Status: CI 72/72 PASS + UF2 VERIFIED / PENDING PHYSICAL ACCEPTANCE.** [Candidato](candidate.md): commit `0b62137494ce34a86bbecb8d8ee42a7cdfa42385`, [Actions #366](https://github.com/remappingbridge/remappingbridge/actions/runs/38149731598), UF2 **942592 bytes**, SHA256 **`2f934c507e8502029114ffc4075363b108e23185c51cf28abb022884fc35a576`**, [artifact original](https://github.com/remappingbridge/remappingbridge/actions/runs/38149731598/artifacts/11705632305). Gravar UF2 sem flash_nuke. Primeiro host de referência: **Linux desktop**, com editor, gerenciador de arquivos e navegador. Não iniciar MOD-08.
 
 ## Procedimento
 
