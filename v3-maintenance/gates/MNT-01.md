@@ -1,6 +1,6 @@
 # MNT-01 — Saved Devices: dicas, REMOVE DEVICE e seleção branca
 
-**Status: PLANNED / NÃO INICIADO.** Nenhuma alteração de código, UF2, CI ou release executada neste gate.
+**Status: CANDIDATO DE FIRMWARE PRONTO — CI 81/81 + UF2 DE PRODUÇÃO VERIFICADO — AGUARDANDO ACEITE FÍSICO.** Build e artefato: [executions/MNT-01/candidate.md](../executions/MNT-01/candidate.md); [teste físico](../executions/MNT-01/physical-acceptance.md). Nada foi mesclado, publicado ou versionado como v3.0.1.
 
 - Backlog: **HF-01** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Base/dependência: **v3.0.0**; a branch futura `maintenance/v3x-mnt-01` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
@@ -18,7 +18,7 @@ HOME CONNECTED → SAVED DEVICES com 1/2+ bonds → confirmar dicas cinza, REMOV
 ## Riscos/limites
 O nome do mouse conectado não pode ser recolorido pela seleção de REMOVE DEVICE.
 
-## Contrato de entrega
+## Contrato de entrega (etapas já executadas registradas em executions/MNT-01)
 1. Antes de implementar: registrar fonte imutável, diff mínimo, fixtures 9×21 e baseline de regressão no `executions/MNT-01/pre-implementation.md`.
 2. Implementar **apenas este gate**, criar testes host/CI novos e conservar regressões completas. Build de produção Pico 2 W, baixar UF2 oficial, comparar SHA-256 local com log CI, disponibilizar para teste; PR draft.
 3. Registrar `executions/MNT-01/candidate.md` e `physical-acceptance.md`. **Somente o usuário testa e aceita fisicamente**; se falhar, corrigir na mesma branch e repetir.
