@@ -1,6 +1,7 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01–MOV-07 ACEITOS / MOV-08 HOST CI 56/56 PASS; PICO E ACEITAÇÃO FÍSICA PENDENTES.
+Status: MOV-01–MOV-07 ACEITOS / MOV-08 HOST CI 56/56 + PICO UF2 PASS; ACEITAÇÃO FÍSICA PENDENTE.
+MOV-08 source `7a18ee16a486a17d676f5ba10be58432a0965bc3`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38098664052, artifact `11686753895`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (idêntico ao MOV-07 já aceito).
 MOV-07 commit `23657734a172f4bd9dc61665ff57acf5230b3568`, run `38098381892`, artifact `11686122817`, UF2 SHA-256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo binário do MOV-06 aceito, nenhuma gravação extra necessária).
 MOV-06 SHA `e6834c3bc1a28b3ce20f0e6c192d15ba65daf5f5`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38098014017, artifact `11686117401`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (binário idêntico ao MOV-05 aceito).
 MOV-05 commit `59c01a2bcec78267fa2b0baa0ddfa4989353a4c7`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097711254, artifact `11686186807`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo firmware MOV-04; não precisa gravar novamente).
