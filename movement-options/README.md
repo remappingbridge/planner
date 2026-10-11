@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01–MOV-07 ACCEPTED / MOV-08 HOST CI 56/56 + PICO UF2 PASS / MOV-08 PHYSICAL PENDING**
+Status: **MOV-01–MOV-08 ACCEPTED / MOV-09 HOST CI 58/58 PASS / PICO BUILD PENDING / MOV-09 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -44,6 +44,12 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 - MOV-08 Saved Devices tests per-mouse H/V/Rotation by logical bond and pagination, front-page current identity, identity-only cyan color, global-profile provenance, long names, disconnected/reconnected view, zero saved devices and safe Remove This navigation. No new screen is added.
 - New test `tests/test_mov08_saved_devices.c` registered in CTest; 56/56 host tests PASS. Pico production UF2 PASS. Source SHA `7a18ee16a486a17d676f5ba10be58432a0965bc3`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38098664052. Artifact `11686753895`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`, bit-for-bit identical to accepted MOV-07.
 - Full physical checklist: [executions/MOV-08/physical-acceptance.md](executions/MOV-08/physical-acceptance.md). Awaiting operator confirmation.
+
+## MOV-09 active gate (2026-10-10)
+- Operator accepted MOV-08 Saved Devices (per-bond DPI/rotation and identity-only cyan): [executions/MOV-08/physical-acceptance.md](executions/MOV-08/physical-acceptance.md).
+- MOV-09 Remove This Mouse tests bond-scoped deletion, Help/Cancel, pending single-command safety, storage rollback and failure handling. Firmware fix publishes `REMOVE_FAILED` when logical bond vanishes before removal, so UI can leave pending state.
+- New C host test and Pico BLE source-contract test give 58/58 PASS on source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203.
+- Physical checklist (involves actual deletion of one mouse's bond/preferences): [executions/MOV-09/physical-acceptance.md](executions/MOV-09/physical-acceptance.md); requires operator confirmation.
 
 ## Sources and precedence
 1. Operator's attachment 'telas movement(1).md', supplied 2026-10-10, especially explicit controls, copy, gate split and cyan rules. Source text takes priority for this new flow.
