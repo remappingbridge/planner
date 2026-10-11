@@ -1,6 +1,6 @@
 # MOV-04 — Vertical Slow DPI | Candidato de testes
 
-**Status:** host CI **51/51 PASS**, firmware Pico 2 W no CI, aceite físico **PENDING**.
+**Status:** host CI **51/51 PASS**, Pico 2 W UF2 **PASS**, aceite físico **PENDING**.
 
 Fonte: `remappingbridge/remappingbridge` `feature/movement-options-v1.0`, SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`.
 PR: https://github.com/remappingbridge/remappingbridge/pull/22
@@ -12,6 +12,8 @@ Mudanças em relação ao MOV-03 aceito:
 - A navegação do produto existente reinicia seleção do menu pai em HORIZONTAL ao voltar, logo testes e roteiro mostram nova seleção da opção VERTICAL.
 - Gates MOV-01/02/03 aceitos pelo usuário. MOV-04 ainda não aceito.
 
-Comprovação de build host: 51 de 51 testes CTest aprovados no SHA acima. Registrar artefato, tamanho e hash UF2 após sucesso do job `pico2-w-production` para o mesmo SHA; o firmware antigo não serve de candidato para este gate.
+Comprovação de build host: 51 de 51 testes CTest aprovados no SHA acima. Build completo: host CI 51/51 PASS; Pico 2 W production build/verify/upload PASS. GitHub Actions artifact `11686156439` (blu2usb-picow-production-pico2w). UF2 extraído `blu2usb_picow.uf2` com **925696 bytes**, **1808 blocos UF2** e SHA-256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`. Family IDs RP2350: `0xe48bff57`, `0xe48bff59`.
+
+**Importante:** UF2 MOV-04 resultou binariamente idêntico ao UF2 aceito no MOV-03 (mesmo SHA-256). A funcionalidade Vertical Slow já estava implementada no firmware integrado da branch anterior; neste gate foram acrescentados novos testes/validação do código existente, não modificações de runtime. O artefato foi recompilado pelo CI para o novo commit e está verificado. Ainda requer aceite específico do operador para MOV-04; não alegar firmware diferente.
 
 Roteiro físico: `physical-acceptance.md` nesta pasta.
