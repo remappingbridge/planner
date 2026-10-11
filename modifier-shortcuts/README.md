@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 implemented + visual correction CI 61/61 PASS + corrected UF2, physical acceptance pending; MOD-03..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 implemented, host tests PASS, build and physical acceptance pending; MOD-04..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -48,7 +48,7 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 - [Escopo e pré-implementação](executions/MOD-02/pre-implementation.md)
 - [Firmware corrigido, CI 61/61 PASS + SHA](executions/MOD-02/visual-bugfix.md)
 - [Candidato MOD-02 anterior, substituído pela correção visual](executions/MOD-02/candidate.md)
-- [Cenários físicos, aceite PENDING](executions/MOD-02/physical-acceptance.md)
+- [Cenários físicos, aceite ACCEPTED](executions/MOD-02/physical-acceptance.md)
 - [Contrato técnico e roteiro no firmware](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod01/docs/modifier-shortcuts/mod02-combinations.md)
 - 6 novas telas, 12 slots estáveis, 40 telas runtime; RESET em NONE não grava flash; o catálogo de atalhos só surge em MOD-03.
 - Não iniciar MOD-03 antes da CI, build UF2 e aceite físico do operador.
