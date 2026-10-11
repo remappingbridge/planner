@@ -1,6 +1,7 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01–MOV-09 ACEITOS / MOV-10 HOST CI 59/59 PASS; PICO UF2 E ACEITAÇÃO FÍSICA PENDENTES.
+Status: MOV-01–MOV-09 ACEITOS / MOV-10 HOST CI 59/59 + PICO UF2 PASS; ACEITAÇÃO FÍSICA PENDENTE.
+MOV-10 commit `f38c4984c2c1ebe28401dc9a3f410a62e132160a`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704, artifact `11701285206`, UF2 SHA256 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc` (mesmo binário do MOV-09 aceito, sem necessidade de gravar novamente).
 MOV-10 source `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704. Gate MOV-10 exige aceite físico próprio e **NÃO** autoriza merge.
 MOV-09 SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203; artifact `11687290125`, SHA-256 UF2 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`. **Novo UF2 diferente do MOV-08; deve gravar antes dos testes.**
 MOV-08 source `7a18ee16a486a17d676f5ba10be58432a0965bc3`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38098664052, artifact `11686753895`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (idêntico ao MOV-07 já aceito).
