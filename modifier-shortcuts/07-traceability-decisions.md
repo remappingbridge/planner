@@ -18,6 +18,8 @@
 | R13 | Telas shortcuts-1..30 | 02/04: 30 IDs e copy em ordem exata | MOD-03/07/08 |
 | R14 | Comentário: valores parentéticos não renderizam | 02: dinâmico só o valor; sem comentários | MOD-02/03 |
 
+**Candidato do MOD-00:** [executions/MOD-00/candidate.md](executions/MOD-00/candidate.md) registra propostas explícitas de resolução; [aceite do operador](executions/MOD-00/operator-acceptance.md) continua **PENDING**. A existência das propostas não significa que os bloqueios foram aceitos.
+
 ## ADRs / decisões que não constam expressamente no anexo
 - **D1 [BLOCKER, MOD-00]** Literalidade/typos do desenho: `PASSTHROUGT`, `WHELL`, `0F`, `NOT CUSTMIZED`; decidir texto de exibição exato e congelar golden 9×21 antes do código.
 - **D2 [BLOCKER, MOD-00]** Compatibilidade HID: Consumer Control na segunda interface com Report IDs (preferência condicional), terceira interface ou cobertura incompleta. O contrato v2 garante exatamente 2 interfaces; alteração precisa de aprovação e ensaio.
@@ -42,6 +44,8 @@
 7. A passagem instantânea pelo limiar da movimentação deve movimentar o cursor? Proposta buffering/supressão a validar.
 
 Estas questões são **inferências/ADRs**, não requisitos afirmados pelo anexo. É permitido documentar proposta; **não está autorizada implementação com valores arbitrários**. Depois da aprovação deste planejamento, congelar decisões no MOD-00.
+
+**Correção da rastreabilidade:** a ordem normativa das opções WILL BECOME é LEFT, RIGHT, MIDDLE, FORWARD, BACKWARD, MODIFIER (MODIFIER por último), conforme o anexo. A redação anterior 'substituir ESCAPE na mesma posição' foi corrigida em `02-ui-navigation-contract.md`.
 
 ## Verificação documental antes de abrir branch de firmware
 - Todos os 12 slots e 30 labels comparados ao anexo, sem omissões;
