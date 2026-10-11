@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01–MOV-08 ACCEPTED / MOV-09 HOST CI 58/58 + PICO UF2 PASS / MOV-09 PHYSICAL PENDING**
+Status: **MOV-01–MOV-09 ACCEPTED / MOV-10 HOST CI 59/59 PASS / PICO PRODUCTION BUILD IN PROGRESS / MOV-10 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -50,6 +50,13 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 - MOV-09 Remove This Mouse tests bond-scoped deletion, Help/Cancel, pending single-command safety, storage rollback and failure handling. Firmware fix publishes `REMOVE_FAILED` when logical bond vanishes before removal, so UI can leave pending state.
 - New C host test and Pico BLE source-contract test give 58/58 PASS on source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203. Pico 2 W production build verified; artifact `11687290125`, UF2 SHA256 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`, differs from MOV-08 and REQUIRES reflash for this gate.
 - Physical checklist (involves actual deletion of one mouse's bond/preferences): [executions/MOV-09/physical-acceptance.md](executions/MOV-09/physical-acceptance.md); requires operator confirmation.
+
+## MOV-10 final gate (2026-10-11)
+- Operator physically accepted MOV-09 on 2026-10-11. Acceptance record: [executions/MOV-09/physical-acceptance.md](executions/MOV-09/physical-acceptance.md).
+- MOV-10 tests all new or updated Help screens as ONE combined gate: shared H/V Slow DPI Help, shared H/V Fast DPI Help, Rotation Help and Remove Mouse Help.
+- Dedicated `tests/test_mov10_all_help.c` validates every full 9×21 Help screen, Any Key return including Y/A/B/JOY, no accidental APPLY/REMOVE/lock, exact parent and candidate/selection restore and pending removal safety. Test registered in CMake; host 59/59 PASS.
+- CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704 for source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; Pico production artifact to be pinned after build succeeds.
+- Operator physical checklist: [executions/MOV-10/physical-acceptance.md](executions/MOV-10/physical-acceptance.md). This final gate is **NOT yet accepted** and PR #22 stays Draft/unmerged.
 
 ## Sources and precedence
 1. Operator's attachment 'telas movement(1).md', supplied 2026-10-10, especially explicit controls, copy, gate split and cyan rules. Source text takes priority for this new flow.
