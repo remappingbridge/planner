@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01–MOV-06 ACCEPTED / MOV-07 HOST 55/55 PASS / PICO BUILD IN PROGRESS / MOV-07 PHYSICAL PENDING**
+Status: **MOV-01–MOV-06 ACCEPTED / MOV-07 HOST CI 55/55 + PICO UF2 PASS / MOV-07 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
@@ -36,7 +36,7 @@ Plan a new navigable MOVEMENT OPTIONS flow on connected HOME, with independent h
 - Operator explicitly accepted MOV-06 Rotation: [acceptance](executions/MOV-06/physical-acceptance.md).
 - MOV-07 Home Connected checks 4 connected HOME destinations, original Help/Back and lock behavior, saved-search/retry/reconnect and HID continuity while LCD locked.
 - Dedicated host navigation test and Pico runtime-source guard added: `test_mov07_home_connected.c`, `test_mov07_home_runtime_source.py` (+2 tests), 55/55 PASS at source SHA `23657734a172f4bd9dc61665ff57acf5230b3568`.
-- CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38098381892
+- CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38098381892, host 55/55 PASS and Pico UF2 PASS, artifact `11686122817`. Extracted UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`, byte-identical to the operator-accepted MOV-06.
 - Physical instructions: [executions/MOV-07/physical-acceptance.md](executions/MOV-07/physical-acceptance.md). No physical acceptance yet.
 
 ## Sources and precedence
