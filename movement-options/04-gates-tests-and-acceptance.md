@@ -93,7 +93,7 @@ MOV-06 ACCEPTED (operator confirmation 2026-10-10; SHA `e6834c3bc1a28b3ce20f0e6c
 MOV-07 ACCEPTED (operator confirmation 2026-10-10; source SHA `23657734a172f4bd9dc61665ff57acf5230b3568`; record: executions/MOV-07/physical-acceptance.md)
 MOV-08 ACCEPTED (operator confirmation 2026-10-10; source SHA `7a18ee16a486a17d676f5ba10be58432a0965bc3`; record: executions/MOV-08/physical-acceptance.md)
 MOV-09 ACCEPTED (operator confirmation 2026-10-11; source SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`; CI 58/58 + Pico UF2 PASS; record: executions/MOV-09/physical-acceptance.md)
-MOV-10 HOST CI 59/59 PASS / PICO PRODUCTION BUILD IN PROGRESS / PHYSICAL PENDING (source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; tests/test_mov10_all_help.c; all Help copy and Any Key return)
+MOV-10 HOST CI 59/59 + PICO UF2 PASS / PHYSICAL PENDING (source SHA `f38c4984c2c1ebe28401dc9a3f410a62e132160a`, CI run 38136123704, artifact 11701285206, UF2 SHA-256 dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc; bit-identical to accepted MOV-09; tests/test_mov10_all_help.c)
 
 ## Stop rule
 Gate-by-gate implementation has already been expressly authorized. **STOP after generating each gate's verified UF2 and checklist** until the operator gives that gate's explicit physical acceptance; do not automatically accept later gates or merge into stable main/release. Use the existing Draft PR #22 for isolated development.
