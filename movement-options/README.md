@@ -1,6 +1,6 @@
 # RemappingBridge — Movement Options | Implementation candidate
 
-Status: **MOV-01 + MOV-02 ACCEPTED / MOV-03 HOST CI 50/50 PASSED / PICO BUILD IN PROGRESS / MOV-03 PHYSICAL PENDING**
+Status: **MOV-01 + MOV-02 ACCEPTED / MOV-03 HOST CI 50/50 + PICO UF2 PASSED / MOV-03 PHYSICAL PENDING**
 Date: 2026-10-10.
 Owner repository: remappingbridge/remappingbridge.
 Planning repository: remappingbridge/planner, directory at repository root: movement-options/.
