@@ -1,6 +1,6 @@
 # MOD-08 — Testes físicos Consumer Control desde HOME conectada
 
-**Status: PENDENTE DE ACEITE FÍSICO.** Partir de Mouse BLE já pareado, Pico 2 W em USB de computador Linux desktop. Use o UF2 e SHA256 do [candidate.md](candidate.md) quando CI concluir; gravar via BOOTSEL sem apagar flash/pareamentos.
+**Status: CI 74/74 PASS + UF2 VERIFICADO / ACEITE FÍSICO PENDENTE.** [Candidato](candidate.md), [CI #391](https://github.com/remappingbridge/remappingbridge/actions/runs/38150938822): UF2 **943616 bytes**, SHA256 **`6440583a4563add26b651072f1aac419ae7d72686362ffc59df775c3ee0d2008`**, [artefato oficial](https://github.com/remappingbridge/remappingbridge/actions/runs/38150938822/artifacts/11706980027). Partir de Mouse BLE já pareado, Pico 2 W em USB de computador Linux desktop. Use o UF2 e SHA256 do [candidate.md](candidate.md); gravar via BOOTSEL sem apagar flash/pareamentos.
 
 - [ ] **01 — Upgrade e reconhecimento USB:** fazer BOOTSEL sem flash_nuke, boot e reconexão automática do BLE. Rodar `lsusb -v` para verificar **2 interfaces HID**, mesmo VID/PID, Mouse separado e teclado com coleção Consumer (IDs 1 e 2 na interface 1). Se necessário inspecionar descritor via ferramenta local. Documentar erros de enumeração e logs do kernel.
 - [ ] **02 — Keyboard regressão:** em editor Linux, confirmar COPY/CUT/PASTE/UNDO/REDO e Escape. Teclado existente 6KRO continua em 8 bytes de payload Report ID 1; Boot Keyboard deve continuar válido, se ambiente de teste permitir avaliar Boot Protocol.
