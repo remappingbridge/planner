@@ -1,6 +1,7 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01, MOV-02, MOV-03 E MOV-04 ACEITOS / MOV-05 HOST 52/52 PASS; PICO E ACEITAÇÃO FÍSICA PENDENTES.
+Status: MOV-01–MOV-04 ACEITOS / MOV-05 HOST 52/52 + PICO UF2 PASS, ACEITAÇÃO FÍSICA PENDENTE.
+MOV-05 commit `59c01a2bcec78267fa2b0baa0ddfa4989353a4c7`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097711254, artifact `11686186807`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo firmware MOV-04; não precisa gravar novamente).
 MOV-04 SHA `036e5bd930b11b3c79ceeac6332dac7c21844d57`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38097344728; artifact `11686156439`; SHA256 UF2 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo binário do MOV-03, com novos testes host).
 Commit MOV-03: `326c5f11164932aad5415783197d01cbc180de2e`; CI: https://github.com/remappingbridge/remappingbridge/actions/runs/38096841875
 Artefato GitHub Actions MOV-03: `11686925370`. UF2 SHA-256: `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`; 925.696 bytes.
