@@ -4,7 +4,7 @@
 
 - Backlog: **MEL-09 (antigo item 8)** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Base/dependência: **MNT-10 decidido (publicado ou DEFERRED)**; a branch futura `maintenance/v3x-mnt-11` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
-- Versão prevista somente após aceite físico: **v3.1.5 PATCH condicional; v3.1.4 se MNT-10 sem release**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
+- Versão prevista somente após aceite físico: **v3.1.6 PATCH condicional; v3.1.5 se MNT-10 sem release**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
 ## Escopo exato
 Antes de anexar MOUSE, detectar substring MOUSE em qualquer posição sem fronteiras de palavras e case-insensitive. Nome BTS. 0MOUSE2 não recebe sufixo; LIFT recebe MOUSE. Unificar HOME CONNECTED e Saved Devices com normalizador comum e preservar nome capturado de BLE.
