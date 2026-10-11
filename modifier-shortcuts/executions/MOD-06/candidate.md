@@ -1,6 +1,6 @@
 # MOD-06 — Candidato CI aprovado e UF2 Pico 2 W
 
-**Status: CI 70/70 PASS + UF2 de produção verificado / ACEITE FÍSICO PENDENTE.** Data: 2026-10-11.
+**Status: CI 70/70 PASS + UF2 de produção verificado / ACEITO FISICAMENTE pelo operador em 2026-10-11.** Data: 2026-10-11.
 
 ## Proveniência
 
@@ -22,4 +22,4 @@
 
 ## Gate
 
-[12 testes físicos desde HOME](physical-acceptance.md) aguardam operador. CI e compilação não comprovam comportamento real do Linux nem ergonomia das direções. **MOD-06 ainda NÃO aceito; MOD-07 bloqueado.** Sem merge, tag ou release.
+[12 testes físicos desde HOME](physical-acceptance.md) aguardam operador. CI e compilação não comprovam comportamento real do Linux nem ergonomia das direções. **MOD-06 ACEITO por mensagem explícita do operador; MOD-07 autorizado.** Sem merge, tag ou release.
