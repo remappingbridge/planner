@@ -1,6 +1,7 @@
 # Movement Options — implementação contínua e testes físicos por gate
 
-Status: MOV-01–MOV-08 ACEITOS / MOV-09 HOST CI 58/58 + PICO UF2 PASS; ACEITAÇÃO FÍSICA PENDENTE.
+Status: MOV-01–MOV-09 ACEITOS / MOV-10 HOST CI 59/59 PASS; PICO UF2 E ACEITAÇÃO FÍSICA PENDENTES.
+MOV-10 source `f38c4984c2c1ebe28401dc9a3f410a62e132160a`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38136123704. Gate MOV-10 exige aceite físico próprio e **NÃO** autoriza merge.
 MOV-09 SHA `6a75b6212a152e34fec457b481e9bb513e5898ae`; CI https://github.com/remappingbridge/remappingbridge/actions/runs/38099188203; artifact `11687290125`, SHA-256 UF2 `dbbeb26fd013facccacb226d8b9e3bdba487871a146560f18c8ed28130721bdc`. **Novo UF2 diferente do MOV-08; deve gravar antes dos testes.**
 MOV-08 source `7a18ee16a486a17d676f5ba10be58432a0965bc3`, CI https://github.com/remappingbridge/remappingbridge/actions/runs/38098664052, artifact `11686753895`, UF2 SHA256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (idêntico ao MOV-07 já aceito).
 MOV-07 commit `23657734a172f4bd9dc61665ff57acf5230b3568`, run `38098381892`, artifact `11686122817`, UF2 SHA-256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e` (mesmo binário do MOV-06 aceito, nenhuma gravação extra necessária).
@@ -93,13 +94,13 @@ Cada revisão é compilada pelo job `pico2-w-production` do workflow `BLU2USB Ca
 - C22: com 2–3 mouses pareados e valores H/V/rotação distintos, navegar JOY RIGHT/LEFT com wrap; verificar que ordem e valores persistentes seguem a identidade lógica, nunca a posição visual. Desligar mouse ativo: ciano desaparece. Conectar outro mouse: este vai à primeira página e só o nome dele fica ciano. Sem confundir valores entre os dispositivos.
 - C23: reiniciar Pico sem apagar bonds, reconectar alternadamente 2 mouses, checar valores próprios; testar nomes longos/truncamento dentro de 9×21 colunas. JOY PRESS em página inativa abre confirmação de remover **aquele mouse**; KEY B cancela, sem excluir. Contrato completo em executions/MOV-08/physical-acceptance.md.
 
-### MOV-09 — remove-this (candidato atual, aceite físico pendente)
+### MOV-09 — remove-this (ACEITO pelo operador em 2026-10-11)
 - C24: HOME conectada > SAVED DEVICES > página de mouse INATIVO > JOY PRESS. REMOVE THIS MOUSE mostra nome do bond correto, não ordinal. Testar KEY Y HELP e retorno sem lock, KEY B cancela e retorna à mesma página sem modificar bonds nem preferências.
 - C25: voltar à confirmação, KEY A solicita remoção do mouse selecionado (exclusão REAL e irreversível até novo pareamento). Confirmar que somente aquele bond e seu TLV são excluídos; mouses restantes conservam H/V/Rotation e se conectam normalmente. Re-parear o removido: defaults H=1x,V=1x,0°. Confirmar também após reinicializar.
 - C26: pressionar KEY A várias vezes enquanto remoção pendente não pode produzir múltiplas exclusões; KEY B/Y durante pending não deve provocar outro pedido ou Lock. Se remoção falhar (incluindo bond desaparecido), interface volta a SAVED DEVICES e permite tentar novamente, sem apagar preferências de outros mouses.
 - C26A: se seguro, repetir com mouse conectado como alvo e confirmar liberação de HID e desconexão antes da exclusão. Remover último bond direciona à SEARCHING FIRST MOUSE. Roteiro detalhado em executions/MOV-09/physical-acceptance.md.
 
-### MOV-10 — Help unificado
+### MOV-10 — Help unificado (candidato atual, aceite físico pendente)
 - C27: KEY X de H/V Slow abre SLOW DPI HELP, ANY KEY retorna à página exata sem mudar opção/candidato.
 - C28: KEY X de H/V Fast abre FAST DPI HELP idem, KEY Y em Help apenas volta, jamais trava a tela.
 - C29: KEY X de ROTATION abre ROTATION HELP, confirma explicação anticlockwise, retorno restaura seleção.
