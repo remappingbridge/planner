@@ -1,6 +1,6 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado atualizado em 2026-10-11: MNT-01 EM CANDIDATO (CI 81/81 PASS + Pico 2 W UF2 SHA VERIFICADO), AGUARDANDO ACEITE FÍSICO. MNT-02..11 ainda não iniciados; nenhuma nova tag/release publicada.** O texto a seguir registra o planejamento original e o protocolo de execução.
+**Estado atualizado em 2026-10-11: MNT-01 CANDIDATO CORRIGIDO (CI #435 81/81 PASS + Pico 2 W novo UF2 SHA VERIFICADO; cabeçalho magenta), AGUARDANDO ACEITE FÍSICO. MNT-02..11 ainda não iniciados; nenhuma nova tag/release publicada.** O texto a seguir registra o planejamento original e o protocolo de execução.
 
 ## Baseline congelada
 - Produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge).
