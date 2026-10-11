@@ -1,6 +1,6 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado: PLANEJAMENTO SOMENTE. Nenhum gate iniciado, nenhum código alterado, nenhum UF2 gerado, nenhuma tag/release publicada.** Data da solicitação: 2026-10-11.
+**Estado atualizado em 2026-10-11: MNT-01 EM CANDIDATO (CI 81/81 PASS + Pico 2 W UF2 SHA VERIFICADO), AGUARDANDO ACEITE FÍSICO. MNT-02..11 ainda não iniciados; nenhuma nova tag/release publicada.** O texto a seguir registra o planejamento original e o protocolo de execução.
 
 ## Baseline congelada
 - Produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge).
@@ -14,7 +14,8 @@
 2. [02 — Gates, dependências e versões](02-gates-and-versioning.md): **11 gates**, os hotfixes 2/3 empacotados atomicamente, Help/Lock realizado **antes** da legenda LOCKS ANYWHERE, e **uma publicação condicionada a cada gate fisicamente aceito**.
 3. [03 — Cenários físicos e regressão](03-tests-and-acceptance.md): cada candidato nasce testável desde HOME CONNECTED e requer CI + UF2 Pico 2 W, checksum e aceite.
 4. [04 — Decisões, semântica visual e riscos](04-decisions-and-risks.md): diferencia cores, controles, nomes, compatibilidade de layout e semver.
-5. [gates/](gates/): contrato independente de cada MNT-01..MNT-11, pronto para implementação futura.
+5. [MNT-01 — candidato + teste físico](executions/MNT-01/candidate.md), CI 81/81 PASS, UF2 SHA-256 verificado, aceite PENDING.
+6. [gates/](gates/): contrato independente de cada MNT-01..MNT-11, pronto para implementação futura.
 
 ## Regras de entrega e publicação
 - Hotfixes/correções cosméticas: **PATCH**; mudança intencional de comportamento dos Helps (somente KEY B volta; KEY Y bloqueia): **MINOR**; **MAJOR não está no escopo**. Tabela de versões é **previsão**, deve ser recalculada a partir da última tag realmente publicada se outro release intercalar.
