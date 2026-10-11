@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 ACCEPTED; MOD-06 PHYSICALLY ACCEPTED; MOD-07 PHYSICALLY ACCEPTED; MOD-08 PHYSICALLY ACCEPTED by operator; MOD-09 candidate in dedicated branch, CI/UF2 and physical validation pending; MOD-10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 ACCEPTED; MOD-06 PHYSICALLY ACCEPTED; MOD-07 PHYSICALLY ACCEPTED; MOD-08 PHYSICALLY ACCEPTED by operator; MOD-09 CI 77/77 PASS + verified Pico 2 W UF2, physical validation pending; MOD-10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -100,7 +100,7 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 
 ## MOD-09 — Recovery, lock, BLE/USB, Saved Devices
 - [Base, riscos e escopo](executions/MOD-09/pre-implementation.md)
-- [Candidato e CI](executions/MOD-09/candidate.md)
+- [Candidato CI 77/77 PASS, UF2 verificado e SHA-256](executions/MOD-09/candidate.md)
 - [Roteiro físico desde HOME CONNECTED](executions/MOD-09/physical-acceptance.md)
 - [Branch de firmware MOD-09](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod09)
 - Base exata: MOD-08 aceito `5bfde2c4dc21aef3505ea9884a4878ae8ee8ec6f`. Não avançar MOD-10 antes de aprovação.
