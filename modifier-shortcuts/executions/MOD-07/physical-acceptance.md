@@ -1,6 +1,6 @@
 # MOD-07 — Aceite físico desde HOME conectada
 
-**Status: CI 72/72 PASS + UF2 VERIFIED / PENDING PHYSICAL ACCEPTANCE.** [Candidato](candidate.md): commit `0b62137494ce34a86bbecb8d8ee42a7cdfa42385`, [Actions #366](https://github.com/remappingbridge/remappingbridge/actions/runs/38149731598), UF2 **942592 bytes**, SHA256 **`2f934c507e8502029114ffc4075363b108e23185c51cf28abb022884fc35a576`**, [artifact original](https://github.com/remappingbridge/remappingbridge/actions/runs/38149731598/artifacts/11705632305). Gravar UF2 sem flash_nuke. Primeiro host de referência: **Linux desktop**, com editor, gerenciador de arquivos e navegador. Não iniciar MOD-08.
+**Status: MOD-07 ACEITO PELO OPERADOR (2026-10-11); CI 72/72 PASS + UF2 VERIFICADO.** [Candidato](candidate.md): commit `0b62137494ce34a86bbecb8d8ee42a7cdfa42385`, [Actions #366](https://github.com/remappingbridge/remappingbridge/actions/runs/38149731598), UF2 **942592 bytes**, SHA256 **`2f934c507e8502029114ffc4075363b108e23185c51cf28abb022884fc35a576`**, [artifact original](https://github.com/remappingbridge/remappingbridge/actions/runs/38149731598/artifacts/11705632305). Gravar UF2 sem flash_nuke. Primeiro host de referência: **Linux desktop**, com editor, gerenciador de arquivos e navegador. MOD-08 autorizado a partir do commit aprovado.
 
 ## Procedimento
 
@@ -19,4 +19,4 @@ Usar Mouse Bluetooth pareado e conectado ao Pico 2 W; Pico ligado por USB ao Lin
 - [ ] **11 — Ações não implementadas:** atribuir PLAY/PAUSE, VOLUME UP e BRIGHTNESS UP a combos e acioná-los; não podem produzir teclas falsas nem serem alegadas funcionais. MOD-08 é responsável por Consumer HID.
 - [ ] **12 — Persistência/reboot:** desligar e ligar Pico, reconectar Mouse, verificar ações, slots mascarados, DPI H/V e Rotation 90/270, lock Y/unlock e Passthrough (atalhos inertes) e volta ao Custom.
 
-**Aceite exige mensagem explícita do operador.** A CI demonstra traduções USB, não a execução real em aplicativos ou no compositor. Nenhuma publicação/merge antes do aceite.
+**Aceite recebido: «gate aceito prossiga».** Não foram fornecidas medições ou capturas individuais; o aceite global fica registrado sem alegar logs físicos inexistentes. A CI demonstra traduções USB, não a execução real em aplicativos ou no compositor. Sem publicação/merge: aceite de gate não é autorização de release.
