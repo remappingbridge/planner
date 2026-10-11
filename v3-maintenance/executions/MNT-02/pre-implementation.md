@@ -1,11 +1,11 @@
 # MNT-02 — preflight técnico (HF-02 + HF-03, atômicos)
 
-**Status: PREPARATION / AGUARDANDO TAG v3.0.1 OFICIAL ANTES DE CRIAR BRANCH DE FIRMWARE.** Planejamento MNT-02 autorizado pelo operador após aceite físico do MNT-01 em 2026-10-11.
+**Status: IMPLEMENTED ON ISOLATED BRANCH / CI + PICO CANDIDATE IN VALIDATION / PHYSICAL GATE PENDING.** Planejamento MNT-02 autorizado pelo operador após aceite físico do MNT-01 em 2026-10-11.
 
 ## Dependência e versionamento
 - Gate MNT-01 aceito, fonte do release em `main`: `b776fec2cf2c89788d1bdfed7aa257aa766f2dc6`.
-- Workflow [release v3.0.1](https://github.com/remappingbridge/remappingbridge/actions/runs/38180559115) disparado após merge; verificar TAG/release/assets e SHA antes de iniciar implementação MNT-02.
-- Só então criar `maintenance/v3x-mnt-02` da TAG oficial `v3.0.1`; versão futura **v3.0.2** SOMENTE após aceite físico MNT-02.
+- Workflow [release v3.0.1](https://github.com/remappingbridge/remappingbridge/actions/runs/38180559115) **SUCCESS**, tag oficial `v3.0.1` confirmada no SHA exato `b776fec2cf2c89788d1bdfed7aa257aa766f2dc6`; UF2 oficial SHA256 `c7ec5c2a3ef0c91af3aaec4ff27b1f86695a79cbaef1baac844a42f90ea1389f`.
+- Branch [`maintenance/v3x-mnt-02`](https://github.com/remappingbridge/remappingbridge/tree/maintenance/v3x-mnt-02) **criada da tag oficial `v3.0.1`**; [PR #32 DRAFT](https://github.com/remappingbridge/remappingbridge/pull/32); versão futura **v3.0.2** SOMENTE após aceite físico MNT-02.
 
 ## Inventário na v3.0.1
 - `src/ux_model/ux_model.c`: `BLU2USB_SCREEN_REMOVE_THIS` exibe `KEY Y: HELP` em sua linha 8. `blu2usb_ux_input` captura KEY Y nessa tela para abrir `BLU2USB_SCREEN_HELP_REMOVE_THIS`, em vez de respeitar o lock global.
