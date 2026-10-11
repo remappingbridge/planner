@@ -25,3 +25,7 @@
 ## Entrega e gate
 - CI host integral + Pico 2 W Release, UF2 SHA-256 verificado, PR draft, docs de candidato e roteiro físico desde HOME CONNECTED.
 - **PENDING** até operador reportar testes físicos e disser `gate aceito`; somente nesse momento ocorrerão merge, version bump e publicação v3.0.1.
+
+
+## Correção de regressão visual identificada no primeiro teste físico
+O operador esclareceu que, embora não constasse como mudança explícita HF-01, **o cabeçalho SAVED DEVICES deve ser magenta**, como em todas as outras telas. O primeiro candidato forçou row0 a STATIC amarelo; isso é regressão e foi corrigido na **mesma branch MNT-01** sem alteração de escopo. O contrato normativo é row0 `BLU2USB_UI_TONE_TITLE`/magenta independente de mouse ativo e quantidade de bonds. Os testes MNT-01 e legado MOV-08 agora exigem esse RGB565.
