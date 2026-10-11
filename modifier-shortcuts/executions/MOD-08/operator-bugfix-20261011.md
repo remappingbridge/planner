@@ -28,3 +28,21 @@ O operador constatou no firmware MOD-08 inicial:
 7. Repetir Copy/Paste/UNDO, mod-release Escape, Wheel/MOVE, rotação, DPI, mouse desconectar/reconectar, USB hotplug, Lock/unlock, persistência de atribuições e Save Devices, incluindo cancelamento de drag da seleção durante perda de BLE/USB.
 
 **Gate:** aceite MOD-08 ainda PENDENTE. Não avançar ao MOD-09 nem publicar firmware. Resultado deve distinguir comandos HID emitidos, eventos Linux recebidos e efeitos funcionais reais; brilho pode não ser controlável via Consumer na tela usada.
+
+## Evidência adicional do operador — zoom Obsidian (2026-10-11)
+
+O operador confirmou no **mesmo Debian 13 KDE Plasma** que **ZOOM IN e ZOOM OUT funcionam perfeitamente no Obsidian pelo teclado físico do notebook**, porém continuam **sem efeito quando gerados pelo RemappingBridge corrigido**. **RESET ZOOM funciona pelos dois**; ZOOM IN/OUT do RemappingBridge continuam funcionando no navegador. Portanto, a limitação NÃO deve ser tratada apenas como "Obsidian não suporta Ctrl+Plus/Minus", nem considerada aceite da ação para o Obsidian.
+
+Mapeamento atual do firmware, independente do Obsidian:
+- ID 26: HID Keyboard **Left Ctrl + Left Shift + Equal (usage 0x2E)**, previsto para produzir Ctrl+Plus no layout.
+- ID 27: HID Keyboard **Left Ctrl + Minus (usage 0x2D)**.
+- ID 28: HID Keyboard **Left Ctrl + 0 (usage 0x27)**, comprovado fisicamente.
+- XKB brasileiro ABNT2 associa `AE12` a `equal, plus` (Shift), mas variantes/layouts e teclas efetivamente pressionadas podem diferir. A correção precisa se apoiar nos códigos reais usados pelo notebook.
+
+**Decisão técnica:** NÃO alterar temporariamente o mapa HID com teclas específicas do Obsidian ou duplicar códigos cegamente. Executar no host:
+1. `sudo apt install evtest`; `sudo evtest`; selecionar teclado integrado do notebook; pressionar os mesmos Ctrl+Plus e Ctrl+Minus que funcionam no Obsidian; registrar `KEY_*` e `EV_KEY value` de cada tecla, inclusive Ctrl e Shift.
+2. `sudo evtest`; selecionar **BLU2USB** Keyboard; disparar ZOOM IN e ZOOM OUT pelo Modifier. Comparar códigos EV_KEY e ordem press/release com teclado integrado.
+3. Se **códigos diferirem**, corrigir HID usages/configuração de layout de modo genérico e repetir navegador+Obsidian+RESET; se **iguais**, investigar estado de modificadores, down/up de 25ms, sequência e repetição sem criar mapeamento de aplicativo. O EV_KEY registra entrada mesmo em sessão Wayland, sem depender de X11.
+4. **Não registrar comportamento como PASS no Obsidian** até evidencia física equivalente, e manter o MOD-08 pendente de aceite/decisão do operador. Nenhum código/UF2 adicional foi gerado por este relato.
+
+Evidência baseada na reprodução real reportada, não em alegação de teste no computador por CI.
