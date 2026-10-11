@@ -1,6 +1,6 @@
 # MOD-02 — Testes físicos do operador (Pico 2 W)
 
-**Status: PENDING OPERATOR ACCEPTANCE.** CI/UF2 evidence will be registered in `candidate.md` after the final production build.
+**Status: CI PASS + UF2 GENERATED / PENDING OPERATOR ACCEPTANCE.** Immutable CI evidence is in [candidate.md](candidate.md).
 
 ## Test cases — from connected HOME
 
@@ -16,9 +16,9 @@
 - [ ] **10 — Regression:** verify usual Mouse click, scroll, BLE disconnect/reconnect, Saved Devices colors (only connected Mouse name cyan), H/V DPI and rotation persist, and previous Custom remap remains functional. KEY X has no new Help page for COMBINATIONS in this gate.
 
 ## Evidence
-- Firmware commit / SHA: PENDING final CI verification.
-- Production `blu2usb_picow.uf2` / SHA256: PENDING final CI verification.
-- CI host tests + Pico Release: PENDING final run verification.
+- Firmware commit: [`fb568154d88d3e984a89f0c7e0b69aaaa0fefffd`](https://github.com/remappingbridge/remappingbridge/commit/fb568154d88d3e984a89f0c7e0b69aaaa0fefffd).
+- Production `blu2usb_picow.uf2`: [original artifact ZIP](https://github.com/remappingbridge/remappingbridge/actions/runs/38140599963/artifacts/11703161553). SHA256 **`84d2d478877c02c46dcba14d8fa83a2d3a122f1e63555d588dce19a877cb3d4a`**, 926,720 bytes; independently reproduced from CI artifact.
+- CI host tests: **61/61 PASS**; Pico 2 W Release: **PASS**. [CI run #225](https://github.com/remappingbridge/remappingbridge/actions/runs/38140599963).
 - Physical test verdict: **PENDING operator**.
 - Gate accepted: **NO**.
 - MOD-03 unlocked: **NO**.
