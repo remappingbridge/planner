@@ -1,12 +1,12 @@
 # 02 — Gates MNT-01..MNT-11, dependências e Semantic Versioning 3.x
 
-**Situação: somente planejamento / 0 de 11 gates iniciados / último release publicado: [v3.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.0.0).** 2026-10-11. Nenhum gatilho de release é criado agora; aceites futuros habilitam release de cada gate.
+**Situação: MNT-01 implementado em branch isolada, CI 81/81 PASS + UF2 verificado, aceite físico PENDING; MNT-02..11 planejados / último release publicado: [v3.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.0.0).** 2026-10-11. Nenhum gatilho de release é criado agora; aceites futuros habilitam release de cada gate.
 
 ## Matriz de execução incremental
 
 | Gate | Itens | Entrega atômica | Versão-alvo condicional | Dependência |
 |---|---|---|---|---|
-| [MNT-01](gates/MNT-01.md) | HF-01 | Saved Devices: dicas cinza, único REMOVE DEVICE cinza/branco conforme seleção | **v3.0.1** (PATCH) | tag v3.0.0 |
+| [MNT-01](gates/MNT-01.md) | HF-01 | Saved Devices: dicas cinza, único REMOVE DEVICE cinza/branco conforme seleção; [candidato CI 81/81 + UF2](executions/MNT-01/candidate.md), físico PENDING | **v3.0.1** (PATCH, NÃO PUBLICADA) | tag v3.0.0 |
 | [MNT-02](gates/MNT-02.md) | HF-02 + HF-03 | Remove This: rótulo KEY X: HELP e funcionamento real do Help pelo X no mesmo build | **v3.0.2** (PATCH) | MNT-01 publicado |
 | [MNT-03](gates/MNT-03.md) | MEL-01 | Movement Options: números DPI sem `x` apenas no resumo | **v3.0.3** (PATCH) | MNT-02 |
 | [MNT-04](gates/MNT-04.md) | MEL-02 | separadores visuais do LCD normalizados para `/` | **v3.0.4** (PATCH) | MNT-03 |
