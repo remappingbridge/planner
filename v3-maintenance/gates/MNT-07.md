@@ -4,7 +4,7 @@
 
 - Backlog: **MEL-05** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Base/dependência: **MNT-06 publicado**; a branch futura `maintenance/v3x-mnt-07` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
-- Versão prevista somente após aceite físico: **v3.1.1 (PATCH)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
+- Versão prevista somente após aceite físico: **v3.1.2 (PATCH)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
 ## Escopo exato
 Alterar todas as ocorrências de texto no tom ciano normal atual para tom ciano claro esbranquiçado, em todo LCD. Manter papéis e contraste dos demais tons.
