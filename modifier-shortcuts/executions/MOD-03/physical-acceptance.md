@@ -17,8 +17,8 @@ From `home-connected`, with your previously bonded Mouse:
 **Additional migration regression (if upgrading from original v2 profile):** old Standard/Escape profile is now Passthrough; old Custom ESCAPE targets become source identities, never Modifier. Existing bonds/movement preserved. The migration is not an instruction to clear flash.
 
 ## Evidence
-- Firmware and SHA256: pending final CI.
-- Host suite: 63 tests (final candidate CI to be verified).
+- Firmware SHA256: 6b5e3cdfbfc27b703ddfd3d08018289ce1c4fafc3fc9c04a6e2970e1c81e3445.
+- Host tests 63/63 PASS; Pico production PASS (run 38143309171).
 - Physical verdict: **PENDING operator**.
 - Gate accepted: **NO**.
 - MOD-04 authorized: **NO**.
