@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 implemented, host tests PASS, build and physical acceptance pending; MOD-04..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 implemented, CI 63/63 PASS + verified UF2, physical acceptance pending; MOD-04..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -54,6 +54,7 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 - Não iniciar MOD-03 antes da CI, build UF2 e aceite físico do operador.
 
 ## MOD-03 — cinco telas de atalhos e persistência
+- [Candidato validado, 63/63 PASS + UF2 e SHA](executions/MOD-03/candidate.md)
 - [Escopo e migração v3](executions/MOD-03/pre-implementation.md)
 - [Cenários físicos e aceite pendente](executions/MOD-03/physical-acceptance.md)
 - [Contrato e fluxo no firmware](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod01/docs/modifier-shortcuts/mod03-shortcuts.md)
