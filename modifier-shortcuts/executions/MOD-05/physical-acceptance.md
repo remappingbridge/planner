@@ -1,6 +1,6 @@
 # MOD-05 — Testes físicos do Modifier: Escape e Copy
 
-**Status: PENDENTE DE ACEITE FÍSICO.** Não iniciar MOD-06. Partir sempre da HOME com Mouse BLE salvo conectado e Pico 2 W em USB de um desktop Linux. O CI/UF2/SHA do candidato ficarão em candidate.md.
+**Status: PENDENTE DE ACEITE FÍSICO.** Não iniciar MOD-06. Partir sempre da HOME com Mouse BLE salvo conectado e Pico 2 W em USB de um desktop Linux. O [candidato](candidate.md) está validado: CI **68/68 PASS**, Pico 2 W production **PASS**, SHA256 do UF2 **`8f1015d2081c83707ee33f524478cbef98780dee32e4a0fd46e43af6ebbaa3ad`**, 939008 bytes, [artifact 11704924925](https://github.com/remappingbridge/remappingbridge/actions/runs/38147899079/artifacts/11704924925).
 
 1. [ ] Gravar UF2 MOD-05 em BOOTSEL **sem flash_nuke**; confirmar reconexão do mouse, Saved Devices, H/V DPI e rotação.
 2. [ ] HOME → REMAPPING OPTIONS → CUSTOM REMAPPING → LEFT WILL BECOME → MODIFIER → KEY A; voltar a EDIT CUSTOM REMAP, confirmar LEFT IS MODIFIER, e KEY A APPLY CUSTOM.
