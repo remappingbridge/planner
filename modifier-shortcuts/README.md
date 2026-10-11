@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 IMPLEMENTED, CI 68/68 PASS + verified UF2, physical acceptance pending; MOD-06..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 ACCEPTED; MOD-06 IMPLEMENTED with CI 70/70 PASS, production UF2 and physical acceptance pending; MOD-07..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -71,7 +71,13 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 ## MOD-05 — buttons + Escape e Copy
 - [Candidato CI 68/68 PASS e UF2 verificado](executions/MOD-05/candidate.md)
 - [Escopo de runtime](executions/MOD-05/pre-implementation.md)
-- [Testes físicos, aceite pendente](executions/MOD-05/physical-acceptance.md)
+- [Testes físicos, aceite ACCEPTED](executions/MOD-05/physical-acceptance.md)
 - [Fluxo no firmware](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod05/docs/modifier-shortcuts/mod05-buttons-and-keyboard.md)
 - [Branch MOD-05](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod05), [PR draft #25](https://github.com/remappingbridge/remappingbridge/pull/25).
 - Somente HID Keyboard Escape e Ctrl+C neste gate; MOD-06 depende de aceite físico.
+
+## MOD-06 — Wheel e MOVE direcional
+- [Escopo da classificação, sem alterar Movement](executions/MOD-06/pre-implementation.md)
+- [Cenários físicos desde HOME, calibração e aceite PENDING](executions/MOD-06/physical-acceptance.md)
+- [Branch do firmware](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod06), [PR #26 draft](https://github.com/remappingbridge/remappingbridge/pull/26)
+- Suporte a detents verticais, pan preservado, captura MOVE com rotação pré-DPI, direção dominante, quietude/histerese. A execução USB permanece limitada aos dois atalhos validados no MOD-05 (ESCAPE e COPY).
