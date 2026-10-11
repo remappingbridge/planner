@@ -1,6 +1,6 @@
 # MNT-01 — Saved Devices: dicas, REMOVE DEVICE e seleção branca
 
-**Status: CANDIDATO DE FIRMWARE PRONTO — CI 81/81 + UF2 DE PRODUÇÃO VERIFICADO — AGUARDANDO ACEITE FÍSICO.** Build e artefato: [executions/MNT-01/candidate.md](../executions/MNT-01/candidate.md); [teste físico](../executions/MNT-01/physical-acceptance.md). Nada foi mesclado, publicado ou versionado como v3.0.1.
+**Status: CANDIDATO CORRIGIDO — CI #435 81/81 + UF2 NOVO VERIFICADO — AGUARDANDO ACEITE FÍSICO.** A primeira linha/título do Saved Devices foi restaurada para magenta após regressão reportada pelo operador. Build e artefato: [executions/MNT-01/candidate.md](../executions/MNT-01/candidate.md); [teste físico](../executions/MNT-01/physical-acceptance.md). Nada foi mesclado, publicado ou versionado como v3.0.1.
 
 - Backlog: **HF-01** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Base/dependência: **v3.0.0**; a branch futura `maintenance/v3x-mnt-01` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
