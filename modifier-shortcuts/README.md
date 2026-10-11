@@ -67,3 +67,10 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 - [Cenários de testes físicos, aceite ACCEPTED](executions/MOD-04/physical-acceptance.md)
 - [Branch exclusiva](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod04) e [PR #24 em draft](https://github.com/remappingbridge/remappingbridge/pull/24)
 - Novo MODIFIER como destino do Custom, 1 source exclusivo, combinações de mesmo botão UNAVAILABLE (sem apagar shortcut), retorno do valor salvo ao mudar source; nenhuma execução HID até MOD-05.
+
+## MOD-05 — buttons + Escape e Copy
+- [Escopo de runtime](executions/MOD-05/pre-implementation.md)
+- [Testes físicos, aceite pendente](executions/MOD-05/physical-acceptance.md)
+- [Fluxo no firmware](https://github.com/remappingbridge/remappingbridge/blob/feature/modifier-shortcuts-mod05/docs/modifier-shortcuts/mod05-buttons-and-keyboard.md)
+- [Branch MOD-05](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod05), [PR draft #25](https://github.com/remappingbridge/remappingbridge/pull/25).
+- Somente HID Keyboard Escape e Ctrl+C neste gate; MOD-06 depende de aceite físico.
