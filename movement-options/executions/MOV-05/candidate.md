@@ -1,6 +1,6 @@
 # MOV-05 — Vertical Fast DPI | Candidato para testes físicos
 
-**Status:** host CI `52/52 PASS`, firmware Pico 2 W em compilação, aceite físico `PENDING`.
+**Status:** host CI `52/52 PASS`, Pico 2 W UF2 `PASS`, aceite físico `PENDING`.
 
 Produto: `remappingbridge/remappingbridge`
 Branch: `feature/movement-options-v1.0`
@@ -16,5 +16,5 @@ PR Draft: https://github.com/remappingbridge/remappingbridge/pull/22
 
 ## Evidência e aceite
 Testes host: `52/52 PASS` em 2026-10-10.
-Aguardar conclusão do `pico2-w-production` desse SHA, registrar artefato e checksum do UF2.
+O `pico2-w-production` passou e publicou o artefato `11686186807`, com `blu2usb_picow.uf2` de **925.696 bytes**, **1.808 blocos**, família RP2350, SHA-256 `bc29783cb23c75f046d115b22509b9a042c1c8c6aab98cb24eed7d97095b3f0e`. A verificação foi feita em cima dos bytes extraídos do ZIP do próprio GitHub Actions. O UF2 é **binariamente idêntico ao MOV-04 aceito**, pois só os testes/documentação mudaram. Não é necessário reflashear quem permaneceu no firmware MOV-04; o MOV-05 ainda exige teste/aceite físico próprio.
 Execução manual: `physical-acceptance.md`; operador ainda precisa declarar aceito/rejeitado.
