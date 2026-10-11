@@ -1,6 +1,6 @@
 # Modifier Shortcuts — planejamento arquitetural (RemappingBridge v2.0.0)
 
-**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 corrected after operator feedback, CI 66/66 PASS + corrected UF2 verified, physical acceptance pending; MOD-05..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
+**Status: MOD-00 and MOD-01 ACCEPTED; MOD-02 ACCEPTED; MOD-03 ACCEPTED; MOD-04 CORRECTED AND ACCEPTED; MOD-05 IMPLEMENTED, physical acceptance pending; MOD-06..10 PLANNED.** Data: 2026-10-11. Documento de entrada: `TELAS MODIFIER.md` fornecido pelo operador. Repositório de produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge). Fonte imutável: [tag v2.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v2.0.0). Este diretório NÃO contém alterações de firmware.
 
 ## Resultado esperado
 Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-Y > KEY A: APPLY AND BACK`, permitindo associar uma das **30 ações de teclado** a cada uma de **12 combinações** envolvendo um botão físico `MODIFIER`. Configurar atalhos independe de selecionar o botão modificador. `STANDARD REMAP` e `ESCAPE REMAP` deixam de existir como perfis/opções; `ESCAPE` passa a ser um atalho configurável.
@@ -64,6 +64,6 @@ Continuar em `home-connected > remapping-options > combinations-N > shortcuts-X-
 - [Correção de 4 bugs de UI, CI 66/66 PASS + SHA UF2](executions/MOD-04/visual-correction.md)
 - [Candidato original MOD-04, substituído](executions/MOD-04/candidate.md)
 - [Escopo e dependência física aceita](executions/MOD-04/pre-implementation.md)
-- [Cenários de testes físicos, aceite pendente](executions/MOD-04/physical-acceptance.md)
+- [Cenários de testes físicos, aceite ACCEPTED](executions/MOD-04/physical-acceptance.md)
 - [Branch exclusiva](https://github.com/remappingbridge/remappingbridge/tree/feature/modifier-shortcuts-mod04) e [PR #24 em draft](https://github.com/remappingbridge/remappingbridge/pull/24)
 - Novo MODIFIER como destino do Custom, 1 source exclusivo, combinações de mesmo botão UNAVAILABLE (sem apagar shortcut), retorno do valor salvo ao mudar source; nenhuma execução HID até MOD-05.
