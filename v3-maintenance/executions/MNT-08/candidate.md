@@ -30,3 +30,16 @@ Usar `physical-acceptance.md` e conferir cores em hardware real. **MNT-08 ainda 
 - Branch e PR mantidos: `maintenance/v3x-mnt-08`, [#38](https://github.com/remappingbridge/remappingbridge/pull/38).
 - Última revisão de fonte: `965aa62aa68069765417a26da56b5a7177617246`; CI [#498](https://github.com/remappingbridge/remappingbridge/actions/runs/38187661315) (89/89 testes host aprovados; compilação Pico 2 W a confirmar no relatório de artefato).
 - A versão prevista continua **v3.1.3 após aceite físico conjunto MNT-07/MNT-08**.
+
+## Novo candidato MNT-08 — papéis de ciano invertidos (VIGENTE)
+
+**STATUS: CANDIDATO PRONTO, CI COMPLETA. ACEITE FÍSICO PENDENTE.** Este firmware substitui por completo o primeiro candidato MNT-08 citado acima.
+
+- Branch: `maintenance/v3x-mnt-08`, commit **`965aa62aa68069765417a26da56b5a7177617246`**; [PR #38](https://github.com/remappingbridge/remappingbridge/pull/38) segue draft.
+- Valor **CURRENT sem seleção**: RGB565 **`0x07FF`**, ciano normal.
+- Valor **SELECTED_CURRENT selecionado**: RGB565 **`0xD7FF`**, ciano clarinho pastel.
+- Itens não-CURRENT continuam **cinza/branco**. SAVED DEVICES: o nome do mouse conectado informa CURRENT e fica em ciano normal, não selecionável; nome desconectado amarelo; REMOVE DEVICE branco; dicas cinza.
+- [CI #498](https://github.com/remappingbridge/remappingbridge/actions/runs/38187661315): **89/89 testes host aprovados**, **build Pico 2 W produção aprovado**. O teste MNT-07 foi atualizado para verificar que o tom pastel `0xD7FF` permanece na paleta, agora atribuído a SELECTED_CURRENT.
+- Artefato GitHub Actions **11720491873** de commit exato; firmware entregue `remappingbridge-mnt08-inverted-cyans-pico2w.uf2`, **945.152 bytes**.
+- SHA-256 do UF2: **`05832da337ebdfc03d9a5239154726287d431df59254a28e121131396efbab40`**, aferido no arquivo extraído e conferido igual ao hash dos logs de CI.
+- O firmware candidato contém a versão base **3.1.2**. Somente após aceite físico conjunto MNT-07/MNT-08 versionar como **3.1.3** e publicar.
