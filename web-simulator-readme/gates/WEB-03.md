@@ -1,6 +1,16 @@
 # WEB-03 — HAT virtual, Lock e Help
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-02 aceito.
+**Status:** ACCEPTED BY OPERATOR ON 2026-10-12; WEB-04 AUTHORIZED. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-02 aceito.
+
+## Implementation and tests
+
+- [WEB-03 site PR #4](https://github.com/remappingbridge/remappingbridge.github.io/pull/4)
+- [Preflight and provenance](../executions/WEB-03/preflight.md)
+- [Candidate and 80-check report](../executions/WEB-03/candidate.md)
+- [Production-browser acceptance checklist](../executions/WEB-03/manual-tests.md)
+- Operator's carried-over improvement: default **Gentle** backdrop `#300c39`, more vivid and less gray than WEB-02. No semantic foreground changes.
+
+WEB-04 is **AUTHORIZED**. [Operator acceptance](../executions/WEB-03/operator-acceptance.md) also mandates a smaller centered LCD, left joystick, vertical right A/B/X/Y and removal of background choices.
 
 ## Escopo fechado
 
