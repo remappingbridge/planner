@@ -10,6 +10,10 @@
 - `assets/css/app.css`: enhance LCD housing/panel visual depth, visible focus rings, native range/select contrast, responsive single-column settings, density-based panel spacing and 44px mobile touch targets, reduced-motion suppression; keep the physical small HAT and sticky behavior, CSS/HiDPI bitmap scaling and fixed Gentle #300c39.
 - `README.md`, `tests/index.html`, `tests/runner.js`: English-only explanation and **226 assertions** (194 original plus 32 new display and touch checks).
 
+## Production candidate publication
+
+Website [PR #9](https://github.com/remappingbridge/remappingbridge.github.io/pull/9) was merged to website `main` only to publish the WEB-08 candidate, commit `9ba5732b31601ed4b92300fce8b29f87a21fab9c`. Associated [GitHub Pages run #38318887192](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38318887192) is the deployment verification reference. Publication does **not** imply operator acceptance; planner [PR #27](https://github.com/remappingbridge/planner/pull/27) stays draft until explicit acceptance. WEB-09 remains blocked.
+
 ## Automated validation and limitations
 
 Actual `tests/runner.js` executed in **isolated V8** with simulated native DOM/Canvas2D: **226/226 PASS**. Tests include source 45/45 rasterized screens, accepted pixel golden checks, source 12/30 shortcuts, saved mouse profiles, browser display module clamp/validation, preferences persistence/blocked-store fallback, lock/unlock effective brightness and restored 27%, Canvas style factor bounded <=1, native range/density events and extra nine touch controls.
