@@ -4,7 +4,7 @@
 
 - Backlog: **MEL-11 (novo)** — investigar possível regressão no PAIR NEW concorrente.
 - Contrato: `PAIR NEW MOUSE` deve conseguir descobrir e qualificar um novo mouse BLE HOGP enquanto um mouse anterior permanece conectado e operacional. Somente o **handoff bem-sucedido** pode desconectar o antigo; cancelamento/timeout preservam o antigo.
-- Base de referência: última tag oficial verificada ao **iniciar a execução** (na elaboração deste plano: `v3.2.1`); manter a **v3.2.0** como baseline da investigação estática já realizada. Não reabrir os releases v3.2.0/v3.2.1.
+- Base de referência: última tag oficial verificada ao **iniciar a execução** (a versão `v3.2.1` era a base histórica quando o gate original foi escrito; a execução deverá verificar a última tag estável, atualmente v3.2.2); manter a **v3.2.0** como baseline da investigação estática já realizada. Não reabrir os releases v3.2.0/v3.2.1.
 - **Nova ordem:** MNT-12 (cores) aceito; **MNT-13** é a melhoria do `>` para indicar foco (não iniciada); **MNT-14** preserva o diagnóstico PAIR NEW em duas partes; **MNT-15** preserva Zoom/Obsidian suspenso. Este planejamento não inicia nenhum deles.
 - **Estrutura obrigatória:** duas partes sequenciais e separadas: **Parte 1 = descobrir/comprovar causa raiz; Parte 2 = decidir GO / NO-GO / BLOCKED para uma correção segundo causa raiz, viabilidade, riscos e evidências**. A Parte 2 não transforma automaticamente a investigação em autorização para modificar o firmware.
 
@@ -55,7 +55,7 @@ A análise anterior foi registrada em [investigations/pair-new-with-connected-mo
 
 ### 4.1 Critérios prévios e baseline
 
-1. Confirmar `v3.x` oficial em `remappingbridge/remappingbridge`, SHA da tag, notas, CI e hash do UF2 executado no hardware. Registrar em `executions/MNT-14/part-1-preflight.md`. MNT-12 e MNT-14 não são desbloqueados pelo início desta investigação.
+1. Confirmar `v3.x` oficial em `remappingbridge/remappingbridge`, SHA da tag, notas, CI e hash do UF2 executado no hardware. Registrar em `executions/MNT-14/part-1-preflight.md`. MNT-13 e MNT-15 não são desbloqueados pelo início desta investigação.
 2. Confirmar mouse **A** conectado, nome/identidade, e mouse **B** realmente **não salvo**, compatível com BLE HOGP e colocado em modo de pareamento. Registrar diferenças de modelo/advertising; usar B na mesma condição nos controles.
 3. Estabelecer um baseline **sem mexer em flash**, bonds, perfis ou atalhos. Não usar `flash_nuke`, excluir bonds ou alterar a UX para “resolver” o teste.
 4. Registrar o histórico HOPE-06 e quais diferenças de código entre o commit fisicamente aceito e o release atual podem afetar init da stack, scan/connection, security, HID ou janela de tempo. A inspeção deve abranger callbacks, não apenas as três rotinas já comparadas.
