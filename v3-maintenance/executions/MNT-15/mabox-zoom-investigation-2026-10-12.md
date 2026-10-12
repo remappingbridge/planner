@@ -1,13 +1,13 @@
 # MNT-15 / MEL-08 — Observações de Zoom no Mabox (12/10/2026)
 
-**Estado:** relato físico coletado, hipótese de incompatibilidade de shortcut/layout em investigação; **sem causa demonstrada, firmware não alterado, nenhuma versão gerada**. MNT-14 já está cancelado por validação positiva de pareamento. Esta nota não autoriza automaticamente um patch ou publicação.
+**Estado atualizado após novo teste:** o operador confirmou no teclado físico do Obsidian que **Ctrl + = sem Shift amplia** e que **com Shift o zoom não responde**; relatou também diminuir normalmente sem Shift. Isso fortalece a incompatibilidade entre o atalho ZOOM IN atual do firmware (Ctrl+Shift+Equal) e a interpretação do Obsidian neste host, mas **não demonstra ainda que Ctrl+Equal funcionará em todos os aplicativos**. Firmware não alterado; nenhuma nova versão gerada. MNT-14 já está cancelado por validação positiva de pareamento. Esta nota não autoriza automaticamente um patch ou publicação.
 
 ## Ambiente informado pelo operador
 
 - **Host:** Mabox Linux; operador acredita que a sessão utiliza **X11**, mas `$XDG_SESSION_TYPE` ainda não foi consultado.
 - **Firmware usado:** esperado RemappingBridge estável v3.2.3, mas o UF2 exato/hashes do dispositivo não foram apresentados nesta execução.
 - **Aplicações testadas:** Obsidian, navegador e terminal.
-- **Método de teste:** ações Zoom In / Zoom Out / Reset Zoom do RemappingBridge; não há eventos `evtest` ou teclado físico comparativo registrados neste relato.
+- **Método de teste:** ações Zoom In / Zoom Out / Reset Zoom do RemappingBridge em três aplicativos; **comparação adicional no teclado físico do Obsidian**: Ctrl+= sem Shift amplia e Ctrl+- sem Shift diminui, mas com Shift o Zoom não ocorre. Não há eventos `evtest` documentados.
 
 ## Evidência de funcionamento reportada
 
@@ -18,6 +18,20 @@
 | Terminal | **PASS** | **PASS** | **PASS** |
 
 Esses são resultados **observados/referidos pelo operador**, não rastros de input USB. Corrigem o histórico do Debian KDE onde haviam sido reportadas falhas Zoom In *e* Zoom Out no Obsidian: **no Mabox apenas Zoom In falha**. Não transportar resultado entre hosts sem registrar a distinção.
+
+## Teste discriminante concluído pelo operador
+
+Em resposta ao teste solicitado, o operador informou: **"sem o shift aumenta e diminui o zoom, mas com shift não acontece"**. No contexto do teste do teclado físico dentro do Obsidian, isso significa:
+
+- **Ctrl + = (sem Shift):** aumenta o zoom.
+- **Ctrl + - (sem Shift):** diminui o zoom.
+- **Com Shift nas combinações de zoom testadas:** a ação não ocorre.
+
+**Interpretação limitada à evidência:** o resultado favorece a hipótese de **atalho não aceito pelo Obsidian com Shift neste host**, pois o próprio teclado físico reproduz essa diferença. Não é correto atribuir o comportamento apenas à temporização USB ou a um defeito de HCI/BLE. O teste não confirma ainda se mudar o atalho global para Ctrl+= preserva navegador e terminal.
+
+**Próximo controle antes de patch:** testar o **teclado físico Ctrl+= SEM Shift** no **navegador e no terminal**; registrar se ele também amplia nesses programas (a ação atual do RemappingBridge já funciona ali, mas usa Shift). Se ambos funcionarem, a proposta mínima é retirar **MOD_SHIFT somente da ação 26, ZOOM IN**, preservando `HID Equal 0x2E + MOD_CTRL 0x01`, em vez da máscara `0x03`. Deixar ação 27 (Ctrl+-) e 28 (Ctrl+0) **intocadas**, pois passam no Mabox.
+
+**Decisão de implementação:** proposta técnica pronta para validação cruzada; sem autorização expressa para mudar firmware, não criar branch, UF2, tag ou release.
 
 ## Inspeção do mapeamento de firmware v3.2.3
 
@@ -38,10 +52,10 @@ Por ser a mesma ação HID que funciona no navegador e terminal, **USB HID não 
 ## Próximo experimento não destrutivo prioritário (sem firmware novo)
 
 1. No terminal do Mabox, executar `printf 'session=%s layout=%s\\n' "${XDG_SESSION_TYPE:-unknown}" "$(setxkbmap -query 2>/dev/null | sed -n 's/^layout:[[:space:]]*//p')"` para documentar sessão e layout (se `setxkbmap` existir).
-2. **Dentro do Obsidian com foco**, testar no teclado físico **Ctrl + = SEM Shift** e anotar se amplia.
-3. Testar no mesmo teclado **Ctrl + Shift + =**, anotar se amplia. Não confundir tecla `+` impressa em layout ABNT2/alternativo com usage Equal.
+2. **CONCLUÍDO no Obsidian:** teclado físico **Ctrl + = SEM Shift amplia**; **com Shift não amplia**.
+3. **PENDENTE:** testar teclado físico **Ctrl + = SEM Shift** tanto no navegador como no terminal, para verificar compatibilidade antes de mudar o atalho global. Não confundir tecla `+` impressa em layout ABNT2/alternativo com usage Equal.
 4. Com uma nota de Obsidian e navegador/terminal abertos, comparar ação ZOOM IN do RemappingBridge, ZOOM OUT e RESET; não instalar plugin de Zoom nem reatribuir hotkey antes desse A/B.
-5. Se teclado Ctrl+= funciona onde Ctrl+Shift+= falha: **hipótese prioritária** é uso desnecessário de Shift na ação de Zoom In para Obsidian. Avaliar **mudança genérica** de `Ctrl+Shift+Equal` para `Ctrl+Equal`, sempre testando navegador e terminal. Não aplicar sem demonstração/regressões.
+5. **Condição observada no Obsidian:** Ctrl+= funciona e Ctrl+Shift+= falha. Hipótese prioritária é o Shift desnecessário na ação Zoom In para este aplicativo/host. A mudança genérica `Ctrl+Shift+Equal` → `Ctrl+Equal` continua **condicionada** a teste de teclado físico em navegador e terminal, testes do firmware e autorização explícita.
 6. Se ambas as teclas físicas funcionam mas o RemappingBridge não: coletar via `evtest` ou `libinput debug-events` do **device BLU2USB correto** o KEY_LEFTCTRL, KEY_LEFTSHIFT, KEY_EQUAL, keydown/keyup e comparar emissão e ordem de eventos ao teclado físico. Não presumir que `event0` corresponda ao RemappingBridge.
 7. Se apenas `Ctrl+Shift+=` funciona fisicamente: não mudar mapeamento para `Ctrl+=` sem investigar layout/temporização do HID.
 
@@ -52,4 +66,4 @@ Por ser a mesma ação HID que funciona no navegador e terminal, **USB HID não 
 - Solução genérica, se necessária, deve ter teste host para as ações 26/27/28 e regressão física em Obsidian, navegador e terminal, depois CI Pico 2 W e UF2 de candidato em branch, com aceite antes de PATCH.
 - **Sem patch ou nova release neste relato.** A última estável segue **v3.2.3**.
 
-**Situação MNT-15:** diagnóstico enriquecido pelos resultados do Mabox, **investigação de compatibilidade pendente**; nenhuma causa raiz comprovada, implementação não iniciada.
+**Situação MNT-15:** falha específica de atalho com Shift reproduzida também no teclado físico do Obsidian; **validação cruzada pendente em navegador e terminal**. Nenhum patch/CI/UF2/release MNT-15; implementação não iniciada.
