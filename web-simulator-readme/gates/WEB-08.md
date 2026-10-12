@@ -1,6 +1,14 @@
 # WEB-08 — HAT/LCD visual, responsive e brilho 0–100%
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-07 aceito.
+**Status:** CANDIDATE IMPLEMENTED; 226/226 isolated checks PASS; production-browser acceptance PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-07 aceito.
+
+## Candidate evidence
+
+- [Firmware/source baseline](../executions/WEB-08/preflight.md)
+- [Implemented candidate and 226 isolated browser checks](../executions/WEB-08/candidate.md)
+- [14 numbered production browser acceptance tests](../executions/WEB-08/manual-tests.md)
+
+WEB-08 acceptance is **pending**; WEB-09 **not started**.
 
 ## Escopo fechado
 
