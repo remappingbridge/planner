@@ -1,6 +1,6 @@
-# MNT-08 — firmware candidato com seleção ciano normal
+# MNT-08 — histórico e candidato vigente
 
-**STATUS: IMPLEMENTADO, CI COMPLETA / 89 DE 89 TESTES HOST PASS / PICO 2 W PRODUÇÃO SUCCESS. ACEITE FÍSICO PENDING.**
+**ATENÇÃO: o candidato descrito nesta seção está OBSOLETO e não deve ser testado.** Foi substituído por uma revisão que inverte o papel dos dois cianos, conforme pedido expresso do operador. MNT-08 ainda aguarda aceite físico.
 
 - Base imutável: release oficial **v3.1.2**, commit `9ccc3f38b1bb697546d756f2fca3475d33204f2a`. MNT-07 está formalmente aceito para versão, mas seu aceite físico final será concluído junto com MNT-08.
 - Branch: `maintenance/v3x-mnt-08`, HEAD do candidato `c858938e51f8cf4f713def2e9fd6d778ccec3032`.
@@ -20,3 +20,13 @@
 
 ## Aceite físico conjunto
 Usar `physical-acceptance.md` e conferir cores em hardware real. **MNT-08 ainda NÃO está aceito e v3.1.3 NÃO deve ser publicada**. Quando o operador aceitar o MNT-08, registrar também a conclusão do aceite físico conjunto do MNT-07 e só então criar v3.1.3.
+
+## Inversão dos cianos (nova regra aprovada para implementação, NÃO para aceite físico)
+- O operador aprovou a aparência dos tons, mas solicitou **inverter seus papéis**.
+- `BLU2USB_UI_TONE_CURRENT` / sem seleção: **ciano normal 0x07FF**.
+- `BLU2USB_UI_TONE_SELECTED_CURRENT` / selecionado: **ciano claro pastel 0xD7FF**.
+- Cinza comum → branco no foco; CURRENT meramente informativo (nome de mouse conectado em SAVED DEVICES) permanece ciano normal.
+- Sem novas cores: somente mapeamento semântico central e testes de paleta modificados; comportamentos e controles não mudam.
+- Branch e PR mantidos: `maintenance/v3x-mnt-08`, [#38](https://github.com/remappingbridge/remappingbridge/pull/38).
+- Última revisão de fonte: `965aa62aa68069765417a26da56b5a7177617246`; CI [#498](https://github.com/remappingbridge/remappingbridge/actions/runs/38187661315) (89/89 testes host aprovados; compilação Pico 2 W a confirmar no relatório de artefato).
+- A versão prevista continua **v3.1.3 após aceite físico conjunto MNT-07/MNT-08**.
