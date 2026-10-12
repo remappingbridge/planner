@@ -1,6 +1,6 @@
-# 02 — Gates MNT-01..MNT-13, dependências e Semantic Versioning 3.x
+# 02 — Gates MNT-01..MNT-14, dependências e Semantic Versioning 3.x
 
-**Atualizado em 11/10/2026:** MNT-01 a MNT-11 **aceitos e publicados**, última tag oficial **v3.2.1**. MNT-12 (Zoom/Obsidian) **suspenso a pedido do operador**; novo MNT-13 (PAIR NEW com mouse já conectado) **PLANEJADO**, em duas partes de diagnóstico e decisão de viabilidade. Nenhuma correção MNT-13 foi autorizada. Não confundir a numeração de gates com uma sequência que se inicia automaticamente.
+**Atualizado em 12/10/2026:** MNT-01..MNT-11 **aceitos e publicados** até **v3.2.1**. **MNT-12 NOVO**: ciano condicional de MODIFIER SHORTCUTS e valores de COMBINATIONS, **somente planejado**. MNT-13: PAIR NEW, diagnóstico em duas partes, **não iniciado**. **MNT-14**: Zoom/Obsidian, preservado do antigo MNT-12 e **suspenso**. Nenhum gate pendente autorizado para execução.
 
 ## Matriz de execução incremental
 
@@ -17,12 +17,13 @@
 | [MNT-09](gates/MNT-09.md) | MEL-07 | HOME CONNECTED: primeira opção `REMAPPING OPTIONS` fixa | **ACEITO v3.1.4** | MNT-08 |
 | [MNT-10](gates/MNT-10.md) | **MEL-10 NOVO** | Remover mouse: eliminar bond, nome, Movement e todo perfil/remap/shortcuts antigos **somente daquele mouse**; novo pareamento inicia em defaults | **ACEITO E PUBLICADO v3.2.0 (MINOR)** — perfis por mouse | MNT-09 v3.1.4 publicada |
 | [MNT-11](gates/MNT-11.md) | MEL-09 | Nomes BLE: sufixo MOUSE só se substring não existe | **ACEITO E PUBLICADO v3.2.1 (PATCH)** — título BLE sem MOUSE duplicado | **MNT-10 publicado v3.2.0** |
-| [MNT-12](gates/MNT-12.md) | MEL-08 (antigo MNT-10) | Diagnóstico Zoom Obsidian/KDE e **correção HID genérica apenas se comprovada** | **PLANEJADO E SUSPENSO A PEDIDO DO OPERADOR** — só executar após liberação; PATCH se correção validada ou DEFERRED/NO RELEASE | **MNT-11 publicado** |
-| [MNT-13](gates/MNT-13.md) | **MEL-11 NOVO** | **PAIR NEW com A conectado:** Parte 1 diagnóstico/causa raiz com evidências; Parte 2 decisão técnica **GO / NO-GO / BLOCKED / NOT A BUG**, sem correção automática | **PLANEJADO; PARTES 1 E 2 PENDING; SEM RELEASE** — patch v3.x apenas se GO, implementação autorizada e aceite físico | **v3.2.1 publicada**; independente de MNT-12 suspenso; execução só por pedido explícito |
+| [MNT-12](gates/MNT-12.md) | **MEL-12 NOVO** | Ciano condicional para **MODIFIER SHORTCUTS** e somente **valores atribuídos** de COMBINATIONS (CUSTOM aplicado **E** botão Modifier); foco = ciano claro; UNAVAILABLE/NOT CUSTOMIZED intactos | **PLANEJADO / NÃO INICIADO** — PATCH 3.x após implementação e aceite | **v3.2.1 publicada** |
+| [MNT-13](gates/MNT-13.md) | **MEL-11 NOVO** | **PAIR NEW com A conectado:** Parte 1 diagnóstico/causa raiz com evidências; Parte 2 decisão técnica **GO / NO-GO / BLOCKED / NOT A BUG**, sem correção automática | **PLANEJADO; PARTES 1 E 2 PENDING; SEM RELEASE** — patch v3.x apenas se GO, implementação autorizada e aceite físico | **v3.2.1 publicada**; independente dos MNT-12 e MNT-14; MNT-14 suspenso; execução só por pedido explícito |
+| [MNT-14](gates/MNT-14.md) | **MEL-08** (Zoom, antigo MNT-10 e depois MNT-12) | Diagnosticar Zoom no Obsidian/KDE; correção HID genérica **somente se comprovada** | **PLANEJADO / SUSPENSO** — sem implementação nem release; PATCH após correção validada ou DEFERRED/NO RELEASE | **v3.2.1 publicada**, retomada apenas sob autorização |
 
-**Organização atual:** MNT-10 (limpeza de mouse) → MNT-11 (sufixo BLE) **concluídos**; MNT-12 Zoom permanece suspenso; MNT-13 PAIR NEW foi acrescentado sem renumerar o Zoom ou executar qualquer gate. MNT-13 pode ser investigado sem iniciar MNT-12, **somente se o operador autorizar seu início**. As referências MEL-08/MEL-09/MEL-10 históricas são preservadas; novo item **MEL-11** corresponde ao MNT-13.
+**Organização após renumeração:** MNT-10 (exclusão) e MNT-11 (nome BLE) concluídos; MNT-12 (cores de Modifier/Combinations) é o novo gate planejado; MNT-13 (PAIR NEW) preserva as duas partes de diagnóstico/decisão; MNT-14 (Zoom) recebe integralmente o antigo MNT-12, mantendo MEL-08 e o estado suspenso. A nova melhoria é **MEL-12**, sem reatribuir MEL-11 ao novo número MNT-12. Nenhum desses três gates está autorizado para implementação por este pedido.
 
-**SemVer a partir da última tag v3.2.1:** MNT-12 e MNT-13 em fase diagnóstica **não consomem número de versão**. Se a Parte 2 do MNT-13 decidir GO, o operador autorizar código e a correção for aceita fisicamente, calcular o próximo PATCH v3.x **da tag vigente naquele momento**, nunca reservar v3.2.2 antes. NO-GO, NOT A BUG ou investigação inconclusiva não geram release.
+**Versões:** MNT-12 é ajuste de apresentação compatível, portanto PATCH (próximo número definido pela **última tag oficial no dia do aceite**). Diagnóstico/NO-GO/BLOCKED/NOT A BUG de MNT-13 e Zoom apenas investigado em MNT-14 não geram release; implementação aceita futura também deriva SemVer da tag vigente, sem números reservados.
 
 
 ## Regra de cálculo da versão
@@ -30,7 +31,7 @@
 2. HOTFIX e melhorias de *copy*, apresentação/cores, normalização e mapeamento HID corretivo preservando contrato externo são **PATCH** (incrementa último componente: 3.0.0 → 3.0.1).
 3. MEL-04 muda deliberadamente semântica de controles em todos os Help; é uma mudança funcional compatível de UI, portanto **MINOR**: da hipotética 3.0.4 para **3.1.0**, reiniciando PATCH.
 4. Versões da matriz **não são reservas irrevogáveis**. Se outra publicação surgir antes do gate, derivar próximo número da última tag estável v3.x realmente publicada (nunca reutilizar/rebaixar).
-5. Se um gate for **somente diagnóstico sem alteração executável** (ex.: MNT-12 Zoom ou MNT-13 Pair New com conclusão sem código), **não criar tag, não gerar release vazio, não pular números por causa de tabela**. Registrar conclusão *DEFERRED / NO RELEASE* e usar a próxima versão disponível no gate seguinte. Se o comportamento modificar contrato incompatível, **reabrir planejamento antes de implementá-lo**, não impor v4 por omissão.
+5. Se um gate for **somente diagnóstico sem alteração executável** (ex.: MNT-14 Zoom ou MNT-13 Pair New com conclusão sem código), **não criar tag, não gerar release vazio, não pular números por causa de tabela**. Registrar conclusão *DEFERRED / NO RELEASE* e usar a próxima versão disponível no gate seguinte. Se o comportamento modificar contrato incompatível, **reabrir planejamento antes de implementá-lo**, não impor v4 por omissão.
 6. Um único release para cada gate aceito, associado a seu commit-fonte exato; nenhuma release antecipada mesmo que CI passe.
 
 ## Ciclo obrigatório de cada gate
@@ -50,7 +51,7 @@
 - Após aceite (autorização de publicação fornecida neste planejamento): atualizar código de versão/CMake/README/release notes ao número calculado; CI do commit final e, se necessário, UF2 final produzido da mesma fonte/tag; integrar branch conforme estratégia segura do repositório; tag anotada `v3.x.y` **apontando para o commit com versão correta**; GitHub Release oficial com UF2 + `SHA256SUMS`; verificar download/hash e que tag coincide com `main`.
 - Registrar `executions/MNT-XX/operator-acceptance.md`, `release.md` com tag/SHA/CI/hashes/publicação, então habilitar o próximo gate a partir da **tag publicada**, não do candidato anterior.
 - Se CI do bump falhar ou Release falhar: **gate não publicado**, não prosseguir; corrigir sem gerar release duplicada. Nunca deixar versão README divergente de tag/firmware.
-- **Exceção MNT-13, em duas partes:** a Parte 1 produz evidências e relatório de causa raiz **sem patch**; a Parte 2 compara viabilidade, riscos e alternativas, resultando em decisão GO/NO-GO/BLOCKED/NOT A BUG. Somente se houver GO **e autorização expressa posterior** aplica-se o ciclo A/B/C para código, testes, UF2, aceite físico e publicação. Neste pedido foi autorizado **somente planejar**, não executar a Parte 1 nem a Parte 2.
+- **Exceção MNT-13, em duas partes:** a Parte 1 produz evidências e relatório de causa raiz **sem patch**; a Parte 2 compara viabilidade, riscos e alternativas, resultando em decisão GO/NO-GO/BLOCKED/NOT A BUG. Somente se houver GO **e autorização expressa posterior** aplica-se o ciclo A/B/C para código, testes, UF2, aceite físico e publicação. Neste pedido foi autorizado **somente planejar**, não executar MNT-12 nem a Parte 1 ou Parte 2 de MNT-13, e não iniciar MNT-14.
 
 ## Invariantes
 - Manter Pico 2 W e build Release, 2 USB HID interfaces existentes, Mouse/Keyboard/Consumer, 30 atalhos, 12 combos, movimentação e DPI/rotação por mouse, Saved Devices bond-scoped, Lock/Modifier, BLE pairing, esquema flash v3.
