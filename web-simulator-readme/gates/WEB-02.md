@@ -1,6 +1,6 @@
 # WEB-02 — Canvas LCD e paleta fiel
 
-**Status:** CANDIDATE IMPLEMENTED IN SITE BRANCH / 39/39 ISOLATED RASTER TESTS PASS / PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-01 aceito.
+**Status:** ACCEPTED BY OPERATOR (2026-10-12); publication successful. Gentle preferred; more saturated refinement explicitly assigned to WEB-03. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-01 aceito.
 
 ## Implementation evidence
 
@@ -9,7 +9,7 @@
 - [Candidate scope and 39 regression checks](../executions/WEB-02/candidate.md)
 - [Production-browser test checklist](../executions/WEB-02/manual-tests.md)
 
-Only the English web app is changed. WEB-03 is NOT STARTED; WEB-02 operator acceptance is pending.
+[Operator acceptance](../executions/WEB-02/operator-acceptance.md) recorded. WEB-03 authorized; WEB-04 not started.
 
 ## Escopo fechado
 
