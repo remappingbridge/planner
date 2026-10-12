@@ -1,6 +1,6 @@
 # WEB-06 — Perfis, Custom Modifier e Movement
 
-**Status:** CANDIDATE IMPLEMENTED / 165/165 ISOLATED CHECKS PASS / PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-05 aceito.
+**Status:** ACCEPTED BY OPERATOR (2026-10-12). WEB-07 authorized, including HAT identity relocation. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-05 aceito.
 
 ## Implementation and operator addition
 
