@@ -1,6 +1,6 @@
 # MNT-13 — candidato de firmware atualizado (pipe na segunda linha)
 
-**STATUS: IMPLEMENTADO / CI COMPLETA PASS / UF2 PICO 2 W VERIFICADO / ACEITE FÍSICO PENDING.** O candidato anterior com `>` está **substituído** por esta revisão com `|`. Ainda não houve merge, tag nova nem release. Firmware conserva a versão interna `v3.2.2` até aceite.
+**ARQUIVO HISTÓRICO DO CANDIDATO FISICAMENTE ACEITO.** Em 12/10/2026 o operador declarou “gate aceito”; a versão final [v3.2.3](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3) foi publicada com [checksum oficial](release.md). **Os hashes abaixo são apenas do candidato, não do UF2 da release.** O candidato anterior com `>` está **substituído** por esta revisão com `|`. A publicação posterior está registrada em [release.md](release.md). Firmware conserva a versão interna `v3.2.2` até aceite.
 
 ## Fonte e execução oficial
 
@@ -25,4 +25,4 @@
 
 Gravar **este** UF2 por BOOTSEL **sem `flash_nuke`** (manter bonds e perfis), guardar o UF2 estável anterior como reversão e executar o [roteiro físico atualizado](physical-acceptance.md) **desde HOME CONNECTED**. Verificar que `|` ocupa a primeira coluna da segunda linha de cada opção de duas linhas, sem aparecer em linhas informativas ou rótulos de COMBINATIONS.
 
-**ACEITE FÍSICO PENDING.** Somente após `gate aceito` será feito bump PATCH com CI do commit versionado, merge, tag e Release final; **MNT-14** e **MNT-15** permanecem não iniciados.
+**ACEITE FÍSICO CONCEDIDO EM 12/10/2026 / v3.2.3 PUBLICADA.** [Operador](operator-acceptance.md) · [Publicação oficial](release.md). MNT-14 Parte 1 iniciada em auditoria estática; MNT-15 suspenso.
