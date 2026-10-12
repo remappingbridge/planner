@@ -1,6 +1,6 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-13 aceitos/publicados**, última tag oficial **[v3.2.3](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3)**. **MNT-14 CANCELADO a pedido do operador**, após testes físicos relatados como bem-sucedidos em cenários variados/adversos; auditoria estática histórica preservada, sem diagnóstico causal ou patch. **MNT-15 Zoom: teclado físico confirma Ctrl+= sem Shift no Obsidian e falha com Shift; validar navegador e terminal antes de eventual alteração genérica da ação 26. Sem patch autorizado.**
+**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-13 aceitos/publicados**, última tag oficial **[v3.2.3](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3)**. **MNT-14 CANCELADO a pedido do operador**, após testes físicos relatados como bem-sucedidos em cenários variados/adversos; auditoria estática histórica preservada, sem diagnóstico causal ou patch. **MNT-15 Zoom: implementação autorizada após teste Mabox; ação 26 passou de Ctrl+Shift+Equal para Ctrl+Equal na [PR #45 DRAFT](https://github.com/remappingbridge/remappingbridge/pull/45), CI host 98/98 PASS, Pico 2 W e físico PENDING. Terminais apresentam atalhos com Shift distintos; limitação documentada, ainda sem release.**
 
 ## Baseline e fontes
 
@@ -18,7 +18,7 @@
 5. [MNT-12 — cores de Modifier/Combinations](gates/MNT-12.md): **ACEITO v3.2.2**. [Aceite](executions/MNT-12/operator-acceptance.md) e [release](executions/MNT-12/release.md).
 6. [MNT-13 — novo indicador de opção selecionada](gates/MNT-13.md): **ACEITO/PUBLICADO v3.2.3**. Só a opção focada recebe o caractere `|` na primeira coluna; em opções de duas linhas, na segunda linha; nenhuma outra opção/tela informativa.
 7. [MNT-14 — PAIR NEW com A conectado](gates/MNT-14.md): **CANCELADO POR DECISÃO DO OPERADOR** após testes físicos positivos; relatórios de investigação estática anteriores preservados como histórico em [executions/MNT-14](executions/MNT-14/part-1-root-cause.md). Não executar Parte 2 nem correção.
-8. [MNT-15 — Zoom genérico Obsidian/Mabox](gates/MNT-15.md): **NOVOS TESTES DOCUMENTADOS, SEM PATCH** — [matriz Mabox e investigação](executions/MNT-15/mabox-zoom-investigation-2026-10-12.md). Antigo MNT-14, sem alteração de firmware.
+8. [MNT-15 — Zoom genérico Obsidian/Mabox](gates/MNT-15.md): **CANDIDATO PR #45 / CI HOST 98/98 / ACEITE FÍSICO PENDING** — [matriz Mabox e investigação](executions/MNT-15/mabox-zoom-investigation-2026-10-12.md). Antigo MNT-14, sem alteração de firmware.
 9. [gates/](gates/) contém MNT-01..15; [executions/](executions/) conserva histórico de aceites e apenas roteiros planejados dos gates não iniciados.
 
 ## Regras de condução
