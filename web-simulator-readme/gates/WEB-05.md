@@ -1,6 +1,6 @@
 # WEB-05 — Mouse virtual, eventos, persistência e busca
 
-**Status:** CANDIDATE IMPLEMENTED / 134 ISOLATED CHECKS / PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-04 aceito.
+**Status:** ACCEPTED by operator on 2026-10-12. WEB-06 authorized; sticky HAT layout assigned to next gate. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-04 aceito.
 
 ## WEB-05 implementation evidence
 
