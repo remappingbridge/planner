@@ -3,9 +3,9 @@
 **Status: PLANEJADO / SUSPENSO — NÃO INICIADO.** O gate Zoom/Obsidian foi movido de MNT-12 para MNT-14, sem mudança de requisitos. Nenhuma alteração de firmware, CI, UF2 ou release foi executada.
 
 - Backlog: **MEL-08 (solicitação explícita)** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
-- Base/dependência: **MNT-11 publicado** (MNT-10 de limpeza concluído antes do MNT-11); a branch futura `maintenance/v3x-mnt-12` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
+- Base/dependência: **MNT-11 publicado** (MNT-10 de limpeza concluído antes do MNT-11); a branch futura `maintenance/v3x-mnt-14` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
 - Histórico de renumeração: **MNT-10 → MNT-12 → MNT-14**; o conteúdo de MEL-08 Zoom/Obsidian foi preservado. Renumeração solicitada pelo operador em 12/10/2026.
-- Versão prevista somente após aceite físico: **próxima versão v3.x disponível após MNT-11 (PATCH apenas se correção real; sem release se só diagnóstico)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
+- Versão prevista somente após aceite físico: **próxima versão v3.x disponível ao executar MNT-14 (PATCH apenas se correção real; sem release se só diagnóstico)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
 ## Escopo exato
 Investigar ZOOM IN/OUT: teclado físico funciona no Obsidian KDE Debian13; RemappingBridge falha no Obsidian e funciona no navegador; RESET funciona. Não modificar firmware até obter origem/semântica dos eventos. Se solução genérica HID for confirmada e passar regressões, implantar alteração mínima, sem condição por aplicativo.
