@@ -1,0 +1,314 @@
+{
+  "schema": "remappingbridge-web00-interaction-contract-v1",
+  "source": {
+    "repository": "remappingbridge/remappingbridge",
+    "tag": "v3.2.3",
+    "commit": "f38c5fd15c68ea9a36d3b05912727788d7b98e81",
+    "paths": [
+      "include/blu2usb/ux_model/ux_model.h",
+      "src/ux_model/ux_model.c",
+      "include/blu2usb/domain/control.h",
+      "include/blu2usb/renderer/renderer.h",
+      "include/blu2usb/domain/profile.h",
+      "src/movement/movement.c",
+      "src/interaction/interaction.c",
+      "src/renderer/renderer.c",
+      "src/renderer/profile_feedback.c",
+      "tests/test_mnt12_modifier_cyan.c",
+      "tests/test_mnt13_selection_marker.c"
+    ]
+  },
+  "display": {
+    "lcd": {
+      "width": 240,
+      "height": 240,
+      "rows": 9,
+      "columns": 21,
+      "glyphScale": 2,
+      "glyphWidth": 10,
+      "glyphHeight": 14,
+      "charAdvance": 11,
+      "lineAdvance": 27,
+      "origin": {
+        "x": 7,
+        "y": 8
+      }
+    },
+    "rgb565": {
+      "BLU2USB_COLOR_BLACK": "0X0000",
+      "BLU2USB_COLOR_WHITE": "0XFFFF",
+      "BLU2USB_COLOR_MAGENTA": "0XF81F",
+      "BLU2USB_COLOR_CYAN": "0X07FF",
+      "BLU2USB_COLOR_CYAN_FOCUSED": "0XD7FF",
+      "BLU2USB_COLOR_OFF_WHITE_YELLOW": "0XFFB8",
+      "BLU2USB_COLOR_LIGHT_GRAY": "0XC618",
+      "BLU2USB_COLOR_DARK_MAGENTA": "0X0801"
+    },
+    "renderOrder": [
+      "blu2usb_ui_project",
+      "blu2usb_ui_enforce_applied_visual_contract",
+      "blu2usb_ui_apply_selection_marker",
+      "blu2usb_renderer_render"
+    ],
+    "webDelta": "Only dark-magenta LCD background may be softened after visual approval. Brightness limited to 0..100 percent."
+  },
+  "controls": {
+    "enumOrder": [
+      "BLU2USB_CONTROL_JOY_UP",
+      "BLU2USB_CONTROL_JOY_DOWN",
+      "BLU2USB_CONTROL_JOY_LEFT",
+      "BLU2USB_CONTROL_JOY_RIGHT",
+      "BLU2USB_CONTROL_JOY_PRESS",
+      "BLU2USB_CONTROL_KEY_A",
+      "BLU2USB_CONTROL_KEY_B",
+      "BLU2USB_CONTROL_KEY_X",
+      "BLU2USB_CONTROL_KEY_Y"
+    ],
+    "keyboard": {
+      "ArrowUp": "JOY_UP",
+      "ArrowDown": "JOY_DOWN",
+      "ArrowLeft": "JOY_LEFT",
+      "ArrowRight": "JOY_RIGHT",
+      "Enter": "JOY_PRESS",
+      "Space": "JOY_PRESS",
+      "a": "KEY_A",
+      "b": "KEY_B",
+      "x": "KEY_X",
+      "y": "KEY_Y"
+    },
+    "eventContract": "Actions occur on validated control RELEASE after a PRESS; lock first matched press/release unlocks and is consumed"
+  },
+  "profile": {
+    "codedEnums": [
+      "BLU2USB_MOUSE_PROFILE_PASSTHROUGH",
+      "BLU2USB_MOUSE_PROFILE_DEFAULT_REMAP",
+      "BLU2USB_MOUSE_PROFILE_ESCAPE_REMAP",
+      "BLU2USB_MOUSE_PROFILE_CUSTOM_REMAP"
+    ],
+    "visibleMenuChoices": [
+      "PASSTHROUGH DEFAULT",
+      "CUSTOM REMAPPING"
+    ],
+    "sources": [
+      "BLU2USB_MOUSE_SOURCE_LEFT",
+      "BLU2USB_MOUSE_SOURCE_RIGHT",
+      "BLU2USB_MOUSE_SOURCE_MIDDLE",
+      "BLU2USB_MOUSE_SOURCE_FORWARD",
+      "BLU2USB_MOUSE_SOURCE_BACKWARD"
+    ],
+    "encodedTargets": [
+      "BLU2USB_MOUSE_TARGET_LEFT",
+      "BLU2USB_MOUSE_TARGET_RIGHT",
+      "BLU2USB_MOUSE_TARGET_MIDDLE",
+      "BLU2USB_MOUSE_TARGET_BACKWARD",
+      "BLU2USB_MOUSE_TARGET_FORWARD",
+      "BLU2USB_MOUSE_TARGET_ESCAPE",
+      "BLU2USB_MOUSE_TARGET_MODIFIER"
+    ],
+    "visibleTargetOrder": [
+      "LEFT",
+      "RIGHT",
+      "MIDDLE",
+      "FORWARD",
+      "BACKWARD",
+      "MODIFIER"
+    ],
+    "note": "DEFAULT_REMAP and ESCAPE_REMAP enum IDs are retained only for backwards compatibility; not UI options. Encoded BACKWARD and FORWARD order differs from the choice order."
+  },
+  "modifiers": {
+    "combinationIds": [
+      "BLU2USB_MOD_COMBO_RELEASED",
+      "BLU2USB_MOD_COMBO_MIDDLE",
+      "BLU2USB_MOD_COMBO_LEFT",
+      "BLU2USB_MOD_COMBO_RIGHT",
+      "BLU2USB_MOD_COMBO_FORWARD",
+      "BLU2USB_MOD_COMBO_BACKWARD",
+      "BLU2USB_MOD_COMBO_WHEEL_UP",
+      "BLU2USB_MOD_COMBO_WHEEL_DOWN",
+      "BLU2USB_MOD_COMBO_MOVE_LEFT",
+      "BLU2USB_MOD_COMBO_MOVE_RIGHT",
+      "BLU2USB_MOD_COMBO_MOVE_UP",
+      "BLU2USB_MOD_COMBO_MOVE_DOWN"
+    ],
+    "shortcutLabels": [
+      "NOT CUSTOMIZED",
+      "COPY",
+      "CUT",
+      "SELECT ALL",
+      "PASTE",
+      "UNDO",
+      "REDO",
+      "ESCAPE",
+      "SPACE",
+      "ENTER/RETURN",
+      "BACKSPACE",
+      "DELETE",
+      "RENAME",
+      "FULL SCREEN",
+      "SCREENSHOT FULL",
+      "SCREENSHOT AREA",
+      "REFRESH",
+      "FIND",
+      "SAVE",
+      "PLAY/PAUSE",
+      "NEXT TRACK",
+      "PREVIOUS TRACK",
+      "VOLUME UP",
+      "VOLUME DOWN",
+      "MUTE",
+      "HOME SCREEN/PAGE",
+      "ZOOM IN",
+      "ZOOM OUT",
+      "RESET ZOOM",
+      "BRIGHTNESS UP",
+      "BRIGHTNESS DOWN"
+    ],
+    "validAssignments": [
+      1,
+      30
+    ],
+    "unassignedId": 0,
+    "combinationsPages": 6,
+    "combinationsPerPage": 2,
+    "shortcutsPages": 5,
+    "shortcutsPerPage": 6,
+    "activePredicate": "active_profile == CUSTOM_REMAP && modifier_source in [0,4]",
+    "unavailableButtonCombos": [
+      "MIDDLE",
+      "LEFT",
+      "RIGHT",
+      "FORWARD",
+      "BACKWARD"
+    ],
+    "allOtherComboKindsRemainsAvailable": true
+  },
+  "movement": {
+    "allowedGainQuarters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      12
+    ],
+    "displayGains": [
+      "0.25x",
+      "0.5x",
+      "0.75x",
+      "1x",
+      "1.25x",
+      "1.5x",
+      "2x",
+      "3x"
+    ],
+    "defaultGainQuarters": {
+      "horizontal": 4,
+      "vertical": 4,
+      "rotation": 0
+    },
+    "rotationDegrees": [
+      0,
+      90,
+      180,
+      270
+    ]
+  },
+  "mock": {
+    "maxSavedMice": 8,
+    "simulatedBLE": true,
+    "simulatedUSB": true,
+    "simulatedFlash": true
+  },
+  "routes": [
+    {
+      "screen": "HOME",
+      "options": [
+        "MOUSE_OPTIONS",
+        "MOVEMENT_OPTIONS",
+        "SAVED_DEVICES",
+        "PAIR_MOUSE"
+      ]
+    },
+    {
+      "screen": "HOME_SEARCHING",
+      "options": [
+        "SAVED_DEVICES",
+        "PAIR_MOUSE"
+      ]
+    },
+    {
+      "screen": "HOME_RETRY",
+      "options": [
+        "SAVED_DEVICES",
+        "PAIR_MOUSE"
+      ]
+    },
+    {
+      "screen": "SEARCHING_FIRST",
+      "options": [],
+      "reason": "didactic; no HAT action"
+    }
+  ],
+  "visualCases": [
+    {
+      "case": "MNT12_CUSTOM_with_applied_MODIFIER",
+      "expected": "MODIFIER SHORTCUTS cyan; focused pastel cyan"
+    },
+    {
+      "case": "MNT12_PASSTHROUGH_with_saved_MODIFIER",
+      "expected": "MODIFIER SHORTCUTS gray; focused white"
+    },
+    {
+      "case": "MNT12_CUSTOM_without_applied_MODIFIER",
+      "expected": "gray; focused white"
+    },
+    {
+      "case": "MNT12_draft_not_applied",
+      "expected": "draft must not activate cyan"
+    },
+    {
+      "case": "MNT12_available_assigned_shortcut",
+      "expected": "cyan if active, pastel cyan focused"
+    },
+    {
+      "case": "MNT12_UNAVAILABLE",
+      "expected": "value static yellow; independent of focus"
+    },
+    {
+      "case": "MNT12_NOT_CUSTOMIZED",
+      "expected": "gray/white"
+    },
+    {
+      "case": "MNT13_standard_options",
+      "expected": "one pipe in first physical column; no others"
+    },
+    {
+      "case": "MNT13_combinations_two_lines",
+      "expected": "pipe in second/value line 2 or 4"
+    },
+    {
+      "case": "MNT13_saved_devices",
+      "expected": "pipe row 5 iff saved bond exists"
+    },
+    {
+      "case": "MNT13_unavailable_pipe_tone",
+      "expected": "pipe uses focused label tone while value static"
+    },
+    {
+      "case": "MNT13_no_menu_and_invalid_selection",
+      "expected": "no pipe"
+    },
+    {
+      "case": "MNT13_overlay_idempotency",
+      "expected": "two applications produce same frame"
+    }
+  ],
+  "legacyExclusions": [
+    "STANDARD REMAP choice",
+    "ESCAPE REMAP choice",
+    "LEARN THE KEYS as navigable route",
+    "Legacy 29-screen lab as v3 UI source"
+  ]
+}
