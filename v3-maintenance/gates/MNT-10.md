@@ -4,7 +4,7 @@
 
 - Backlog: **MEL-10**, nova melhoria de exclusão integral de dispositivo.
 - Base: **v3.1.4 oficialmente publicada**, após MNT-09; futura branch `maintenance/v3x-mnt-10` deve nascer da tag/SHA exatos da última release oficial.
-- Precede: MNT-11 (nome BLE). O gate de Zoom anteriormente chamado MNT-10 foi deslocado para **MNT-12**.
+- Precede: MNT-11 (nome BLE). O gate de Zoom, originalmente MNT-10 e depois MNT-12, foi finalmente renumerado para **MNT-14** em 12/10/2026; MNT-12 agora é a indicação visual de Modifier Shortcuts/Combinations.
 - Versão prevista: **a decidir no preflight** com SemVer 3.x. Se correção interna compatível PATCH, próxima disponível `v3.1.5`; se a solução exigir introduzir persistência e perfil por dispositivo, avaliar **v3.2.0 MINOR**. Não publicar v4.0.0 nem reservar números imutáveis.
 
 ## Defeito observado e resultado esperado
