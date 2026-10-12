@@ -4,6 +4,8 @@
 
 [Site PR #4](https://github.com/remappingbridge/remappingbridge.github.io/pull/4): `web/web-03-hat-help-lock-gentle` → `main`.
 
+**Production candidate published to website main** via squash commit `d78533cbd274647b5c521cf8132e2a2d148cf3e3`. This merge is solely to enable operator testing through GitHub Pages and **does not mean operator acceptance**. [Pages run #38305839675](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38305839675). Exact source blobs of `index.html`, the renderer, HAT engine, app bootstrap and test runner in production main were compared to the WEB-03 candidate branch and all matched.
+
 ## Implementation delivered
 
 - `assets/js/hat-interaction.js` adds a pure, firmware-derived input and limited HOME/HELP state machine. Screens supported explicitly are the FIRST tutorial, connected HOME, searching HOME, retry HOME, and the three corresponding Help templates. **This is not 45-screen WEB-04.**
