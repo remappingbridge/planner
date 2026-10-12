@@ -1,6 +1,6 @@
 # 03 — Matriz de teste físico, host e regressão de v3.x
 
-**Estado em 12/10/2026:** MNT-01..MNT-13 **aceitos/publicados até v3.2.3**. **MNT-14 CANCELADO pelo operador** após testes físicos relatados como bem-sucedidos em cenários diversos/adversos; sem logs individuais anexados, não converter automaticamente cada caso desta matriz em PASS. A Parte 2 e a correção não ocorreram. **MNT-15: ação ZOOM IN genérica alterada para Ctrl+Equal sem Shift na PR #45 DRAFT, autorização explícita; CI host 98/98 PASS. Zoom Out/Reset preservados; há terminais que só ampliam com Shift, limitação documentada. Pico/aceite físico pendentes.**
+**Estado em 12/10/2026:** MNT-01..MNT-13 **aceitos/publicados até v3.2.3**. **MNT-14 CANCELADO pelo operador** após testes físicos relatados como bem-sucedidos em cenários diversos/adversos; sem logs individuais anexados, não converter automaticamente cada caso desta matriz em PASS. A Parte 2 e a correção não ocorreram. **MNT-15: ação ZOOM IN genérica alterada para Ctrl+Equal sem Shift na PR #45 DRAFT, autorização explícita; CI 98/98 testes host + Pico 2 W produção PASS; UF2 hash validado. Zoom Out/Reset preservados; há terminais que só ampliam com Shift, limitação documentada. Aceite físico pendente.**
 
 ## Preparação comum
 1. Identificar tag estável instalada e a versão candidata, guardar 12 combos de shortcuts e parâmetros Movement; fazer backup quando pertinente sem flash_nuke.
