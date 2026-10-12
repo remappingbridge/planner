@@ -1,6 +1,6 @@
 # 02 — Gates MNT-01..MNT-15, dependências e Semantic Versioning 3.x
 
-**Atualizado em 12/10/2026:** MNT-01..MNT-13 **aceitos e publicados até v3.2.3**. **MNT-14 CANCELADO PELO OPERADOR** após testes físicos amplos relatados como bem-sucedidos; não houve patch nem release e a causa raiz não foi estabelecida. Parte 2 não será executada. **MNT-15 Zoom: resultados do Mabox documentados; apenas Zoom In falha no Obsidian. Nenhuma implementação/autorização de patch.**
+**Atualizado em 12/10/2026:** MNT-01..MNT-13 **aceitos e publicados até v3.2.3**. **MNT-14 CANCELADO PELO OPERADOR** após testes físicos amplos relatados como bem-sucedidos; não houve patch nem release e a causa raiz não foi estabelecida. Parte 2 não será executada. **MNT-15 Zoom: comparação física no Obsidian confirma Ctrl+= sem Shift funcionando e Ctrl+Shift+= falhando; validar Ctrl+= sem Shift em navegador e terminal antes de qualquer patch. Nenhuma implementação/autorização de firmware.**
 
 ## Matriz de execução incremental
 
