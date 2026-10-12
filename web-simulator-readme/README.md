@@ -1,6 +1,6 @@
 # Programa WEB — Simulador estático e README didático RemappingBridge
 
-**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 ACEITO PELO OPERADOR, PR #1 integrada; WEB-02 IN REVIEW (Canvas candidate); WEB-03..15 NOT STARTED. Todos os textos públicos de firmware/site/releases devem estar em inglês; testes manuais web apenas em navegador de produção.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
+**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 ACEITO PELO OPERADOR, PR #1 integrada; WEB-02 ACCEPTED, WEB-03 AUTHORIZED (Gentle refinement), WEB-04..15 NOT STARTED. Todos os textos públicos de firmware/site/releases devem estar em inglês; testes manuais web apenas em navegador de produção.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
 
 ## Objetivo e destinos
 
