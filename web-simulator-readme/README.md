@@ -40,6 +40,7 @@ Planejamento, contratos, critérios de aceite e evidências de execução ficam 
 - [03 — Testes, paridade e aceite](03-acceptance-and-tests.md)
 - [04 — README, hardware, ilustrações, download e embedding](04-readme-hardware-and-download.md)
 - [gates/](gates/) — escopos e critérios individuais WEB-00..WEB-15.
+- [English-only audit: firmware, website and 16 GitHub Releases — completed](executions/WEB-01/english-audit.md)
 - [WEB-01: candidato e teste manual](executions/WEB-01/candidate.md) — site integrado à main, mas publicação Pages ainda exige verificação independente.
 - [WEB-00: evidências](executions/WEB-00/candidate.md) e [fixtures versionadas](fixtures/README.md) — fonte v3.2.3 extraída; autorização para avançar registrada em [WEB-00/operator-acceptance.md](executions/WEB-00/operator-acceptance.md).
 
