@@ -1,6 +1,6 @@
 # WEB-00 — Autoridade, snapshot e fixtures
 
-**Status:** CANDIDATO DOCUMENTAL PREPARADO — VERIFICAÇÃO ESTÁTICA PASS, ACEITE DO OPERADOR PENDENTE. **Destino em futura execução:** `planner (execução apenas documental)`. **Dependência:** Nenhum. Primeiro gate da série.
+**Status:** AUTORIZADO/ACEITO PARA PROSSEGUIR PELO OPERADOR EM 12/10/2026 (“prossiga”); verificação estática PASS. **Destino em futura execução:** `planner (execução apenas documental)`. **Dependência:** Nenhum. Primeiro gate da série.
 
 ## Candidato e evidências
 
@@ -10,7 +10,7 @@
 - [Fixtures versionadas](../fixtures/README.md)
 - [Checklist manual PENDENTE](../executions/WEB-00/manual-tests.md)
 
-**Nenhum código de site ou README do firmware alterado. WEB-01 bloqueado até aceite explícito.**
+**Nenhum código de site ou README do firmware alterado neste gate. WEB-01 autorizado; ver [decisão do operador](../executions/WEB-00/operator-acceptance.md).**
 
 ## Escopo fechado
 
