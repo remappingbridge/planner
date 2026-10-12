@@ -23,7 +23,7 @@
 
 ## Published production candidate
 
-Website [PR #7](https://github.com/remappingbridge/remappingbridge.github.io/pull/7) was merged into website `main` exclusively for browser testing, commit `7b8449dd233016698d089015b28a811ddd643478`. Pages workflow [#38314559207](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38314559207) must complete successfully before independent operator visual review. **Publication is not gate acceptance.**
+Website [PR #7](https://github.com/remappingbridge/remappingbridge.github.io/pull/7) was merged into website `main` exclusively for browser testing, commit `7b8449dd233016698d089015b28a811ddd643478`. Pages workflow [#38314559207](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38314559207) **COMPLETED SUCCESSFULLY** (build and deploy) for exactly that site SHA. Source blob hashes for HTML, CSS, model, HAT, projector, app and 165-test runner matched between published site `main` and WEB-06 candidate branch. **Actual browser visual and live 165-check validation remain operator tasks.** **Publication is not gate acceptance.**
 
 ## Publication, acceptance and rollback
 
