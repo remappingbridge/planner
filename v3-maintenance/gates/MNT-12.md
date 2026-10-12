@@ -1,11 +1,11 @@
 # MNT-12 — Indicador ciano de Modifier Shortcuts e valores de Combinations
 
-**STATUS: CANDIDATO IMPLEMENTADO / ACEITE FÍSICO PENDING.** Criado em 12/10/2026 e implementado após ordem expressa, no PR draft [#42](https://github.com/remappingbridge/remappingbridge/pull/42), branch `maintenance/v3x-mnt-12`, a partir da tag oficial v3.2.1. [CI #541](https://github.com/remappingbridge/remappingbridge/actions/runs/38249366464) **94/94 testes host PASS e Pico 2 W produção SUCCESS**; [UF2 candidato com SHA256](../executions/MNT-12/candidate.md) e [cenários físicos](../executions/MNT-12/physical-acceptance.md). **Sem aceite físico, merge ou release novo.** O Zoom antigo foi preservado em [MNT-14](MNT-14.md).
+**STATUS: ACEITO E PUBLICADO como [v3.2.2](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.2).** PR #42 integrado; CI #541 com 94/94 testes e Pico produção PASS, CI versionada #545 host+Pico PASS; tag verificada. [Aceite](../executions/MNT-12/operator-acceptance.md) e [release](../executions/MNT-12/release.md) registrados. Próximo gate MNT-13 é a nova seta `>` (planejada), MNT-14 é PAIR NEW (duas partes não executadas) e MNT-15 é Zoom suspenso.
 
 - Backlog: **MEL-12 (novo item)**. MEL-11 permanece vinculado ao MNT-13 / PAIR NEW, mesmo que o número do novo gate seja MNT-12. Não renumerar os demais itens MEL.
 - Hardware e produto: Pico 2 W, LCD 9 × 21, firmware [última release v3.2.1](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.1), perfis isolados por mouse após MNT-10.
 - Branch efetiva: `maintenance/v3x-mnt-12`, criada do SHA exato **`3846e8f4ee5fba40421c0db1f51387de6c51e953`** da tag oficial `v3.2.1`. PR #42 em rascunho, candidato sem mudança de versão.
-- Entrega **após futuro aceite físico**: PATCH da série v3.x (proposta `v3.2.2` se não houver release intermediário). Sem versionar antes de aceite.
+- **Entrega concluída:** PATCH v3.2.2 fisicamente aceito e publicado. A versão do candidato permaneceu 3.2.1 até o aceite, e foi atualizada conforme o rito de release.
 - Relação com outros gates: [MNT-13](MNT-13.md) (PAIR NEW) segue intacto e em duas partes; [MNT-14](MNT-14.md) (Zoom) permanece suspenso. Este gate **não os inicia**.
 
 ## 1. Regra única de habilitação visual
@@ -137,7 +137,7 @@ Além da tabela:
 1. **Executado:** operador autorizou implementar; tag v3.2.1, SHA e branch foram registrados em [pre-implementation.md](../executions/MNT-12/pre-implementation.md).
 2. **Executado:** predicado único derivado de perfil+Modifier aplicado e ajuste visual isolado em `profile_feedback.c`/`renderer.c`, sem alterar modelo HID, persistência, menus ou navegação.
 3. **Executado:** 94 testes host, Pico 2 W production e UF2/SHA conferidos no [registro do candidato](../executions/MNT-12/candidate.md). Roteiro de [validação física](../executions/MNT-12/physical-acceptance.md) preparado.
-4. **PENDENTE:** aguardar **aceite físico explícito**. Se rejeitado, corrigir na mesma branch e gerar novo UF2. Se aceito, bump PATCH v3.x, executar CI versionada, PR/merge, GitHub Release UF2/SHA256SUMS e registrar aceite/release no planner.
-5. **Não prosseguir automaticamente para MNT-13 ou MNT-14.** Esses gates exigem autorização independente; MNT-14 permanece suspenso.
+4. **EXECUTADO:** aceite físico explícito registrado; bump PATCH, CI versionada, PR #42/merge, tag v3.2.2 e GitHub Release documentados em [release.md](../executions/MNT-12/release.md).
+5. **Não iniciar automaticamente MNT-13, MNT-14 ou MNT-15.** MNT-13 é novo indicador `>` de foco (somente planejado), MNT-14 mantém investigação PAIR NEW em duas partes e MNT-15 permanece Zoom suspenso.
 
-**Estado atual: firmware candidato, CI concluída, sem teste/aceite físico e sem nova versão publicada.** MNT-13 e MNT-14 permanecem intocados.
+**Estado atual: MNT-12 ACEITO, TESTADO E PUBLICADO v3.2.2; MNT-13/14/15 NÃO INICIADOS.**
