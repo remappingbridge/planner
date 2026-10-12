@@ -15,7 +15,7 @@
 | [MNT-07](gates/MNT-07.md) | MEL-05 | Paleta com novo ciano clarinho `0xD7FF` | **ACEITO v3.1.2** (avaliação conjunta encerrada com MNT-08) | MNT-06 |
 | [MNT-08](gates/MNT-08.md) | MEL-06 | Inversão final: sem foco ciano `0x07FF`, selecionado clarinho `0xD7FF` | **ACEITO v3.1.3** | MNT-07 |
 | [MNT-09](gates/MNT-09.md) | MEL-07 | HOME CONNECTED: primeira opção `REMAPPING OPTIONS` fixa | **ACEITO v3.1.4** | MNT-08 |
-| [MNT-10](gates/MNT-10.md) | **MEL-10 NOVO** | Remover mouse: eliminar bond, nome, Movement e todo perfil/remap/shortcuts antigos **somente daquele mouse**; novo pareamento inicia em defaults | **PLANEJADO; versão a decidir** — v3.1.5 PATCH se correção compatível, ou v3.2.0 MINOR se nova persistência por mouse | MNT-09 v3.1.4 publicada |
+| [MNT-10](gates/MNT-10.md) | **MEL-10 NOVO** | Remover mouse: eliminar bond, nome, Movement e todo perfil/remap/shortcuts antigos **somente daquele mouse**; novo pareamento inicia em defaults | **CANDIDATO PR #40 / CI 92/92 + Pico PASS / FÍSICO PENDING** — proposta v3.2.0 MINOR por introduzir perfis por mouse | MNT-09 v3.1.4 publicada |
 | [MNT-11](gates/MNT-11.md) | MEL-09 | Nomes BLE: sufixo MOUSE só se substring não existe | **PLANEJADO; próximo PATCH disponível** | **MNT-10 publicado** |
 | [MNT-12](gates/MNT-12.md) | MEL-08 (antigo MNT-10) | Diagnóstico Zoom Obsidian/KDE e **correção HID genérica apenas se comprovada** | **PLANEJADO; próximo PATCH se correção validada, ou DEFERRED/NO RELEASE** | **MNT-11 publicado** |
 
