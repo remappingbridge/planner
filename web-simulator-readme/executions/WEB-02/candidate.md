@@ -2,7 +2,7 @@
 
 **State:** CODE IMPLEMENTED / STATIC RENDERER-REGRESSION PASS / **PRODUCTION-BROWSER VISUAL CHECKS & OPERATOR ACCEPTANCE PENDING**.
 
-Site branch: `web/web-02-canvas-lcd-renderer`, based on WEB-01 accepted `main`. Web site implementation must remain separate from planner evidence.
+Site branch: `web/web-02-canvas-lcd-renderer`, based on WEB-01 accepted `main`. **Production-browser candidate** merged into website `main` as `50c0fbfc8f6ea5852a572818ea89d3e74e6c2738` via [site PR #3](https://github.com/remappingbridge/remappingbridge.github.io/pull/3), solely to allow operator testing directly on production Pages. **Merge is NOT operator acceptance.** [GitHub Pages deployment #38303510241](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38303510241) should be checked for success and the live website checked by the operator.
 
 ## Delivered files
 
@@ -32,4 +32,4 @@ WEB-02 implements no other firmware screen, no profile/mouse/BLE state, no Help/
 
 ## Candidate status and transition
 
-**Not accepted.** The site's PR should be inspected, made available in production according to the approved publication/acceptance workflow, and tested by the operator. Preserve WEB-01 accepted baseline until the WEB-02 candidate is approved. WEB-03 remains **NOT STARTED**.
+**Not accepted.** The site's PR was merged only to publish the candidate for the user's required production-browser review. Any rejection can be reverted to accepted WEB-01 commit `9b95bc964928b5912f0d46ae82434bdd9c3130a6`. The operator must test live Pages, compare the LCD, select a magenta backdrop, and explicitly accept WEB-02. WEB-03 remains **NOT STARTED**.
