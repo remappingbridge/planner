@@ -19,3 +19,6 @@ O operador avaliou o primeiro ciano `0xBFFF` como razoável, mas pediu um tom ma
 - Artifact ID `11719059430`; firmware `remappingbridge-mnt07-muted-cyan-pico2w.uf2`, **945152 bytes**.
 - SHA-256 do UF2: `1ffb230f36e9c84ede884ba06c5b254c7a5b9fdfe85ced90c6efec32590d2dfa` — conferido localmente e comparado ao log de produção GitHub Actions.
 - Cor revisada `0xB65A`; contraste/aceite físico continuam pendentes. Substitui integralmente o firmware MNT-07 anterior (`0xBFFF`).
+
+## Segunda revisão do ciano: ciano pastel sem escurecer
+O operador rejeitou o candidato `0xB65A` como muito escuro; solicitou retornar ao estilo do primeiro ciano `0xBFFF`, porém ainda mais fraco. Portanto, a fonte na mesma branch MNT-07 usa agora **`0xD7FF` (RGB565 R=26/31, G=63/63, B=31/31)**: a componente vermelha sobe de 23 para 26, enquanto verde e azul permanecem máximos, reduzindo a saturação e aumentando a claridade. O cinza padrão `0xC618` não foi alterado. Teste automatizado atualizado para validar preservação de brilho e semântica. Commit `091716c1476e81690ddaebe7309e09d026e4b652`; execução CI [#486](https://github.com/remappingbridge/remappingbridge/actions/runs/38186522000). **Os candidatos MNT-07 anteriores (0xBFFF e 0xB65A) estão substituídos.** Nenhum aceite físico foi informado para esta revisão.
