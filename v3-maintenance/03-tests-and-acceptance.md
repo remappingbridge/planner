@@ -24,6 +24,8 @@
 | MNT-10 | Salvar perfil/remap/12 shortcuts/Modifier e DPI/Rotation no mouse A; remover em SAVED DEVICES; reboot; reparear mesmo mouse como novo; repetir com mouse B preservado; simular falha de armazenamento/IRK/slot reciclado | A perde completamente bond/configuração e retorna aos defaults; B mantém suas configurações; falha não informa exclusão falsa nem restaura A |
 | MNT-11 | Nome BLE `BTS. 0MOUSE2`, `mouse`, `MOUSE123`, `LIFT`, vazio/UNKNOWN, truncado; HOME e SAVED DEVICES, desligar/religar | Qualquer subsequência `MOUSE` dispensa sufixo; LIFT recebe ` MOUSE`; sem duplo sufixo nem truncamento perigoso; bonds intactos |
 | MNT-12 | Em Debian 13 KDE Obsidian e navegador, testar Zoom In/Out/Reset do teclado físico e BLU2USB; comparar eventos por device com evtest/udevadm; reiniciar | Somente após correção HID genérica: ambas apps executam Zoom In/Out/Reset, sem efeitos colaterais; sem prova, registrar DEFERRED / NO RELEASE |
+| **MNT-13 / Parte 1** | A conectado e B realmente inédito: PAIR NEW por 15 s; repetir com A ausente; comparar eventos de start/scan/advertising/connect/SM/HIDS/handoff, timeout e KEY B; rejeição correta de mouse salvo | Relatório técnico demonstra causa raiz e primeiro estágio divergente **ou** classifica evidência INCONCLUSIVE/NOT REPRODUCED de modo transparente; **sem patch/UF2 release** |
+| **MNT-13 / Parte 2** | Revisar relatório da Parte 1, riscos reais de coexistência BLE/BTstack/USB, viabilidade técnica, custo e regressões; deliberar GO / NO-GO / BLOCKED / NOT A BUG | Decisão justificada e aceita pelo operador. GO exige autorização **separada** para corrigir, candidato físico e aceite para release; NO-GO/BLOCKED/NOT A BUG não geram release |
 
 ## Testes automatizados e cross-gate
 
@@ -43,3 +45,11 @@
 
 ## Contrato de segurança adicional — novo MNT-10
 Remoção de um mouse salva não equivale a `factory reset`: teste com pelo menos dois bonds e perfis diferentes é obrigatório. Dados bond-scoped incluem identidade/IRK, nomes, Movement, perfil ativo, remap, Modifier, atalhos e rascunho. Repareamento após reboot deve começar nos defaults, sem reaproveitamento de configuração antiga ou de ordinal/slot reciclado. Testar falha de flash/TLV, sequência de confirmação, cancelamento por B e idempotência. Não declarar exclusão bem-sucedida se alguma etapa persistente falhar.
+
+## Critérios particulares de diagnóstico — MNT-13
+
+- A **Parte 1** é considerada entregue por relatório técnico rastreável (baseline SHA/versão, identificação dos dois mouses, reprodução controlada, estado de advertising e bond, timestamps/states/errors, hipótese testada e evidência pró/contra); não exige UF2 definitivo e **não publica release**. Logs e dumps devem anonimizar identidade/IRK.
+- O sintoma só está **reproduzido** se mouse B não salvo, BLE HOGP, em modo de pareamento, falha com A conectado em condições comparáveis à condição A ausente. Mouse salvo ser ignorado em PAIR NEW é **PASS contratual**, não falha.
+- A **Parte 2** escolhe GO/NO-GO/BLOCKED/NOT A BUG com avaliação de viabilidade/custos/risco e aprovação do operador. Não usar `gate aceito` da Parte 1 como aceite físico de correção.
+- **Somente após GO e autorização específica para código**, caso exista patch: regressão host e Pico, observação de dois mouses em hardware, sem perda de input do A durante scan, troca segura somente após qualificação do B, cancel/timeout preservando A e nenhum bond/perfil de terceiros modificado. Cumprir rito de UF2/aceite SemVer 3.x.
+- Desconectar A para conseguir conectar B é procedimento de **controle negativo/contorno de teste**, não solução que satisfaça a arquitetura sem formalizar mudança contratual.
