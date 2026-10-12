@@ -1,6 +1,6 @@
 # Programa WEB — Simulador estático e README didático RemappingBridge
 
-**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 EM CANDIDATO (PR #1 no site) — aceite pendente; WEB-02..15 NÃO INICIADOS.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
+**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 ACEITO PELO OPERADOR, PR #1 integrada; WEB-02..15 NÃO INICIADOS. Todos os textos públicos de firmware/site/releases devem estar em inglês; testes manuais web apenas em navegador de produção.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
 
 ## Objetivo e destinos
 
@@ -40,8 +40,15 @@ Planejamento, contratos, critérios de aceite e evidências de execução ficam 
 - [03 — Testes, paridade e aceite](03-acceptance-and-tests.md)
 - [04 — README, hardware, ilustrações, download e embedding](04-readme-hardware-and-download.md)
 - [gates/](gates/) — escopos e critérios individuais WEB-00..WEB-15.
-- [WEB-01: candidato e teste manual](executions/WEB-01/candidate.md) — site em branch de revisão, sem publicação Pages verificada.
+- [WEB-01: candidato e teste manual](executions/WEB-01/candidate.md) — site integrado à main, mas publicação Pages ainda exige verificação independente.
 - [WEB-00: evidências](executions/WEB-00/candidate.md) e [fixtures versionadas](fixtures/README.md) — fonte v3.2.3 extraída; autorização para avançar registrada em [WEB-00/operator-acceptance.md](executions/WEB-00/operator-acceptance.md).
+
+## Permanent language and browser testing rules
+
+- All user-facing content in `remappingbridge/remappingbridge` and `remappingbridge/remappingbridge.github.io`, including every documentation page, README, page `<html lang>`, accessible label, browser test report and **all GitHub Release descriptions**, must be in **English**. Stable C identifiers, tags and checksums remain unchanged.
+- Starting with WEB-02, operator-facing manual scenarios must run on the **production GitHub Pages website in a browser**, not from a local Debian clone. If Pages is not published, report the deployment blocker instead of claiming production acceptance.
+- A separate documentation maintenance program translates existing release bodies and adds checks. Do not silently start WEB-02 while this requirement is unresolved.
+- [WEB-01 operator acceptance and policy](executions/WEB-01/operator-acceptance.md).
 
 ## Princípio de aceite
 

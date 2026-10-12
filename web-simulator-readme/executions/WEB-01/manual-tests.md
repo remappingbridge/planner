@@ -1,19 +1,23 @@
-# WEB-01 — Cenários manuais de aceite (PENDENTES)
+# WEB-01 — Production-browser test checklist (operator preference)
 
-Antes de testar, usar a branch `web/web-01-static-app-foundation` do repositório `remappingbridge.github.io`. Por ser uma PR draft, a URL pública Pages **não** é alegada disponível.
+**Gate decision:** ACCEPTED by the operator on October 12, 2026. This checklist remains a **separate, not-yet-observed production-browser verification record**; gate acceptance must not be misrepresented as browser testing evidence.
 
-### Cenários, em sequência
+The operator will test the application directly at **https://remappingbridge.github.io/**, using a normal web browser. **Do not require Debian, a local git checkout, or local `file://` tests.** The static site must first be enabled through GitHub Pages if the production URL is not yet served.
 
-- [ ] **01. Abrir local:** `index.html` pelo navegador via `file://`. Confirmar CSS/JS carregados sem erro e nenhuma navbar/footer/landing.
-- [ ] **02. Fonte simples:** a prévia textual exibe `SEARCHING FIRST MOUSE`, joystick e linhas KEY A/B/X/Y; nenhum texto é cortado pela borda. Trata-se de texto HTML, não pixel-perfect LCD.
-- [ ] **03. HAT:** clicar cada uma das nove teclas virtuais; todas exibem feedback com o identificador correto e incrementam o contador.
-- [ ] **04. Botão Limpar:** após pelo menos dois eventos, Limpar retorna a contagem a `00` e ao texto inicial. Não altera o firmware.
-- [ ] **05. Estado pressionado:** pointer/touch mantém feedback de botão pressionado enquanto houver pressão e restaura o aspecto após soltar/cancelar.
-- [ ] **06. Keyboard-only:** usar Tab e Enter/Espaço nos botões HTML nativos, verificar foco visível e acionamento por acessibilidade de controles, sem confundir com as futuras teclas de mapeamento global HAT (WEB-03).
-- [ ] **07. Responsividade:** desktop amplo, janela estreita, 320px e orientação de celular; no móvel estreito joystick e teclas ficam empilhados para evitar corte.
-- [ ] **08. Testes automáticos no navegador:** abrir `tests/index.html` diretamente, confirmar **14/14 PASS** visíveis. Se falhar, enviar erro/texto; não marcar PASS antecipadamente.
-- [ ] **09. HTTP sem toolchain:** na raiz do repo, opcionalmente executar `python3 -m http.server 8000`; abrir `http://localhost:8000/` e `http://localhost:8000/tests/`; confirmar assets relativos.
-- [ ] **10. Sem build/Actions/UF2:** verificar ausência de npm/Node/package.json, scripts remotos, workflows autorais e comandos que acessem BLE/USB físico.
-- [ ] **11. Escopo:** confirmar que o site anuncia “WEB-01 prévia” e explicitamente não oferece navegação, Canvas, perfis/Movement, BLE ou controle de brilho ainda.
+## Production test cases
 
-**Resultado atual:** NÃO EXECUTADO PELO OPERADOR — aguardando teste/aceite. Se reportar bug, corrigir na mesma branch/gate e revalidar; não adiantar WEB-02.
+- [ ] **Availability:** the production URL responds with the current application, not GitHub 404 or an unconfigured Pages placeholder.
+- [ ] **English interface:** page `lang=en`, headings, preview labels, screen-reader descriptions, buttons and messages all use English.
+- [ ] **LCD preview:** SEARCHING FIRST MOUSE and its nine lines remain readable; this is HTML text, not a pixel-perfect ST7789 Canvas.
+- [ ] **Virtual controls:** tap/click all nine HAT controls; each control displays correct English feedback and increments the count.
+- [ ] **Clear:** after several actions, Clear resets the counter to `00` and restores `Ready for virtual controls.`.
+- [ ] **Pointer input:** hold and release/cancel each HAT control; pressed visuals clear correctly.
+- [ ] **Keyboard accessibility:** Tab, Enter, and Space activate accessible HTML buttons; focus styling is visible.
+- [ ] **Responsive display:** desktop, narrow window and mobile portrait/landscape keep LCD and controls reachable without clipping.
+- [ ] **Live browser test suite:** open **https://remappingbridge.github.io/tests/** and inspect the results, including English locale checks. Never claim the suite passed without observing it.
+- [ ] **No real hardware claims:** page clearly says BLE, USB, flash and the full firmware renderer/navigation are not yet implemented.
+- [ ] **No npm/CDN/author-owned build Actions:** the site is served as static HTML/CSS/JS from the default branch.
+
+**Observed production status:** NOT VERIFIED IN THIS CONVERSATION. The operator explicitly accepted WEB-01 and requested testing on the production URL. Future web gates must present production-browser verification steps, not Debian commands.
+
+Related: [WEB-01 operator acceptance](operator-acceptance.md).
