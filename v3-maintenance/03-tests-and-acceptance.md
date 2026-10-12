@@ -1,6 +1,6 @@
 # 03 — Matriz de teste físico, host e regressão de v3.x
 
-**Estado:** MNT-01..MNT-12 **aceitos e publicados** (v3.2.2); MNT-13 novo indicador de foco está **implementado em candidato, CI 96/96 e Pico 2 W PASS; aceite físico PENDING**; MNT-14 PAIR NEW (duas partes) **não iniciado**; MNT-15 Zoom **suspenso**. Implementações futuras serão validadas na mesma base de hardware Pico 2 W + LCD ST7789 + HAT + mouse BLE, a partir de HOME CONNECTED. O operador escolhe ambiente real de hosts; CI nunca simula cor/contraste real do LCD.
+**Estado:** MNT-01..MNT-13 **aceitos/publicados** até **v3.2.3**, com CI 96/96 e Pico 2 W PASS para MNT-13; MNT-14 **Parte 1 auditoria estática concluída, reprodução física PENDING/INCONCLUSIVE**, Parte 2 não iniciada; MNT-15 Zoom suspenso. Somente experimentos no Pico 2 W + mouse A conectado + mouse B genuinamente novo podem distinguir as causas reais de PAIR NEW.
 
 ## Preparação comum
 1. Identificar tag estável instalada e a versão candidata, guardar 12 combos de shortcuts e parâmetros Movement; fazer backup quando pertinente sem flash_nuke.
