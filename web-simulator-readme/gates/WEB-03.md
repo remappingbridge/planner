@@ -1,6 +1,16 @@
 # WEB-03 — HAT virtual, Lock e Help
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-02 aceito.
+**Status:** CANDIDATE IMPLEMENTED / 80/80 ISOLATED REGRESSIONS PASS / PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-02 aceito.
+
+## Implementation and tests
+
+- [WEB-03 site PR #4](https://github.com/remappingbridge/remappingbridge.github.io/pull/4)
+- [Preflight and provenance](../executions/WEB-03/preflight.md)
+- [Candidate and 80-check report](../executions/WEB-03/candidate.md)
+- [Production-browser acceptance checklist](../executions/WEB-03/manual-tests.md)
+- Operator's carried-over improvement: default **Gentle** backdrop `#300c39`, more vivid and less gray than WEB-02. No semantic foreground changes.
+
+WEB-04 is **NOT STARTED**; require explicit WEB-03 acceptance.
 
 ## Escopo fechado
 
