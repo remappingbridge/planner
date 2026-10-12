@@ -1,5 +1,8 @@
 # 04 — Decisões de planejamento, evidências e riscos
 
+> **Revisão do MNT-13 em 12/10/2026 (vigente):** pedido posterior substituiu o marcador `>` por **pipe `|`** e exigiu o indicador **na segunda linha de toda opção com duas linhas**. Nas telas COMBINATIONS, marcar valor/status 2/4, nunca rótulo 1/3; UNAVAILABLE mantém tom STATIC, com pipe branco de foco. Candidato final [PR #43](https://github.com/remappingbridge/remappingbridge/pull/43), SHA `c1d20493c208651ddac1a433de96d5fc44eedfae`, [CI 96/96 + Pico 2 W PASS](https://github.com/remappingbridge/remappingbridge/actions/runs/38257166557), [UF2 verificado](executions/MNT-13/candidate.md), **aceite físico PENDING**. As decisões anteriores abaixo ficam como histórico, não são contrato vigente. MNT-14/15 inalterados.
+
+
 > **Atualização posterior — 12/10/2026:** MNT-13 recebeu autorização expressa para implementação e tornou-se candidato com [PR #43](https://github.com/remappingbridge/remappingbridge/pull/43), CI 96/96 PASS e Pico 2 W PASS; **aceite físico PENDING e sem release**. As notas abaixo sobre “somente planejamento” descrevem a decisão anterior a essa nova autorização, não o estado atual. MNT-14 e MNT-15 permanecem inalterados.
 
 
