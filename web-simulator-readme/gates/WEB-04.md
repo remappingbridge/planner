@@ -1,6 +1,15 @@
 # WEB-04 — 45 telas e navegação canônica v3
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-03 aceito.
+**Status:** CANDIDATE IMPLEMENTED, 90/90 ISOLATED JS/DOM/CANVAS CHECKS PASS; PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-03 aceito.
+
+## Implementation evidence
+
+- [WEB-04 website implementation branch](https://github.com/remappingbridge/remappingbridge.github.io/tree/web/web-04-canonical-screens-hat-layout)
+- [Preflight and exact firmware source hashes](../executions/WEB-04/preflight.md)
+- [Candidate/limitations and 90 checks](../executions/WEB-04/candidate.md)
+- [Production browser manual checklist](../executions/WEB-04/manual-tests.md)
+
+The operator additionally required **no LCD BACKGROUND selector**, permanently vivid **Gentle #300c39**, a **smaller centered LCD**, joystick on the left, and A/B/X/Y in one vertical column on the right. The implementation addresses those requirements. **WEB-05 NOT STARTED.**
 
 ## Escopo fechado
 
