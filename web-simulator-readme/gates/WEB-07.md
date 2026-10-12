@@ -1,6 +1,15 @@
 # WEB-07 — Combinations, Shortcuts e MNT-12/MNT-13
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-06 aceito.
+**Status:** CANDIDATE IMPLEMENTED; 194/194 isolated JS/DOM/Canvas checks PASS; production-browser acceptance PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-06 aceito.
+
+## Implementation evidence
+
+- [Source preflight](../executions/WEB-07/preflight.md)
+- [Candidate and 194 isolated checks](../executions/WEB-07/candidate.md)
+- [15 numbered production-browser tests](../executions/WEB-07/manual-tests.md)
+- Operator's extra requirement: **REMAPPINGBRIDGE** upper-left and **VIRTUAL DEVICE with yellow indicator** lower-left inside sticky HAT, not in right metadata; hardware specs stay right.
+
+**WEB-08 NOT STARTED; WEB-07 operator acceptance pending.**
 
 ## Escopo fechado
 
