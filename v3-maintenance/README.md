@@ -1,6 +1,6 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-12 aceitos e publicados**, última tag oficial [**v3.2.2**](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.2). O **MNT-13** (seta `>` na primeira coluna para opção em foco) está **implementado em candidato PR #43, CI 96/96 + Pico 2 W PASS, aceite físico PENDING**. O antigo MNT-13 (PAIR NEW com mouse conectado) virou **MNT-14**, preservando suas duas partes de diagnóstico/viabilidade sem execução. O antigo MNT-14 (Zoom no Obsidian/KDE) virou **MNT-15**, preservado e **suspenso**. Apenas MNT-13 recebeu código candidato não publicado; MNT-14/15 continuam sem implementação.
+**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-12 aceitos e publicados**, última tag oficial [**v3.2.2**](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.2). O **MNT-13** (pipe `|` na primeira coluna da opção focada; opção de duas linhas marcada na segunda linha) está **implementado em candidato PR #43, CI 96/96 + Pico 2 W PASS, aceite físico PENDING**. O antigo MNT-13 (PAIR NEW com mouse conectado) virou **MNT-14**, preservando suas duas partes de diagnóstico/viabilidade sem execução. O antigo MNT-14 (Zoom no Obsidian/KDE) virou **MNT-15**, preservado e **suspenso**. Apenas MNT-13 recebeu código candidato não publicado; MNT-14/15 continuam sem implementação.
 
 ## Baseline e fontes
 
@@ -13,10 +13,10 @@
 
 1. [01 — Backlog e contrato](01-backlog-and-contract.md): **3 hotfixes e 13 melhorias**. MEL-12 corresponde ao MNT-12 aceito, MEL-13 ao novo indicador visual do MNT-13, MEL-11 ao MNT-14 (PAIR NEW) e MEL-08 ao MNT-15 (Zoom).
 2. [02 — Matriz dos gates, dependências e SemVer 3.x](02-gates-and-versioning.md): MNT-01..12 concluídos; MNT-13 candidato PENDING, MNT-14 planejado, MNT-15 suspenso.
-3. [03 — Testes e aceites](03-tests-and-acceptance.md): cenários do marcador `>` em todas as listas, exceções de COMBINATIONS/SAVED DEVICES, diagnóstico PAIR NEW e Zoom.
+3. [03 — Testes e aceites](03-tests-and-acceptance.md): cenários do marcador `|` em todas as listas, exceções de COMBINATIONS/SAVED DEVICES, diagnóstico PAIR NEW e Zoom.
 4. [04 — Decisões e riscos](04-decisions-and-risks.md): cor e foco, integridade das telas 9×21, composição final do renderer, riscos BLE/HID.
 5. [MNT-12 — cores de Modifier/Combinations](gates/MNT-12.md): **ACEITO v3.2.2**. [Aceite](executions/MNT-12/operator-acceptance.md) e [release](executions/MNT-12/release.md).
-6. [MNT-13 — novo indicador de opção selecionada](gates/MNT-13.md): **CANDIDATO, ACEITE FÍSICO PENDING**. Só a opção focada recebe o caractere `>` na primeira coluna; nenhuma outra opção/tela informativa.
+6. [MNT-13 — novo indicador de opção selecionada](gates/MNT-13.md): **CANDIDATO, ACEITE FÍSICO PENDING**. Só a opção focada recebe o caractere `|` na primeira coluna; em opções de duas linhas, na segunda linha; nenhuma outra opção/tela informativa.
 7. [MNT-14 — PAIR NEW com A conectado](gates/MNT-14.md): **PLANEJADO em duas partes**, primeiro comprovar causa raiz, depois decisão GO/NO-GO/BLOCKED/NOT A BUG. Roteiros [Parte 1](executions/MNT-14/part-1-investigation-plan.md) e [Parte 2](executions/MNT-14/part-2-feasibility-plan.md). Insumo estático [aqui](investigations/pair-new-with-connected-mouse-2026-10-11.md).
 8. [MNT-15 — Zoom genérico Obsidian/KDE](gates/MNT-15.md): **SUSPENSO**, antigo MNT-14, sem mudança de contrato.
 9. [gates/](gates/) contém MNT-01..15; [executions/](executions/) conserva histórico de aceites e apenas roteiros planejados dos gates não iniciados.
