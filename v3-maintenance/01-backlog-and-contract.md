@@ -53,7 +53,7 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 
 **Critérios de aceite:** remover A e reparear A reinicia perfil PASSTHROUGH, botões, atalhos, modifier e Movement; B continua com suas configurações; reboot antes/depois não restaura dados de A; remoção falha não pode ser mostrada como concluída; testes de RPA/IRK e ordinais reciclados. Planejamento e histórico de implementação em [MNT-10](gates/MNT-10.md). **Aceito e publicado como v3.2.0.**
 
-**Ordem de gates atualizada:** MEL-10 integra MNT-10; MEL-09 permanece MNT-11; **MEL-08 Zoom**, anteriormente MNT-10, MNT-12 e MNT-14, foi movido para **MNT-15**. A numeração MEL histórica dos itens originais não é modificada; MEL-11 mantém investigação em duas partes no **MNT-14**; MEL-12 ocupa MNT-12 (cores) publicado e a nova MEL-13 ocupa MNT-13 (seta de seleção).
+**Ordem de gates atualizada:** MEL-10 integra MNT-10; MEL-09 permanece MNT-11; **MEL-08 Zoom**, anteriormente MNT-10, MNT-12 e MNT-14, foi movido para **MNT-15**. A numeração MEL histórica dos itens originais não é modificada; MEL-11 mantém investigação em duas partes no **MNT-14**; MEL-12 ocupa MNT-12 (cores) publicado e a nova MEL-13 ocupa MNT-13 (pipe de seleção).
 
 ### MEL-11 — PAIR NEW com mouse conectado: investigação e decisão, não correção automática (MNT-14)
 
@@ -66,7 +66,7 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 1. **Parte 1 (somente investigação):** reproduzir controladamente com A conectado × A ausente e B realmente não salvo em modo pairing, capturar estados/erros de scan, advertising, connection, SM, GATT HIDS, filtros de bonds/IRK, timeout 15 s e handoff. Identificar a primeira divergência, separar hipótese de causa comprovada, gerar relatório com evidências. **Não corrigir, não versionar.**
 2. **Parte 2 (decisão técnica):** com a causa raiz conhecida, avaliar se corrigir é viável, seguro e proporcional, preservando o contrato de um mouse autoritativo e candidato temporário. Resultado **GO / NO-GO (DEFERRED) / BLOCKED (INCONCLUSIVE) / NOT A BUG**. Somente um GO aprovado e uma **nova autorização expressa de implementação** permitem alterar firmware; release apenas após CI, UF2 e aceite físico. Nenhum release por diagnóstico.
 
-**Escopo e detalhes do gate:** [MNT-14](gates/MNT-14.md). **Status: PLANEJADO; duas partes PENDING, não iniciado.** MNT-15 Zoom permanece suspenso; MNT-13 agora é a nova seta de seleção.
+**Escopo e detalhes do gate:** [MNT-14](gates/MNT-14.md). **Status: PLANEJADO; duas partes PENDING, não iniciado.** MNT-15 Zoom permanece suspenso; MNT-13 agora é o novo pipe de seleção.
 
 ### MEL-12 — Indicação ciano de Modifier Shortcuts e valores atribuídos de Combinations (novo MNT-12)
 
@@ -79,11 +79,11 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 
 **Status: ACEITO E PUBLICADO na v3.2.2.** Especificação, verdade lógica, riscos de renderer e testes constam em [MNT-12](gates/MNT-12.md). Zoom/Obsidian (MEL-08) foi preservado no **[MNT-15](gates/MNT-15.md)**. PAIR NEW em duas partes foi preservado no **[MNT-14](gates/MNT-14.md)**.
 
-### MEL-13 — Seta > na primeira coluna para a opção focada (novo MNT-13)
+### MEL-13 — Pipe `|` na primeira coluna para a opção focada (novo MNT-13)
 
-**Pedido do operador, 12/10/2026, apenas planejar.** Todas as telas que apresentem **opções selecionáveis e escolhíveis** devem exibir o caractere maior que **`>` exclusivamente na primeira coluna física (índice de célula 0)** da **opção atualmente em foco**. Nenhuma outra opção na lista da mesma tela pode conter o marcador. Ao navegar o cursor, a seta desaparece da linha antiga e aparece na nova imediatamente. **O estado aplicado/ciano não é o foco**; o indicador representa apenas onde o usuário pode escolher.
+**Pedido inicial do operador, 12/10/2026, inicialmente planejado e depois autorizado. Revisão posterior do candidato:** todas as telas com **opções selecionáveis** exibem o pipe **`|`** exclusivamente na primeira coluna física (índice de célula 0) da **opção atualmente focada**. **Se a opção ocupar duas linhas, marcar sempre a segunda.** As demais opções não têm marcador; ao mover o foco o pipe acompanha a escolha sem resíduo. **O estado aplicado/ciano não é o foco**; o indicador representa apenas onde o usuário pode escolher.
 
-**Inventário mínimo:** HOME CONNECTED (4 itens); HOME SEARCHING e RETRY (2); REMAPPING OPTIONS (3); EDIT CUSTOM REMAP (5); cinco telas WILL BECOME (6); MOVEMENT OPTIONS (3; a seleção ROTATION aponta à linha 4, não COUNTERCLOCKWISE); 4 telas DPI SLOW/FAST (4); ROTATION (4); COMBINATIONS 1..6 (2 pares/página, marcador só no rótulo linhas 1 ou 3, nunca no valor linhas 2/4); SHORTCUTS 1..5 (6/página); SAVED DEVICES (única opção implícita REMOVE DEVICE, linha 5, quando existe bond). Sem seta em Help, estados de pareamento ou resultado, confirmações KEY A ou textos apenas informativos, nem quando Saved Devices está vazio.
+**Inventário mínimo:** HOME CONNECTED (4 itens); HOME SEARCHING e RETRY (2); REMAPPING OPTIONS (3); EDIT CUSTOM REMAP (5); cinco telas WILL BECOME (6); MOVEMENT OPTIONS (3; a seleção ROTATION aponta à linha 4, não COUNTERCLOCKWISE); 4 telas DPI SLOW/FAST (4); ROTATION (4); COMBINATIONS 1..6 (2 pares/página, marcador somente na segunda linha, valor/status 2 ou 4; nunca nos rótulos 1/3); SHORTCUTS 1..5 (6/página); SAVED DEVICES (única opção implícita REMOVE DEVICE, linha 5, quando existe bond). Sem pipe em Help, estados de pareamento ou resultado, confirmações KEY A ou textos apenas informativos, nem quando Saved Devices está vazio.
 
 **Sem mudanças nos textos ou funções:** ocupar a margem à esquerda sem sobrescrever conteúdo do LCD 9×21; indicador com tom coerente com o item focado (branco ou ciano clarinho segundo regra existente); preservar RGB, shortcuts, perfis, Movement, BLE/USB e navegação. Cobrir toda a matriz com testes C por célula, foco/paginação/reconexão e validação física. Ver **[MNT-13](gates/MNT-13.md)** para contrato, cenários e riscos.
 
