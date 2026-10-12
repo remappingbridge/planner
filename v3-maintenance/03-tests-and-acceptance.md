@@ -1,6 +1,6 @@
 # 03 — Matriz de teste físico, host e regressão de v3.x
 
-**Estado:** MNT-01..MNT-12 **aceitos e publicados** (v3.2.2); MNT-13 novo indicador de foco é **somente planejado**; MNT-14 PAIR NEW (duas partes) **não iniciado**; MNT-15 Zoom **suspenso**. Implementações futuras serão validadas na mesma base de hardware Pico 2 W + LCD ST7789 + HAT + mouse BLE, a partir de HOME CONNECTED. O operador escolhe ambiente real de hosts; CI nunca simula cor/contraste real do LCD.
+**Estado:** MNT-01..MNT-12 **aceitos e publicados** (v3.2.2); MNT-13 novo indicador de foco está **implementado em candidato, CI 96/96 e Pico 2 W PASS; aceite físico PENDING**; MNT-14 PAIR NEW (duas partes) **não iniciado**; MNT-15 Zoom **suspenso**. Implementações futuras serão validadas na mesma base de hardware Pico 2 W + LCD ST7789 + HAT + mouse BLE, a partir de HOME CONNECTED. O operador escolhe ambiente real de hosts; CI nunca simula cor/contraste real do LCD.
 
 ## Preparação comum
 1. Identificar tag estável instalada e a versão candidata, guardar 12 combos de shortcuts e parâmetros Movement; fazer backup quando pertinente sem flash_nuke.
@@ -64,13 +64,13 @@ Remoção de um mouse salva não equivale a `factory reset`: teste com pelo meno
 4. Draft de Custom com Modifier criado/removido mas não confirmado não deve mudar a indicação do perfil realmente ativo. Aplicar Custom e trocar para PASSTHROUGH deve recalcular os dois grupos de tons na projeção seguinte. Após remoção/re-pareamento ou troca de mouse salvo, não herdar tons de outro bond.
 5. Fazer os testes de projeção de tom por célula + CI host completa + Pico 2 W oficial + teste físico para qualquer futura implementação; na implementação MNT-12 **94/94 testes host e Pico 2 W produção passaram**, e o gate foi **fisicamente aceito/publicado v3.2.2**.
 
-## Contrato de regressão — MNT-13 (seta de seleção; APENAS PLANEJADO)
+## Contrato de regressão — MNT-13 (seta de seleção; CI PASS, físico PENDING)
 
 1. Verificar **primeira coluna índice 0** em cada frame: exatamente um `>` na linha do foco quando há lista elegível e nenhuma seta nas outras opções. Se seleção inválida, zero setas. Guardar/restaurar o espaço das demais linhas sem apagar caracteres informativos.
 2. Cobrir HOME(4), HOME_SEARCHING/RETRY(2), REMAPPING OPTIONS(3), EDIT CUSTOM(5), cinco WILL BECOME(6), MOVEMENT OPTIONS(3), quatro DPI SLOW/FAST(4), ROTATION(4), seis COMBINATIONS(2 pares), cinco SHORTCUTS(6) e SAVED DEVICES (única opção implícita REMOVE DEVICE com bond salvo).
 3. **Exceções:** MOVEMENT seleção 2 marca ROTATION **linha 4**, não COUNTERCLOCKWISE; COMBINATIONS marcador somente **rótulos 1/3**, nunca valores 2/4; SAVED DEVICES vazio **não** mostra `>`, com bonds marcador só REMOVE DEVICE linha 5 apesar de `ux_option_count()==0`.
 4. Título, mouse salvo/ativo, PROFILE/DPI/ROTATION informativo, Help, PAIR NEW, REMOVE THIS, confirmações KEY A, dicas KEY/JOY, FIRST MOUSE e SEARCHING FIRST: zero `>` **de seleção**. `>` não aparece na tela sem menu por resíduo da tela anterior.
 5. As tonalidades de foco MNT-08 e MNT-12 e estados CURRENT/UNAVAILABLE/NOT CUSTOMIZED devem continuar intactos. A seta usa tom coerente com opção focada (branco ou ciano claro), sem recolorir rótulo/valor.
-6. CI host por célula e estado/paginação, Pico 2 W produção UF2 com SHA-256 e teste físico 9×21; **nada disso foi executado para MNT-13 nesta solicitação**.
+6. CI host por célula e estado/paginação, Pico 2 W produção UF2 com SHA-256 e teste físico 9×21; **CI host 96/96, produção Pico 2 W e hash UF2 foram validados em PR #43; teste físico ainda PENDING**.
 
 **MNT-14 e MNT-15 permanecem intactos no conteúdo funcional: nenhuma investigação física nova ou correção foi iniciada.**
