@@ -1,6 +1,6 @@
 # MNT-14 — PAIR NEW com mouse conectado: causa raiz e decisão de viabilidade
 
-**Status: PARTE 1 INICIADA — AUDITORIA ESTÁTICA CONCLUÍDA, PROVA FÍSICA PENDING / CAUSA INCONCLUSIVE.** Originalmente MNT-13, renumerado em 12/10/2026 para **MNT-14**. Ambas as partes permanecem sem execução e sem correção autorizada; não iniciar MNT-13 (nova seta de seleção) nem MNT-15 (Zoom).
+**Status: PARTE 1 INICIADA — AUDITORIA ESTÁTICA CONCLUÍDA, PROVA FÍSICA PENDING / CAUSA INCONCLUSIVE.** Originalmente MNT-13, renumerado em 12/10/2026 para **MNT-14**. A Parte 1 tem análise estática executada sobre a release v3.2.3, mas aguarda teste físico; Parte 2 e correção de firmware não iniciadas. MNT-13 foi aceito/publicado; MNT-15 (Zoom) permanece suspenso.
 
 - Backlog: **MEL-11 (novo)** — investigar possível regressão no PAIR NEW concorrente.
 - Contrato: `PAIR NEW MOUSE` deve conseguir descobrir e qualificar um novo mouse BLE HOGP enquanto um mouse anterior permanece conectado e operacional. Somente o **handoff bem-sucedido** pode desconectar o antigo; cancelamento/timeout preservam o antigo.
