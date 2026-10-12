@@ -53,7 +53,7 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 
 **Critérios de aceite:** remover A e reparear A reinicia perfil PASSTHROUGH, botões, atalhos, modifier e Movement; B continua com suas configurações; reboot antes/depois não restaura dados de A; remoção falha não pode ser mostrada como concluída; testes de RPA/IRK e ordinais reciclados. Planejamento e histórico de implementação em [MNT-10](gates/MNT-10.md). **Aceito e publicado como v3.2.0.**
 
-**Ordem de gates atualizada:** MEL-10 integra MNT-10; MEL-09 permanece MNT-11; **MEL-08 Zoom**, antes associado ao gate MNT-10, foi adiado para **MNT-12**. A numeração MEL histórica dos itens originais não é modificada; MEL-11 agora adiciona MNT-13 sem alterar MNT-12.
+**Ordem de gates atualizada:** MEL-10 integra MNT-10; MEL-09 permanece MNT-11; **MEL-08 Zoom**, anteriormente MNT-10 e depois MNT-12, foi movido para **MNT-14**. A numeração MEL histórica dos itens originais não é modificada; MEL-11 mantém MNT-13 em duas partes; a nova MEL-12 ocupa MNT-12 (cores).
 
 ### MEL-11 — PAIR NEW com mouse conectado: investigação e decisão, não correção automática (MNT-13)
 
@@ -67,6 +67,17 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 2. **Parte 2 (decisão técnica):** com a causa raiz conhecida, avaliar se corrigir é viável, seguro e proporcional, preservando o contrato de um mouse autoritativo e candidato temporário. Resultado **GO / NO-GO (DEFERRED) / BLOCKED (INCONCLUSIVE) / NOT A BUG**. Somente um GO aprovado e uma **nova autorização expressa de implementação** permitem alterar firmware; release apenas após CI, UF2 e aceite físico. Nenhum release por diagnóstico.
 
 **Escopo e detalhes do gate:** [MNT-13](gates/MNT-13.md). **Status: PLANEJADO; duas partes PENDING, não iniciado.** MNT-12 Zoom segue separado e suspenso.
+
+### MEL-12 — Indicação ciano de Modifier Shortcuts e valores atribuídos de Combinations (novo MNT-12)
+
+**Solicitado em 12/10/2026, somente para planejamento.** Em `REMAPPING OPTIONS`, a opção `MODIFIER SHORTCUTS` deve usar ciano **se, e somente se,** o perfil efetivamente ativo for **CUSTOM REMAPPING** e existir ao menos um botão de mouse **configurado como MODIFIER na configuração Custom aplicada**. PASSTHROUGH com Modifier salvo mas inativo = não habilitado; CUSTOM sem qualquer Modifier aplicado = não habilitado. Um draft não aplicado não ativa essa indicação.
+
+- Item `MODIFIER SHORTCUTS` ativo: **ciano normal** sem foco (`0x07FF`) e **ciano clarinho** selecionado (`0xD7FF`). Se inativo: cinza sem foco e branco selecionado. Continua acessível em ambos os casos.
+- Nas telas `COMBINATIONS 1 OF 6` a `6 OF 6`, apenas **as linhas de valor (índices 2 e 4)** das duas combinações podem ganhar ciano, e somente quando a mesma condição geral está ativa, há um atalho atribuído e a combinação não é indisponível. Na seleção, valor ciano fica ciano clarinho. **Linhas de rótulo** (`MODIFIER RELEASED IS`, `MOD + ... IS`) mantêm cinza/branco.
+- Valores **`UNAVAILABLE` e `NOT CUSTOMIZED` não mudam de cor**, nem quando o par está selecionado; obedecem exatamente às prioridades atuais de disponibilidade/seleção. Não modificar os nomes dos atalhos, a lista SHORTCUTS, a disponibilidade dos slots, comportamento do Modifier ou persistência.
+- A regra deve ser derivada de **perfil e Modifier aplicados do mouse atualmente conectado**, não do outro mouse salvo nem de rascunho pendente. Preservar switching/reboot, 9×21 e cores originais dos itens PASSTHROUGH/CUSTOM, perfil, menus, Helps, HID e 12 slots/30 shortcuts.
+
+**Status: PLANEJADO / NÃO IMPLEMENTADO.** Especificação, verdade lógica, riscos de renderer e matriz completa em [MNT-12](gates/MNT-12.md). O Zoom/Obsidian (`MEL-08`) foi preservado no **[MNT-14](gates/MNT-14.md)**. O MNT-13 PAIR NEW mantém a investigação e decisão em duas partes.
 
 ## Registro da implementação de cores aceita
 As solicitações MEL-05/MEL-06 acima registram o desejo original. Após iterações e aceite final conjunto do operador, a regra efetivamente publicada na **v3.1.3** é o inverso do texto original: **CURRENT sem seleção = ciano normal 0x07FF** e **CURRENT selecionado = ciano clarinho pastel 0xD7FF**; os demais itens permanecem cinza→branco. O nome conectado em Saved Devices é informativo e permanece ciano normal.
