@@ -53,7 +53,7 @@ O magenta/roxo de **fundo** do LCD (área de dicas e estado didático) pode ser 
 
 ## Modelo simulado e segurança
 
-- Máquina de estados determinística para transições HAT `pressed/released`, comandos, resultado commit-first, help/lock, busca de salvo/P at, remoção e restauração; mock de múltiplos mouses BLE; perfis, draft/applied, Movement e shortcuts **por identidade**.
+- Máquina de estados determinística para transições HAT `pressed/released`, comandos, resultado commit-first, help/lock, busca de salvos/Pair New, remoção e restauração; mock de múltiplos mouses BLE; perfis, draft/applied, Movement e shortcuts **por identidade**.
 - `localStorage` versionado, validado e com recuperação segura para campos inválidos/corrompidos; só guarda dados de simulação. `RESET` demanda confirmação; cenário isolado não altera persistência permanente; export de evidências sem upload.
 - `setTimeout`/relógio virtual devem preservar causalidade e ignorar respostas atrasadas; opção de avanço manual do relógio para testes. Falhas simuladas nunca alteram configurações aplicadas por engano.
 - HTML sempre por text nodes para nomes de mouses informados pelo usuário, sem `innerHTML` não confiável; sem `eval`, token, armazenamento remoto ou transferência de dados. Aviso explícito: simulação não faz flash/USB/Bluetooth.
