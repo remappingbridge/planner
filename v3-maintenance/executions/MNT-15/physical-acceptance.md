@@ -1,12 +1,12 @@
 # MNT-15 — physical acceptance, Ctrl+Equal Zoom In candidate
 
-**STATUS: PENDING OPERATOR PHYSICAL TEST AND ACCEPTANCE.** Version still `3.2.3` internally until official release bump. Candidate [PR #45 (draft)](https://github.com/remappingbridge/remappingbridge/pull/45), branch `maintenance/v3x-mnt-15`, based on v3.2.3 tag `f38c5fd15c68ea9a36d3b05912727788d7b98e81`.
+**STATUS: CI 98/98 + PICO 2 W PASS; UF2 SHA-256 VERIFIED; PENDING OPERATOR PHYSICAL TEST AND ACCEPTANCE.** Version still `3.2.3` internally until official release bump. Candidate [PR #45 (draft)](https://github.com/remappingbridge/remappingbridge/pull/45), [CI #38298979787](https://github.com/remappingbridge/remappingbridge/actions/runs/38298979787), commit `7177672d109f8f13aea77ba707c614e53d6065f1`, [candidate data](candidate.md), branch `maintenance/v3x-mnt-15`, based on v3.2.3 tag `f38c5fd15c68ea9a36d3b05912727788d7b98e81`.
 
 **Observed before candidate (baseline, operator report):** Mabox, Obsidian accepts physical Ctrl+= but not Ctrl+Shift+=. Browser accepts Ctrl+= without Shift. Terminals differ: some require Ctrl+Shift+= while others use Ctrl+=. This difference is **not fixable universally with a single generic HID chord** without per-host/app policies that are outside MNT-15.
 
 ## Installation prerequisites
 
-1. Use only CI-produced **Pico 2 W production `.uf2`** downloaded for PR #45 commit; SHA-256 must match same CI log. Do not use a source ZIP, guess link or compile v3.2.3 release instead.
+1. Use only CI-produced **Pico 2 W production `.uf2`** from PR #45 commit; original CI artifact ID **11769092575** was extracted to file **`remappingbridge-mnt15-zoom-ctrl-equal-pico2w.uf2`**, **953344 bytes**, SHA-256 **`4ae558f0814607aeda23d1b2e8bd128a6ca03c5f47c11a3c44e83e826796ca8e`**, validated against the [same CI log](https://github.com/remappingbridge/remappingbridge/actions/runs/38298979787). Do not install artifact ZIP; use the `.uf2`.
 2. Preserve existing firmware v3.2.3 UF2 for rollback, [official release](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3) with SHA-256 `29597c0f69fb8acdc05f849ebd828853a65824513a6e8e02424e007022761fe4`.
 3. Enter BOOTSEL and copy UF2 as usual. **Do not run `flash_nuke`, remove bonds, reset profiles/shortcuts or reinstall an OS**; the source does not change storage schema.
 4. Start all app checks from **HOME CONNECTED** with a mouse connected, CUSTOM REMAPPING applied and a working Modifier mapping to action `ZOOM IN`.
