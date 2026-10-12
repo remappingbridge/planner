@@ -1,6 +1,15 @@
 # WEB-05 — Mouse virtual, eventos, persistência e busca
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-04 aceito.
+**Status:** CANDIDATE IMPLEMENTED / 134 ISOLATED CHECKS / PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-04 aceito.
+
+## WEB-05 implementation evidence
+
+- [Source and acceptance dependencies](../executions/WEB-05/preflight.md)
+- [Virtual mouse model, general HAT key guide, and isolated verification](../executions/WEB-05/candidate.md)
+- [Production-browser manual acceptance scenarios](../executions/WEB-05/manual-tests.md)
+- Operator-requested **English general key legend**, placed below the physical HAT outside LCD. B back/cancel on most screens (not Connected Home); Y locks where allowed, any HAT control press/release unlocks to Home. Tutorial/Retry exceptions are disclosed.
+
+WEB-05 is **not accepted** until explicit operator approval; **WEB-06 remains NOT STARTED**.
 
 ## Escopo fechado
 
