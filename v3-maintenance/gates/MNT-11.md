@@ -1,6 +1,6 @@
 # MNT-11 — Nomes BLE: remover sufixo MOUSE se substring já existe
 
-**Status: EM IMPLEMENTAÇÃO / PR DRAFT [#41](https://github.com/remappingbridge/remappingbridge/pull/41).** Gate baseado na tag v3.2.0 publicada, candidato sob testes host e build Pico 2 W. **Aceite físico ainda pendente; sem versão v3.2.1 publicada.**
+**Status: CANDIDATO PRONTO / PR DRAFT [#41](https://github.com/remappingbridge/remappingbridge/pull/41).** Gate derivado da tag v3.2.0; [CI #534](https://github.com/remappingbridge/remappingbridge/actions/runs/38190966788) com **93/93 host PASS + Pico 2 W produção SUCCESS**. [UF2 e SHA registrados](../executions/MNT-11/candidate.md); [cenários físicos](../executions/MNT-11/physical-acceptance.md). **ACEITE FÍSICO PENDING; sem v3.2.1 publicada.**
 
 - Backlog: **MEL-09 (antigo item 8)** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Ordem atual: **MNT-11 permanece MEL-09**; o antigo MNT-10 (Zoom) foi reprogramado como MNT-12 e não é pré-requisito deste gate.
