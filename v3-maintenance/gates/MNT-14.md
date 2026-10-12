@@ -1,11 +1,11 @@
 # MNT-14 — PAIR NEW com mouse conectado: causa raiz e decisão de viabilidade
 
-**Status: PLANEJADO / NÃO INICIADO.** Originalmente MNT-13, renumerado em 12/10/2026 para **MNT-14**. Ambas as partes permanecem sem execução e sem correção autorizada; não iniciar MNT-13 (nova seta de seleção) nem MNT-15 (Zoom).
+**Status: PARTE 1 INICIADA — AUDITORIA ESTÁTICA CONCLUÍDA, PROVA FÍSICA PENDING / CAUSA INCONCLUSIVE.** Originalmente MNT-13, renumerado em 12/10/2026 para **MNT-14**. Ambas as partes permanecem sem execução e sem correção autorizada; não iniciar MNT-13 (nova seta de seleção) nem MNT-15 (Zoom).
 
 - Backlog: **MEL-11 (novo)** — investigar possível regressão no PAIR NEW concorrente.
 - Contrato: `PAIR NEW MOUSE` deve conseguir descobrir e qualificar um novo mouse BLE HOGP enquanto um mouse anterior permanece conectado e operacional. Somente o **handoff bem-sucedido** pode desconectar o antigo; cancelamento/timeout preservam o antigo.
-- Base de referência: última tag oficial verificada ao **iniciar a execução** (a versão `v3.2.1` era a base histórica quando o gate original foi escrito; a execução deverá verificar a última tag estável, atualmente v3.2.2); manter a **v3.2.0** como baseline da investigação estática já realizada. Não reabrir os releases v3.2.0/v3.2.1.
-- **Nova ordem:** MNT-12 (cores) aceito; **MNT-13** é a melhoria do `>` para indicar foco (não iniciada); **MNT-14** preserva o diagnóstico PAIR NEW em duas partes; **MNT-15** preserva Zoom/Obsidian suspenso. Este planejamento não inicia nenhum deles.
+- Base de referência: última tag oficial verificada ao **iniciar a execução** (a versão `v3.2.1` era a base histórica quando o gate original foi escrito; a execução deverá verificar a última tag estável, atualmente **v3.2.3** (tag `f38c5fd15c68ea9a36d3b05912727788d7b98e81`)); manter a **v3.2.0** como baseline da investigação estática já realizada. Não reabrir os releases v3.2.0/v3.2.1.
+- **Nova ordem:** MNT-12 (cores) aceito; **MNT-13** (marcador `|`) está aceito e publicado v3.2.3; **MNT-14** preserva o diagnóstico PAIR NEW em duas partes; **MNT-15** preserva Zoom/Obsidian suspenso. MNT-14 Parte 1 foi iniciada posteriormente mediante autorização do operador; Parte 2 e MNT-15 ainda não.
 - **Estrutura obrigatória:** duas partes sequenciais e separadas: **Parte 1 = descobrir/comprovar causa raiz; Parte 2 = decidir GO / NO-GO / BLOCKED para uma correção segundo causa raiz, viabilidade, riscos e evidências**. A Parte 2 não transforma automaticamente a investigação em autorização para modificar o firmware.
 
 ## 1. Sintoma e distinção fundamental
@@ -55,7 +55,7 @@ A análise anterior foi registrada em [investigations/pair-new-with-connected-mo
 
 ### 4.1 Critérios prévios e baseline
 
-1. Confirmar `v3.x` oficial em `remappingbridge/remappingbridge`, SHA da tag, notas, CI e hash do UF2 executado no hardware. Registrar em `executions/MNT-14/part-1-preflight.md`. MNT-13 e MNT-15 não são desbloqueados pelo início desta investigação.
+1. **Preflight estático executado:** confirmar `v3.x` oficial em `remappingbridge/remappingbridge`, SHA da tag, notas, CI e hash do UF2 executado no hardware. Registrar em `executions/MNT-14/part-1-preflight.md`. MNT-13 e MNT-15 não são desbloqueados pelo início desta investigação.
 2. Confirmar mouse **A** conectado, nome/identidade, e mouse **B** realmente **não salvo**, compatível com BLE HOGP e colocado em modo de pareamento. Registrar diferenças de modelo/advertising; usar B na mesma condição nos controles.
 3. Estabelecer um baseline **sem mexer em flash**, bonds, perfis ou atalhos. Não usar `flash_nuke`, excluir bonds ou alterar a UX para “resolver” o teste.
 4. Registrar o histórico HOPE-06 e quais diferenças de código entre o commit fisicamente aceito e o release atual podem afetar init da stack, scan/connection, security, HID ou janela de tempo. A inspeção deve abranger callbacks, não apenas as três rotinas já comparadas.
@@ -133,8 +133,8 @@ A decisão **GO** não autoriza, por si só, lançar produto; código só é esc
 
 ## 6. Gatilhos de aceite e estado
 
-- **Parte 1 — PENDING:** não iniciada. Encerra ao apresentar prova/resultado fundamentado e obter ciência/aceite do operador sobre o diagnóstico.
+- **Parte 1 — EM ANDAMENTO:** auditoria estática executada, reprodução e conclusão física pendentes. Encerra ao apresentar prova/resultado fundamentado e obter ciência/aceite do operador sobre o diagnóstico.
 - **Parte 2 — PENDING:** não iniciada. Encerra com decisão GO / NO-GO / BLOCKED / NOT A BUG **aceita pelo operador**; GO fica aguardando **autorização posterior para implementação** e depois aceite físico de eventual candidato.
-- **MNT-14 global:** **PLANNED**, sem implementação, sem release e sem conclusão técnica. **MNT-15 (Zoom) continua SUSPENSO; MNT-13 (seta de seleção) permanece PLANEJADO e não iniciado.**
+- **MNT-14 global:** **PARTE 1 EM ANDAMENTO — INCONCLUSIVE / NO RELEASE**, sem patch e sem conclusão física. [Preflight](../executions/MNT-14/part-1-preflight.md) · [Experimentos](../executions/MNT-14/part-1-physical-execution.md) · [Relatório aberto](../executions/MNT-14/part-1-root-cause.md). **MNT-15 (Zoom) SUSPENSO; MNT-13 v3.2.3 ACEITO/PUBLICADO.**
 
 **Este gate valoriza a arquitetura originalmente aceita; nunca transformar “desconectar A para parear B” em comportamento intencional sem decisão formal de mudança de requisito.**
