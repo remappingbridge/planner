@@ -1,6 +1,6 @@
 # Programa WEB — Simulador estático e README didático RemappingBridge
 
-**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 ACEITO PELO OPERADOR, PR #1 integrada; WEB-02 ACCEPTED, WEB-03 AUTHORIZED (Gentle refinement), WEB-04..15 NOT STARTED. Todos os textos públicos de firmware/site/releases devem estar em inglês; testes manuais web apenas em navegador de produção.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
+**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 ACEITO PELO OPERADOR, PR #1 integrada; WEB-02 ACCEPTED, WEB-03 CANDIDATE (Gentle #300c39 + release-based HAT/Help/Lock), WEB-04..15 NOT STARTED. Todos os textos públicos de firmware/site/releases devem estar em inglês; testes manuais web apenas em navegador de produção.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
 
 ## Objetivo e destinos
 
@@ -41,6 +41,7 @@ Planejamento, contratos, critérios de aceite e evidências de execução ficam 
 - [04 — README, hardware, ilustrações, download e embedding](04-readme-hardware-and-download.md)
 - [gates/](gates/) — escopos e critérios individuais WEB-00..WEB-15.
 - [English-only audit: firmware, website and 16 GitHub Releases — completed](executions/WEB-01/english-audit.md)
+- [WEB-03: input/Help/Lock candidate](executions/WEB-03/candidate.md) and [production browser tests](executions/WEB-03/manual-tests.md).
 - [WEB-02: Canvas LCD candidate](executions/WEB-02/candidate.md) and [production-browser tests](executions/WEB-02/manual-tests.md).
 - [WEB-01: candidato e teste manual](executions/WEB-01/candidate.md) — site integrado à main, mas publicação Pages ainda exige verificação independente.
 - [WEB-00: evidências](executions/WEB-00/candidate.md) e [fixtures versionadas](fixtures/README.md) — fonte v3.2.3 extraída; autorização para avançar registrada em [WEB-00/operator-acceptance.md](executions/WEB-00/operator-acceptance.md).
