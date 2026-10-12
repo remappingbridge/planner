@@ -1,6 +1,6 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-13 aceitos/publicados**, última tag oficial **[v3.2.3](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3)** com pipe `|` na segunda linha de opções com duas linhas. **MNT-14 Parte 1 EM ANDAMENTO:** preflight estático concluído, evidência física e causa raiz PENDING/INCONCLUSIVE, sem patch nem release. **MNT-14 Parte 2 não iniciada**; **MNT-15 Zoom SUSPENSO**.
+**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-13 aceitos/publicados**, última tag oficial **[v3.2.3](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3)**. **MNT-14 CANCELADO a pedido do operador**, após testes físicos relatados como bem-sucedidos em cenários variados/adversos; auditoria estática histórica preservada, sem diagnóstico causal ou patch. **MNT-15 Zoom SUSPENSO, não implementar.**
 
 ## Baseline e fontes
 
@@ -12,20 +12,20 @@
 ## Índice atualizado — 15 gates
 
 1. [01 — Backlog e contrato](01-backlog-and-contract.md): **3 hotfixes e 13 melhorias**. MEL-12 corresponde ao MNT-12 aceito, MEL-13 ao novo indicador visual do MNT-13, MEL-11 ao MNT-14 (PAIR NEW) e MEL-08 ao MNT-15 (Zoom).
-2. [02 — Matriz dos gates, dependências e SemVer 3.x](02-gates-and-versioning.md): MNT-01..13 publicados; MNT-14 Parte 1 auditoria concluída, físico PENDING; MNT-14 Parte 2 não iniciada; MNT-15 suspenso.
+2. [02 — Matriz dos gates, dependências e SemVer 3.x](02-gates-and-versioning.md): MNT-01..13 publicados; MNT-14 cancelado sem correção/release após validação física positiva relatada pelo operador; MNT-15 suspenso.
 3. [03 — Testes e aceites](03-tests-and-acceptance.md): cenários do marcador `|` em todas as listas, exceções de COMBINATIONS/SAVED DEVICES, diagnóstico PAIR NEW e Zoom.
 4. [04 — Decisões e riscos](04-decisions-and-risks.md): cor e foco, integridade das telas 9×21, composição final do renderer, riscos BLE/HID.
 5. [MNT-12 — cores de Modifier/Combinations](gates/MNT-12.md): **ACEITO v3.2.2**. [Aceite](executions/MNT-12/operator-acceptance.md) e [release](executions/MNT-12/release.md).
 6. [MNT-13 — novo indicador de opção selecionada](gates/MNT-13.md): **ACEITO/PUBLICADO v3.2.3**. Só a opção focada recebe o caractere `|` na primeira coluna; em opções de duas linhas, na segunda linha; nenhuma outra opção/tela informativa.
-7. [MNT-14 — PAIR NEW com A conectado](gates/MNT-14.md): **PARTE 1 EM ANDAMENTO (auditoria concluída, físico pendente), Parte 2 PENDING**, primeiro comprovar causa raiz, depois decisão GO/NO-GO/BLOCKED/NOT A BUG. Roteiros [Parte 1](executions/MNT-14/part-1-investigation-plan.md) e [Parte 2](executions/MNT-14/part-2-feasibility-plan.md). Insumo histórico [aqui](investigations/pair-new-with-connected-mouse-2026-10-11.md). [Preflight atual](executions/MNT-14/part-1-preflight.md), [teste físico](executions/MNT-14/part-1-physical-execution.md) e [relatório aberto](executions/MNT-14/part-1-root-cause.md).
+7. [MNT-14 — PAIR NEW com A conectado](gates/MNT-14.md): **CANCELADO POR DECISÃO DO OPERADOR** após testes físicos positivos; relatórios de investigação estática anteriores preservados como histórico em [executions/MNT-14](executions/MNT-14/part-1-root-cause.md). Não executar Parte 2 nem correção.
 8. [MNT-15 — Zoom genérico Obsidian/KDE](gates/MNT-15.md): **SUSPENSO**, antigo MNT-14, sem mudança de contrato.
 9. [gates/](gates/) contém MNT-01..15; [executions/](executions/) conserva histórico de aceites e apenas roteiros planejados dos gates não iniciados.
 
 ## Regras de condução
 
-- **Aceite MNT-13 encerrado/publicado v3.2.3.** [Aceite](executions/MNT-13/operator-acceptance.md), [release oficial](executions/MNT-13/release.md) e [candidato histórico](executions/MNT-13/candidate.md). **MNT-14 Parte 1 autorizada/iniciada após aceite do MNT-13; MNT-15 continua suspenso.**
+- **Aceite MNT-13 encerrado/publicado v3.2.3.** [Aceite](executions/MNT-13/operator-acceptance.md), [release oficial](executions/MNT-13/release.md) e [candidato histórico](executions/MNT-13/candidate.md). **MNT-14 iniciado apenas como auditoria estática e posteriormente cancelado pelo operador após testes físicos; MNT-15 continua suspenso.**
 - MNT-13 é mudança de exibição, sem alteração de estado/aplicação de perfis, nomes, armazenamento, ações HID ou comandos. Reaproveitar seleção UX, coluna física 1 (índice 0), cores existentes e linha apropriada de cada item.
-- MNT-14 preserva rigorosamente a Parte 1 (diagnóstico COM PROVA de causa raiz) e a Parte 2 (decisão GO/NO-GO/BLOCKED); GO não autoriza implementar sem instrução adicional.
+- MNT-14: Parte 1 teve preflight/auditoria estática; testes físicos positivos informados pelo operador motivaram cancelamento, sem prova de causa raiz e sem Parte 2. Planos originais são conservados como histórico.
 - MNT-15 permanece suspenso; Zoom investigado sem correção comprovada não resulta em release.
 - Qualquer nova implementação autorizada exige branch da tag oficial v3.x mais recente, PR draft, CI host e Pico 2 W produção, UF2 de CI com SHA-256 conferido e validação física. **Somente após aceite explícito** fazer bump PATCH, merge e release. Nunca usar `flash_nuke` durante atualização normal.
 

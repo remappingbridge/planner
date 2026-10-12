@@ -1,6 +1,6 @@
-# MNT-14 / Parte 1 — reprodução física e coleta de evidências
+# MNT-14 / Parte 1 — roteiro físico histórico (gate cancelado)
 
-**STATUS: PREPARADO PARA EXECUÇÃO EM HARDWARE / NÃO EXECUTADO PELO ASSISTENTE.** Baseline: [RemappingBridge v3.2.3 oficial](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3), commit/tag `f38c5fd15c68ea9a36d3b05912727788d7b98e81`, [CI #38280962230](https://github.com/remappingbridge/remappingbridge/actions/runs/38280962230) PASS, UF2 SHA-256 `29597c0f69fb8acdc05f849ebd828853a65824513a6e8e02424e007022761fe4`.
+**STATUS FINAL (12/10/2026): CANCELADO PELO OPERADOR, após ele relatar que os testes físicos funcionaram em cenários variados e adversos.** O assistente não executou esses testes; sem logs/matriz detalhada recebidos, as células PENDING abaixo permanecem como documentação histórica e NÃO devem ser convertidas em PASS individual. A Parte 2 foi cancelada. **Baseline original do roteiro:** Baseline: [RemappingBridge v3.2.3 oficial](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3), commit/tag `f38c5fd15c68ea9a36d3b05912727788d7b98e81`, [CI #38280962230](https://github.com/remappingbridge/remappingbridge/actions/runs/38280962230) PASS, UF2 SHA-256 `29597c0f69fb8acdc05f849ebd828853a65824513a6e8e02424e007022761fe4`.
 
 ## Pré-condições (não pular)
 

@@ -1,12 +1,16 @@
 # MNT-14 — PAIR NEW com mouse conectado: causa raiz e decisão de viabilidade
 
-**Status: PARTE 1 INICIADA — AUDITORIA ESTÁTICA CONCLUÍDA, PROVA FÍSICA PENDING / CAUSA INCONCLUSIVE.** Originalmente MNT-13, renumerado em 12/10/2026 para **MNT-14**. A Parte 1 tem análise estática executada sobre a release v3.2.3, mas aguarda teste físico; Parte 2 e correção de firmware não iniciadas. MNT-13 foi aceito/publicado; MNT-15 (Zoom) permanece suspenso.
+**STATUS FINAL: CANCELADO POR DECISÃO EXPRESSA DO OPERADOR EM 12/10/2026.** O operador relata que realizou testes físicos em cenários diversos e adversos e que tudo funcionou. A auditoria estática da Parte 1 ocorreu anteriormente; os testes físicos não vieram acompanhados de logs ou resultados individualizados e **não comprovam uma causa raiz**. A investigação foi encerrada por cancelamento, sem executar a Parte 2, alterar firmware ou publicar release. **MNT-15 permanece suspenso — não implementar.**
 
 - Backlog: **MEL-11 (novo)** — investigar possível regressão no PAIR NEW concorrente.
 - Contrato: `PAIR NEW MOUSE` deve conseguir descobrir e qualificar um novo mouse BLE HOGP enquanto um mouse anterior permanece conectado e operacional. Somente o **handoff bem-sucedido** pode desconectar o antigo; cancelamento/timeout preservam o antigo.
 - Base de referência: última tag oficial verificada ao **iniciar a execução** (a versão `v3.2.1` era a base histórica quando o gate original foi escrito; a execução deverá verificar a última tag estável, atualmente **v3.2.3** (tag `f38c5fd15c68ea9a36d3b05912727788d7b98e81`)); manter a **v3.2.0** como baseline da investigação estática já realizada. Não reabrir os releases v3.2.0/v3.2.1.
 - **Nova ordem:** MNT-12 (cores) aceito; **MNT-13** (marcador `|`) está aceito e publicado v3.2.3; **MNT-14** preserva o diagnóstico PAIR NEW em duas partes; **MNT-15** preserva Zoom/Obsidian suspenso. MNT-14 Parte 1 foi iniciada posteriormente mediante autorização do operador; Parte 2 e MNT-15 ainda não.
 - **Estrutura obrigatória:** duas partes sequenciais e separadas: **Parte 1 = descobrir/comprovar causa raiz; Parte 2 = decidir GO / NO-GO / BLOCKED para uma correção segundo causa raiz, viabilidade, riscos e evidências**. A Parte 2 não transforma automaticamente a investigação em autorização para modificar o firmware.
+
+## Histórico preservado (não autoriza execução)
+
+O restante deste documento descreve a hipótese e o plano **anteriores ao cancelamento**. A antiga marcação PENDING/INCONCLUSIVE significa ausência de evidência instrumental documentada, não invalida o relato positivo dos testes físicos do operador. Não iniciar Parte 1, Parte 2 ou correção sem novo pedido explícito.
 
 ## 1. Sintoma e distinção fundamental
 

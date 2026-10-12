@@ -1,6 +1,6 @@
-# MNT-14 / Parte 2 — protocolo da decisão de viabilidade
+# MNT-14 / Parte 2 — protocolo histórico (cancelado sem execução)
 
-**STATUS: PLANNED / BLOQUEADO PELA PARTE 1.** Renumerado de MNT-13 para MNT-14 em 12/10/2026, sem iniciar a investigação ou decisão. Este documento é **critério de decisão**, não relatório nem autorização para código. A Parte 2 só é executada após o diagnóstico da Parte 1 ser apresentado ao operador. Ver [MNT-14 completo](../../gates/MNT-14.md).
+**STATUS FINAL (12/10/2026): CANCELADO SEM EXECUÇÃO.** O operador relatou sucesso em testes físicos amplos e cancelou MNT-14; não executar Parte 2, tomar decisão GO ou alterar firmware. **Histórico anterior:** Renumerado de MNT-13 para MNT-14 em 12/10/2026, sem iniciar a investigação ou decisão. Este documento é **critério de decisão**, não relatório nem autorização para código. A Parte 2 só é executada após o diagnóstico da Parte 1 ser apresentado ao operador. Ver [MNT-14 completo](../../gates/MNT-14.md).
 
 ## Entradas obrigatórias
 

@@ -1,5 +1,7 @@
 # 04 — Decisões de planejamento, evidências e riscos
 
+> **Decisão final do operador em 12/10/2026:** **MNT-14 CANCELADO**, após testes físicos reportados como bem-sucedidos em cenários diversos e adversos. Não houve envio de logs/matriz individual por cenário; portanto, registrar **validação positiva declarada pelo operador**, sem afirmar reprodução do defeito, causa raiz comprovada ou execução documentada da matriz inteira. Encerrar as Partes 1 e 2 por decisão de cancelamento, sem correção, PR de firmware, UF2, tag ou release. **MNT-15 permanece suspenso e não deve ser implementado sem nova autorização expressa.** Os parágrafos abaixo que ainda descrevem gates como planejados ou pendentes são registros históricos, não estados vigentes.
+
 > **Revisão do MNT-13 em 12/10/2026 (vigente):** pedido posterior substituiu o marcador `>` por **pipe `|`** e exigiu o indicador **na segunda linha de toda opção com duas linhas**. Nas telas COMBINATIONS, marcar valor/status 2/4, nunca rótulo 1/3; UNAVAILABLE mantém tom STATIC, com pipe branco de foco. Candidato final [PR #43](https://github.com/remappingbridge/remappingbridge/pull/43), SHA `c1d20493c208651ddac1a433de96d5fc44eedfae`, [CI 96/96 + Pico 2 W PASS](https://github.com/remappingbridge/remappingbridge/actions/runs/38257166557), [UF2 verificado](executions/MNT-13/candidate.md), **aceite físico PENDING**. As decisões anteriores abaixo ficam como histórico, não são contrato vigente. MNT-14/15 inalterados.
 
 

@@ -1,6 +1,6 @@
-# MNT-14 — Parte 1 / relatório de causa raiz (aberto)
+# MNT-14 — Parte 1 / auditoria histórica e encerramento por cancelamento
 
-**ESTADO ATUAL: INCONCLUSIVE — AUDITORIA ESTÁTICA CONCLUÍDA; REPRODUÇÃO/TRACE FÍSICOS NÃO OBTIDOS.** Documento iniciado em **12/10/2026** como parte do gate autorizado, mas **NÃO constitui causa raiz comprovada**, nem conclusão aceita pelo operador. Não há código corretivo e não se iniciou a Parte 2.
+**ESTADO FINAL (12/10/2026): MNT-14 CANCELADO POR DECISÃO DO OPERADOR.** Após auditoria estática, o operador comunicou sucesso em testes físicos diversos/adversos e solicitou cancelamento. Não foram apresentados logs, parâmetros ou planilha de resultados individuais, portanto **nenhuma causa raiz ou prova instrumental de todos os cenários é afirmada**. Parte 2 não foi iniciada; não houve código corretivo, PR de firmware, tag ou release. As hipóteses e o termo INCONCLUSIVE abaixo são histórico da auditoria anterior.
 
 ## Dados verificáveis
 

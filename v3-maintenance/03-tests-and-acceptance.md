@@ -1,6 +1,6 @@
 # 03 — Matriz de teste físico, host e regressão de v3.x
 
-**Estado:** MNT-01..MNT-13 **aceitos/publicados** até **v3.2.3**, com CI 96/96 e Pico 2 W PASS para MNT-13; MNT-14 **Parte 1 auditoria estática concluída, reprodução física PENDING/INCONCLUSIVE**, Parte 2 não iniciada; MNT-15 Zoom suspenso. Somente experimentos no Pico 2 W + mouse A conectado + mouse B genuinamente novo podem distinguir as causas reais de PAIR NEW.
+**Estado em 12/10/2026:** MNT-01..MNT-13 **aceitos/publicados até v3.2.3**. **MNT-14 CANCELADO pelo operador** após testes físicos relatados como bem-sucedidos em cenários diversos/adversos; sem logs individuais anexados, não converter automaticamente cada caso desta matriz em PASS. A Parte 2 e a correção não ocorreram. **MNT-15 suspenso, não implementar.**
 
 ## Preparação comum
 1. Identificar tag estável instalada e a versão candidata, guardar 12 combos de shortcuts e parâmetros Movement; fazer backup quando pertinente sem flash_nuke.
@@ -73,4 +73,4 @@ Remoção de um mouse salva não equivale a `factory reset`: teste com pelo meno
 5. As tonalidades de foco MNT-08 e MNT-12 e estados CURRENT/UNAVAILABLE/NOT CUSTOMIZED devem continuar intactos. O pipe usa tom coerente com opção focada (branco ou ciano claro), sem recolorir rótulo/valor.
 6. CI host por célula e estado/paginação, Pico 2 W produção UF2 com SHA-256 e teste físico 9×21; **CI host 96/96, produção Pico 2 W e hash UF2 foram validados em PR #43; teste físico ainda PENDING**.
 
-**MNT-14 e MNT-15 permanecem intactos no conteúdo funcional: nenhuma investigação física nova ou correção foi iniciada.**
+**Atualização final:** operador informou testes físicos bem-sucedidos e cancelou MNT-14, sem fornecer relatório detalhado por cenário. Não houve correção de firmware nem execução da Parte 2; MNT-15 continua suspenso. As matrizes acima permanecem como roteiro histórico, não como registros individuais de PASS.

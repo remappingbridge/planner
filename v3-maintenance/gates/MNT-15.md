@@ -1,6 +1,6 @@
 # MNT-15 — Zoom genérico: diagnosticar Obsidian antes de corrigir HID
 
-**Status: PLANEJADO / SUSPENSO — NÃO INICIADO.** O gate Zoom/Obsidian foi movido de MNT-12 para MNT-14 e depois para MNT-15, sem mudança de requisitos. Nenhuma alteração de firmware, CI, UF2 ou release foi executada.
+**Status vigente em 12/10/2026: PLANEJADO / SUSPENSO — NÃO INICIADO, NÃO IMPLEMENTAR.** Cancelamento do MNT-14 não autoriza nem desbloqueia este gate; somente novo pedido explícito do operador poderá iniciar investigação, branch ou implementação. O gate Zoom/Obsidian foi movido de MNT-12 para MNT-14 e depois para MNT-15, sem mudança de requisitos. Nenhuma alteração de firmware, CI, UF2 ou release foi executada.
 
 - Backlog: **MEL-08 (solicitação explícita)** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Base/dependência: **MNT-12 aceito e publicado como v3.2.2** (MNT-10 e MNT-11 concluídos); a branch futura `maintenance/v3x-mnt-15` deve nascer do SHA exato da **última tag v3.x realmente publicada**.

@@ -66,7 +66,7 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 1. **Parte 1 (somente investigação):** reproduzir controladamente com A conectado × A ausente e B realmente não salvo em modo pairing, capturar estados/erros de scan, advertising, connection, SM, GATT HIDS, filtros de bonds/IRK, timeout 15 s e handoff. Identificar a primeira divergência, separar hipótese de causa comprovada, gerar relatório com evidências. **Não corrigir, não versionar.**
 2. **Parte 2 (decisão técnica):** com a causa raiz conhecida, avaliar se corrigir é viável, seguro e proporcional, preservando o contrato de um mouse autoritativo e candidato temporário. Resultado **GO / NO-GO (DEFERRED) / BLOCKED (INCONCLUSIVE) / NOT A BUG**. Somente um GO aprovado e uma **nova autorização expressa de implementação** permitem alterar firmware; release apenas após CI, UF2 e aceite físico. Nenhum release por diagnóstico.
 
-**Escopo e detalhes do gate:** [MNT-14](gates/MNT-14.md). **Status: Parte 1 iniciada com preflight estático realizado sobre v3.2.3; causa física INCONCLUSIVE, Parte 2 não iniciada e nenhum patch autorizado.** MNT-15 Zoom permanece suspenso; MNT-13 agora é o novo pipe de seleção.
+**Escopo e detalhes do gate:** [MNT-14](gates/MNT-14.md). **ESTADO FINAL EM 12/10/2026: CANCELADO por decisão do operador.** O operador relata testes físicos bem-sucedidos em condições diversas/adversas; os dados individuais não foram anexados. Auditoria estática realizada, mas sem causa raiz comprovada; Parte 2 cancelada, nenhuma correção de firmware ou release. **MNT-15 Zoom permanece suspenso e não deve ser implementado.** MNT-13 é o pipe de seleção publicado em v3.2.3.
 
 ### MEL-12 — Indicação ciano de Modifier Shortcuts e valores atribuídos de Combinations (novo MNT-12)
 
