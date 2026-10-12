@@ -38,3 +38,19 @@
 - **MNT-12 / MEL-08:** diagnóstico do Zoom foi movido do antigo MNT-10, sem descarte de requisitos ou autorização para correções específicas de Obsidian.
 - **Persistência e integridade:** definir formato/escopo/retrocompatibilidade de dados por bond, controle de falha parcial, limpeza idempotente e defaults de pareamento; slots reciclados/IRK/RPA não podem permitir ressurreição de settings. Atualizar SemVer em 3.x conforme impacto real da mudança.
 - **Cores aceitas:** CURRENT sem foco `0x07FF`, CURRENT selecionado `0xD7FF`, cinza/branco inalterados (MNT-07/08 aceitos).
+
+## Novo MNT-13 — decisão sobre PAIR NEW, sem workaround travestido de arquitetura
+
+**Status: PLANEJADO, não iniciado; MNT-12 suspenso.** [Contrato MNT-13](gates/MNT-13.md) incorpora [investigação estática já registrada](investigations/pair-new-with-connected-mouse-2026-10-11.md).
+
+**Autoridade funcional:** documentação canônica de 20/09/2026 no programa `RP-2350/mouse-bridge-remapper/requirements` (connected HOME, ajuda/handoff e um mouse autoritativo) tem prioridade. Com o mouse A conectado, Pair New pode pesquisar B verdadeiramente novo sem desconectar A; qualificação B → handoff seguro; timeout/cancelamento preservam A; salvo B não é aceito como novo. “Desligar A para B funcionar” é **workaround/controle negativo**, não requisito de produto.
+
+**Histórico físico relevante:** HOPE-06 (23/09/2026) inicialmente falhou porque `MAX_NR_HCI_CONNECTIONS`, `MAX_NR_GATT_CLIENTS` e `MAX_NR_HIDS_CLIENTS` estavam em `1`; rework colocou cada um em `2`, e houve **aceite físico**. A `v3.2.0` ainda contém os três valores em `2`, e a máquina de estados ainda permite Pair New em `READY`; **não se conclui que esse é o problema atual**. Teste unitário de símbolos não prova coexistência real do scan/connection/SM/HIDS no Pico 2 W.
+
+**Duas partes com decisões distintas:**
+
+1. **Parte 1 — DIAGNOSTICAR:** reproduzir A conectado versus desconectado com B realmente inédito dentro de 15 s, medir primeira falha da cadeia UI → request → scan → report → connect → security → HIDS → handoff, com evidência versionada/anônima. Nenhum patch de comportamento; resultado técnico pode ser causa confirmada ou inconclusivo.
+2. **Parte 2 — DECIDIR:** avaliar suporte real do controlador/BTstack, risco, custo, compatibilidade com a arquitetura (um autoritativo, candidato temporário), teste/rollback. Documentar GO / NO-GO / BLOCKED / NOT A BUG. GO aprovado **não é autorização implícita para implementar**: requer nova instrução do operador, CI, UF2 candidato, teste físico e aceite. Sem código real aceito → **NO RELEASE**.
+
+**Riscos a não ocultar:** starvation ou retorno falso de scan coexistente; timing intermitente; dispositivo B já salvo ou advertising de pairing ausente; race da troca de handles/CID e eventos USB mantidos; divergência SDK/firmware controlador; memória/pools; alteração acidental da limpeza de bonds MNT-10; efeitos indesejáveis de logs na temporização. Diagnóstico real, não solução de desconexão precoce.
+
