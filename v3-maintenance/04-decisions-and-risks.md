@@ -35,13 +35,13 @@
 
 - **Novo MNT-10 / MEL-10:** priorizar exclusão completa do dispositivo e de **todas as configurações associadas apenas à identidade do mouse**. A exclusão atual remove bonds/nomes/Movement TLV, porém `blu2usb_profiles_t` é restaurado do storage global no boot: investigar e corrigir a separação de profiles/shortcuts por identidade BLE antes de considerar o defeito solucionado. **Apagar o perfil global inteiro é proibido** se prejudicar outros mouses.
 - **MNT-11 existente / MEL-09:** detecção de substring MOUSE em nome BLE foi preservada na sequência, após a publicação do novo MNT-10.
-- **MNT-12 / MEL-08:** diagnóstico do Zoom foi movido do antigo MNT-10, sem descarte de requisitos ou autorização para correções específicas de Obsidian.
+- **MNT-14 / MEL-08:** Zoom foi movido **MNT-10 → MNT-12 → MNT-14**; requisitos e suspensão preservados, sem autorização de hard-code por aplicativo.
 - **Persistência e integridade:** definir formato/escopo/retrocompatibilidade de dados por bond, controle de falha parcial, limpeza idempotente e defaults de pareamento; slots reciclados/IRK/RPA não podem permitir ressurreição de settings. Atualizar SemVer em 3.x conforme impacto real da mudança.
 - **Cores aceitas:** CURRENT sem foco `0x07FF`, CURRENT selecionado `0xD7FF`, cinza/branco inalterados (MNT-07/08 aceitos).
 
 ## Novo MNT-13 — decisão sobre PAIR NEW, sem workaround travestido de arquitetura
 
-**Status: PLANEJADO, não iniciado; MNT-12 suspenso.** [Contrato MNT-13](gates/MNT-13.md) incorpora [investigação estática já registrada](investigations/pair-new-with-connected-mouse-2026-10-11.md).
+**Status: PLANEJADO, não iniciado; MNT-14 Zoom suspenso; novo MNT-12 (cores) também não iniciado.** [Contrato MNT-13](gates/MNT-13.md) incorpora [investigação estática já registrada](investigations/pair-new-with-connected-mouse-2026-10-11.md).
 
 **Autoridade funcional:** documentação canônica de 20/09/2026 no programa `RP-2350/mouse-bridge-remapper/requirements` (connected HOME, ajuda/handoff e um mouse autoritativo) tem prioridade. Com o mouse A conectado, Pair New pode pesquisar B verdadeiramente novo sem desconectar A; qualificação B → handoff seguro; timeout/cancelamento preservam A; salvo B não é aceito como novo. “Desligar A para B funcionar” é **workaround/controle negativo**, não requisito de produto.
 
@@ -54,3 +54,13 @@
 
 **Riscos a não ocultar:** starvation ou retorno falso de scan coexistente; timing intermitente; dispositivo B já salvo ou advertising de pairing ausente; race da troca de handles/CID e eventos USB mantidos; divergência SDK/firmware controlador; memória/pools; alteração acidental da limpeza de bonds MNT-10; efeitos indesejáveis de logs na temporização. Diagnóstico real, não solução de desconexão precoce.
 
+
+## Alteração do programa em 12/10/2026 — novo MNT-12 e Zoom renumerado MNT-14
+
+- **MNT-12 / MEL-12 NOVO:** aparência de `MODIFIER SHORTCUTS` e dos **valores atribuídos** nas seis telas `COMBINATIONS`. Predicado único: **CUSTOM REMAPPING aplicado** + **existe um botão Modifier efetivo**. Os dois requisitos são necessários, em conjunto, e não bastam presença de Modifier em perfil Custom inativo nem Custom aplicado sem Modifier. O predicado não depende de ter atalhos configurados.
+- **Exibição REMAPPING OPTIONS:** somente linha `MODIFIER SHORTCUTS` ganha CURRENT (`0x07FF`) se o predicado é verdadeiro e SELECTED_CURRENT (`0xD7FF`) se focada. Em todos demais casos, cinza normal / branco focado. Continuar acessível sempre, sem flag de disabled.
+- **Exibição COMBINATIONS:** somente **linhas de valor 2 e 4** de atalho efetivamente configurado, não indisponível, podem receber CURRENT/SELECTED_CURRENT; rótulos das combinações mantêm cinza/branco. `NOT CUSTOMIZED` e `UNAVAILABLE` permanecem com suas tonalidades, inclusive ao selecionar; NÃO mudar semântica de atalhos.
+- **Fonte de dados:** `ux->active_profile` + `ux->modifier_source` derivado de `profiles->custom_targets` efetivamente aplicado; a UX também mantém `custom_targets` de draft. **Nunca basear ciano somente em draft**, nem em armazenamento de outro bond/mouse salvo. Só representação visual, sem novo campo persistente.
+- **Risco de precedência:** `renderer.c` reaplica `ACTIONABLE` às linhas COMBINATIONS antes de foco e restaura `UNAVAILABLE` a `STATIC`; `profile_feedback.c` reconstrói todas as opções de REMAPPING OPTIONS depois. Aplicar indicador **na etapa exata** sem contaminar rótulos ou sobrescrever exceções. Reusar `BLU2USB_UI_TONE_CURRENT`, `BLU2USB_UI_TONE_SELECTED_CURRENT` e `blu2usb_ui_tone_on_focus`, sem novo RGB.
+- **Histórico preservado:** Zoom/Obsidian, `MEL-08`, agora **[MNT-14](gates/MNT-14.md)**, permanece suspenso; [MNT-13](gates/MNT-13.md) continua investigação de PAIR NEW em duas partes; nenhum destes foi iniciado.
+- **Sem execução:** atualização exclusiva no `remappingbridge/planner`. PATCH 3.x somente quando MNT-12 for futuramente implementado, testado fisicamente e aceito. Nenhum UF2/CI/tag neste pedido.
