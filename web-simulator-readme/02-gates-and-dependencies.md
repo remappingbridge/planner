@@ -1,6 +1,6 @@
 # 02 — Série unificada WEB-00..WEB-15
 
-**Somente planejamento em 12/10/2026. Nenhum gate executado, testado fisicamente ou aceito.** O código do site e o README do firmware não são modificados por este documento.
+**Updated October 12, 2026:** WEB-00 and WEB-01 completed/accepted; WEB-02..WEB-15 not started. Product text must be English-only. Web manual acceptance must be in the production browser, not via Debian testing. Firmware source/UF2 unchanged by WEB-00/01.
 
 ## Matriz sequencial
 
