@@ -1,6 +1,6 @@
 # Investigação — Pair New só encontra novo mouse quando nenhum está conectado
 
-**Data da análise inicial:** 11/10/2026 (horário local). **Natureza:** levantamento estático de diagnóstico, **não** uma execução do MNT-13. **Estado:** comportamento reportado pelo operador; análise estática concluída, causa exata em hardware **não identificada**. **Atualização de planejamento:** esta evidência inicial foi incorporada ao [MNT-13 — duas partes](../gates/MNT-13.md), criado em 11/10/2026; ambas as partes continuam **PENDING**. MNT-14 (Zoom) segue suspenso; MNT-12 agora é a nova indicação de cores e continua não iniciado.
+**Data da análise inicial:** 11/10/2026 (horário local). **Natureza:** levantamento estático de diagnóstico, **não** uma execução do MNT-13. **Estado:** comportamento reportado pelo operador; análise estática concluída, causa exata em hardware **não identificada**. **Atualização de planejamento:** esta evidência inicial foi incorporada ao gate originalmente chamado MNT-13, **renumerado em 12/10/2026 como [MNT-14 — duas partes](../gates/MNT-14.md)**; ambas as partes continuam **PENDING**. MNT-15 (Zoom) segue suspenso; MNT-12 (ciano de Modifier) foi aceito e publicado na v3.2.2 e o novo MNT-13 é apenas a seta de seleção `>`.
 
 ## Sintoma reportado
 
@@ -45,10 +45,10 @@ O cenário precisa ser reproduzido com um **mouse realmente não salvo**, anunci
 
 **Diagnóstico seguinte apenas se autorizado:** incluir logs serial/trace delimitados por condição em `request_pair_new`, `start_pair_new`, `gap_start_scan`/advertising, `gap_connect`/status, `sm_request_pairing`, HIDS/descriptor, timeout e handoff; testar no Pico 2 W. Evitar mudança de comportamento ou versão antes de evidência.
 
-## Incorporação ao MNT-13 — cronologia correta
+## Incorporação ao MNT-14 (antes MNT-13) — cronologia correta
 
-Após a investigação estática, o operador solicitou criar o **MNT-13** dividido em (1) investigação que **comprove** causa raiz e (2) decisão se vale a pena corrigir segundo viabilidade e risco. Este documento foi escrito **antes** da abertura do gate e por isso **não significa execução da Parte 1** nem autorização de implementação. O protocolo completo, cenários, evidências exigidas, critérios de classificação e possibilidades GO/NO-GO/BLOCKED/NOT A BUG constam em [gates/MNT-13.md](../gates/MNT-13.md). Não há evidência nova de hardware nem diagnóstico concluído por essa mudança documental.
+Após a investigação estática, o operador solicitou criar originalmente o **MNT-13**, posteriormente renumerado para **MNT-14**, dividido em (1) investigação que **comprove** causa raiz e (2) decisão se vale a pena corrigir segundo viabilidade e risco. Este documento foi escrito **antes** da abertura do gate e por isso **não significa execução da Parte 1** nem autorização de implementação. O protocolo completo, cenários, evidências exigidas, critérios de classificação e possibilidades GO/NO-GO/BLOCKED/NOT A BUG constam em [gates/MNT-14.md](../gates/MNT-14.md). Não há evidência nova de hardware nem diagnóstico concluído por essa mudança documental.
 
 ## Versionamento
 
-O aceite do MNT-11 é independente desta investigação: publicar **v3.2.1** para normalização de nomes conforme PR #41. MNT-12 (cores) e MNT-14 (Zoom) **não iniciam**. PAIR NEW não foi alterado como parte do MNT-11.
+Histórico preservado: MNT-11 publicou v3.2.1 (nome BLE) e MNT-12 publicou v3.2.2 (ciano de Modifier/Combinations). O relato de PAIR NEW permanece em **MNT-14, Parte 1 e Parte 2 PENDING**; Zoom é **MNT-15 suspenso**; novo MNT-13 é a seta visual de foco. Nenhuma mudança funcional de PAIR NEW foi implementada como parte dessas releases.
