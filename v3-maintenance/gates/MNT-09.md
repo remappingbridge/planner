@@ -1,6 +1,6 @@
 # MNT-09 — HOME CONNECTED: primeira opção fixa REMAPPING OPTIONS
 
-**Status: PLANNED / NÃO INICIADO.** Nenhuma alteração de código, UF2, CI ou release executada neste gate.
+**Status: ACEITO E PUBLICADO como v3.1.4 em 11/10/2026.** Registro operacional em [executions/MNT-09/release.md](../executions/MNT-09/release.md); PR #39 e CI #507 aprovados. O restante do arquivo conserva o contrato originalmente planejado.
 
 - Backlog: **MEL-07** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
 - Base/dependência: **MNT-08 publicado**; a branch futura `maintenance/v3x-mnt-09` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
@@ -23,4 +23,4 @@ Não confundir índice de seleção com título da tela, nem remover estado de p
 2. Implementar **apenas este gate**, criar testes host/CI novos e conservar regressões completas. Build de produção Pico 2 W, baixar UF2 oficial, comparar SHA-256 local com log CI, disponibilizar para teste; PR draft.
 3. Registrar `executions/MNT-09/candidate.md` e `physical-acceptance.md`. **Somente o usuário testa e aceita fisicamente**; se falhar, corrigir na mesma branch e repetir.
 4. Após **aceite explícito**, fazer bump SemVer adequado, build/CI do código versionado, integrar e publicar **um único GitHub Release** com UF2, SHA256SUMS e changelog rastreáveis, registrar release e então habilitar o gate seguinte. Se este for MNT-10 e nenhum patch genérico for validado, **marcar DEFERRED/NO RELEASE** após decisão, não publicar software sem alteração.
-5. **Neste momento: não iniciar passo 1, 2, 3 ou 4.** Este arquivo é planejamento, não execução.
+5. **Executado e encerrado:** os detalhes de implementação, aceite, CI e release estão em `executions/MNT-09/`; o próximo gate é MNT-10, nova limpeza de mouse, ainda não implementado.
