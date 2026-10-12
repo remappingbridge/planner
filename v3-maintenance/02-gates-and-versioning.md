@@ -1,6 +1,6 @@
 # 02 — Gates MNT-01..MNT-14, dependências e Semantic Versioning 3.x
 
-**Atualizado em 12/10/2026:** MNT-01..MNT-11 **aceitos e publicados** até **v3.2.1**. **MNT-12 NOVO**: ciano condicional de MODIFIER SHORTCUTS e valores de COMBINATIONS, **somente planejado**. MNT-13: PAIR NEW, diagnóstico em duas partes, **não iniciado**. **MNT-14**: Zoom/Obsidian, preservado do antigo MNT-12 e **suspenso**. Nenhum gate pendente autorizado para execução.
+**Atualizado em 12/10/2026:** MNT-01..MNT-11 **aceitos e publicados** até **v3.2.1**. **MNT-12**: ciano condicional de MODIFIER SHORTCUTS e valores de COMBINATIONS, **candidato implementado, CI 94/94 + Pico PASS, físico PENDING**. MNT-13: PAIR NEW, diagnóstico em duas partes, **não iniciado**. **MNT-14**: Zoom/Obsidian, preservado do antigo MNT-12 e **suspenso**. MNT-12 foi autorizado e implementado somente como candidato; MNT-13 e MNT-14 não autorizados.
 
 ## Matriz de execução incremental
 
@@ -17,7 +17,7 @@
 | [MNT-09](gates/MNT-09.md) | MEL-07 | HOME CONNECTED: primeira opção `REMAPPING OPTIONS` fixa | **ACEITO v3.1.4** | MNT-08 |
 | [MNT-10](gates/MNT-10.md) | **MEL-10 NOVO** | Remover mouse: eliminar bond, nome, Movement e todo perfil/remap/shortcuts antigos **somente daquele mouse**; novo pareamento inicia em defaults | **ACEITO E PUBLICADO v3.2.0 (MINOR)** — perfis por mouse | MNT-09 v3.1.4 publicada |
 | [MNT-11](gates/MNT-11.md) | MEL-09 | Nomes BLE: sufixo MOUSE só se substring não existe | **ACEITO E PUBLICADO v3.2.1 (PATCH)** — título BLE sem MOUSE duplicado | **MNT-10 publicado v3.2.0** |
-| [MNT-12](gates/MNT-12.md) | **MEL-12 NOVO** | Ciano condicional para **MODIFIER SHORTCUTS** e somente **valores atribuídos** de COMBINATIONS (CUSTOM aplicado **E** botão Modifier); foco = ciano claro; UNAVAILABLE/NOT CUSTOMIZED intactos | **PLANEJADO / NÃO INICIADO** — PATCH 3.x após implementação e aceite | **v3.2.1 publicada** |
+| [MNT-12](gates/MNT-12.md) | **MEL-12 NOVO** | Ciano condicional para **MODIFIER SHORTCUTS** e somente **valores atribuídos** de COMBINATIONS (CUSTOM aplicado **E** botão Modifier); foco = ciano claro; UNAVAILABLE/NOT CUSTOMIZED intactos | **CANDIDATO PR #42 / CI 94/94 + Pico PASS / FÍSICO PENDING** — PATCH 3.x após aceite | **v3.2.1 publicada** |
 | [MNT-13](gates/MNT-13.md) | **MEL-11 NOVO** | **PAIR NEW com A conectado:** Parte 1 diagnóstico/causa raiz com evidências; Parte 2 decisão técnica **GO / NO-GO / BLOCKED / NOT A BUG**, sem correção automática | **PLANEJADO; PARTES 1 E 2 PENDING; SEM RELEASE** — patch v3.x apenas se GO, implementação autorizada e aceite físico | **v3.2.1 publicada**; independente dos MNT-12 e MNT-14; MNT-14 suspenso; execução só por pedido explícito |
 | [MNT-14](gates/MNT-14.md) | **MEL-08** (Zoom, antigo MNT-10 e depois MNT-12) | Diagnosticar Zoom no Obsidian/KDE; correção HID genérica **somente se comprovada** | **PLANEJADO / SUSPENSO** — sem implementação nem release; PATCH após correção validada ou DEFERRED/NO RELEASE | **v3.2.1 publicada**, retomada apenas sob autorização |
 
