@@ -12,6 +12,10 @@
 - `tests/runner.js`: prior 165 regression checks plus 29 new checks, including C-identical 30 strings, all 12 combo slots, MNT-12/MNT-13 tones, every owning-modifier unavailable case, draft/passthrough distinction, assigned page auto-focus, success and zero reset, persistence and actual app-level HAT clicks.
 - `README.md`, `tests/index.html`: all English, updated 194 assertions and original-source behavior.
 
+## Site candidate publication
+
+Website [PR #8](https://github.com/remappingbridge/remappingbridge.github.io/pull/8) was merged into site `main` **for production-browser testing only**, commit `5f2597946c1af04ceb08c9eec301dc867675c248`. [GitHub Pages deployment #38316811734](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38316811734) is the associated production run; its build/deploy completion must be verified before claiming this version is live. WEB-07 remains pending operator acceptance, and the planner [PR #26](https://github.com/remappingbridge/planner/pull/26) remains draft.
+
 ## Test result and limitations
 
 The website's **actual browser JS runner** executed under an isolated V8 with simulated DOM and Canvas2D. Result: **194/194 PASS**, including old 45/45 canonical LCD rasterizations. **This is not a claim of live Firefox production testing or visual screenshot verification**. CSS corner positions, sticky scroll, zoom and clipping must be checked by operator on production site.
