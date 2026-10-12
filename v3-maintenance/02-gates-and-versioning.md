@@ -1,6 +1,6 @@
 # 02 — Gates MNT-01..MNT-15, dependências e Semantic Versioning 3.x
 
-**Atualizado em 12/10/2026:** MNT-01..MNT-13 **aceitos e publicados até v3.2.3**. **MNT-14 CANCELADO PELO OPERADOR** após testes físicos amplos relatados como bem-sucedidos; não houve patch nem release e a causa raiz não foi estabelecida. Parte 2 não será executada. **MNT-15 Zoom: comparação física no Obsidian confirma Ctrl+= sem Shift funcionando e Ctrl+Shift+= falhando; validar Ctrl+= sem Shift em navegador e terminal antes de qualquer patch. Nenhuma implementação/autorização de firmware.**
+**Atualizado em 12/10/2026:** MNT-01..MNT-13 **aceitos e publicados até v3.2.3**. **MNT-14 CANCELADO PELO OPERADOR** após testes físicos amplos relatados como bem-sucedidos; não houve patch nem release e a causa raiz não foi estabelecida. Parte 2 não será executada. **MNT-15 Zoom: implementado em PR #45 DRAFT com mudança genérica Ctrl+Shift+Equal → Ctrl+Equal da ação 26; autorização expressa após testes Mabox, navegador sem Shift PASS e terminais variáveis; CI host 98/98 PASS e produção/físico PENDING. Sem release até aceite físico.**
 
 ## Matriz de execução incremental
 
