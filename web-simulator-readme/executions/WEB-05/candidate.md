@@ -20,7 +20,7 @@
 
 ## Actual publication for production browser
 
-The website's [PR #6](https://github.com/remappingbridge/remappingbridge.github.io/pull/6) was merged **only to publish WEB-05 for operator testing**, site `main` commit `0ee2238faeb6942f9edc99b8320f65b785feec0d`. [Pages run #38311281605](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38311281605): build SUCCESS at the time of recording, deploy still IN PROGRESS. Recheck for success before telling the operator to rely on the live version. The gate remains unaccepted even after Pages deployment.
+The website's [PR #6](https://github.com/remappingbridge/remappingbridge.github.io/pull/6) was merged **only to publish WEB-05 for operator testing**, site `main` commit `0ee2238faeb6942f9edc99b8320f65b785feec0d`. [Pages run #38311281605](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38311281605): **build and deployment COMPLETED SUCCESSFULLY** for the exact WEB-05 `main` SHA. The deployed browser's actual visual behavior and live 134-check result still require operator inspection. The gate remains unaccepted even after Pages deployment.
 
 ## Publication and rollback
 
