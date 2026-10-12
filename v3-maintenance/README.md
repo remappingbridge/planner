@@ -1,30 +1,31 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado atualizado em 12/10/2026:** MNT-01..MNT-11 **aceitos e publicados**, último release [**v3.2.1**](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.1). **MNT-12**: ciano condicional para `MODIFIER SHORTCUTS` e valores atribuídos de `COMBINATIONS` — **candidato pronto (PR #42, CI 94/94 + Pico PASS, UF2 validado), aceite físico PENDING**. **MNT-13**: investigação PAIR NEW, duas partes — **não iniciado**. **MNT-14**: Zoom/Obsidian, antes MNT-12, **suspenso**. Somente MNT-12 possui alteração em branch candidata; nenhuma nova tag/release foi publicada.
+**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-12 aceitos e publicados**, última tag oficial [**v3.2.2**](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.2). O **novo MNT-13** (seta `>` na primeira coluna para opção em foco) foi **apenas planejado**. O antigo MNT-13 (PAIR NEW com mouse conectado) virou **MNT-14**, preservando suas duas partes de diagnóstico/viabilidade sem execução. O antigo MNT-14 (Zoom no Obsidian/KDE) virou **MNT-15**, preservado e **suspenso**. Nenhum desses três gates recebeu alteração de firmware.
 
 ## Baseline e fontes
 
-- Produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge), Pico 2 W, LCD/HAT 9×21, USB Mouse/Keyboard/Consumer e BLE HOGP.
-- Histórico: [v3.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.0.0) — `d7c7950fe595bd0e14a970cf60a29d085f065db4`; última release aceita [v3.2.1](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.1) — commit `3846e8f4ee5fba40421c0db1f51387de6c51e953`.
-- Repositórios/planejamentos históricos [MOD](../modifier-shortcuts/README.md), [MOV](../movement-options/README.md) e [HOPE](../RP-2350/hope/) preservados.
-- Qualquer implementação futura deve partir do SHA da **tag v3.x oficial mais recente** no momento de execução. Não reescrever tags ou abrir v4.0.0 neste programa.
+- Produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge), firmware para Pico 2 W, LCD/HAT 9×21, Mouse/Keyboard/Consumer USB HID e BLE HOGP.
+- Fonte v3.0.0 imutável: commit `d7c7950fe595bd0e14a970cf60a29d085f065db4`.
+- Última release verificada: **[v3.2.2](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.2)**, commit squash `0d35397e6a1619f2a5dc314d0f2659206912d177`, PR #42, CI 94/94 host e build Pico 2 W concluídos com sucesso.
+- Históricos [modifier-shortcuts](../modifier-shortcuts/README.md), [movement-options](../movement-options/README.md) e [HOPE](../RP-2350/hope/) preservados. A futura branch de qualquer gate com firmware parte exclusivamente da **última tag oficial publicada**, nunca de uma branch candidata.
 
-## Documentos e numeração atual
+## Índice atualizado — 15 gates
 
-1. [01 — Backlog](01-backlog-and-contract.md): **3 hotfixes, 12 melhorias**; MEL-08 Zoom continua MNT-14; MEL-09 nome BLE, MEL-10 exclusão de mouse, MEL-11 PAIR NEW e MEL-12 nova indicação visual.
-2. [02 — Matriz dos 14 gates](02-gates-and-versioning.md): MNT-01..11 encerrados, MNT-12 candidato de teste físico, MNT-13 planejado, MNT-14 suspenso.
-3. [03 — Testes e aceites](03-tests-and-acceptance.md): matriz visual do MNT-12, estágios de investigação MNT-13 e legado Zoom MNT-14.
-4. [04 — Decisões e riscos](04-decisions-and-risks.md): estado do firmware, fonte da regra visual e segurança do contrato Pair New.
-5. [MNT-12 — Modifier Shortcuts + Combinations](gates/MNT-12.md): indicação ciano **se CUSTOM realmente aplicado E há botão Modifier**; só valores atribuídos de combinações mudam; UNAVAILABLE / NOT CUSTOMIZED preservados.
-6. [MNT-13 — PAIR NEW](gates/MNT-13.md): Parte 1 causa raiz e Parte 2 GO/NO-GO/BLOCKED/NOT A BUG; nenhuma correção automaticamente autorizada.
-7. [MNT-14 — Zoom no Obsidian](gates/MNT-14.md): antigo MNT-12, por sua vez antigo MNT-10, **escopo preservado e suspenso**.
-8. [Investigação PAIR NEW prévia](investigations/pair-new-with-connected-mouse-2026-10-11.md) é insumo estático ao MNT-13, não aceite nem execução da Parte 1.
-9. [gates/](gates/) contém todos MNT-01..MNT-14; [executions/](executions/) conserva evidências de gates aceitos e planos separados de MNT-13.
+1. [01 — Backlog e contrato](01-backlog-and-contract.md): **3 hotfixes e 13 melhorias**. MEL-12 corresponde ao MNT-12 aceito, MEL-13 ao novo indicador visual do MNT-13, MEL-11 ao MNT-14 (PAIR NEW) e MEL-08 ao MNT-15 (Zoom).
+2. [02 — Matriz dos gates, dependências e SemVer 3.x](02-gates-and-versioning.md): MNT-01..12 concluídos; MNT-13/14 planejados, MNT-15 suspenso.
+3. [03 — Testes e aceites](03-tests-and-acceptance.md): cenários do marcador `>` em todas as listas, exceções de COMBINATIONS/SAVED DEVICES, diagnóstico PAIR NEW e Zoom.
+4. [04 — Decisões e riscos](04-decisions-and-risks.md): cor e foco, integridade das telas 9×21, composição final do renderer, riscos BLE/HID.
+5. [MNT-12 — cores de Modifier/Combinations](gates/MNT-12.md): **ACEITO v3.2.2**. [Aceite](executions/MNT-12/operator-acceptance.md) e [release](executions/MNT-12/release.md).
+6. [MNT-13 — novo indicador de opção selecionada](gates/MNT-13.md): **PLANEJADO, NÃO IMPLEMENTADO**. Só a opção focada recebe o caractere `>` na primeira coluna; nenhuma outra opção/tela informativa.
+7. [MNT-14 — PAIR NEW com A conectado](gates/MNT-14.md): **PLANEJADO em duas partes**, primeiro comprovar causa raiz, depois decisão GO/NO-GO/BLOCKED/NOT A BUG. Roteiros [Parte 1](executions/MNT-14/part-1-investigation-plan.md) e [Parte 2](executions/MNT-14/part-2-feasibility-plan.md). Insumo estático [aqui](investigations/pair-new-with-connected-mouse-2026-10-11.md).
+8. [MNT-15 — Zoom genérico Obsidian/KDE](gates/MNT-15.md): **SUSPENSO**, antigo MNT-14, sem mudança de contrato.
+9. [gates/](gates/) contém MNT-01..15; [executions/](executions/) conserva histórico de aceites e apenas roteiros planejados dos gates não iniciados.
 
-## Regras de execução e publicação
+## Regras de condução
 
-- **Situação após autorização posterior:** MNT-12 foi implementado **sem publicação**; o próximo passo é exclusivamente o teste/aceite físico do candidato. Não iniciar MNT-13/14 ou mesclar o PR #42 até aceite. A criação do MNT-12 não reabre um gate aceito.
-- MNT-12 é mudança de **paleta semântica da UI**, sem alteração de RGB, USB/HID, BLE, atalhos, persistência ou navegação; candidato/CI estão registrados em [candidate.md](executions/MNT-12/candidate.md). PATCH v3.x apenas após aceite físico.
-- MNT-13 continua em duas partes, diagnóstico somente e decisão de viabilidade; diagnóstico não gera tag/UF2 release nem autoriza um patch automaticamente.
-- MNT-14 permanece SUSPENSO até pedido explícito; sem release para Zoom apenas investigado.
-- Qualquer gate com código exige branch da tag publicada vigente, PR draft, regressões host e Pico 2 W produção, UF2 de GitHub Actions e checksum, teste físico desde HOME CONNECTED e **aceite explícito** antes de mesclar/release. Se falhar, correção e novo UF2 na mesma branch; nenhuma versão fictícia.
+- **Aceite MNT-12 encerrado.** Esta solicitação atualizou somente o planejamento dos gates restantes: **não iniciar implementação do novo MNT-13, nem investigação MNT-14, nem Zoom MNT-15** sem ordem expressa.
+- MNT-13 é mudança de exibição, sem alteração de estado/aplicação de perfis, nomes, armazenamento, ações HID ou comandos. Reaproveitar seleção UX, coluna física 1 (índice 0), cores existentes e linha apropriada de cada item.
+- MNT-14 preserva rigorosamente a Parte 1 (diagnóstico COM PROVA de causa raiz) e a Parte 2 (decisão GO/NO-GO/BLOCKED); GO não autoriza implementar sem instrução adicional.
+- MNT-15 permanece suspenso; Zoom investigado sem correção comprovada não resulta em release.
+- Qualquer nova implementação autorizada exige branch da tag oficial v3.x mais recente, PR draft, CI host e Pico 2 W produção, UF2 de CI com SHA-256 conferido e validação física. **Somente após aceite explícito** fazer bump PATCH, merge e release. Nunca usar `flash_nuke` durante atualização normal.
+
