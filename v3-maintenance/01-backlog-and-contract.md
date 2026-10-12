@@ -46,5 +46,17 @@ Diagnosticar primeiro **diferença genérica de HID/layout/mudança de estado/du
 ### MEL-09 — Evitar sufixo MOUSE duplicado em nomes BLE
 A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **palavra inteira**; o operador quer detecção de **subsequência `MOUSE` em qualquer posição**, incluindo sem espaços, precedida/seguida de letras, números ou caracteres especiais. Se o nome capturado contiver `MOUSE` (sem diferença entre maiúsculas/minúsculas), **não anexar** a palavra. Casos literais: `BTS. 0MOUSE2` → `BTS. 0MOUSE2` (nunca `BTS. 0MOUSE2 MOUSE`); `LIFT` → `LIFT MOUSE`. Aplicar na HOME CONNECTED e Saved Devices pelo **mesmo normalizador**, preservar nome BLE original/capitalização visível conforme regra vigente, truncamento 21 caracteres, UNKNOWN MOUSE fallback, reconexão/pareamento e bonds. **É o antigo item 8 do rascunho, renumerado 9** para não sobrescrever MEL-08 Zoom solicitado.
 
+### MEL-10 — Exclusão de mouse sem recuperação de dados antigos (novo MNT-10)
+**Novo pedido do operador em 11/10/2026.** Após remover um mouse por Saved Devices, a nova conexão por Pair New recuperou o perfil antigo. Remover deve apagar **todos os registros funcionais vinculados ao mouse** e seus ajustes (bond LE, nome salvo, IRK/identidade e resolving list, Movement DPI/Rotation, perfil ativo, remapeamento, rascunho, Modifier, combinações e shortcuts), sem interferir nas configurações de outros mouses salvos. Ao reconectar o mesmo dispositivo como novo, devem valer os **defaults completos**, inclusive após reboot.
+
+**Achado preliminar do código atual:** há limpeza de bonds, nomes e Movement por identidade BLE, mas `blu2usb_profiles_t` (perfil/remap/shortcuts) é persistido de forma **global** em `src/app/main.c`, e portanto pode ser reaproveitado no novo pareamento. Investigar causa efetiva com regressões; qualquer solução deve isolar estado por mouse e preservar os demais, sem apagar indiscriminadamente o perfil global. Priorizar identidade estável e migração de registros v3, remoção idempotente e falhas recuperáveis de TLV/flash. Não prometer secure erase físico forense do flash sem requisito técnico adicional.
+
+**Critérios de aceite:** remover A e reparear A reinicia perfil PASSTHROUGH, botões, atalhos, modifier e Movement; B continua com suas configurações; reboot antes/depois não restaura dados de A; remoção falha não pode ser mostrada como concluída; testes de RPA/IRK e ordinais reciclados. Planejamento detalhado em [MNT-10](gates/MNT-10.md). **Não implementado.**
+
+**Ordem de gates atualizada:** MEL-10 integra MNT-10; MEL-09 permanece MNT-11; **MEL-08 Zoom**, antes associado ao gate MNT-10, foi adiado para **MNT-12**. A numeração MEL histórica dos itens originais não é modificada.
+
+## Registro da implementação de cores aceita
+As solicitações MEL-05/MEL-06 acima registram o desejo original. Após iterações e aceite final conjunto do operador, a regra efetivamente publicada na **v3.1.3** é o inverso do texto original: **CURRENT sem seleção = ciano normal 0x07FF** e **CURRENT selecionado = ciano clarinho pastel 0xD7FF**; os demais itens permanecem cinza→branco. O nome conectado em Saved Devices é informativo e permanece ciano normal.
+
 ## Fora de escopo deste backlog
 Novos shortcuts/30 IDs, mudança de protocolo ou quantidade de interfaces USB, mudanças de esquema flash, nomes BLE de origem, novos modos, compatibilidade de Obsidian por regras específicas, troca de microcontrolador, funcionalidades v4.0.
