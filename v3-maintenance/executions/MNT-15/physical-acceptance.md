@@ -1,6 +1,6 @@
 # MNT-15 — physical acceptance, Ctrl+Equal Zoom In candidate
 
-**STATUS: CI 98/98 + PICO 2 W PASS; UF2 SHA-256 VERIFIED; PENDING OPERATOR PHYSICAL TEST AND ACCEPTANCE.** Version still `3.2.3` internally until official release bump. Candidate [PR #45 (draft)](https://github.com/remappingbridge/remappingbridge/pull/45), [CI #38298979787](https://github.com/remappingbridge/remappingbridge/actions/runs/38298979787), commit `7177672d109f8f13aea77ba707c614e53d6065f1`, [candidate data](candidate.md), branch `maintenance/v3x-mnt-15`, based on v3.2.3 tag `f38c5fd15c68ea9a36d3b05912727788d7b98e81`.
+**STATUS: OPERATOR PHYSICAL GATE ACCEPTED EXPLICITLY ON 12 OCTOBER 2026.** Operator response: **“gate aceito”** to the MNT-15 candidate UF2. This constitutes overall physical acceptance, **not a separate instrumented PASS for each checklist row**. Candidate CI **98/98 host PASS** + Pico 2 W production PASS; UF2 SHA-256 verified. Release version bump to **3.2.4** initiated only after this acceptance. Candidate [PR #45 (draft)](https://github.com/remappingbridge/remappingbridge/pull/45), [CI #38298979787](https://github.com/remappingbridge/remappingbridge/actions/runs/38298979787), commit `7177672d109f8f13aea77ba707c614e53d6065f1`, [candidate data](candidate.md), branch `maintenance/v3x-mnt-15`, based on v3.2.3 tag `f38c5fd15c68ea9a36d3b05912727788d7b98e81`.
 
 **Observed before candidate (baseline, operator report):** Mabox, Obsidian accepts physical Ctrl+= but not Ctrl+Shift+=. Browser accepts Ctrl+= without Shift. Terminals differ: some require Ctrl+Shift+= while others use Ctrl+=. This difference is **not fixable universally with a single generic HID chord** without per-host/app policies that are outside MNT-15.
 
@@ -25,10 +25,18 @@
 | 8 | Switch PASSTHROUGH/CUSTOM, reboot, check a second saved mouse | Applied profiles, modifier/shortcuts, bond-specific Movement unaffected | PENDING |
 | 9 | Navigate HOME/COMBINATIONS/SAVED DEVICES | Visual pipe `|`, colors, menus, 9×21 unaffected by HID-only change | PENDING |
 
+## Acceptance recorded — 12 October 2026
+
+- **Operator statement:** “gate aceito” — unequivocal acceptance of MNT-15, in direct response to the delivered Pico 2 W UF2 and manual test instructions.
+- **Approved candidate:** branch `maintenance/v3x-mnt-15`, commit `7177672d109f8f13aea77ba707c614e53d6065f1`, CI #38298979787, artifact ZIP ID 11769092575; actual **UF2 SHA-256 `4ae558f0814607aeda23d1b2e8bd128a6ca03c5f47c11a3c44e83e826796ca8e`**.
+- **What is established:** operator accepted the gate as a whole after the UF2 was provided, authorizing a PATCH release. The operator did **not** enumerate individual Obsidian/browser/terminal screenshots/logs in the acceptance message, so detailed checklist cells remain historically **PENDING / NOT ITEMIZED**; do not manufacture observations.
+- **Known limitation acknowledged in implementation:** terminals disagree on whether Zoom In requires Shift. The action stays generic Ctrl+=; no app-specific detection or dual-chord emission.
+- **Release change:** version metadata + English notes + release workflow only, no further functional HID change. Publish **v3.2.4** only from verified merge commit, CI and production build.
+
 ## Acceptance decision
 
 - **PASS + explicit “gate aceito”**: authorize patch SemVer 3.x (next after current official v3.2.3; candidate release target tentatively v3.2.4), re-run final CI, merge, tag and publish official UF2 plus SHA256SUMS. Check that English-only public documentation on main is preserved.
 - **FAIL or terminal compatibility unacceptable**: retain PR draft and test candidate; do not publish. If necessary, reopen architecture/design discussion about user-configurable shortcut strategy in a **separate, explicitly approved scope**.
 - **No physical report**: remain PENDING. CI and source tests cannot prove Obsidian/terminal compatibility.
 
-**No scenario here is claimed PASS before the operator reports its observation.**
+**Gate-level approval is recorded above; per-scenario evidence not supplied in the short acceptance message remains unitemized.**
