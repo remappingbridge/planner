@@ -1,6 +1,16 @@
 # WEB-00 — Autoridade, snapshot e fixtures
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `planner (execução apenas documental)`. **Dependência:** Nenhum. Primeiro gate da série.
+**Status:** AUTORIZADO/ACEITO PARA PROSSEGUIR PELO OPERADOR EM 12/10/2026 (“prossiga”); verificação estática PASS. **Destino em futura execução:** `planner (execução apenas documental)`. **Dependência:** Nenhum. Primeiro gate da série.
+
+## Candidato e evidências
+
+- [Preflight de fontes/licenças](../executions/WEB-00/preflight.md)
+- [Candidate — validações estáticas](../executions/WEB-00/candidate.md)
+- [45 telas e mapa de interações](../executions/WEB-00/screen-matrix.md)
+- [Fixtures versionadas](../fixtures/README.md)
+- [Checklist manual PENDENTE](../executions/WEB-00/manual-tests.md)
+
+**Nenhum código de site ou README do firmware alterado neste gate. WEB-01 autorizado; ver [decisão do operador](../executions/WEB-00/operator-acceptance.md).**
 
 ## Escopo fechado
 
