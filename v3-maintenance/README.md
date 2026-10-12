@@ -1,6 +1,6 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado atualizado em 2026-10-11: MNT-01 ACEITO E [v3.0.1 PUBLICADA](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.0.1); MNT-02 CANDIDATO PRONTO (CI #445 82/82 PASS + UF2 Pico 2 W SHA verificado), ACEITE FÍSICO PENDENTE; MNT-03..11 ainda planejados.** O texto a seguir registra o planejamento original e o protocolo de execução.
+**Estado atualizado em 2026-10-11:** MNT-01..MNT-09 aceitos e publicados, com última versão **[v3.1.4](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.1.4)**. Novo **MNT-10** planeja remoção completa de mouse/configuração; MNT-11 permanece nome BLE; MNT-12 guarda o antigo diagnóstico Zoom (antes MNT-10). Nenhum código do MNT-10 foi implementado.
 
 ## Baseline congelada
 - Produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge).
@@ -10,16 +10,16 @@
 - Produto: Raspberry Pi Pico 2 W, LCD/HAT com grade 9 linhas × 21 caracteres, USB Mouse+Keyboard/Consumer, BLE e saved mouse; preservar v3.0 e todas as 30 ações/12 combinações.
 
 ## Organização
-1. [01 — Backlog literal e critérios por item](01-backlog-and-contract.md): **3 hotfixes, 9 melhorias**; Zoom Obsidian definido como **Melhoria 8**; nome redundante do mouse renumerado **Melhoria 9** porque o rascunho tinha dois títulos `8`.
-2. [02 — Gates, dependências e versões](02-gates-and-versioning.md): **11 gates**, os hotfixes 2/3 empacotados atomicamente, Help/Lock realizado **antes** da legenda LOCKS ANYWHERE, e **uma publicação condicionada a cada gate fisicamente aceito**.
+1. [01 — Backlog literal e critérios por item](01-backlog-and-contract.md): **3 hotfixes, 10 melhorias**; Zoom Obsidian definido como **Melhoria 8**; nome redundante do mouse renumerado **Melhoria 9** porque o rascunho tinha dois títulos `8`.
+2. [02 — Gates, dependências e versões](02-gates-and-versioning.md): **12 gates**, os hotfixes 2/3 empacotados atomicamente, Help/Lock realizado **antes** da legenda LOCKS ANYWHERE, e **uma publicação condicionada a cada gate fisicamente aceito**.
 3. [03 — Cenários físicos e regressão](03-tests-and-acceptance.md): cada candidato nasce testável desde HOME CONNECTED e requer CI + UF2 Pico 2 W, checksum e aceite.
 4. [04 — Decisões, semântica visual e riscos](04-decisions-and-risks.md): diferencia cores, controles, nomes, compatibilidade de layout e semver.
-5. [MNT-01 — aceite e release v3.0.1](executions/MNT-01/release.md) publicada, tag/UF2/SHA256 verificados.
-6. [MNT-02 — candidato e testes físicos](executions/MNT-02/candidate.md), CI 82/82 PASS, UF2 de produção SHA256 verificado, aceite PENDING.
-7. [gates/](gates/): contrato independente de cada MNT-01..MNT-11, pronto para implementação futura.
+5. [MNT-09 — candidato/aceite](executions/MNT-09/operator-acceptance.md) e publicação [v3.1.4](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.1.4); demais releases anteriores aceitos.
+6. [MNT-10 — exclusão completa de mouse](gates/MNT-10.md) planejado; [MNT-11 — sufixo BLE](gates/MNT-11.md) preservado; [MNT-12 — Zoom genérico](gates/MNT-12.md) renumerado, sem implementação.
+7. [gates/](gates/): contrato independente de cada MNT-01..MNT-12, pronto para implementação futura.
 
 ## Regras de entrega e publicação
 - Hotfixes/correções cosméticas: **PATCH**; mudança intencional de comportamento dos Helps (somente KEY B volta; KEY Y bloqueia): **MINOR**; **MAJOR não está no escopo**. Tabela de versões é **previsão**, deve ser recalculada a partir da última tag realmente publicada se outro release intercalar.
-- Em cada gate: criar branch da última tag publicada, implementar somente escopo aprovado, CI host PASS + build Pico 2 W, UF2 real e SHA-256, PR de revisão, roteiro físico desde HOME, **aceite explícito do operador**, então atualizar versão/código/release notes, publicar tag GitHub Release com UF2/SHA256SUMS, validar release e só então iniciar gate seguinte. O pedido deste planejamento **autoriza o versionamento/publicação após cada aceite futuro**, mas **não autoriza implementação ou lançamento agora**.
+- Em cada gate: criar branch da última tag publicada, implementar somente escopo aprovado, CI host PASS + build Pico 2 W, UF2 real e SHA-256, PR de revisão, roteiro físico desde HOME, **aceite explícito do operador**, então atualizar versão/código/release notes, publicar tag GitHub Release com UF2/SHA256SUMS, validar release e só então iniciar gate seguinte. O pedido atual registra o aceite e publicação do MNT-09, mas **não autoriza implementar o novo MNT-10 neste momento**. Os releases seguintes continuam condicionados aos aceites de seus próprios gates.
 - Rejeição/bug: corrigir **na mesma branch e dentro do mesmo gate**, substituir UF2 candidato, retestar e manter número de versão futuro reservado; **não publicar** uma falha. Item apenas diagnosticado/documentado (ex.: Zoom) não gera release fictícia.
 - Preservar sempre flash sem `flash_nuke`, bonds BLE, configuração v3, Movement por mouse, identidade USB VID/PID/interfaces, Lock, Modifier, Custom/Passthrough, telas e semântica atual fora do gate.
