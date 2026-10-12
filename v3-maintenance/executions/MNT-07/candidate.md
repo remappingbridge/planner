@@ -22,3 +22,15 @@ O operador avaliou o primeiro ciano `0xBFFF` como razoável, mas pediu um tom ma
 
 ## Segunda revisão do ciano: ciano pastel sem escurecer
 O operador rejeitou o candidato `0xB65A` como muito escuro; solicitou retornar ao estilo do primeiro ciano `0xBFFF`, porém ainda mais fraco. Portanto, a fonte na mesma branch MNT-07 usa agora **`0xD7FF` (RGB565 R=26/31, G=63/63, B=31/31)**: a componente vermelha sobe de 23 para 26, enquanto verde e azul permanecem máximos, reduzindo a saturação e aumentando a claridade. O cinza padrão `0xC618` não foi alterado. Teste automatizado atualizado para validar preservação de brilho e semântica. Commit `091716c1476e81690ddaebe7309e09d026e4b652`; execução CI [#486](https://github.com/remappingbridge/remappingbridge/actions/runs/38186522000). **Os candidatos MNT-07 anteriores (0xBFFF e 0xB65A) estão substituídos.** Nenhum aceite físico foi informado para esta revisão.
+
+## Candidato vigente para teste — ciano pastel 0xD7FF
+
+**Este é o único candidato MNT-07 válido agora; os anteriores estão substituídos.**
+
+- Código: commit `091716c1476e81690ddaebe7309e09d026e4b652`, mesma branch `maintenance/v3x-mnt-07` e [PR #37](https://github.com/remappingbridge/remappingbridge/pull/37).
+- Cor RGB565 `BLU2USB_COLOR_CYAN = 0xD7FF`, tom claro e menos saturado que `0xBFFF`, sem a perda de brilho observada com `0xB65A`.
+- [CI #486](https://github.com/remappingbridge/remappingbridge/actions/runs/38186522000): **87/87 testes host aprovados**; **build produção Pico 2 W aprovado**.
+- Artefato de firmware Actions: `11720106308`, arquivo `blu2usb_picow.uf2`; arquivo entregue ao operador como `remappingbridge-mnt07-pastel-cyan-pico2w.uf2`.
+- Tamanho: **945.152 bytes**.
+- SHA-256 do UF2: `f72a20c54666d09f13d9f18486a0258d4a2d0948bf1c79b0e7ea918674065d9a`. Hash do arquivo extraído **igual ao registrado no log de produção**.
+- Status: **aguardando teste e aceite físico**, **sem publicação v3.1.2**.
