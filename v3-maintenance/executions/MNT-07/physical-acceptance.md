@@ -11,3 +11,6 @@
 7. Regressão: mouse BLE, USB HID, ajustes e persistência não sofreram alteração.
 
 **Aceite global:** PENDING. A escolha definitiva da cor depende do teste no dispositivo.
+
+## Ajuste do teste físico — segunda revisão
+Apenas avaliar o **novo ciano pastel `0xD7FF`**. O anterior `0xB65A` foi rejeitado por escuro, e `0xBFFF` foi considerado razoável, porém forte. Esperado: ciano semelhante ao `0xBFFF`, mais suave e claro, **não** aproximado do cinza padrão. Em SAVED DEVICES, comparar o nome do mouse ativo com outros textos e confirmar contraste em iluminação real. Registrar aceite somente depois de instalar o novo UF2.
