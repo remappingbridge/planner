@@ -1,6 +1,15 @@
 # WEB-06 — Perfis, Custom Modifier e Movement
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-05 aceito.
+**Status:** CANDIDATE IMPLEMENTED / 165/165 ISOLATED CHECKS PASS / PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-05 aceito.
+
+## Implementation and operator addition
+
+- [Preflight / v3.2.4 source](../executions/WEB-06/preflight.md)
+- [Candidate: Custom/Movement and sticky HAT](../executions/WEB-06/candidate.md)
+- [**Numbered production-browser manual tests (14 scenarios)**](../executions/WEB-06/manual-tests.md)
+- Operator accepted WEB-05 and required a **sticky always-visible HAT**, shorter LCD frame top/bottom, narrower/less-rounded vertical right A/B/X/Y buttons, and Pico/device metadata in a right-side column bounded by the LCD square. Implemented in WEB-06 alongside profile and Movement work.
+
+**WEB-06 remains pending operator acceptance. WEB-07 NOT STARTED.**
 
 ## Escopo fechado
 
