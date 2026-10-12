@@ -1,6 +1,6 @@
 # MNT-10 — Remover mouse sem deixar vínculo nem configuração residual
 
-**Status: CANDIDATO IMPLEMENTADO / AGUARDANDO TESTE FÍSICO.** PR draft [#40](https://github.com/remappingbridge/remappingbridge/pull/40), [CI #526](https://github.com/remappingbridge/remappingbridge/actions/runs/38190069355) com **92/92 testes host e build Pico 2 W aprovados**, UF2/checksum documentados em [candidate.md](../executions/MNT-10/candidate.md). **Não há aceite físico nem nova release.** O restante preserva os critérios e riscos do planejamento original.
+**Status: ACEITO E PUBLICADO como v3.2.0; ver [release.md](../executions/MNT-10/release.md).** PR draft [#40](https://github.com/remappingbridge/remappingbridge/pull/40), [CI #526](https://github.com/remappingbridge/remappingbridge/actions/runs/38190069355) com **92/92 testes host e build Pico 2 W aprovados**, UF2/checksum documentados em [candidate.md](../executions/MNT-10/candidate.md). **Aceite físico global foi registrado e a tag 3.2.0 verificada.** O restante preserva os critérios e riscos do planejamento original.
 
 - Backlog: **MEL-10**, nova melhoria de exclusão integral de dispositivo.
 - Base: **v3.1.4 oficialmente publicada**, após MNT-09; futura branch `maintenance/v3x-mnt-10` deve nascer da tag/SHA exatos da última release oficial.
@@ -53,4 +53,4 @@ Excluir um mouse **não deve apagar os perfis, atalhos, bonds ou movimentos de o
 3. Build de produção Pico 2 W; extrair UF2 de GitHub Actions, conferir SHA-256 com o log e disponibilizar candidato para testes físicos desde HOME CONNECTED; documentar `candidate.md` e `physical-acceptance.md`.
 4. **Somente após aceite físico explícito do operador**, atualizar a versão 3.x, executar CI versionada, mesclar e publicar release único com UF2 + SHA256SUMS. Se testes falharem, corrigir na mesma branch e refazer candidato. MNT-11 só começa após publicação verificada.
 
-**Implementação candidata concluída**, pendente dos cenários em [physical-acceptance.md](../executions/MNT-10/physical-acceptance.md). A CI valida código e compilação, mas **não prova o funcionamento físico de flash/LE**; não publicar ou mesclar sem aceite.
+**Implementação aprovada e publicada**, documentada nos cenários em [physical-acceptance.md](../executions/MNT-10/physical-acceptance.md). A CI valida código e compilação, mas **não prova o funcionamento físico de flash/LE**; não publicar ou mesclar sem aceite.
