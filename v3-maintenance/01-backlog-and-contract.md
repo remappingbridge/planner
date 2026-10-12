@@ -51,9 +51,22 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 
 **Achado preliminar do código atual:** há limpeza de bonds, nomes e Movement por identidade BLE, mas `blu2usb_profiles_t` (perfil/remap/shortcuts) é persistido de forma **global** em `src/app/main.c`, e portanto pode ser reaproveitado no novo pareamento. Investigar causa efetiva com regressões; qualquer solução deve isolar estado por mouse e preservar os demais, sem apagar indiscriminadamente o perfil global. Priorizar identidade estável e migração de registros v3, remoção idempotente e falhas recuperáveis de TLV/flash. Não prometer secure erase físico forense do flash sem requisito técnico adicional.
 
-**Critérios de aceite:** remover A e reparear A reinicia perfil PASSTHROUGH, botões, atalhos, modifier e Movement; B continua com suas configurações; reboot antes/depois não restaura dados de A; remoção falha não pode ser mostrada como concluída; testes de RPA/IRK e ordinais reciclados. Planejamento detalhado em [MNT-10](gates/MNT-10.md). **Não implementado.**
+**Critérios de aceite:** remover A e reparear A reinicia perfil PASSTHROUGH, botões, atalhos, modifier e Movement; B continua com suas configurações; reboot antes/depois não restaura dados de A; remoção falha não pode ser mostrada como concluída; testes de RPA/IRK e ordinais reciclados. Planejamento e histórico de implementação em [MNT-10](gates/MNT-10.md). **Aceito e publicado como v3.2.0.**
 
-**Ordem de gates atualizada:** MEL-10 integra MNT-10; MEL-09 permanece MNT-11; **MEL-08 Zoom**, antes associado ao gate MNT-10, foi adiado para **MNT-12**. A numeração MEL histórica dos itens originais não é modificada.
+**Ordem de gates atualizada:** MEL-10 integra MNT-10; MEL-09 permanece MNT-11; **MEL-08 Zoom**, antes associado ao gate MNT-10, foi adiado para **MNT-12**. A numeração MEL histórica dos itens originais não é modificada; MEL-11 agora adiciona MNT-13 sem alterar MNT-12.
+
+### MEL-11 — PAIR NEW com mouse conectado: investigação e decisão, não correção automática (MNT-13)
+
+**Novo pedido, 11/10/2026.** O operador observou que PAIR NEW só consegue parear um novo dispositivo quando não há mouse conectado. Os requisitos originais de 20/09/2026 exigem exatamente o contrário: o mouse atual deve continuar operacional enquanto um **segundo mouse BLE HOGP não salvo** é descoberto e qualificado; somente depois ocorre handoff e desconexão do antigo. A tentativa cancelada ou expirada em 15 segundos não pode desconectar o mouse atual. Mouse já cadastrado não é vencedor de PAIR NEW por contrato.
+
+**Resultados prévios verificados:** HOPE-06 falhou inicialmente com pools BTstack de apenas 1 conexão/GATT/HIDS, corrigidos para 2 e fisicamente aceitos. A v3.2.0 mantém os três limites em **2**; o renderer/UI permite PAIR NEW mesmo com mouse conectado, e `start_pair_new` aceita o estado READY. Existem sessão candidata separada, security/HIDS e handoff seguro. **Essas evidências estáticas não provam a causa raiz atual** nem se o defeito foi reproduzido em testes controlados. Ver [investigação anterior](investigations/pair-new-with-connected-mouse-2026-10-11.md).
+
+**MNT-13 será dividido obrigatoriamente em duas partes:**
+
+1. **Parte 1 (somente investigação):** reproduzir controladamente com A conectado × A ausente e B realmente não salvo em modo pairing, capturar estados/erros de scan, advertising, connection, SM, GATT HIDS, filtros de bonds/IRK, timeout 15 s e handoff. Identificar a primeira divergência, separar hipótese de causa comprovada, gerar relatório com evidências. **Não corrigir, não versionar.**
+2. **Parte 2 (decisão técnica):** com a causa raiz conhecida, avaliar se corrigir é viável, seguro e proporcional, preservando o contrato de um mouse autoritativo e candidato temporário. Resultado **GO / NO-GO (DEFERRED) / BLOCKED (INCONCLUSIVE) / NOT A BUG**. Somente um GO aprovado e uma **nova autorização expressa de implementação** permitem alterar firmware; release apenas após CI, UF2 e aceite físico. Nenhum release por diagnóstico.
+
+**Escopo e detalhes do gate:** [MNT-13](gates/MNT-13.md). **Status: PLANEJADO; duas partes PENDING, não iniciado.** MNT-12 Zoom segue separado e suspenso.
 
 ## Registro da implementação de cores aceita
 As solicitações MEL-05/MEL-06 acima registram o desejo original. Após iterações e aceite final conjunto do operador, a regra efetivamente publicada na **v3.1.3** é o inverso do texto original: **CURRENT sem seleção = ciano normal 0x07FF** e **CURRENT selecionado = ciano clarinho pastel 0xD7FF**; os demais itens permanecem cinza→branco. O nome conectado em Saved Devices é informativo e permanece ciano normal.
