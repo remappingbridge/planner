@@ -1,6 +1,15 @@
 # WEB-01 — Página única e bootstrap estático
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-00 aceito.
+**Status:** CANDIDATO IMPLEMENTADO EM BRANCH DO SITE / SMOKE ESTRUTURAL PASS / TESTE VISUAL E ACEITE PENDENTES. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-00 aceito.
+
+## Evidência da implementação
+
+- [PR #1 — remappingbridge.github.io](https://github.com/remappingbridge/remappingbridge.github.io/pull/1) — código estático em branch draft.
+- [Preflight](../executions/WEB-01/preflight.md)
+- [Candidate e resultados técnicos](../executions/WEB-01/candidate.md)
+- [Cenários de teste manual PENDENTES](../executions/WEB-01/manual-tests.md)
+
+**WEB-02 permanece bloqueado até o aceite explícito do WEB-01.**
 
 ## Escopo fechado
 
