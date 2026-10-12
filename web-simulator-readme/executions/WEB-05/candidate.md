@@ -18,6 +18,10 @@
 - The general legend deliberately uses **"on most screens"**, not unqualified `always`, because firmware's first-mouse tutorial and certain Retry screens are exceptions. The unlock action is a press-and-release of any HAT control, returns to the appropriate resolved Home and is consumed. No claim that KEY Y itself toggles unlock.
 - Persisted profiles hold separate default values but **full editing/apply transactions are WEB-06/07, not WEB-05**. Physical pairing and bonds are never modified.
 
+## Actual publication for production browser
+
+The website's [PR #6](https://github.com/remappingbridge/remappingbridge.github.io/pull/6) was merged **only to publish WEB-05 for operator testing**, site `main` commit `0ee2238faeb6942f9edc99b8320f65b785feec0d`. [Pages run #38311281605](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38311281605): build SUCCESS at the time of recording, deploy still IN PROGRESS. Recheck for success before telling the operator to rely on the live version. The gate remains unaccepted even after Pages deployment.
+
 ## Publication and rollback
 
 Site [WEB-05 candidate branch](https://github.com/remappingbridge/remappingbridge.github.io/tree/web/web-05-virtual-mice-key-legend). When deployed to `main`, this is only for operator's production testing, not final gate acceptance. If rejected, revert to accepted WEB-04 site SHA `19a5b7dd24c917ecc2810ad8230963f13e33d00e`. **WEB-06 NOT STARTED**.
