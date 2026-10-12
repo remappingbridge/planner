@@ -1,0 +1,19 @@
+# WEB-09 — Diagnostics Inspector, bottom-right technical HAT metadata
+
+**Status:** CANDIDATE IMPLEMENTED; **235/235 ISOLATED JS DOM/Canvas2D ASSERTIONS PASS**; live production browser/manual operator acceptance **PENDING**.
+
+## Delivered
+
+1. **Operator layout changes.** HAT right metadata flex alignment moved to **bottom and right** inside its display-height container, with all three original lines PICO 2 W, LCD 240 × 240 and 9 HAT CONTROLS intact. The accepted upper-left REMAPPINGBRIDGE, lower-left yellow-dot VIRTUAL DEVICE, left joystick, 240×240 logical LCD, vertical A/B/X/Y, responsive sticky geometry and Gentle background remain.
+2. **Remove dispensable DISPLAY CONTROLS.** Deleted the complete LCD appearance brightness/density markup and its unused `assets/js/display-settings.js` source file. Browser now paints LCD at normal (100%) CSS brightness. Source-accurate KEY Y Lock still blanks the original framebuffer and unlock restores normal brightness. Large mobile 44px touch HAT controls, source colors and local virtual-mouse preferences are retained. Leftover historical stylesheet rules have no DOM matches and do not expose any controls.
+3. **Diagnostic lab in same page.** `index.html` has a collapsed `<details>` section **Diagnostic Inspector · scenarios and local evidence**. It is not a firmware menu and not a new site.
+4. **`assets/js/diagnostics.js` new:** eight current UX isolated deterministic scenarios in **memory only** via virtual model `storage:null`. These cover First Use, Connected, Two Mice, Remove, Stale+Failed Pair, Timeout, Custom Movement, Modifier Shortcuts. Stable FNV-1a hashes calculated solely from canonical source event/model state, never timestamps, browser-local saved mice, random IDs or network data.
+5. **Pixel inspector.** Separate native 240×240 `Canvas` uses the existing source renderer and projector. Click coordinates scale from CSS rect to 240×240; semantic IDs `LCD/<SCREEN>/ROW_nn/COL_nn`, C-source row/col, semantic tone and actual 10×14 glyph bounding rectangle derive from physical source geometry. Keyboard focus supports Enter/Space and arrow navigation without accidentally changing HAT state; clipboard copies the visible reference, fallback message if permission denied.
+6. **Evidence and timeline.** JSON and TXT local downloads include scenario hash/events/source/selection; PNG exports the diagnostic Canvas with 240×240 logical pixels via `toDataURL`. Local Blob URL/data-URI downloads never perform an upload. Bounded in-app event timeline also records live HAT and real-browser virtual-mouse interaction **without affecting deterministic scenario state hashes**. No data sent off-device.
+7. **Automatic regressions.** `tests/runner.js` was updated to remove obsolete WEB-08 slider/density control tests. Preserves v3.2.4 golden font/frame, all 45 source screens, 12 combos/30 shortcut routes, WEB-05..08 virtual bonds/Movement/MNT-12/MNT-13 and mobile HAT. Tests add independent scenario hashes and storage separation, failure/stale/timeout, 240×240 semantic hit/copy coordinates, keyboard-selected source glyph, JSON/TXT/PNG export UI and bounded timeline.
+
+## Verification performed
+
+**235/235 PASS** by executing the **actual native website `tests/runner.js`** in an isolated JS V8 environment with simulated DOM and Canvas2D. This is **not actual Firefox or Chromium production-browser execution**. The 44px mobile tap targets, visual bottom-right alignment, CSS sticky scrolling, inspector pointer scaling, Clipboard API permission, real downloaded file contents/sizes and 150–200% zoom remain operator manual tests documented in [manual-tests.md](manual-tests.md).
+
+Firmware source, UF2 files, real BLE/HID and all existing virtual mouse bonds are unchanged. WEB-10 is blocked until WEB-09 accepted. Publication of site candidate does NOT mean acceptance.
