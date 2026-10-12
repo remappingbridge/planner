@@ -1,6 +1,16 @@
 # WEB-00 — Autoridade, snapshot e fixtures
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `planner (execução apenas documental)`. **Dependência:** Nenhum. Primeiro gate da série.
+**Status:** CANDIDATO DOCUMENTAL PREPARADO — VERIFICAÇÃO ESTÁTICA PASS, ACEITE DO OPERADOR PENDENTE. **Destino em futura execução:** `planner (execução apenas documental)`. **Dependência:** Nenhum. Primeiro gate da série.
+
+## Candidato e evidências
+
+- [Preflight de fontes/licenças](../executions/WEB-00/preflight.md)
+- [Candidate — validações estáticas](../executions/WEB-00/candidate.md)
+- [45 telas e mapa de interações](../executions/WEB-00/screen-matrix.md)
+- [Fixtures versionadas](../fixtures/README.md)
+- [Checklist manual PENDENTE](../executions/WEB-00/manual-tests.md)
+
+**Nenhum código de site ou README do firmware alterado. WEB-01 bloqueado até aceite explícito.**
 
 ## Escopo fechado
 
