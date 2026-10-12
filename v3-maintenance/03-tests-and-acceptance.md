@@ -1,6 +1,6 @@
 # 03 — Matriz de teste físico, host e regressão de v3.x
 
-**Estado:** histórico MNT-01..MNT-11 aceito; cenários MNT-12..MNT-14 são **propostos e não executados**. Implementações futuras serão validadas na mesma base de hardware Pico 2 W + LCD ST7789 + HAT + mouse BLE, a partir de HOME CONNECTED. O operador escolhe ambiente real de hosts; CI nunca simula cor/contraste real do LCD.
+**Estado:** MNT-01..MNT-12 **aceitos e publicados** (v3.2.2); MNT-13 novo indicador de foco é **somente planejado**; MNT-14 PAIR NEW (duas partes) **não iniciado**; MNT-15 Zoom **suspenso**. Implementações futuras serão validadas na mesma base de hardware Pico 2 W + LCD ST7789 + HAT + mouse BLE, a partir de HOME CONNECTED. O operador escolhe ambiente real de hosts; CI nunca simula cor/contraste real do LCD.
 
 ## Preparação comum
 1. Identificar tag estável instalada e a versão candidata, guardar 12 combos de shortcuts e parâmetros Movement; fazer backup quando pertinente sem flash_nuke.
@@ -24,9 +24,10 @@
 | MNT-10 | Salvar perfil/remap/12 shortcuts/Modifier e DPI/Rotation no mouse A; remover em SAVED DEVICES; reboot; reparear mesmo mouse como novo; repetir com mouse B preservado; simular falha de armazenamento/IRK/slot reciclado | A perde completamente bond/configuração e retorna aos defaults; B mantém suas configurações; falha não informa exclusão falsa nem restaura A |
 | MNT-11 | Nome BLE `BTS. 0MOUSE2`, `mouse`, `MOUSE123`, `LIFT`, vazio/UNKNOWN, truncado; HOME e SAVED DEVICES, desligar/religar | Qualquer subsequência `MOUSE` dispensa sufixo; LIFT recebe ` MOUSE`; sem duplo sufixo nem truncamento perigoso; bonds intactos |
 | **MNT-12** | Em REMAPPING OPTIONS, cruzar 4 estados (CUSTOM/PASSTHROUGH × tem/sem Modifier efetivo); em COMBINATIONS 1..6 avaliar valor atribuído, NOT CUSTOMIZED e UNAVAILABLE, selecionado/não selecionado, mudança de perfil/mouse, draft, reset, reboot | Apenas CUSTOM **com Modifier aplicado** ativa ciano; na opção MODIFIER SHORTCUTS e apenas valores atribuídos da combinação = 0x07FF sem foco / 0xD7FF selecionado; rótulos, UNAVAILABLE e NOT CUSTOMIZED preservados; nenhum ciano residual em PASSTHROUGH ou CUSTOM sem Modifier |
-| **MNT-13 / Parte 1** | A conectado e B realmente inédito: PAIR NEW por 15 s; repetir com A ausente; comparar eventos de start/scan/advertising/connect/SM/HIDS/handoff, timeout e KEY B; rejeição correta de mouse salvo | Relatório técnico demonstra causa raiz e primeiro estágio divergente **ou** classifica evidência INCONCLUSIVE/NOT REPRODUCED de modo transparente; **sem patch/UF2 release** |
-| **MNT-13 / Parte 2** | Revisar relatório da Parte 1, riscos reais de coexistência BLE/BTstack/USB, viabilidade técnica, custo e regressões; deliberar GO / NO-GO / BLOCKED / NOT A BUG | Decisão justificada e aceita pelo operador. GO exige autorização **separada** para corrigir, candidato físico e aceite para release; NO-GO/BLOCKED/NOT A BUG não geram release |
-| **MNT-14** | Em Debian 13 KDE Obsidian e navegador, testar Zoom In/Out/Reset do teclado físico e BLU2USB; comparar eventos por device com evtest/udevadm; reiniciar | Diagnóstico Zoom originalmente MNT-12 preservado e **suspenso**; somente após correção HID genérica: ambas apps fazem zoom sem efeitos colaterais; sem prova, DEFERRED / NO RELEASE |
+| **MNT-13 NOVO** | Percorrer cada opção nas telas HOME, SEARCHING, RETRY, REMAPPING, EDIT CUSTOM, WILL BECOME, MOVEMENT, DPI, ROTATION, COMBINATIONS, SHORTCUTS e ação única de SAVED DEVICES; repetir navegação/paginação e BACK/Help/Lock | Em toda tela com lista elegível, **exatamente um `>` na coluna física 1 / índice 0, na linha do item focado**; zero nos demais itens/status/hints/Help; MOVEMENT terceiro item → linha 4; COMBINATIONS seta só no rótulo 1/3; Saved Devices único REMOVE DEVICE linha 5 quando há bond; cores/textos/comandos intactos |
+| **MNT-14 / Parte 1** | A conectado e B realmente inédito: PAIR NEW por 15 s; repetir com A ausente; comparar eventos de start/scan/advertising/connect/SM/HIDS/handoff, timeout e KEY B; rejeição correta de mouse salvo | Relatório técnico demonstra causa raiz e primeiro estágio divergente **ou** classifica evidência INCONCLUSIVE/NOT REPRODUCED de modo transparente; **sem patch/UF2 release** |
+| **MNT-14 / Parte 2** | Revisar relatório da Parte 1, riscos reais de coexistência BLE/BTstack/USB, viabilidade técnica, custo e regressões; deliberar GO / NO-GO / BLOCKED / NOT A BUG | Decisão justificada e aceita pelo operador. GO exige autorização **separada** para corrigir, candidato físico e aceite para release; NO-GO/BLOCKED/NOT A BUG não geram release |
+| **MNT-15** | Em Debian 13 KDE Obsidian e navegador, testar Zoom In/Out/Reset do teclado físico e BLU2USB; comparar eventos por device com evtest/udevadm; reiniciar | Diagnóstico Zoom originalmente MNT-12 preservado e **suspenso**; somente após correção HID genérica: ambas apps fazem zoom sem efeitos colaterais; sem prova, DEFERRED / NO RELEASE |
 
 ## Testes automatizados e cross-gate
 
@@ -47,7 +48,7 @@
 ## Contrato de segurança adicional — novo MNT-10
 Remoção de um mouse salva não equivale a `factory reset`: teste com pelo menos dois bonds e perfis diferentes é obrigatório. Dados bond-scoped incluem identidade/IRK, nomes, Movement, perfil ativo, remap, Modifier, atalhos e rascunho. Repareamento após reboot deve começar nos defaults, sem reaproveitamento de configuração antiga ou de ordinal/slot reciclado. Testar falha de flash/TLV, sequência de confirmação, cancelamento por B e idempotência. Não declarar exclusão bem-sucedida se alguma etapa persistente falhar.
 
-## Critérios particulares de diagnóstico — MNT-13
+## Critérios particulares de diagnóstico — MNT-14 (antigo MNT-13)
 
 - A **Parte 1** é considerada entregue por relatório técnico rastreável (baseline SHA/versão, identificação dos dois mouses, reprodução controlada, estado de advertising e bond, timestamps/states/errors, hipótese testada e evidência pró/contra); não exige UF2 definitivo e **não publica release**. Logs e dumps devem anonimizar identidade/IRK.
 - O sintoma só está **reproduzido** se mouse B não salvo, BLE HOGP, em modo de pareamento, falha com A conectado em condições comparáveis à condição A ausente. Mouse salvo ser ignorado em PAIR NEW é **PASS contratual**, não falha.
@@ -55,10 +56,21 @@ Remoção de um mouse salva não equivale a `factory reset`: teste com pelo meno
 - **Somente após GO e autorização específica para código**, caso exista patch: regressão host e Pico, observação de dois mouses em hardware, sem perda de input do A durante scan, troca segura somente após qualificação do B, cancel/timeout preservando A e nenhum bond/perfil de terceiros modificado. Cumprir rito de UF2/aceite SemVer 3.x.
 - Desconectar A para conseguir conectar B é procedimento de **controle negativo/contorno de teste**, não solução que satisfaça a arquitetura sem formalizar mudança contratual.
 
-## Contrato visual de regressão — novo MNT-12 (sem execução atual)
+## Contrato visual de regressão — MNT-12 (aceito v3.2.2)
 
 1. Tom do texto `MODIFIER SHORTCUTS` no frame da tela `BLU2USB_SCREEN_MOUSE_OPTIONS`: conferir `BLU2USB_UI_TONE_CURRENT` / `BLU2USB_UI_TONE_SELECTED_CURRENT` **apenas** para CUSTOM aplicado + fonte Modifier existente. Outras três combinações de estado seguem ACTIONABLE / EMPHASIZED.
 2. Nos seis pares de páginas `COMBINATIONS_1..6`, testar coordenadas de linhas 1/2 e 3/4: **somente células visíveis de linhas de valores 2/4 atribuídos** mudam para CURRENT (sem foco) / SELECTED_CURRENT (foco). Linhas rótulo 1/3 continuam ACTIONABLE / EMPHASIZED.
 3. Com atalhos não atribuídos (`shortcut_assignments[combo] == 0`), **NOT CUSTOMIZED** não muda seu estado de foco/cor; com `blu2usb_ux_combination_unavailable(...)`, **UNAVAILABLE** continua STATIC inclusive selecionado. Conferir explicitamente a precedência final de composição no renderer.
 4. Draft de Custom com Modifier criado/removido mas não confirmado não deve mudar a indicação do perfil realmente ativo. Aplicar Custom e trocar para PASSTHROUGH deve recalcular os dois grupos de tons na projeção seguinte. Após remoção/re-pareamento ou troca de mouse salvo, não herdar tons de outro bond.
-5. Fazer os testes de projeção de tom por célula + CI host completa + Pico 2 W oficial + teste físico para qualquer futura implementação; neste pedido **nenhum teste, build nem candidato é executado**.
+5. Fazer os testes de projeção de tom por célula + CI host completa + Pico 2 W oficial + teste físico para qualquer futura implementação; na implementação MNT-12 **94/94 testes host e Pico 2 W produção passaram**, e o gate foi **fisicamente aceito/publicado v3.2.2**.
+
+## Contrato de regressão — MNT-13 (seta de seleção; APENAS PLANEJADO)
+
+1. Verificar **primeira coluna índice 0** em cada frame: exatamente um `>` na linha do foco quando há lista elegível e nenhuma seta nas outras opções. Se seleção inválida, zero setas. Guardar/restaurar o espaço das demais linhas sem apagar caracteres informativos.
+2. Cobrir HOME(4), HOME_SEARCHING/RETRY(2), REMAPPING OPTIONS(3), EDIT CUSTOM(5), cinco WILL BECOME(6), MOVEMENT OPTIONS(3), quatro DPI SLOW/FAST(4), ROTATION(4), seis COMBINATIONS(2 pares), cinco SHORTCUTS(6) e SAVED DEVICES (única opção implícita REMOVE DEVICE com bond salvo).
+3. **Exceções:** MOVEMENT seleção 2 marca ROTATION **linha 4**, não COUNTERCLOCKWISE; COMBINATIONS marcador somente **rótulos 1/3**, nunca valores 2/4; SAVED DEVICES vazio **não** mostra `>`, com bonds marcador só REMOVE DEVICE linha 5 apesar de `ux_option_count()==0`.
+4. Título, mouse salvo/ativo, PROFILE/DPI/ROTATION informativo, Help, PAIR NEW, REMOVE THIS, confirmações KEY A, dicas KEY/JOY, FIRST MOUSE e SEARCHING FIRST: zero `>` **de seleção**. `>` não aparece na tela sem menu por resíduo da tela anterior.
+5. As tonalidades de foco MNT-08 e MNT-12 e estados CURRENT/UNAVAILABLE/NOT CUSTOMIZED devem continuar intactos. A seta usa tom coerente com opção focada (branco ou ciano claro), sem recolorir rótulo/valor.
+6. CI host por célula e estado/paginação, Pico 2 W produção UF2 com SHA-256 e teste físico 9×21; **nada disso foi executado para MNT-13 nesta solicitação**.
+
+**MNT-14 e MNT-15 permanecem intactos no conteúdo funcional: nenhuma investigação física nova ou correção foi iniciada.**
