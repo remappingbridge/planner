@@ -1,6 +1,6 @@
 # Investigação — Pair New só encontra novo mouse quando nenhum está conectado
 
-**Data:** 11/10/2026 (horário local). **Natureza:** diagnóstico somente, sem correção nem novo gate. **Estado:** comportamento reportado pelo operador; análise estática concluída, causa exata em hardware **não identificada**. Não iniciar MNT-12 por solicitação expressa do operador.
+**Data da análise inicial:** 11/10/2026 (horário local). **Natureza:** levantamento estático de diagnóstico, **não** uma execução do MNT-13. **Estado:** comportamento reportado pelo operador; análise estática concluída, causa exata em hardware **não identificada**. **Atualização de planejamento:** esta evidência inicial foi incorporada ao [MNT-13 — duas partes](../gates/MNT-13.md), criado em 11/10/2026; ambas as partes continuam **PENDING**. MNT-12 segue suspenso.
 
 ## Sintoma reportado
 
@@ -44,6 +44,10 @@ O cenário precisa ser reproduzido com um **mouse realmente não salvo**, anunci
 5. Se falhar apenas com A conectado, marcar bug reproduzido do **caminho concorrente**, preservar estado e não remover/zerar dados à força.
 
 **Diagnóstico seguinte apenas se autorizado:** incluir logs serial/trace delimitados por condição em `request_pair_new`, `start_pair_new`, `gap_start_scan`/advertising, `gap_connect`/status, `sm_request_pairing`, HIDS/descriptor, timeout e handoff; testar no Pico 2 W. Evitar mudança de comportamento ou versão antes de evidência.
+
+## Incorporação ao MNT-13 — cronologia correta
+
+Após a investigação estática, o operador solicitou criar o **MNT-13** dividido em (1) investigação que **comprove** causa raiz e (2) decisão se vale a pena corrigir segundo viabilidade e risco. Este documento foi escrito **antes** da abertura do gate e por isso **não significa execução da Parte 1** nem autorização de implementação. O protocolo completo, cenários, evidências exigidas, critérios de classificação e possibilidades GO/NO-GO/BLOCKED/NOT A BUG constam em [gates/MNT-13.md](../gates/MNT-13.md). Não há evidência nova de hardware nem diagnóstico concluído por essa mudança documental.
 
 ## Versionamento
 
