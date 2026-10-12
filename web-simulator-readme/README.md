@@ -1,6 +1,6 @@
 # Programa WEB — Simulador estático e README didático RemappingBridge
 
-**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 ACEITO PELO OPERADOR, PR #1 integrada; WEB-02 ACCEPTED, WEB-03 ACCEPTED, WEB-04 ACCEPTED (45 screens, physical HAT layout, fixed Gentle); WEB-05 ACCEPTED (local virtual mice + English HAT key guide), WEB-06 ACCEPTED; WEB-07 AUTHORIZED (Modifier Shortcuts + HAT identity relocation), WEB-05..15 NOT STARTED. Todos os textos públicos de firmware/site/releases devem estar em inglês; testes manuais web apenas em navegador de produção.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
+**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 ACEITO PELO OPERADOR, PR #1 integrada; WEB-02 ACCEPTED, WEB-03 ACCEPTED, WEB-04 ACCEPTED (45 screens, physical HAT layout, fixed Gentle); WEB-05 ACCEPTED (local virtual mice + English HAT key guide), WEB-06 ACCEPTED; WEB-07 CANDIDATE (12 combos, 30 shortcuts, upper-left brand and lower-left virtual device), WEB-05..15 NOT STARTED. Todos os textos públicos de firmware/site/releases devem estar em inglês; testes manuais web apenas em navegador de produção.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
 
 ## Objetivo e destinos
 
