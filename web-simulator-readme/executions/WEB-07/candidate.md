@@ -14,7 +14,7 @@
 
 ## Site candidate publication
 
-Website [PR #8](https://github.com/remappingbridge/remappingbridge.github.io/pull/8) was merged into site `main` **for production-browser testing only**, commit `5f2597946c1af04ceb08c9eec301dc867675c248`. [GitHub Pages deployment #38316811734](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38316811734) is the associated production run; its build/deploy completion must be verified before claiming this version is live. WEB-07 remains pending operator acceptance, and the planner [PR #26](https://github.com/remappingbridge/planner/pull/26) remains draft.
+Website [PR #8](https://github.com/remappingbridge/remappingbridge.github.io/pull/8) was merged into site `main` **for production-browser testing only**, commit `5f2597946c1af04ceb08c9eec301dc867675c248`. [GitHub Pages deployment #38316811734](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38316811734) is the associated production run; its **build and deployment COMPLETED SUCCESSFULLY** for the exact WEB-07 site SHA. However, screenshot fidelity, browser zoom and actual live 194-check pass remain for operator testing. WEB-07 remains pending operator acceptance, and the planner [PR #26](https://github.com/remappingbridge/planner/pull/26) remains draft.
 
 ## Test result and limitations
 
