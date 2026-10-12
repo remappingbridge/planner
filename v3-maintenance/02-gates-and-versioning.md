@@ -1,6 +1,6 @@
 # 02 — Gates MNT-01..MNT-15, dependências e Semantic Versioning 3.x
 
-**Atualizado em 12/10/2026:** MNT-01..MNT-13 **aceitos e publicados até v3.2.3**. **MNT-14 CANCELADO PELO OPERADOR** após testes físicos amplos relatados como bem-sucedidos; não houve patch nem release e a causa raiz não foi estabelecida. Parte 2 não será executada. **MNT-15 Zoom: implementado em PR #45 DRAFT com mudança genérica Ctrl+Shift+Equal → Ctrl+Equal da ação 26; autorização expressa após testes Mabox, navegador sem Shift PASS e terminais variáveis; CI host 98/98 PASS e produção/físico PENDING. Sem release até aceite físico.**
+**Atualizado em 12/10/2026:** MNT-01..MNT-13 **aceitos e publicados até v3.2.3**. **MNT-14 CANCELADO PELO OPERADOR** após testes físicos amplos relatados como bem-sucedidos; não houve patch nem release e a causa raiz não foi estabelecida. Parte 2 não será executada. **MNT-15 Zoom: implementado em PR #45 DRAFT com mudança genérica Ctrl+Shift+Equal → Ctrl+Equal da ação 26; autorização expressa após testes Mabox, navegador sem Shift PASS e terminais variáveis; CI 98/98 host PASS + Pico 2 W PASS + UF2 SHA verificado; somente físico PENDING. Sem release até aceite físico.**
 
 ## Matriz de execução incremental
 
@@ -20,7 +20,7 @@
 | [MNT-12](gates/MNT-12.md) | MEL-12 | Ciano condicional de MODIFIER SHORTCUTS e valores de COMBINATIONS, somente CUSTOM aplicado + botão Modifier; exceções UNAVAILABLE e NOT CUSTOMIZED | **ACEITO E PUBLICADO v3.2.2 (PATCH)** — CI 94/94 + Pico 2 W PASS, PR #42 | v3.2.1 |
 | [MNT-13](gates/MNT-13.md) | **MEL-13 NOVO** | Caractere &#124; na **primeira coluna física** somente da opção focada; em opções de duas linhas, na segunda linha; nenhum marcador nas demais | **ACEITO/PUBLICADO v3.2.3 / PR #43 / CI 96/96 + PICO PASS** | **v3.2.2 publicada**; aceite físico antes de release |
 | [MNT-14](gates/MNT-14.md) | **MEL-11** (antigo MNT-13) | PAIR NEW com A conectado: investigação historicamente dividida em duas partes | **CANCELADO pelo operador em 12/10/2026 após testes físicos positivos; sem correção/release** | encerrado, não executar Parte 2 |
-| [MNT-15](gates/MNT-15.md) | **MEL-08** (Zoom, antigo MNT-14) | Diagnóstico de Zoom Obsidian/KDE e correção HID genérica somente se comprovada | **PR #45 DRAFT, HOST 98/98 PASS, PICO/ACEITE PENDING, SEM RELEASE** | independente de MNT-13/14; retomada somente com autorização |
+| [MNT-15](gates/MNT-15.md) | **MEL-08** (Zoom, antigo MNT-14) | Diagnóstico de Zoom Obsidian/KDE e correção HID genérica somente se comprovada | **PR #45 DRAFT, CI 98/98 + PICO PASS, UF2 VERIFICADO, ACEITE FÍSICO PENDING, SEM RELEASE** | independente de MNT-13/14; retomada somente com autorização |
 
 **Ordem atual:** MNT-10/11/12/13 concluídos e publicados. O **novo MNT-13 (MEL-13)** documenta o pipe `|` de foco em listas, na segunda linha dos itens de duas linhas. O antigo **MNT-13 (MEL-11) virou MNT-14** sem mudar suas duas partes de diagnóstico/viabilidade; o antigo **MNT-14 (MEL-08) virou MNT-15** e recebeu autorização de implementação em 12/10/2026, com trade-off para terminais e PR #45 DRAFT. As numerações MEL históricas e o aceite MNT-12 não são alterados.
 
