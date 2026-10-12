@@ -21,6 +21,10 @@
 - Source files contain no Node/npm, bundled framework/CDN, custom GitHub Actions or real BLE/HID. Site has one interactive app page plus separate browser test harness.
 - **Not observed in an actual Firefox/Chromium browser:** sticky scroll/overlap, right metadata containment, button height/radius, 100–200% zoom, narrow viewport, browser CSS/layout and user-facing 165/165 result. These require manual operator inspection in the deployed production browser.
 
+## Published production candidate
+
+Website [PR #7](https://github.com/remappingbridge/remappingbridge.github.io/pull/7) was merged into website `main` exclusively for browser testing, commit `7b8449dd233016698d089015b28a811ddd643478`. Pages workflow [#38314559207](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38314559207) must complete successfully before independent operator visual review. **Publication is not gate acceptance.**
+
 ## Publication, acceptance and rollback
 
 The operator requires testing at https://remappingbridge.github.io/ and https://remappingbridge.github.io/tests/. Website candidate branch is `web/web-06-profiles-movement-sticky-hat`, and any site PR merge is **for production-browser testing only**; it does **not** constitute acceptance. WEB-07 remains blocked until explicit operator acceptance.
