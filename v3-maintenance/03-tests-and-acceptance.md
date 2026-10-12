@@ -1,6 +1,6 @@
 # 03 — Matriz de teste físico, host e regressão de v3.x
 
-**Estado:** checklists PROPOSTOS / nenhum executado. Cada gate abaixo será validado na mesma base de hardware Pico 2 W + LCD ST7789 + HAT + mouse BLE, e desde HOME CONNECTED. O operador escolhe ambiente real de hosts; CI nunca simula cor/contraste real do LCD.
+**Estado:** histórico MNT-01..MNT-11 aceito; cenários MNT-12..MNT-14 são **propostos e não executados**. Implementações futuras serão validadas na mesma base de hardware Pico 2 W + LCD ST7789 + HAT + mouse BLE, a partir de HOME CONNECTED. O operador escolhe ambiente real de hosts; CI nunca simula cor/contraste real do LCD.
 
 ## Preparação comum
 1. Identificar tag estável instalada e a versão candidata, guardar 12 combos de shortcuts e parâmetros Movement; fazer backup quando pertinente sem flash_nuke.
