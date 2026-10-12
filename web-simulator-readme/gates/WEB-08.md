@@ -1,6 +1,6 @@
 # WEB-08 — HAT/LCD visual, responsive e brilho 0–100%
 
-**Status:** CANDIDATE IMPLEMENTED; 226/226 isolated checks PASS; production-browser acceptance PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-07 aceito.
+**Status:** ACCEPTED by operator on 2026-10-12; WEB-09 authorized, including removal of optional WEB-08 display controls. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-07 aceito.
 
 ## Candidate evidence
 
