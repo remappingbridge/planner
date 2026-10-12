@@ -3,7 +3,7 @@
 **Status: PLANEJADO / SUSPENSO — NÃO INICIADO.** O gate Zoom/Obsidian foi movido de MNT-12 para MNT-14 e depois para MNT-15, sem mudança de requisitos. Nenhuma alteração de firmware, CI, UF2 ou release foi executada.
 
 - Backlog: **MEL-08 (solicitação explícita)** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
-- Base/dependência: **MNT-12 aceito e publicado como v3.2.2** (MNT-10 e MNT-11 concluídos); a branch futura `maintenance/v3x-mnt-14` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
+- Base/dependência: **MNT-12 aceito e publicado como v3.2.2** (MNT-10 e MNT-11 concluídos); a branch futura `maintenance/v3x-mnt-15` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
 - Histórico de renumeração: **MNT-10 → MNT-12 → MNT-14 → MNT-15**; o conteúdo de MEL-08 Zoom/Obsidian foi preservado. Nova renumeração autorizada em 12/10/2026 para reservar MNT-13 à indicação visual de seleção. MNT-14 é o diagnóstico PAIR NEW em duas partes.
 - Versão prevista somente após aceite físico: **próxima versão v3.x disponível ao executar MNT-15 (PATCH apenas se correção real; sem release se só diagnóstico)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
