@@ -129,6 +129,8 @@ A decisão **GO** não autoriza, por si só, lançar produto; código só é esc
 - Versão futura dentro da série 3.x, calculada da **tag oficial mais recente no momento da implementação**. Se só houver diagnóstico ou NO-GO, **NO RELEASE**. Nenhuma tag reservada para MNT-13 neste momento.
 - Documentar possível necessidade de separar investigação e patch em branches próprias para que diagnóstico não entre no firmware final.
 
+**Roteiros operacionais separados (ambos apenas planejados):** [Parte 1 — protocolo de investigação](../executions/MNT-13/part-1-investigation-plan.md) e [Parte 2 — protocolo de decisão/viabilidade](../executions/MNT-13/part-2-feasibility-plan.md). Nenhum desses arquivos representa resultados coletados ou autorização de firmware.
+
 ## 6. Gatilhos de aceite e estado
 
 - **Parte 1 — PENDING:** não iniciada. Encerra ao apresentar prova/resultado fundamentado e obter ciência/aceite do operador sobre o diagnóstico.
