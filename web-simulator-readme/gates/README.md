@@ -1,6 +1,6 @@
 # Gates WEB-00..WEB-15 — índice operacional
 
-**Todos os gates PLANEJADOS, NÃO INICIADOS e NÃO ACEITOS em 12/10/2026.**
+**WEB-00: candidato documental preparado, verificação estática PASS, aceite humano PENDENTE. WEB-01..WEB-15: não iniciados.**
 
 Os contratos globais estão em [README](../README.md), [arquitetura](../01-contract-and-architecture.md), [matriz](../02-gates-and-dependencies.md), [testes](../03-acceptance-and-tests.md) e [README/hardware/UF2](../04-readme-hardware-and-download.md).
 
@@ -15,6 +15,6 @@ Os contratos globais estão em [README](../README.md), [arquitetura](../01-contr
 
 ## Regra de execução
 
-Implementar **somente um gate após autorização explícita**. Cada gate implementado recebe branch separada no repo de destino, testes/roteiro manual e evidências em `../executions/WEB-XX/`. Falhas ficam no próprio gate; sem avanço silencioso. **A criação deste índice não inicia WEB-00.**
+Implementar **somente um gate após autorização explícita**. Cada gate implementado recebe branch separada no repo de destino, testes/roteiro manual e evidências em `../executions/WEB-XX/`. Falhas ficam no próprio gate; sem avanço silencioso. **O WEB-00 foi iniciado em branch isolada; só prosseguir após seu aceite.**
 
 Não alterar o firmware nem produzir UF2 neste programa. A URL da página web não é substituta do download UF2. No README do GitHub haverá uma prévia **clicável** que abre a aplicação no Pages; o GitHub não executa o app dentro de Markdown.
