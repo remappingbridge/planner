@@ -1,6 +1,6 @@
 # 02 — Gates MNT-01..MNT-15, dependências e Semantic Versioning 3.x
 
-**Atualizado em 12/10/2026:** MNT-01..MNT-12 **aceitos e publicados** até **v3.2.2**. **MNT-13 NOVO**: marcador `|` na primeira coluna da opção focada (segunda linha das opções de duas linhas), **implementado em candidato, aceite físico PENDING**. **MNT-14**: antigo MNT-13, PAIR NEW em duas partes (causa raiz e decisão), **não iniciado**. **MNT-15**: antigo MNT-14, Zoom/Obsidian **suspenso**. Somente MNT-13 recebeu nova autorização de implementação; MNT-14 e MNT-15 permanecem não autorizados.
+**Atualizado em 12/10/2026:** MNT-01..MNT-13 **aceitos e publicados até v3.2.3** (pipe `|` na segunda linha de opções de duas linhas). MNT-14 Parte 1 tem auditoria estática concluída, mas está **INCONCLUSIVE por falta de reprodução/trace físicos**; Parte 2 não iniciada, **nenhuma correção de firmware ou release MNT-14**. MNT-15 Zoom suspenso.
 
 ## Matriz de execução incremental
 
@@ -18,13 +18,13 @@
 | [MNT-10](gates/MNT-10.md) | **MEL-10 NOVO** | Remover mouse: eliminar bond, nome, Movement e todo perfil/remap/shortcuts antigos **somente daquele mouse**; novo pareamento inicia em defaults | **ACEITO E PUBLICADO v3.2.0 (MINOR)** — perfis por mouse | MNT-09 v3.1.4 publicada |
 | [MNT-11](gates/MNT-11.md) | MEL-09 | Nomes BLE: sufixo MOUSE só se substring não existe | **ACEITO E PUBLICADO v3.2.1 (PATCH)** — título BLE sem MOUSE duplicado | **MNT-10 publicado v3.2.0** |
 | [MNT-12](gates/MNT-12.md) | MEL-12 | Ciano condicional de MODIFIER SHORTCUTS e valores de COMBINATIONS, somente CUSTOM aplicado + botão Modifier; exceções UNAVAILABLE e NOT CUSTOMIZED | **ACEITO E PUBLICADO v3.2.2 (PATCH)** — CI 94/94 + Pico 2 W PASS, PR #42 | v3.2.1 |
-| [MNT-13](gates/MNT-13.md) | **MEL-13 NOVO** | Caractere &#124; na **primeira coluna física** somente da opção focada; em opções de duas linhas, na segunda linha; nenhum marcador nas demais | **CANDIDATO PR #43 / 96/96 HOST + PICO PASS / ACEITE FÍSICO PENDING / SEM RELEASE** | **v3.2.2 publicada**; aceite físico antes de release |
+| [MNT-13](gates/MNT-13.md) | **MEL-13 NOVO** | Caractere &#124; na **primeira coluna física** somente da opção focada; em opções de duas linhas, na segunda linha; nenhum marcador nas demais | **ACEITO/PUBLICADO v3.2.3 / PR #43 / CI 96/96 + PICO PASS** | **v3.2.2 publicada**; aceite físico antes de release |
 | [MNT-14](gates/MNT-14.md) | **MEL-11** (antigo MNT-13) | **PAIR NEW com mouse conectado**: Parte 1 causa raiz comprovada; Parte 2 decisão GO/NO-GO/BLOCKED/NOT A BUG, sem correção automática | **PLANEJADO / PARTES 1 E 2 PENDING / SEM RELEASE** | independente de MNT-13; executar apenas se solicitado |
 | [MNT-15](gates/MNT-15.md) | **MEL-08** (Zoom, antigo MNT-14) | Diagnóstico de Zoom Obsidian/KDE e correção HID genérica somente se comprovada | **PLANEJADO / SUSPENSO / NO RELEASE até decisão** | independente de MNT-13/14; retomada somente com autorização |
 
-**Ordem atual:** MNT-10/11/12 concluídos e publicados. O **novo MNT-13 (MEL-13)** documenta o pipe `|` de foco em listas, na segunda linha dos itens de duas linhas. O antigo **MNT-13 (MEL-11) virou MNT-14** sem mudar suas duas partes de diagnóstico/viabilidade; o antigo **MNT-14 (MEL-08) virou MNT-15** sem mudar o diagnóstico Zoom e continua suspenso. As numerações MEL históricas e o aceite MNT-12 não são alterados.
+**Ordem atual:** MNT-10/11/12/13 concluídos e publicados. O **novo MNT-13 (MEL-13)** documenta o pipe `|` de foco em listas, na segunda linha dos itens de duas linhas. O antigo **MNT-13 (MEL-11) virou MNT-14** sem mudar suas duas partes de diagnóstico/viabilidade; o antigo **MNT-14 (MEL-08) virou MNT-15** sem mudar o diagnóstico Zoom e continua suspenso. As numerações MEL históricas e o aceite MNT-12 não são alterados.
 
-**Versões:** a mudança visual implementada em candidato no MNT-13 só produzirá PATCH após aceite físico. O MNT-14 nas duas partes de diagnóstico/decisão (sem código) e o MNT-15 caso apenas investigativo não geram release; nenhum número futuro está reservado. MNT-13 implementado em candidato com aceite físico PENDING; MNT-14/15 não iniciados.
+**Versões:** a mudança visual implementada em candidato no MNT-13 só produzirá PATCH após aceite físico. O MNT-14 nas duas partes de diagnóstico/decisão (sem código) e o MNT-15 caso apenas investigativo não geram release; nenhum número futuro está reservado. MNT-13 publicado em v3.2.3; MNT-14 Parte 1 iniciada (auditoria concluída, físico pendente); Parte 2 não iniciada; MNT-15 suspenso.
 
 
 ## Regra de cálculo da versão
@@ -52,7 +52,7 @@
 - Após aceite (autorização de publicação fornecida neste planejamento): atualizar código de versão/CMake/README/release notes ao número calculado; CI do commit final e, se necessário, UF2 final produzido da mesma fonte/tag; integrar branch conforme estratégia segura do repositório; tag anotada `v3.x.y` **apontando para o commit com versão correta**; GitHub Release oficial com UF2 + `SHA256SUMS`; verificar download/hash e que tag coincide com `main`.
 - Registrar `executions/MNT-XX/operator-acceptance.md`, `release.md` com tag/SHA/CI/hashes/publicação, então habilitar o próximo gate a partir da **tag publicada**, não do candidato anterior.
 - Se CI do bump falhar ou Release falhar: **gate não publicado**, não prosseguir; corrigir sem gerar release duplicada. Nunca deixar versão README divergente de tag/firmware.
-- **Exceção MNT-14, em duas partes:** a Parte 1 produz evidências e relatório de causa raiz **sem patch**; a Parte 2 compara viabilidade, riscos e alternativas, resultando em decisão GO/NO-GO/BLOCKED/NOT A BUG. Somente se houver GO **e autorização expressa posterior** aplica-se o ciclo A/B/C para código, testes, UF2, aceite físico e publicação. Após o planejamento inicial, MNT-13 foi autorizado e implementado em candidato, sem publicação. Não executar a Parte 1/2 de MNT-14; MNT-15 Zoom permanece suspenso.
+- **Exceção MNT-14, em duas partes:** a Parte 1 produz evidências e relatório de causa raiz **sem patch**; a Parte 2 compara viabilidade, riscos e alternativas, resultando em decisão GO/NO-GO/BLOCKED/NOT A BUG. Somente se houver GO **e autorização expressa posterior** aplica-se o ciclo A/B/C para código, testes, UF2, aceite físico e publicação. Após o planejamento inicial, MNT-13 foi autorizado e implementado em candidato, sem publicação. Parte 1 do MNT-14 foi autorizada posteriormente e auditada estaticamente; não há evidência física nem autorização para Parte 2/correção. MNT-15 Zoom permanece suspenso.
 
 ## Invariantes
 - Manter Pico 2 W e build Release, 2 USB HID interfaces existentes, Mouse/Keyboard/Consumer, 30 atalhos, 12 combos, movimentação e DPI/rotação por mouse, Saved Devices bond-scoped, Lock/Modifier, BLE pairing, esquema flash v3.
