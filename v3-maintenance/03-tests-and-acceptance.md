@@ -21,8 +21,9 @@
 | MNT-07 | Percorrer HOME, Saved Devices, Movement, Custom, Combinations, Shortcuts, Helps, comparar fotografias do LCD | Todos textos antes em ciano normal tornam-se ciano claro esbranquiçado; outros tons preservados; legível e consistente |
 | MNT-08 | Em páginas com valores de estado ciano, alternar item selecionado/desselecionado; Saved Devices | Texto ciano claro selecionado vira ciano normal e volta ao ciano claro ao perder foco; cinza→branco comum preservado |
 | MNT-09 | HOME CONNECTED em PASSTHROUGH e CUSTOM; JOY PRESS primeira opção | Rótulo fixo `REMAPPING OPTIONS` independentemente do perfil; destino e dados do perfil intactos |
-| MNT-10 | Em Debian 13 KDE Obsidian e navegador, testar Zoom In/Out/Reset do teclado físico e BLU2USB; comparar eventos por device com evtest/udevadm; reiniciar | Somente após correção HID genérica: ambas apps executam Zoom In/Out/Reset, sem side effects em layout; se não demonstrado, registrar decisão SEM RELEASE |
+| MNT-10 | Salvar perfil/remap/12 shortcuts/Modifier e DPI/Rotation no mouse A; remover em SAVED DEVICES; reboot; reparear mesmo mouse como novo; repetir com mouse B preservado; simular falha de armazenamento/IRK/slot reciclado | A perde completamente bond/configuração e retorna aos defaults; B mantém suas configurações; falha não informa exclusão falsa nem restaura A |
 | MNT-11 | Nome BLE `BTS. 0MOUSE2`, `mouse`, `MOUSE123`, `LIFT`, vazio/UNKNOWN, truncado; HOME e SAVED DEVICES, desligar/religar | Qualquer subsequência `MOUSE` dispensa sufixo; LIFT recebe ` MOUSE`; sem duplo sufixo nem truncamento perigoso; bonds intactos |
+| MNT-12 | Em Debian 13 KDE Obsidian e navegador, testar Zoom In/Out/Reset do teclado físico e BLU2USB; comparar eventos por device com evtest/udevadm; reiniciar | Somente após correção HID genérica: ambas apps executam Zoom In/Out/Reset, sem efeitos colaterais; sem prova, registrar DEFERRED / NO RELEASE |
 
 ## Testes automatizados e cross-gate
 
@@ -39,3 +40,6 @@
 - **FAIL**: observado comportamento divergente, atualizar branch do mesmo gate.
 - **N/A**: host ou hardware sem suporte e limitação aprovada explicitamente; não confundir N/A com PASS.
 - **PENDING**: não testado. Aceite global não autoriza inventar resultados individuais.
+
+## Contrato de segurança adicional — novo MNT-10
+Remoção de um mouse salva não equivale a `factory reset`: teste com pelo menos dois bonds e perfis diferentes é obrigatório. Dados bond-scoped incluem identidade/IRK, nomes, Movement, perfil ativo, remap, Modifier, atalhos e rascunho. Repareamento após reboot deve começar nos defaults, sem reaproveitamento de configuração antiga ou de ordinal/slot reciclado. Testar falha de flash/TLV, sequência de confirmação, cancelamento por B e idempotência. Não declarar exclusão bem-sucedida se alguma etapa persistente falhar.
