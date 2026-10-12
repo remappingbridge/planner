@@ -30,3 +30,11 @@
 - **Zoom dependente de layout/host**: comparar evdev/XKB para ABNT2 antes de escolher usage, não quebrar navegador/Android.
 - **Perda de bonds/perfis**: update UF2 normal, nunca flash_nuke; verificar storage v3 após cada gate e respeitar downgrade v2 não totalmente compatível.
 - **Lançamento prematuro ou tag errada**: exigir CI do commit final versionado, SHA UF2 e GitHub Release, recuperação de falha de publish sem tag duplicada.
+
+## Revisão de escopo após aceite MNT-09 (11/10/2026)
+
+- **Novo MNT-10 / MEL-10:** priorizar exclusão completa do dispositivo e de **todas as configurações associadas apenas à identidade do mouse**. A exclusão atual remove bonds/nomes/Movement TLV, porém `blu2usb_profiles_t` é restaurado do storage global no boot: investigar e corrigir a separação de profiles/shortcuts por identidade BLE antes de considerar o defeito solucionado. **Apagar o perfil global inteiro é proibido** se prejudicar outros mouses.
+- **MNT-11 existente / MEL-09:** detecção de substring MOUSE em nome BLE foi preservada na sequência, após a publicação do novo MNT-10.
+- **MNT-12 / MEL-08:** diagnóstico do Zoom foi movido do antigo MNT-10, sem descarte de requisitos ou autorização para correções específicas de Obsidian.
+- **Persistência e integridade:** definir formato/escopo/retrocompatibilidade de dados por bond, controle de falha parcial, limpeza idempotente e defaults de pareamento; slots reciclados/IRK/RPA não podem permitir ressurreição de settings. Atualizar SemVer em 3.x conforme impacto real da mudança.
+- **Cores aceitas:** CURRENT sem foco `0x07FF`, CURRENT selecionado `0xD7FF`, cinza/branco inalterados (MNT-07/08 aceitos).
