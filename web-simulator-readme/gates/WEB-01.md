@@ -1,6 +1,6 @@
 # WEB-01 — Página única e bootstrap estático
 
-**Status:** CANDIDATO IMPLEMENTADO EM BRANCH DO SITE / SMOKE ESTRUTURAL PASS / TESTE VISUAL E ACEITE PENDENTES. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-00 aceito.
+**Status:** ACEITO PELO OPERADOR EM 12/10/2026. **Testes manuais futuros: somente navegador em produção; execução local no Debian não exigida.** **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-00 aceito.
 
 ## Evidência da implementação
 
@@ -9,7 +9,7 @@
 - [Candidate e resultados técnicos](../executions/WEB-01/candidate.md)
 - [Cenários de teste manual PENDENTES](../executions/WEB-01/manual-tests.md)
 
-**WEB-02 permanece bloqueado até o aceite explícito do WEB-01.**
+**WEB-01 está aceito**, com [registro do operador](../executions/WEB-01/operator-acceptance.md). **WEB-02 permanece NÃO INICIADO**, aguardando nova ordem. É obrigatório concluir a auditoria English-only antes do próximo gate.
 
 ## Escopo fechado
 
