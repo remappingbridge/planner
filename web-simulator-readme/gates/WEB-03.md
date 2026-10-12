@@ -1,6 +1,6 @@
 # WEB-03 — HAT virtual, Lock e Help
 
-**Status:** CANDIDATE IMPLEMENTED / 80/80 ISOLATED REGRESSIONS PASS / PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-02 aceito.
+**Status:** ACCEPTED BY OPERATOR ON 2026-10-12; WEB-04 AUTHORIZED. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-02 aceito.
 
 ## Implementation and tests
 
@@ -10,7 +10,7 @@
 - [Production-browser acceptance checklist](../executions/WEB-03/manual-tests.md)
 - Operator's carried-over improvement: default **Gentle** backdrop `#300c39`, more vivid and less gray than WEB-02. No semantic foreground changes.
 
-WEB-04 is **NOT STARTED**; require explicit WEB-03 acceptance.
+WEB-04 is **AUTHORIZED**. [Operator acceptance](../executions/WEB-03/operator-acceptance.md) also mandates a smaller centered LCD, left joystick, vertical right A/B/X/Y and removal of background choices.
 
 ## Escopo fechado
 
