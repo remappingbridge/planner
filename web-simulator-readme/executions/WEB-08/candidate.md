@@ -12,7 +12,7 @@
 
 ## Production candidate publication
 
-Website [PR #9](https://github.com/remappingbridge/remappingbridge.github.io/pull/9) was merged to website `main` only to publish the WEB-08 candidate, commit `9ba5732b31601ed4b92300fce8b29f87a21fab9c`. Associated [GitHub Pages run #38318887192](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38318887192) is the deployment verification reference. Publication does **not** imply operator acceptance; planner [PR #27](https://github.com/remappingbridge/planner/pull/27) stays draft until explicit acceptance. WEB-09 remains blocked.
+Website [PR #9](https://github.com/remappingbridge/remappingbridge.github.io/pull/9) was merged to website `main` only to publish the WEB-08 candidate, commit `9ba5732b31601ed4b92300fce8b29f87a21fab9c`. Associated [GitHub Pages run #38318887192](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38318887192) **COMPLETED SUCCESSFULLY**, including its build and deploy jobs, for exactly the WEB-08 main SHA. The HTML/CSS, source renderer/screens, native app/display module, and test-runner file blobs match the published main branch and the candidate branch. Publication does **not** imply operator acceptance; planner [PR #27](https://github.com/remappingbridge/planner/pull/27) stays draft until explicit acceptance. WEB-09 remains blocked.
 
 ## Automated validation and limitations
 
