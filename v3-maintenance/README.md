@@ -1,6 +1,6 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-13 aceitos/publicados**, última tag oficial **[v3.2.3](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3)**. **MNT-14 CANCELADO a pedido do operador**, após testes físicos relatados como bem-sucedidos em cenários variados/adversos; auditoria estática histórica preservada, sem diagnóstico causal ou patch. **MNT-15 Zoom: resultados físicos do Mabox adicionados ao diagnóstico; apenas ZOOM IN falha no Obsidian, com ZOOM OUT e RESET funcionando, sem patch autorizado.**
+**Estado atualizado em 12/10/2026:** gates **MNT-01..MNT-13 aceitos/publicados**, última tag oficial **[v3.2.3](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3)**. **MNT-14 CANCELADO a pedido do operador**, após testes físicos relatados como bem-sucedidos em cenários variados/adversos; auditoria estática histórica preservada, sem diagnóstico causal ou patch. **MNT-15 Zoom: teclado físico confirma Ctrl+= sem Shift no Obsidian e falha com Shift; validar navegador e terminal antes de eventual alteração genérica da ação 26. Sem patch autorizado.**
 
 ## Baseline e fontes
 
