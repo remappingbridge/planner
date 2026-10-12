@@ -14,7 +14,7 @@
 
 ## Published site candidate and provenance
 
-Website [PR #10](https://github.com/remappingbridge/remappingbridge.github.io/pull/10) merged into website `main` only to allow browser-based operator testing, commit `e47b5c78e92dff3aa86051c04827d75aa80c512b`. Related [GitHub Pages run #38321316955](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38321316955) is the deployment reference. The Git blob SHAs for HTML, CSS, diagnostic model, app, firmware screens/rasterizer, source projector/HAT and 235-test runner were checked against site `main` and **all match the WEB-09 candidate branch**. Publishing is **not operator acceptance**. Planner [PR #28](https://github.com/remappingbridge/planner/pull/28) stays draft; WEB-10 remains blocked.
+Website [PR #10](https://github.com/remappingbridge/remappingbridge.github.io/pull/10) merged into website `main` only to allow browser-based operator testing, commit `e47b5c78e92dff3aa86051c04827d75aa80c512b`. Related [GitHub Pages run #38321316955](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38321316955) **COMPLETED SUCCESSFULLY** including GitHub Pages build and deployment, for exactly the WEB-09 published site SHA. The Git blob SHAs for HTML, CSS, diagnostic model, app, firmware screens/rasterizer, source projector/HAT and 235-test runner were checked against site `main` and **all match the WEB-09 candidate branch**. Publishing is **not operator acceptance**. Planner [PR #28](https://github.com/remappingbridge/planner/pull/28) stays draft; WEB-10 remains blocked.
 
 ## Verification performed
 
