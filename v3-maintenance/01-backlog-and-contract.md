@@ -87,7 +87,7 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 
 **Sem mudanças nos textos ou funções:** ocupar a margem à esquerda sem sobrescrever conteúdo do LCD 9×21; indicador com tom coerente com o item focado (branco ou ciano clarinho segundo regra existente); preservar RGB, shortcuts, perfis, Movement, BLE/USB e navegação. Cobrir toda a matriz com testes C por célula, foco/paginação/reconexão e validação física. Ver **[MNT-13](gates/MNT-13.md)** para contrato, cenários e riscos.
 
-**STATUS: PLANEJADO, NÃO IMPLEMENTADO.** O antigo MNT-13 PAIR NEW foi movido integralmente para MNT-14, e o antigo MNT-14 Zoom para MNT-15.
+**STATUS: IMPLEMENTADO EM CANDIDATO, ACEITE FÍSICO PENDING.** [MNT-13 candidato e evidências](executions/MNT-13/candidate.md), sem publicação. O antigo MNT-13 PAIR NEW foi movido integralmente para MNT-14, e o antigo MNT-14 Zoom para MNT-15.
 
 ## Registro da implementação de cores aceita
 As solicitações MEL-05/MEL-06 acima registram o desejo original. Após iterações e aceite final conjunto do operador, a regra efetivamente publicada na **v3.1.3** é o inverso do texto original: **CURRENT sem seleção = ciano normal 0x07FF** e **CURRENT selecionado = ciano clarinho pastel 0xD7FF**; os demais itens permanecem cinza→branco. O nome conectado em Saved Devices é informativo e permanece ciano normal.
