@@ -1,6 +1,6 @@
 # MNT-11 — preflight (sem mudança BLE/HID)
 
-**Base:** o operador aceitou MNT-10 em 11/10/2026 e o PR #40 foi integrado à `main` como commit `3d7c196ffa0fbda935a77ae0f386d39b2b293d2c`, com versão fonte **3.2.0**. A branch `maintenance/v3x-mnt-11` nasceu exatamente desse SHA; a tag oficial `v3.2.0` deve ser verificada antes de encerrar o gate. PR draft [#41](https://github.com/remappingbridge/remappingbridge/pull/41).
+**Base:** o operador aceitou MNT-10 em 11/10/2026 e o PR #40 foi integrado à `main` como commit `3d7c196ffa0fbda935a77ae0f386d39b2b293d2c`, com versão fonte **3.2.0**. A branch `maintenance/v3x-mnt-11` nasceu exatamente desse SHA; a tag oficial `v3.2.0` foi **verificada no GitHub** por leitura do commit da tag, com o mesmo SHA `3d7c196ffa0fbda935a77ae0f386d39b2b293d2c`; branch de MNT-11 realmente parte da release publicada. PR draft [#41](https://github.com/remappingbridge/remappingbridge/pull/41).
 
 **Escopo MEL-09:** impedir acrescentar ` MOUSE` ao nome BLE se a subsequência `MOUSE` já ocorrer em qualquer posição, ignorando caixa e sem exigir fronteiras de palavra. HOME CONNECTED, Saved Devices e demais páginas que exibem mouse já usam o helper compartilhado `home_title` de `src/renderer/renderer.c`; não deve duplicar lógica nem alterar o nome bruto persistido na BLE.
 
