@@ -16,7 +16,7 @@
 | [MNT-08](gates/MNT-08.md) | MEL-06 | Inversão final: sem foco ciano `0x07FF`, selecionado clarinho `0xD7FF` | **ACEITO v3.1.3** | MNT-07 |
 | [MNT-09](gates/MNT-09.md) | MEL-07 | HOME CONNECTED: primeira opção `REMAPPING OPTIONS` fixa | **ACEITO v3.1.4** | MNT-08 |
 | [MNT-10](gates/MNT-10.md) | **MEL-10 NOVO** | Remover mouse: eliminar bond, nome, Movement e todo perfil/remap/shortcuts antigos **somente daquele mouse**; novo pareamento inicia em defaults | **ACEITO E PUBLICADO v3.2.0 (MINOR)** — perfis por mouse | MNT-09 v3.1.4 publicada |
-| [MNT-11](gates/MNT-11.md) | MEL-09 | Nomes BLE: sufixo MOUSE só se substring não existe | **EM IMPLEMENTAÇÃO / PR #41 DRAFT / ACEITE FÍSICO PENDING** — v3.2.1 PATCH após aceite | **MNT-10 publicado v3.2.0** |
+| [MNT-11](gates/MNT-11.md) | MEL-09 | Nomes BLE: sufixo MOUSE só se substring não existe | **CANDIDATO PR #41 / CI 93/93 + Pico PASS / FÍSICO PENDING** — v3.2.1 PATCH após aceite | **MNT-10 publicado v3.2.0** |
 | [MNT-12](gates/MNT-12.md) | MEL-08 (antigo MNT-10) | Diagnóstico Zoom Obsidian/KDE e **correção HID genérica apenas se comprovada** | **PLANEJADO; próximo PATCH se correção validada, ou DEFERRED/NO RELEASE** | **MNT-11 publicado** |
 
 **Ordem preservada:** MNT-10 novo (MEL-10) → MNT-11 existente (MEL-09) → MNT-12 Zoom (MEL-08). As referências MEL históricas não foram renumeradas. O Zoom continua existente e não pode ser tratado como resolvido.
