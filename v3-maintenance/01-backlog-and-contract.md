@@ -1,6 +1,6 @@
 # 01 — Backlog de hotfixes e melhorias v3.x
 
-**Fonte:** texto literal fornecido pelo operador em 2026-10-11; notas de escopo abaixo são critérios de aceitação e cautelas de implementação, **não são funcionalidades já implementadas**. As telas identificadas em minúsculas são nomes funcionais do pedido; o código v3.0 usa identificadores como `BLU2USB_SCREEN_SAVED_DEVICES` e `BLU2USB_SCREEN_REMOVE_THIS`.
+**Fonte:** solicitações originais do operador em 11/10/2026 e nova melhoria de cor em 12/10/2026. O histórico inclui itens já aceitos e itens apenas planejados; os critérios abaixo não devem ser confundidos com um estado uniforme de implementação. As telas identificadas em minúsculas são nomes funcionais do pedido; o código v3.0 usa identificadores como `BLU2USB_SCREEN_SAVED_DEVICES` e `BLU2USB_SCREEN_REMOVE_THIS`.
 
 ## Hotfixes
 
