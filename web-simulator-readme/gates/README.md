@@ -1,6 +1,6 @@
 # Gates WEB-00..WEB-15 — índice operacional
 
-**WEB-00: candidato documental preparado, verificação estática PASS, aceite humano PENDENTE. WEB-01..WEB-15: não iniciados.**
+**WEB-00: encerrado com autorização do operador em 12/10/2026. WEB-01: autorizado para iniciar. WEB-02..WEB-15: não iniciados.**
 
 Os contratos globais estão em [README](../README.md), [arquitetura](../01-contract-and-architecture.md), [matriz](../02-gates-and-dependencies.md), [testes](../03-acceptance-and-tests.md) e [README/hardware/UF2](../04-readme-hardware-and-download.md).
 
