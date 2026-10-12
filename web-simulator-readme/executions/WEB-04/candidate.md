@@ -2,7 +2,7 @@
 
 **State:** IMPLEMENTED AS CANDIDATE; ISOLATED JAVASCRIPT / DOM / CANVAS REGRESSION TESTS **90/90 PASS**; production-browser visual test and operator acceptance **PENDING**.
 
-**Production test candidate** was merged into website `main` as SHA `19a5b7dd24c917ecc2810ad8230963f13e33d00e` via [site PR #5](https://github.com/remappingbridge/remappingbridge.github.io/pull/5). This merge is solely for the operator's production-browser tests, not operator acceptance. [GitHub Pages deployment run #38308243232](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38308243232) must be successful before claiming that the new UI is live. Accepted WEB-03 rollback SHA: `d78533cbd274647b5c521cf8132e2a2d148cf3e3`.
+**Production test candidate** was merged into website `main` as SHA `19a5b7dd24c917ecc2810ad8230963f13e33d00e` via [site PR #5](https://github.com/remappingbridge/remappingbridge.github.io/pull/5). This merge is solely for the operator's production-browser tests, not operator acceptance. [GitHub Pages deployment run #38308243232](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38308243232) **completed successfully (build and deploy)** for the exact WEB-04 SHA. Independent browser rendering and the live test-page result were not available to the assistant; the operator must confirm them in the production browser. Accepted WEB-03 rollback SHA: `d78533cbd274647b5c521cf8132e2a2d148cf3e3`.
 
 ## Implemented website files
 
