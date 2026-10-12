@@ -1,6 +1,16 @@
 # WEB-09 — Laboratório web: Inspector, cenários e evidências
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-08 aceito.
+**Status:** CANDIDATE IMPLEMENTED; 235/235 isolated JS DOM/Canvas2D tests PASS; production-browser operator acceptance PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-08 aceito.
+
+## Candidate evidence
+
+- [Preflight, firmware source and accepted operator requirements](../executions/WEB-09/preflight.md)
+- [Implemented diagnostic Inspector and isolated 235/235 checks](../executions/WEB-09/candidate.md)
+- [16 numbered production-browser operator tests](../executions/WEB-09/manual-tests.md)
+
+Operator additionally requested moving PICO 2 W / LCD 240 × 240 / 9 HAT CONTROLS into the bottom-right of their containing HAT column and removing the **entire** dispensable WEB-08 LCD appearance/brightness/density section. Both are implemented in WEB-09. The original KEY Y Lock stays functional.
+
+**WEB-09 NOT ACCEPTED; WEB-10 NOT STARTED.**
 
 ## Escopo fechado
 
