@@ -1,11 +1,11 @@
 # MNT-12 — Indicador ciano de Modifier Shortcuts e valores de Combinations
 
-**STATUS: PLANEJADO / NÃO INICIADO.** Substitui o antigo MNT-12 de Zoom/Obsidian, que foi **preservado integralmente em [MNT-14](MNT-14.md)**. Gate adicionado por solicitação do operador em **12/10/2026**. **Este pedido é exclusivamente de planejamento:** não criar branch de firmware, não alterar código, não executar CI nem gerar UF2 ou release.
+**STATUS: CANDIDATO IMPLEMENTADO / ACEITE FÍSICO PENDING.** Criado em 12/10/2026 e implementado após ordem expressa, no PR draft [#42](https://github.com/remappingbridge/remappingbridge/pull/42), branch `maintenance/v3x-mnt-12`, a partir da tag oficial v3.2.1. [CI #541](https://github.com/remappingbridge/remappingbridge/actions/runs/38249366464) **94/94 testes host PASS e Pico 2 W produção SUCCESS**; [UF2 candidato com SHA256](../executions/MNT-12/candidate.md) e [cenários físicos](../executions/MNT-12/physical-acceptance.md). **Sem aceite físico, merge ou release novo.** O Zoom antigo foi preservado em [MNT-14](MNT-14.md).
 
 - Backlog: **MEL-12 (novo item)**. MEL-11 permanece vinculado ao MNT-13 / PAIR NEW, mesmo que o número do novo gate seja MNT-12. Não renumerar os demais itens MEL.
 - Hardware e produto: Pico 2 W, LCD 9 × 21, firmware [última release v3.2.1](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.1), perfis isolados por mouse após MNT-10.
-- Futura branch de execução (somente após ordem expressa): `maintenance/v3x-mnt-12`, criada do SHA exato da **tag v3.x oficial mais recente no início da execução**, nunca de um release não aceito.
-- Entrega se futuramente implementado/aceito: **PATCH da série 3.x** (somente mudança de apresentação), número derivado da tag vigente; não reservar `v3.2.2` antecipadamente.
+- Branch efetiva: `maintenance/v3x-mnt-12`, criada do SHA exato **`3846e8f4ee5fba40421c0db1f51387de6c51e953`** da tag oficial `v3.2.1`. PR #42 em rascunho, candidato sem mudança de versão.
+- Entrega **após futuro aceite físico**: PATCH da série v3.x (proposta `v3.2.2` se não houver release intermediário). Sem versionar antes de aceite.
 - Relação com outros gates: [MNT-13](MNT-13.md) (PAIR NEW) segue intacto e em duas partes; [MNT-14](MNT-14.md) (Zoom) permanece suspenso. Este gate **não os inicia**.
 
 ## 1. Regra única de habilitação visual
@@ -132,12 +132,12 @@ Além da tabela:
 - Preservar perfil ativo e cores das opções PASSTHROUGH/CUSTOM, seleção ciano clarinho em CURRENT, gray→white nos demais, 9×21, Help/Lock/Back, 12 slots/30 atalhos, Modifier HID, persistência por mouse.
 - Testes C de projeção do `frame->cells[row][col].tone` com cenários de foco, além de source contract de isolamento das linhas e regressão completa; para futura entrega: CI host PASS, Pico 2 W produção PASS, UF2 do artifact oficial com SHA-256 validado e teste físico no LCD desde HOME CONNECTED.
 
-## 6. Contrato de execução futura (não autorizado agora)
+## 6. Registro de execução e entrega pendente
 
-1. Receber ordem expressa para **implementar MNT-12**, confirmar tag oficial v3.x e PR em branch própria; registrar `executions/MNT-12/pre-implementation.md` com valores de baseline, fixtures e testes previstos.
-2. Implementar o **menor ajuste na camada de estado/renderização**, calculando um único predicado de “Modifier efetivamente ativo”; não mudar modelo HID, persistência, número de atalhos, fluxos ou navegação. Corrigir composição em `profile_feedback.c` e `renderer.c` sem mudar outras telas.
-3. Adicionar/regredir testes e CI completa, compilar produção Pico 2 W, validar UF2/SHA, registrar `executions/MNT-12/candidate.md` e `physical-acceptance.md`.
-4. Aguardar **aceite físico explícito**. Se rejeitado, corrigir na mesma branch e novo UF2. Se aceito, bump PATCH 3.x sobre tag vigente, CI versionada, PR/merge, GitHub Release UF2/SHA256SUMS e documentar `operator-acceptance.md`/`release.md`.
+1. **Executado:** operador autorizou implementar; tag v3.2.1, SHA e branch foram registrados em [pre-implementation.md](../executions/MNT-12/pre-implementation.md).
+2. **Executado:** predicado único derivado de perfil+Modifier aplicado e ajuste visual isolado em `profile_feedback.c`/`renderer.c`, sem alterar modelo HID, persistência, menus ou navegação.
+3. **Executado:** 94 testes host, Pico 2 W production e UF2/SHA conferidos no [registro do candidato](../executions/MNT-12/candidate.md). Roteiro de [validação física](../executions/MNT-12/physical-acceptance.md) preparado.
+4. **PENDENTE:** aguardar **aceite físico explícito**. Se rejeitado, corrigir na mesma branch e gerar novo UF2. Se aceito, bump PATCH v3.x, executar CI versionada, PR/merge, GitHub Release UF2/SHA256SUMS e registrar aceite/release no planner.
 5. **Não prosseguir automaticamente para MNT-13 ou MNT-14.** Esses gates exigem autorização independente; MNT-14 permanece suspenso.
 
-**Estado final desta solicitação: PLANEJAMENTO APENAS. Nenhuma alteração em firmware, flash, CI, PR ou release.**
+**Estado atual: firmware candidato, CI concluída, sem teste/aceite físico e sem nova versão publicada.** MNT-13 e MNT-14 permanecem intocados.
