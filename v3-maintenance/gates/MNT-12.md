@@ -3,7 +3,7 @@
 **Status: PLANNED / NÃO INICIADO.** Nenhuma alteração de código, UF2, CI ou release executada neste gate.
 
 - Backlog: **MEL-08 (solicitação explícita)** em [01-backlog-and-contract.md](../01-backlog-and-contract.md).
-- Base/dependência: **MNT-11 publicado** (MNT-10 de limpeza concluído antes do MNT-11); a branch futura `maintenance/v3x-mnt-10` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
+- Base/dependência: **MNT-11 publicado** (MNT-10 de limpeza concluído antes do MNT-11); a branch futura `maintenance/v3x-mnt-12` deve nascer do SHA exato da **última tag v3.x realmente publicada**.
 - Reordenação: antigo MNT-10, preservado como **MNT-12** por determinação do operador em 11/10/2026.
 - Versão prevista somente após aceite físico: **próxima versão v3.x disponível após MNT-11 (PATCH apenas se correção real; sem release se só diagnóstico)**. A numeração definitiva depende de [02-gates-and-versioning.md](../02-gates-and-versioning.md).
 
