@@ -1,6 +1,6 @@
 # MNT-13 — roteiro de aceite físico (Pico 2 W, LCD 9×21)
 
-**STATUS: PENDING** — implementação candidata na branch `maintenance/v3x-mnt-13`, [PR #43 DRAFT](https://github.com/remappingbridge/remappingbridge/pull/43). O operador ainda não executou/aceitou os cenários. Versão interna permanece `v3.2.2` até aceite.
+**STATUS HISTÓRICO: operador declarou aceite global em 12/10/2026** — implementação candidata na branch `maintenance/v3x-mnt-13`, [PR #43 DRAFT](https://github.com/remappingbridge/remappingbridge/pull/43). O operador aprovou o gate globalmente; não foram fornecidos resultados individuais do checklist. Versão interna permanece `v3.2.2` até aceite.
 
 ## Preparação segura
 
@@ -34,4 +34,4 @@
 - [ ] C9 sem ghosting após navegação/troca/reboot
 - [ ] C10 regressões físicas e cores
 
-**ACEITE FÍSICO: PENDING.** Registrar PASS/FAIL por cenário apenas após observação. Qualquer falha requer correção na mesma branch e revalidação do novo UF2. **Sem merge, tag ou release antes de `gate aceito`.**
+**ACEITE FÍSICO GLOBAL: ACEITO (12/10/2026).** Registrar PASS/FAIL por cenário apenas após observação. Qualquer falha requer correção na mesma branch e revalidação do novo UF2. **Sem merge, tag ou release antes de `gate aceito`.**
