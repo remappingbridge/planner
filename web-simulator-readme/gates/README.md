@@ -1,6 +1,6 @@
 # Gates WEB-00..WEB-15 — índice operacional
 
-**WEB-00: encerrado com autorização do operador em 12/10/2026. WEB-01: ACEITO pelo operador, PR #1 integrado. WEB-02: ACCEPTED by operator, Gentle refinement assigned to WEB-03. WEB-03: ACCEPTED by operator. WEB-04 ACCEPTED by operator; WEB-05 authorized. WEB-05 ACCEPTED by operator; WEB-06 ACCEPTED by operator; WEB-07 authorized; WEB-08..WEB-15 not started; English-only e validação futura apenas em navegador de produção.**
+**WEB-00: encerrado com autorização do operador em 12/10/2026. WEB-01: ACEITO pelo operador, PR #1 integrado. WEB-02: ACCEPTED by operator, Gentle refinement assigned to WEB-03. WEB-03: ACCEPTED by operator. WEB-04 ACCEPTED by operator; WEB-05 authorized. WEB-05 ACCEPTED by operator; WEB-06 ACCEPTED by operator; WEB-07 ACCEPTED by operator; WEB-08 authorized; WEB-09..WEB-15 not started; English-only e validação futura apenas em navegador de produção.**
 
 Os contratos globais estão em [README](../README.md), [arquitetura](../01-contract-and-architecture.md), [matriz](../02-gates-and-dependencies.md), [testes](../03-acceptance-and-tests.md) e [README/hardware/UF2](../04-readme-hardware-and-download.md).
 
