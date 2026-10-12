@@ -1,6 +1,15 @@
 # WEB-02 — Canvas LCD e paleta fiel
 
-**Status:** PLANEJADO / NÃO INICIADO. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-01 aceito.
+**Status:** ACCEPTED BY OPERATOR (2026-10-12); publication successful. Gentle preferred; more saturated refinement explicitly assigned to WEB-03. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-01 aceito.
+
+## Implementation evidence
+
+- [WEB-02 Canvas implementation in the website](https://github.com/remappingbridge/remappingbridge.github.io/tree/web/web-02-canvas-lcd-renderer)
+- [WEB-02 preflight and source hashes](../executions/WEB-02/preflight.md)
+- [Candidate scope and 39 regression checks](../executions/WEB-02/candidate.md)
+- [Production-browser test checklist](../executions/WEB-02/manual-tests.md)
+
+[Operator acceptance](../executions/WEB-02/operator-acceptance.md) recorded. WEB-03 authorized; WEB-04 not started.
 
 ## Escopo fechado
 
