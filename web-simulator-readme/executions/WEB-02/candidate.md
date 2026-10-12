@@ -2,7 +2,7 @@
 
 **State:** CODE IMPLEMENTED / STATIC RENDERER-REGRESSION PASS / **PRODUCTION-BROWSER VISUAL CHECKS & OPERATOR ACCEPTANCE PENDING**.
 
-Site branch: `web/web-02-canvas-lcd-renderer`, based on WEB-01 accepted `main`. **Production-browser candidate** merged into website `main` as `50c0fbfc8f6ea5852a572818ea89d3e74e6c2738` via [site PR #3](https://github.com/remappingbridge/remappingbridge.github.io/pull/3), solely to allow operator testing directly on production Pages. **Merge is NOT operator acceptance.** [GitHub Pages deployment #38303510241](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38303510241) should be checked for success and the live website checked by the operator.
+Site branch: `web/web-02-canvas-lcd-renderer`, based on WEB-01 accepted `main`. **Production-browser candidate** merged into website `main` as `50c0fbfc8f6ea5852a572818ea89d3e74e6c2738` via [site PR #3](https://github.com/remappingbridge/remappingbridge.github.io/pull/3), solely to allow operator testing directly on production Pages. **Merge is NOT operator acceptance.** [GitHub Pages deployment #38303510241](https://github.com/remappingbridge/remappingbridge.github.io/actions/runs/38303510241) **COMPLETED SUCCESSFULLY** for the exact deployed SHA. The production HTTP/visual result itself was not independently accessible from the available web reader and must be checked by the operator.
 
 ## Delivered files
 
