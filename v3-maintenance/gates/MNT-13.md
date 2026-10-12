@@ -1,6 +1,6 @@
 # MNT-13 — Marcador pipe `|` na primeira coluna da opção focada
 
-**STATUS: IMPLEMENTADO EM CANDIDATO / CI 96/96 + PICO 2 W PASS / UF2 VERIFICADO / ACEITE FÍSICO PENDING.** O gate foi inicialmente planejado em 12/10/2026; nova ordem expressa para implementar resultou na [branch e PR #43 DRAFT](https://github.com/remappingbridge/remappingbridge/pull/43). Ainda **sem merge/tag/release**. [Candidato e SHA](../executions/MNT-13/candidate.md) · [Cenários físicos](../executions/MNT-13/physical-acceptance.md).
+**STATUS: ACEITO E PUBLICADO COMO [v3.2.3](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.3) / CI 96/96 + PICO 2 W PASS.** O gate foi inicialmente planejado em 12/10/2026; nova ordem expressa para implementar resultou na [branch e PR #43 DRAFT](https://github.com/remappingbridge/remappingbridge/pull/43). **Merge, tag e Release oficiais concluídos**, commit `f38c5fd15c68ea9a36d3b05912727788d7b98e81`. [Candidato e SHA](../executions/MNT-13/candidate.md) · [Cenários físicos](../executions/MNT-13/physical-acceptance.md).
 
 - Identificador de backlog: MEL-13 NOVO; numeração MEL independente dos gates históricos.
 - A base efetivamente usada foi a tag v3.2.2 (MNT-12), mantendo a branch MNT-13 isolada até o aceite físico.
@@ -104,4 +104,4 @@ Nome de mouse, PROFILE, DPI e ROTATION são informativos e jamais ganham marcado
 
 ## 6. Estado final
 
-**MNT-13 — CANDIDATO PRONTO PARA TESTE FÍSICO.** Código, regressões, CI e UF2 verificáveis registrados em [candidate.md](../executions/MNT-13/candidate.md). **Aceite físico PENDING; sem tag/release.** MNT-14 continua diagnóstico PAIR NEW em duas partes, não iniciado; MNT-15 Zoom/Obsidian suspenso.
+**MNT-13 — ACEITO E PUBLICADO v3.2.3.** Código, regressões, CI e UF2 verificáveis registrados em [candidate.md](../executions/MNT-13/candidate.md). **Aceite explícito registrado em [operator-acceptance](../executions/MNT-13/operator-acceptance.md); [release.md](../executions/MNT-13/release.md) confirma tag/asset/hash.** MNT-14 continua diagnóstico PAIR NEW em duas partes, não iniciado; MNT-15 Zoom/Obsidian suspenso.
