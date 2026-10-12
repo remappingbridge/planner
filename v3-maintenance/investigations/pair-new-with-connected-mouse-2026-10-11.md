@@ -1,6 +1,6 @@
 # Investigação — Pair New só encontra novo mouse quando nenhum está conectado
 
-**Data da análise inicial:** 11/10/2026 (horário local). **Natureza:** levantamento estático de diagnóstico, **não** uma execução do MNT-13. **Estado:** comportamento reportado pelo operador; análise estática concluída, causa exata em hardware **não identificada**. **Atualização de planejamento:** esta evidência inicial foi incorporada ao [MNT-13 — duas partes](../gates/MNT-13.md), criado em 11/10/2026; ambas as partes continuam **PENDING**. MNT-12 segue suspenso.
+**Data da análise inicial:** 11/10/2026 (horário local). **Natureza:** levantamento estático de diagnóstico, **não** uma execução do MNT-13. **Estado:** comportamento reportado pelo operador; análise estática concluída, causa exata em hardware **não identificada**. **Atualização de planejamento:** esta evidência inicial foi incorporada ao [MNT-13 — duas partes](../gates/MNT-13.md), criado em 11/10/2026; ambas as partes continuam **PENDING**. MNT-14 (Zoom) segue suspenso; MNT-12 agora é a nova indicação de cores e continua não iniciado.
 
 ## Sintoma reportado
 
@@ -51,4 +51,4 @@ Após a investigação estática, o operador solicitou criar o **MNT-13** dividi
 
 ## Versionamento
 
-O aceite do MNT-11 é independente desta investigação: publicar **v3.2.1** para normalização de nomes conforme PR #41. MNT-12 **não inicia**. PAIR NEW não foi alterado como parte do MNT-11.
+O aceite do MNT-11 é independente desta investigação: publicar **v3.2.1** para normalização de nomes conforme PR #41. MNT-12 (cores) e MNT-14 (Zoom) **não iniciam**. PAIR NEW não foi alterado como parte do MNT-11.
