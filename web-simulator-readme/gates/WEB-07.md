@@ -1,6 +1,6 @@
 # WEB-07 — Combinations, Shortcuts e MNT-12/MNT-13
 
-**Status:** CANDIDATE IMPLEMENTED; 194/194 isolated JS/DOM/Canvas checks PASS; production-browser acceptance PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-06 aceito.
+**Status:** ACCEPTED by operator on 2026-10-12; WEB-08 authorized (responsive/brightness 0–100%). **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-06 aceito.
 
 ## Implementation evidence
 
