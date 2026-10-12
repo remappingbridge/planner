@@ -1,6 +1,6 @@
 # WEB-04 — 45 telas e navegação canônica v3
 
-**Status:** CANDIDATE IMPLEMENTED, 90/90 ISOLATED JS/DOM/CANVAS CHECKS PASS; PRODUCTION-BROWSER ACCEPTANCE PENDING. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-03 aceito.
+**Status:** ACCEPTED by operator (2026-10-12). WEB-05 authorized; key legend assigned to WEB-05. **Destino em futura execução:** `remappingbridge.github.io`. **Dependência:** WEB-03 aceito.
 
 ## Implementation evidence
 
