@@ -1,5 +1,8 @@
 # 04 — Decisões de planejamento, evidências e riscos
 
+> **Atualização posterior — 12/10/2026:** MNT-13 recebeu autorização expressa para implementação e tornou-se candidato com [PR #43](https://github.com/remappingbridge/remappingbridge/pull/43), CI 96/96 PASS e Pico 2 W PASS; **aceite físico PENDING e sem release**. As notas abaixo sobre “somente planejamento” descrevem a decisão anterior a essa nova autorização, não o estado atual. MNT-14 e MNT-15 permanecem inalterados.
+
+
 **Somente planejamento, não execução.** Autoridade 1: pedido textual do operador; 2: [tag v3.0.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.0.0) e fontes nela; 3: histórico aceito [modifier-shortcuts](../modifier-shortcuts/README.md) e [movement-options](../movement-options/README.md); 4: inferências aqui rotuladas.
 
 ## Decisões que evitam ambiguidades
