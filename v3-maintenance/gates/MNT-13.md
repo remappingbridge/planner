@@ -1,6 +1,6 @@
 # MNT-13 — Seta > na primeira coluna da opção selecionada
 
-**STATUS: PLANEJADO, NÃO IMPLEMENTADO.** Novo MNT-13 solicitado em 12/10/2026 após aceite do MNT-12. Este pedido autoriza exclusivamente planejar a melhoria: **não criar branch/PR de firmware, não alterar código, não compilar, não criar UF2 nem publicar nova versão para MNT-13.**
+**STATUS: IMPLEMENTADO EM CANDIDATO / CI 96/96 + PICO 2 W PASS / UF2 VERIFICADO / ACEITE FÍSICO PENDING.** O gate foi inicialmente planejado em 12/10/2026; nova ordem expressa para implementar resultou na [branch e PR #43 DRAFT](https://github.com/remappingbridge/remappingbridge/pull/43). Ainda **sem merge/tag/release**. [Candidato e SHA](../executions/MNT-13/candidate.md) · [Cenários físicos](../executions/MNT-13/physical-acceptance.md).
 
 - Identificador de backlog: MEL-13 NOVO; numeração MEL independente dos gates históricos.
 - A última base aceita antes deste plano é v3.2.2 (MNT-12); futura implementação deve derivar da tag oficial v3.x mais recente que existir na ocasião.
@@ -82,7 +82,7 @@ SAVED DEVICES, com pelo menos um mouse salvo:
 
 Nome de mouse, PROFILE, DPI e ROTATION são informativos e jamais ganham seta.
 
-## 4. Abordagem arquitetural proposta — sem implementação
+## 4. Abordagem arquitetural — adotada pelo candidato
 
 - Buscar um **único mecanismo de acabamento do frame** que recebe o modelo UX e calcula a linha do cursor com base no ID da tela e ux->selection, com retorno explícito **sem seta** quando não há opção válida. Reaproveitar o mapeamento de selected_row() onde correto, tratando COMBINATIONS, MOVEMENT e SAVED DEVICES explicitamente.
 - Aplicar o marcador **após** composição dinâmica, foco, sobreposição de profile_feedback e regras de Saved Devices, para a seta não sumir nem sobrescrever estados CURRENT/UNAVAILABLE. Verificar coordenadas das células e tons efetivos, não redesenhar os textos de menu.
@@ -100,8 +100,8 @@ Nome de mouse, PROFILE, DPI e ROTATION são informativos e jamais ganham seta.
 6. **SAVED DEVICES**: com zero, um e vários bonds. > em REMOVE DEVICE somente quando ação disponível; jamais em nome do mouse, perfil, movimento ou dicas.
 7. **Telas sem lista**: Help, pareamento/resultado, Remove This, confirmações KEY A etc. têm zero >, mesmo com o último menu previamente focado.
 8. **Regressões**: preservar cores de todos gates anteriores (em especial MNT-08 e MNT-12), rotas, perfil/bonds por mouse, 12 combinações/30 atalhos, USB/HID, BLE, help/lock e firmware produção Pico 2 W.
-9. Quando houver ordem expressa para executar MNT-13: criar branch da última tag v3.x publicada, PR draft, regressões host por célula/texto/tom, build Pico 2 W oficial, UF2 com SHA verificado, roteiro físico desde HOME CONNECTED e aceite explícito. Só então bump PATCH, merge e release; não prosseguir automaticamente para MNT-14 ou MNT-15.
+9. Implementação autorizada: branch da tag v3.2.2, PR #43 draft, testes host (96/96 PASS), build Pico 2 W oficial PASS, UF2 com SHA verificado e roteiro físico desde HOME CONNECTED disponíveis. **Aceite físico ainda não observado**. Somente então bump PATCH, merge e release; não prosseguir automaticamente para MNT-14 ou MNT-15.
 
 ## 6. Estado final
 
-**MNT-13 — PLANEJADO SOMENTE.** Nenhum código, CI, UF2, branch, PR, release ou teste físico dessa seta foi realizado. **MNT-14** continua diagnóstico PAIR NEW em duas partes e **MNT-15** conserva Zoom/Obsidian suspenso. A aceitação do MNT-12 não é aceitação de nenhum dos próximos gates.
+**MNT-13 — CANDIDATO PRONTO PARA TESTE FÍSICO.** Código, regressões, CI e UF2 verificáveis registrados em [candidate.md](../executions/MNT-13/candidate.md). **Aceite físico PENDING; sem tag/release.** MNT-14 continua diagnóstico PAIR NEW em duas partes, não iniciado; MNT-15 Zoom/Obsidian suspenso.
