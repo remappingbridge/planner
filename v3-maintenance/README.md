@@ -1,6 +1,6 @@
 # RemappingBridge v3.x — manutenção incremental pós-v3.0.0
 
-**Estado atualizado em 2026-10-11:** MNT-01..MNT-09 aceitos e publicados, com última versão **[v3.1.4](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.1.4)**. Novo **MNT-10** planeja remoção completa de mouse/configuração; MNT-11 permanece nome BLE; MNT-12 guarda o antigo diagnóstico Zoom (antes MNT-10). Nenhum código do MNT-10 foi implementado.
+**Estado atualizado em 2026-10-11:** MNT-01..MNT-10 aceitos e publicados, com última versão **[v3.2.0](https://github.com/remappingbridge/remappingbridge/releases/tag/v3.2.0)**. **MNT-10** entregou exclusão completa de mouse/configuração; MNT-11 está em implementação como correção de nomes BLE; MNT-12 guarda o antigo diagnóstico Zoom (antes MNT-10). MNT-11 aguarda validação física; não há publicação v3.2.1.
 
 ## Baseline congelada
 - Produto: [remappingbridge/remappingbridge](https://github.com/remappingbridge/remappingbridge).
