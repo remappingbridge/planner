@@ -66,7 +66,7 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 1. **Parte 1 (somente investigação):** reproduzir controladamente com A conectado × A ausente e B realmente não salvo em modo pairing, capturar estados/erros de scan, advertising, connection, SM, GATT HIDS, filtros de bonds/IRK, timeout 15 s e handoff. Identificar a primeira divergência, separar hipótese de causa comprovada, gerar relatório com evidências. **Não corrigir, não versionar.**
 2. **Parte 2 (decisão técnica):** com a causa raiz conhecida, avaliar se corrigir é viável, seguro e proporcional, preservando o contrato de um mouse autoritativo e candidato temporário. Resultado **GO / NO-GO (DEFERRED) / BLOCKED (INCONCLUSIVE) / NOT A BUG**. Somente um GO aprovado e uma **nova autorização expressa de implementação** permitem alterar firmware; release apenas após CI, UF2 e aceite físico. Nenhum release por diagnóstico.
 
-**Escopo e detalhes do gate:** [MNT-14](gates/MNT-14.md). **Status: PLANEJADO; duas partes PENDING, não iniciado.** MNT-15 Zoom permanece suspenso; MNT-13 agora é o novo pipe de seleção.
+**Escopo e detalhes do gate:** [MNT-14](gates/MNT-14.md). **Status: Parte 1 iniciada com preflight estático realizado sobre v3.2.3; causa física INCONCLUSIVE, Parte 2 não iniciada e nenhum patch autorizado.** MNT-15 Zoom permanece suspenso; MNT-13 agora é o novo pipe de seleção.
 
 ### MEL-12 — Indicação ciano de Modifier Shortcuts e valores atribuídos de Combinations (novo MNT-12)
 
@@ -87,7 +87,7 @@ A atual rotina adiciona ` MOUSE` quando a sequência não é detectada como **pa
 
 **Sem mudanças nos textos ou funções:** ocupar a margem à esquerda sem sobrescrever conteúdo do LCD 9×21; indicador com tom coerente com o item focado (branco ou ciano clarinho segundo regra existente); preservar RGB, shortcuts, perfis, Movement, BLE/USB e navegação. Cobrir toda a matriz com testes C por célula, foco/paginação/reconexão e validação física. Ver **[MNT-13](gates/MNT-13.md)** para contrato, cenários e riscos.
 
-**STATUS: IMPLEMENTADO EM CANDIDATO, ACEITE FÍSICO PENDING.** [MNT-13 candidato e evidências](executions/MNT-13/candidate.md), sem publicação. O antigo MNT-13 PAIR NEW foi movido integralmente para MNT-14, e o antigo MNT-14 Zoom para MNT-15.
+**STATUS: ACEITO E PUBLICADO COMO v3.2.3.** [MNT-13 aceite](executions/MNT-13/operator-acceptance.md), [publicação](executions/MNT-13/release.md) e [candidato histórico](executions/MNT-13/candidate.md). O antigo MNT-13 PAIR NEW foi movido integralmente para MNT-14, e o antigo MNT-14 Zoom para MNT-15.
 
 ## Registro da implementação de cores aceita
 As solicitações MEL-05/MEL-06 acima registram o desejo original. Após iterações e aceite final conjunto do operador, a regra efetivamente publicada na **v3.1.3** é o inverso do texto original: **CURRENT sem seleção = ciano normal 0x07FF** e **CURRENT selecionado = ciano clarinho pastel 0xD7FF**; os demais itens permanecem cinza→branco. O nome conectado em Saved Devices é informativo e permanece ciano normal.
