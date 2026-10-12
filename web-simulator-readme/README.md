@@ -1,6 +1,6 @@
 # Programa WEB — Simulador estático e README didático RemappingBridge
 
-**Estado em 12/10/2026: WEB-00 EM CANDIDATO DOCUMENTAL / VERIFICAÇÃO ESTÁTICA PASS / ACEITE PENDENTE. WEB-01..WEB-15 NÃO INICIADOS.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
+**Estado em 12/10/2026: WEB-00 CONCLUÍDO, COM AUTORIZAÇÃO EXPLÍCITA DE PROSSEGUIR EM 12/10/2026. WEB-01 EM PREPARAÇÃO; WEB-02..15 NÃO INICIADOS.** A implementação do site e as mudanças no README do firmware continuam não iniciadas.
 
 ## Objetivo e destinos
 
@@ -40,7 +40,7 @@ Planejamento, contratos, critérios de aceite e evidências de execução ficam 
 - [03 — Testes, paridade e aceite](03-acceptance-and-tests.md)
 - [04 — README, hardware, ilustrações, download e embedding](04-readme-hardware-and-download.md)
 - [gates/](gates/) — escopos e critérios individuais WEB-00..WEB-15.
-- [WEB-00: evidências](executions/WEB-00/candidate.md) e [fixtures versionadas](fixtures/README.md) — fonte v3.2.3 extraída; aprovação ainda não concedida.
+- [WEB-00: evidências](executions/WEB-00/candidate.md) e [fixtures versionadas](fixtures/README.md) — fonte v3.2.3 extraída; autorização para avançar registrada em [WEB-00/operator-acceptance.md](executions/WEB-00/operator-acceptance.md).
 
 ## Princípio de aceite
 
