@@ -1,6 +1,6 @@
 # 03 — Matriz de teste físico, host e regressão de v3.x
 
-**Estado em 12/10/2026:** MNT-01..MNT-13 **aceitos/publicados até v3.2.3**. **MNT-14 CANCELADO pelo operador** após testes físicos relatados como bem-sucedidos em cenários diversos/adversos; sem logs individuais anexados, não converter automaticamente cada caso desta matriz em PASS. A Parte 2 e a correção não ocorreram. **MNT-15 suspenso, não implementar.**
+**Estado em 12/10/2026:** MNT-01..MNT-13 **aceitos/publicados até v3.2.3**. **MNT-14 CANCELADO pelo operador** após testes físicos relatados como bem-sucedidos em cenários diversos/adversos; sem logs individuais anexados, não converter automaticamente cada caso desta matriz em PASS. A Parte 2 e a correção não ocorreram. **MNT-15: novos testes Mabox registrados; somente Zoom In falha no Obsidian, Zoom Out/Reset funcionam no Obsidian, e as três ações funcionam no navegador e terminal. Sem patch autorizado.**
 
 ## Preparação comum
 1. Identificar tag estável instalada e a versão candidata, guardar 12 combos de shortcuts e parâmetros Movement; fazer backup quando pertinente sem flash_nuke.
