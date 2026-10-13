@@ -1,9 +1,13 @@
 # WEB-14 — Operator acceptance
 
-**Status: PENDING / NOT ACCEPTED.**
+**Status: ACCEPTED by operator on October 13, 2026 (America/Sao_Paulo).** After the verified latest-release v3.2.4 download/checksum and Pico 2 W BOOTSEL documentation was published, the operator explicitly said **"gate atual aceito. prossiga"**. The same message requested a **Table of Contents immediately before `## Why use it?` in the final WEB-15 gate**, not in WEB-14.
 
-The current verified v3.2.4 UF2/checksum and BOOTSEL instructions were published via [firmware PR #51](https://github.com/remappingbridge/remappingbridge/pull/51), commit **`7ec0d95ce595be82b61509c454d618321084ba72`**. This documentation publication and automated static checks are not operator approval.
+## Accepted publication and constraints
 
-Operator should confirm actual release assets/version/checksum, accurate Pico 2 W BOOTSEL instructions, safe upgrade warnings, retained visually prioritized README intro, and usable instructions in a real browser. **Do not claim a physical flash, checksum comparison on each host OS or a functional mouse pairing test unless actually performed.**
+- Firmware [PR #51](https://github.com/remappingbridge/remappingbridge/pull/51) merged the README-only installation/checksum/BOOTSEL guide at `main` SHA **`7ec0d95ce595be82b61509c454d618321084ba72`**.
+- GitHub latest release v3.2.4 metadata verified official UF2 `remappingbridge-v3.2.4-pico2w.uf2` (953,344 bytes), official asset SHA-256 `56d2eeaf96b2579e34b85333274a4bf1652b6bf33384d1b275eee36aa06f88f2`, and sibling `SHA256SUMS.txt`. Versioned direct link and stable `/releases/latest` both remain visible.
+- BOOTSEL instructions distinguish RP2350 from older RPI-RP2 bootloader drive labels and warn against charge-only cable, mass erase and `flash_nuke`.
+- Canonical [CI run #38384287376](https://github.com/remappingbridge/remappingbridge/actions/runs/38384287376) succeeded in both host and Pico production checks, without publishing another release.
+- This human gate approval does not assert undocumented real physical flashing, checksum file parsing, or all OS runtime tests. Original README short visual hero was preserved.
 
-**WEB-15 NOT STARTED** until explicit operator acceptance.
+**WEB-15 authorized:** perform final integrated cross-repository audit and insert a clean English **Table of Contents directly before `Why use it?`** in root firmware README; links must work in GitHub, hierarchy and original hero must remain untouched. **WEB-15 not accepted until the operator explicitly approves it.**
