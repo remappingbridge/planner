@@ -1,21 +1,17 @@
-# WEB-13 — Manual operator acceptance scenarios
+# WEB-13 — Manual acceptance after operator correction
 
-**State:** PENDING. Run on the [firmware README on GitHub](https://github.com/remappingbridge/remappingbridge#readme). The [live simulator](https://remappingbridge.github.io/) is separate from its embedded static illustration. No physical Pico or BLE mouse is needed.
+**Status: PENDING.** Review the [GitHub-rendered README](https://github.com/remappingbridge/remappingbridge#readme) and [live simulator](https://remappingbridge.github.io/). The operator **removed the optional static preview** and it must **not** reappear.
 
-1. **First screen preserved:** README still opens with the approved **OPEN LIVE SIMULATOR**, direct **v3.2.4 UF2 download**, Pico 2 W and Waveshare HAT photographs and short benefits before the new image and long-form technical sections. No duplicate HAT UI editorial page or landing page was added.
-2. **Visible clickable preview:** original static illustration appears below the short benefits, not as an SVG text attachment/broken image. Click **the image** and confirm the destination opens `https://remappingbridge.github.io/`.
-3. **Accessible fallback link:** use the independent text “Open the interactive simulator”; it goes to the same URL even if images are blocked or not understood by the reader. Confirm Markdown link, not a button that needs JavaScript.
-4. **Honest media label:** illustration says **STATIC PREVIEW**, calls itself an illustration rather than a browser screenshot, and does not falsely imply physical hardware or a fully working app inside GitHub README. No iframe/scripts/auto-executed HTML.
-5. **Source-fidelity visual:** preview resembles the published website's actual dark HAT housing, left joystick, 240×240 magenta LCD, vertical A/B/X/Y, Pico 2 W specs on right, corner brand/status, three demo-state buttons and Virtual Mouse Lab. HOME rows and selected pipe match source-defined copy; DEMO MOUSE is an explicit illustrative dynamic sample.
-6. **Mobile and zoom:** in GitHub mobile view and desktop browser 100%, 200%, 300% and 400% zoom, README text remains readable, no embedded executable scroll/frame appears, SVG can be opened independently at full size and GitHub scales it without clipping.
-7. **Source/UI matching link:** confirm actual [GitHub Pages URL](https://remappingbridge.github.io/) loads its web assets/Canvas and HAT controls in a real Firefox or Chromium instance; a successful Pages deployment alone is not proof of browser behavior.
-8. **Isolated first HOME:** inside **Choose a demo state** select Home Connected. The HAT displays connected HOME visual structure. It is a screen preview, not a new saved physical/virtual Mouse.
-9. **Virtual pairing:** in **Virtual Mouse Lab** input a temporary mouse name and use **Start Pair New → Complete Successfully**. Saved virtual state appears locally, not in Pico firmware. Demo buttons do not create or remove virtual records.
-10. **Movement:** on HOME select MOVEMENT OPTIONS via joystick/keyboard, then a horizontal/vertical gain or rotation setting, use appropriate KEY A apply/KEY B back, and verify only virtual-mouse state is updated.
-11. **Modifier and shortcuts:** through REMAPPING OPTIONS → CUSTOM REMAPPING choose a mouse source and assign MODIFIER via WILL BECOME, then APPLY CUSTOM; only then explore MODIFIER SHORTCUTS, COMBINATIONS and 30 SHORTCUTS and apply one using KEY A. No shortcut is actually emitted into the host; potential UNAVAILABLE combination behavior remains intact.
-12. **Manual / fallback controls:** try virtual joystick and A/B/X/Y buttons, keyboard arrow keys/Enter, Help X and LCD Lock Y; follow exceptions shown on the firmware LCD, rather than expecting global uniform behavior.
-13. **Isolation/privacy:** virtual profiles stay in browser; README preview never invokes Web Bluetooth/USB, firmware download, or keyboard events by itself. Site `/tests/` keeps regression state separate from user virtual storage if tested.
-14. **Docs-only change:** verify PR #49 has only README and one original SVG. No new firmware, release, build assets, runtime website changes or installation tutorial (reserved WEB-14).
-15. **Explicit gate control:** approve **WEB-13** or report specific readability/link/navigation defects; do not mark accepted or execute WEB-14 merely because PR merged.
+1. The README introductory text and three features now flow directly into the next section, with **no "Curious?" paragraph**, large simulator image, secondary clickable-preview CTA or duplicated disclaimer.
+2. The original prominent **OPEN LIVE SIMULATOR** and exact **v3.2.4 UF2 download** links still appear at the top, with the two accepted Pico 2 W and Waveshare Pico-LCD-1.3 photographs and captions.
+3. The original standalone `docs/assets/simulator-preview-v3.2.4.svg` is deleted from main; neither the README nor any link refers to it.
+4. The later **Try it in your browser** paragraph links straight to `https://remappingbridge.github.io/` and does **not** refer to an image or preview above. State clearly that the simulator does not run inside the README.
+5. The **five-step HOME → virtual pairing → Movement → Modifier → Shortcuts** walk-through remains available lower down, including **KEY A**, **KEY B**, **JOY PRESS**, the virtual-only data caveat and no real USB/HID output.
+6. In a real Firefox/Chromium browser, click the text link from README and verify the simulator fully loads, including its 240×240 LCD HAT and Virtual Mouse Lab. GitHub deployment/CI status alone does not prove a successful live click.
+7. With a temporary virtual mouse saved in-browser, manually exercise HOME → Movement and Custom Modifier → Modifier Shortcuts; confirm only local simulation data changes and physical firmware is not touched.
+8. Check README at mobile widths and at larger zoom sizes; it no longer needs to render or scale the removed illustrative SVG. Verify accepted hardware photos, assembly SVG, controls map and technical tables are still legible.
+9. Confirm **14/14 relative Markdown resource paths** resolve in the corrected tree; safe-assembly, compatibility, release, checksum and no-flash_nuke warnings remain intact.
+10. Verify firmware [PR #50](https://github.com/remappingbridge/remappingbridge/pull/50) contains only README copy changes and deleting the unused SVG, without modifying any code, binary, build workflow or release.
+11. Operator explicitly **accepts WEB-13** or requests further corrections. Do **not** accept automatically or begin WEB-14 just because publication succeeds.
 
-Record browser/version, viewport/zoom and whether the image and text both open live GitHub Pages. Real browser verification is mandatory for any assertion that the public URL loads successfully.
+When reporting, note browser, viewport and zoom and any broken link or wording. The operator's removal request is **feedback**, not a statement of gate acceptance.

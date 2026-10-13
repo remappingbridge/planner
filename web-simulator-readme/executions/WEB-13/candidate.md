@@ -1,23 +1,22 @@
-# WEB-13 — Clickable static simulator preview candidate
+# WEB-13 — Candidate and operator-requested correction
 
-**State:** README candidate published; **OPERATOR ACCEPTANCE PENDING**. **WEB-14 NOT STARTED**.
+**Status: CORRECTED CANDIDATE PUBLISHED; OPERATOR ACCEPTANCE PENDING. WEB-14 NOT STARTED.**
 
-## Published delivery
+## Historical first candidate (superseded)
 
-[Firmware PR #49](https://github.com/remappingbridge/remappingbridge/pull/49) integrated two docs-only changes into firmware `main` at **`c06c585ecc7411e930d30457795366c4a869a262`**:
+Firmware [PR #49](https://github.com/remappingbridge/remappingbridge/pull/49) originally added a clickable illustrative SVG and redundant CTAs to the README, together with the five-step virtual guide. It merged at `c06c585ecc7411e930d30457795366c4a869a262`; its canonical [CI run #38329323390](https://github.com/remappingbridge/remappingbridge/actions/runs/38329323390) passed. The original static SVG had 12/12 structural/source tests passed, but **operator explicitly rejected that section** as unnecessary. Neither CI nor publication equals operator acceptance.
 
-1. `docs/assets/simulator-preview-v3.2.4.svg` — **original ~7.8 KB standalone 1280×720 vector illustration**, no scripts/external requests or active links. Its UI layout is source-derived from the deployed static website `index.html`, `assets/css/app.css`, `assets/js/screens.js`: REMAPPINGBRIDGE brand upper left, yellow VIRTUAL DEVICE lower left, left cross joystick, central dark-magenta HOME screen, A/B/X/Y vertical right keys, Pico 2 W/LCD/9 controls in right panel, 3 real demo-state names, and Virtual Mouse Lab. An example DEMO MOUSE label substitutes the dynamic connected-device name; eight nonempty LCD HOME lines preserve source literals and focus pipe. **Not a real live screenshot** and never represented as one; visually labeled STATIC PREVIEW and explicitly described as illustrative. SVG `title`, `desc` and detailed Markdown alt provide alternatives; no dependency on external raster image copyright.
-2. `README.md` — preserve previously accepted hero with visible live simulator/download buttons and real Pico/HAT photos. Add a clickable Markdown image linked directly to **https://remappingbridge.github.io/** near the top, plus redundant **textual** CTA for assistive technology / blocked image loads. Browser section now contains a guided **HOME → Virtual Mouse Lab pairing → Movement → Custom Modifier → Combinations/30 Shortcuts** walkthrough and HAT navigation/lock/help hints, without implying that preview or GitHub can execute the actual app. Browser profile state is local only, and no Bluetooth pairing, USB HID action or flash can occur from the simulator.
+## Operator correction — current candidate
 
-## Executed checks
+Operator instruction: **remove** the entire intro block starting **"Curious? Explore the virtual HAT and LCD now"**, including the large linked static preview and redundant **"Open the interactive simulator — click the preview"** CTA. This is a correction **inside WEB-13**, not a gate acceptance or authorization to proceed.
 
-- **12/12 static assertions passed**: self-contained well-balanced SVG tree, title/desc and no active/script/external content; real clickable Markdown image link and independent textual CTA; 8 nonblank HOME firmware source rows, correct keyboard/HAT/demo/Virtual Mouse Lab vocabulary; complete guided flow and no physical HID claims; all local Markdown paths exist in candidate git tree; existing hero and v3.2.4 release remain in correct sequence.
-- Source web GitHub Pages last successful deploy and exact SHA checked. A successful deploy does not establish a live browser GET or an actual screenshot.
-- The PR changes **only `README.md` and one original SVG**; no firmware, CMake, UF2, tag, release, website, JS or workflow changes.
-- Canonical firmware [CI run #38329323390](https://github.com/remappingbridge/remappingbridge/actions/runs/38329323390) **completed successfully** against docs-only PR head `331b8dba0c0417df7a23f3fe3de28f884378cf5e`: host-architecture and pico2-w-production jobs passed. No firmware binary was released or flashed.
+Firmware [PR #50](https://github.com/remappingbridge/remappingbridge/pull/50) implements that request and merged to main **`d4b1e3a822f710907b8b14f80b4f67119d8e8aef`**:
+1. Removed precisely the operator-quoted intro content without adding replacement marketing copy, image or second CTA.
+2. Deleted **`docs/assets/simulator-preview-v3.2.4.svg`**, now unreferenced. It was an original illustration, never a real browser capture.
+3. Rewrote only the stale clause in the later `Try it in your browser` paragraph that referred to the deleted preview. It now links directly to the real GitHub Pages application and truthfully says GitHub README itself is not executable.
+4. Kept **existing up-front simulator and direct v3.2.4 firmware-download links**, accepted real Pico/Waveshare photos, benefit bullets, all WEB-12 hardware diagrams and the later **HOME → Pair New → Movement → Modifier/Shortcuts** textual demonstration guide. The simulator disclosure remains in that section.
+5. **14/14 remaining relative README Markdown references** valid in final candidate tree; no dead link to deleted preview and no leftover redundant CTA. Only README and deletion of unused SVG changed. No firmware, UF2, release, app code or workflows affected.
 
-## Manual evidence boundary
+The new proposal deliberately **omits** the image-preview deliverable in the original WEB-13 gate definition because the operator expressly chose not to include it. No claim of photographic/captured UI documentation or a live-browser run is made. A live simulator link and test guide remain.
 
-An operator should open the rendered GitHub README on desktop/mobile, verify vector loads at 100–400% zoom, click both image and text into the **real interactive website**, and actually walk HOME → Movement → Modifier on a paired **virtual mouse**. No remote live browser run is claimed by the static checks. If SVG needs different positioning or word sizes, correct within WEB-13 before acceptance.
-
-Rollback reference for README documentation only: firmware `main` before gate `131b30758e4f5993f64480e2eadafff28699a570`. **Do not start WEB-14 until explicit operator acceptance.**
+The corrected README is public for operator review; the operator has **not yet explicitly accepted WEB-13**. The planner evidence PR remains draft. **WEB-14 NOT STARTED.**

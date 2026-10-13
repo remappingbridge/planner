@@ -2,8 +2,8 @@
 
 **Status: PENDING / NOT ACCEPTED.**
 
-The clickable static illustration and guide are published under firmware [PR #49](https://github.com/remappingbridge/remappingbridge/pull/49), but **publication and code-level tests do not mean operator acceptance**.
+The operator specifically **rejected and requested deletion** of the unnecessary "Curious?" paragraph, static linked preview, and duplicate live simulator CTA. This is **not** acceptance. The requested correction was implemented and published via firmware [PR #50](https://github.com/remappingbridge/remappingbridge/pull/50), final README main `d4b1e3a822f710907b8b14f80b4f67119d8e8aef`.
 
-To approve, the operator must inspect the GitHub-rendered README, check the image and textual CTA lead to the live simulator, and confirm the HOME → Movement → Modifier guide is usable. If the image is unreadable or inaccurate on mobile/zoom, fix within WEB-13.
+WEB-13 now includes the existing top-of-page simulator link and the later **HOME → Movement → Modifier** textual guided demo, but **no static preview illustration**. The operator must explicitly approve the corrected README before the gate can be accepted.
 
-**WEB-14 (UF2/BOOTSEL full installation guide) NOT STARTED.**
+**WEB-14 NOT STARTED.**
