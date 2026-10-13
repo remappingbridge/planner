@@ -18,6 +18,7 @@
 - **15/15 relative README resource paths** exist in the candidate git tree; stable and version-specific URLs agree with official GitHub release metadata, asset bytes and `digest`.
 - No executable iframe, firmware source, UF2, release or site code changed. Exact earlier README prefix is unchanged except **one mechanical assembly cross-link** to the new guide; documentation/support/license tail is byte-for-byte preserved.
 - All three host checksum instruction strings present, correct target board and Pico 2-series volume nomenclature present, and familiar Linux/macOS/Windows usage documented.
+- Canonical firmware [CI run #38384287376](https://github.com/remappingbridge/remappingbridge/actions/runs/38384287376) **completed successfully** for docs-only PR head `6b68e1c801f7057bbc3267f6470d64bb42a5e6aa`: both `host-architecture` and `pico2-w-production` jobs passed. This does **not** imply that a new UF2/release was published.
 - [Raspberry Pi manufacturer documentation](https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html) confirms power-on BOOTSEL technique, USB mass-storage enumeration and automatic reboot. A **physical flash or actual three-OS host hash test was not performed here**; those are manual operator checks, not inferred from a GitHub PR or CI.
 
 ## Acceptance boundary
