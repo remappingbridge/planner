@@ -1,0 +1,21 @@
+# WEB-13 — Manual operator acceptance scenarios
+
+**State:** PENDING. Run on the [firmware README on GitHub](https://github.com/remappingbridge/remappingbridge#readme). The [live simulator](https://remappingbridge.github.io/) is separate from its embedded static illustration. No physical Pico or BLE mouse is needed.
+
+1. **First screen preserved:** README still opens with the approved **OPEN LIVE SIMULATOR**, direct **v3.2.4 UF2 download**, Pico 2 W and Waveshare HAT photographs and short benefits before the new image and long-form technical sections. No duplicate HAT UI editorial page or landing page was added.
+2. **Visible clickable preview:** original static illustration appears below the short benefits, not as an SVG text attachment/broken image. Click **the image** and confirm the destination opens `https://remappingbridge.github.io/`.
+3. **Accessible fallback link:** use the independent text “Open the interactive simulator”; it goes to the same URL even if images are blocked or not understood by the reader. Confirm Markdown link, not a button that needs JavaScript.
+4. **Honest media label:** illustration says **STATIC PREVIEW**, calls itself an illustration rather than a browser screenshot, and does not falsely imply physical hardware or a fully working app inside GitHub README. No iframe/scripts/auto-executed HTML.
+5. **Source-fidelity visual:** preview resembles the published website's actual dark HAT housing, left joystick, 240×240 magenta LCD, vertical A/B/X/Y, Pico 2 W specs on right, corner brand/status, three demo-state buttons and Virtual Mouse Lab. HOME rows and selected pipe match source-defined copy; DEMO MOUSE is an explicit illustrative dynamic sample.
+6. **Mobile and zoom:** in GitHub mobile view and desktop browser 100%, 200%, 300% and 400% zoom, README text remains readable, no embedded executable scroll/frame appears, SVG can be opened independently at full size and GitHub scales it without clipping.
+7. **Source/UI matching link:** confirm actual [GitHub Pages URL](https://remappingbridge.github.io/) loads its web assets/Canvas and HAT controls in a real Firefox or Chromium instance; a successful Pages deployment alone is not proof of browser behavior.
+8. **Isolated first HOME:** inside **Choose a demo state** select Home Connected. The HAT displays connected HOME visual structure. It is a screen preview, not a new saved physical/virtual Mouse.
+9. **Virtual pairing:** in **Virtual Mouse Lab** input a temporary mouse name and use **Start Pair New → Complete Successfully**. Saved virtual state appears locally, not in Pico firmware. Demo buttons do not create or remove virtual records.
+10. **Movement:** on HOME select MOVEMENT OPTIONS via joystick/keyboard, then a horizontal/vertical gain or rotation setting, use appropriate KEY A apply/KEY B back, and verify only virtual-mouse state is updated.
+11. **Modifier and shortcuts:** through REMAPPING OPTIONS → CUSTOM REMAPPING choose a mouse source and assign MODIFIER via WILL BECOME, then APPLY CUSTOM; only then explore MODIFIER SHORTCUTS, COMBINATIONS and 30 SHORTCUTS and apply one using KEY A. No shortcut is actually emitted into the host; potential UNAVAILABLE combination behavior remains intact.
+12. **Manual / fallback controls:** try virtual joystick and A/B/X/Y buttons, keyboard arrow keys/Enter, Help X and LCD Lock Y; follow exceptions shown on the firmware LCD, rather than expecting global uniform behavior.
+13. **Isolation/privacy:** virtual profiles stay in browser; README preview never invokes Web Bluetooth/USB, firmware download, or keyboard events by itself. Site `/tests/` keeps regression state separate from user virtual storage if tested.
+14. **Docs-only change:** verify PR #49 has only README and one original SVG. No new firmware, release, build assets, runtime website changes or installation tutorial (reserved WEB-14).
+15. **Explicit gate control:** approve **WEB-13** or report specific readability/link/navigation defects; do not mark accepted or execute WEB-14 merely because PR merged.
+
+Record browser/version, viewport/zoom and whether the image and text both open live GitHub Pages. Real browser verification is mandatory for any assertion that the public URL loads successfully.
