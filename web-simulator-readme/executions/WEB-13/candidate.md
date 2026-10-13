@@ -14,6 +14,7 @@
 - **12/12 static assertions passed**: self-contained well-balanced SVG tree, title/desc and no active/script/external content; real clickable Markdown image link and independent textual CTA; 8 nonblank HOME firmware source rows, correct keyboard/HAT/demo/Virtual Mouse Lab vocabulary; complete guided flow and no physical HID claims; all local Markdown paths exist in candidate git tree; existing hero and v3.2.4 release remain in correct sequence.
 - Source web GitHub Pages last successful deploy and exact SHA checked. A successful deploy does not establish a live browser GET or an actual screenshot.
 - The PR changes **only `README.md` and one original SVG**; no firmware, CMake, UF2, tag, release, website, JS or workflow changes.
+- Canonical firmware [CI run #38329323390](https://github.com/remappingbridge/remappingbridge/actions/runs/38329323390) **completed successfully** against docs-only PR head `331b8dba0c0417df7a23f3fe3de28f884378cf5e`: host-architecture and pico2-w-production jobs passed. No firmware binary was released or flashed.
 
 ## Manual evidence boundary
 
