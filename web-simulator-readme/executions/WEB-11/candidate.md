@@ -21,6 +21,6 @@
 
 ## Publication boundary
 
-Firmware documentation [PR #46](https://github.com/remappingbridge/remappingbridge/pull/46) contains the candidate. If merged, it will publish the README for operator GitHub rendering and link testing, **not record acceptance**. The final integrated `main` SHA and CI status should be recorded after merge. Rollback target is the pre-WEB-11 firmware-repository `main` SHA `3cb74cd04c674803ec109b694fbc3f10a114bad5` (README-level revert only; never firmware flash).
+Firmware documentation [PR #46](https://github.com/remappingbridge/remappingbridge/pull/46) contains the candidate. Firmware PR #46 **merged to public firmware `main`** for README rendering and operator review on October 12, 2026 (local date), commit **`efc2ab938a7e6c4e844c5c74903b5390acadd716`**. Exactly **2 files changed** (README and original SVG), no C, CMake, CI workflow or firmware assets. This publication **does not record WEB-11 acceptance**. The canonical CI [PR run #38326176242](https://github.com/remappingbridge/remappingbridge/actions/runs/38326176242) was triggered; host-architecture passed while the production Pico build was still in progress at documentation publishing time. The separate final run result must be checked before reporting success. Rollback target is the pre-WEB-11 firmware-repository `main` SHA `3cb74cd04c674803ec109b694fbc3f10a114bad5` (README-level revert only; never firmware flash).
 
 WEB-12 cannot begin until the operator explicitly accepts WEB-11.
