@@ -18,7 +18,7 @@
 - Input GPIO mapping **9/9 source definitions match actual `hat.h`**; LCD driver signals **6/6 match actual `st7789_pico.c`**.
 - Existing and new **14/14 local README link references** resolve in GitHub candidate tree; original source diagram and product hero still present.
 - Both SVG files have exactly one `<svg>`, one `<title>`, one `<desc>`, balanced generic/text tags, descriptive alt text in README and separate enlarging links. Source check also found **no active scripts, external image elements, foreign objects or event handlers**.
-- Static contract/source checks passed. No browser-rendered SVG/layout screenshots or physical assembly were tested in the tool environment; do not claim those. Documentation-only CI must be reported separately once completed.
+- Static contract/source checks passed. **Canonical CI completed successfully** for the WEB-12 candidate commit `cd1977578dd62559437a4069227ef880b3b98a11`: both `host-architecture` and `pico2-w-production` checks **PASS**, [run #38328001418](https://github.com/remappingbridge/remappingbridge/actions/runs/38328001418). This build verification does **not** mean new firmware was released or physically flashed. No browser-rendered SVG/layout screenshots or physical assembly were tested in the tool environment; do not claim those.
 
 ## State boundary
 
