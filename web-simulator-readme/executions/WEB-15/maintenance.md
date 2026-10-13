@@ -1,6 +1,6 @@
 # WEB-15 — Future release / web / README maintenance contract
 
-**Current accepted runtime baseline:** firmware v3.2.4 release source `69a640d9767ec7198572eb9b5073ed71f8f3d202`; simulator WEB-10 accepted app files at `26aaac5c7939ddc8883aa756c6a575a3d36b808a`. WEB-15 simulator website main `4b9b4892b52dc2005f73c7d0594ac512bc96f668` changed **only site README**, not application runtime. Current firmware docs `dd401996f6ab72ef1babb475dc0575fdd89e0052`. **WEB-15 acceptance is pending.**
+**Current accepted runtime baseline:** firmware v3.2.4 release source `69a640d9767ec7198572eb9b5073ed71f8f3d202`; simulator WEB-10 accepted app files at `26aaac5c7939ddc8883aa756c6a575a3d36b808a`. WEB-15 simulator website main `905dbf86deb7fc0f7dc26601ed3714a7bb28acba` changed **only site README**, not application runtime. Current firmware docs `35b9e81ce142532d0c34da847d09079eef8ad099`. **WEB-15 acceptance is pending.**
 
 Follow this order for future releases instead of automatically assuming a tag makes web docs current:
 
@@ -13,3 +13,5 @@ Follow this order for future releases instead of automatically assuming a tag ma
 7. **Maintain navigation and originality.** Whenever top-level README headings change, update **Table of contents directly before Why use it?** and verify GitHub-generated slugs. Audit all relative paths, alt text, real board SKU, correct Pico 2 W / RP2350 vs 40-pin HAT labels, original SVGs and external photo attribution. **Do not reintroduce the operator-rejected “Curious?” paragraph or large static simulator preview unless the operator explicitly requests it.**
 8. **Preserve safe-update boundaries.** BOOTSEL uses Micro-USB data, no routine `flash_nuke`/mass erase, no universally guaranteed BLE bond migration or old v2 schema round-trip. Shortcuts are host/application-dependent, the simulator is browser-only, and LCD Lock is not an input lock.
 9. **Record real acceptance.** Maintain per-gate preflight, PR/commit SHA, automation/static checks, manual/browser/physical checks separately, operator corrections/acceptance decision, open risks and rollback path; do not promote “published”, “CI green” or “Pages deployed” to “operator accepted”.
+
+10. **Public docs stay public-friendly.** Do not publish gate numbers, operator acceptance, development chronology, automated-test histories, git hashes, developer-only GPIO source mappings or internal release-maintainer chores in public READMEs. Keep those technical records here in the planner. README users need brief benefits, accurate usage, compatibility, complete safe installation, clear downloads, license and support.

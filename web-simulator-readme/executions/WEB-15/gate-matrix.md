@@ -21,7 +21,7 @@ This table is grounded in **existing accepted planner execution records**, verif
 | **WEB-12** | ACCEPTED | Firmware [#48](https://github.com/remappingbridge/remappingbridge/pull/48) | `131b30758e4f5993f64480e2eadafff28699a570` · BOM, safe mechanical assembly, 9 GPIO controls and 2 original SVGs |
 | **WEB-13** | ACCEPTED (revised) | Firmware [#49](https://github.com/remappingbridge/remappingbridge/pull/49) (superseded) + [#50](https://github.com/remappingbridge/remappingbridge/pull/50) | Final `d4b1e3a822f710907b8b14f80b4f67119d8e8aef` · operator removed redundant preview/media; retained simulator guide |
 | **WEB-14** | ACCEPTED | Firmware [#51](https://github.com/remappingbridge/remappingbridge/pull/51) | `7ec0d95ce595be82b61509c454d618321084ba72` · source-verified v3.2.4 UF2, SHA-256 and Pico BOOTSEL |
-| **WEB-15** | CANDIDATE — PENDING ACCEPTANCE | Firmware [#52](https://github.com/remappingbridge/remappingbridge/pull/52); Site [#14](https://github.com/remappingbridge/remappingbridge.github.io/pull/14) | Firmware `dd401996f6ab72ef1babb475dc0575fdd89e0052` · ToC; Site `4b9b4892b52dc2005f73c7d0594ac512bc96f668` · WEB-10 acceptance status corrected; planner evidence PR pending |
+| **WEB-15** | CANDIDATE — PENDING ACCEPTANCE | Firmware [#52](https://github.com/remappingbridge/remappingbridge/pull/52) + [#53](https://github.com/remappingbridge/remappingbridge/pull/53); Site [#14](https://github.com/remappingbridge/remappingbridge.github.io/pull/14) + [#15](https://github.com/remappingbridge/remappingbridge.github.io/pull/15) | Firmware final `35b9e81ce142532d0c34da847d09079eef8ad099` · 8-anchor ToC and public prose cleanup; Site final `905dbf86deb7fc0f7dc26601ed3714a7bb28acba` · concise simulator guide replacing development chronology; no runtime code changes; planner review pending |
 
 ### Planner decisions and acceptance distinction
 
@@ -30,3 +30,5 @@ This table is grounded in **existing accepted planner execution records**, verif
 - WEB-15 traceability, audit and this README ToC live only in **new WEB-15 evidence**; do **not** mark the last gate accepted until the operator says so.
 - Each prior manual-test checklist documents proposed visual/physical/browser checks. A gate acceptance message **does not prove** all test rows were measured under physical conditions, on all host OS versions or in a separately instrumented Chrome/Firefox session.
 - Website [PR #14](https://github.com/remappingbridge/remappingbridge.github.io/pull/14) is a **docs-only WEB-15 correction**: its `main` differs from accepted WEB-10 runtime source only in the site `README.md`, not in the HTML, CSS, JavaScript or fixtures. It accurately marks WEB-01–WEB-10 accepted.
+
+- Operator final WEB-15 feedback required **removing all process/gate references from both public READMEs**. Firmware PR #53 and simulator PR #15 were published accordingly. **This planner file intentionally retains the true internal traceability**; gate acceptance remains pending.
