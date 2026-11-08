@@ -1,0 +1,6 @@
+# Serviço de boot do Argon ONE V3 (KonstaKANG / Raspberry Pi 5)
+# Carregado pelo Android init em /system/etc/init/argonfan.rc.
+service argonfan /system/bin/sh /system/bin/argonfan.sh
+    class late_start
+    user root
+    group root
